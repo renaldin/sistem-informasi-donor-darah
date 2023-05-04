@@ -38,10 +38,10 @@ class Login extends Controller
             'biodata'  => $this->ModelBiodataWeb->detail(1),
         ];
 
-        return view('auth.login', $data);
+        return view('auth.v_login', $data);
     }
 
-    public function prosesLogin()
+    public function login()
     {
         Request()->validate([
             'email'             => 'required|email',
@@ -65,7 +65,7 @@ class Login extends Controller
 
                     return redirect()->route('dashboardPegawai');
                 } else {
-                    return back()->with('gagal', 'Login gagal! Password tidak sesuai.');
+                    return back()->with('gagal', 'Password tidak sesuai.');
                 }
             } else if ($cekEmail->role === "Admin") {
 
@@ -77,7 +77,7 @@ class Login extends Controller
 
                     return redirect()->route('dashboardAdmin');
                 } else {
-                    return back()->with('gagal', 'Login gagal! Password tidak sesuai.');
+                    return back()->with('gagal', 'Password tidak sesuai.');
                 }
             } else if ($cekEmail->role === "Wakil Direktur") {
 
@@ -89,7 +89,7 @@ class Login extends Controller
 
                     return redirect()->route('dashboardWadir');
                 } else {
-                    return back()->with('gagal', 'Login gagal! Password tidak sesuai.');
+                    return back()->with('gagal', 'Password tidak sesuai.');
                 }
             } else if ($cekEmail->role === "Ketua Jurusan") {
 
@@ -101,11 +101,11 @@ class Login extends Controller
 
                     return redirect()->route('dashboardKajur');
                 } else {
-                    return back()->with('gagal', 'Login gagal! Password tidak sesuai.');
+                    return back()->with('gagal', 'Password tidak sesuai.');
                 }
             }
         } else {
-            return back()->with('gagal', 'Login gagal! Email belum terdaftar.');
+            return back()->with('gagal', 'Email belum terdaftar.');
         }
     }
 

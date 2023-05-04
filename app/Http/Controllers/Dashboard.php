@@ -26,37 +26,37 @@ class Dashboard extends Controller
 
         if (Session()->get('role') === 'Admin') {
             $data = [
-                'title'                 => null,
+                'title'                 => 'Dashboard',
                 'subTitle'              => 'Dashboard',
                 'biodata'               => $this->ModelBiodataWeb->detail(1),
                 'user'                  => $this->ModelUser->detail(Session()->get('id_user')),
                 'jumlahUser'            => $this->ModelUser->jumlahUser(),
             ];
-            return view('admin.dashboard', $data);
+            return view('admin.v_dashboard', $data);
         } elseif (Session()->get('role') === 'Pegawai') {
             $data = [
-                'title'                 => null,
+                'title'                 => 'Dashboard',
                 'subTitle'              => 'Dashboard',
                 'user'                  => $this->ModelUser->detail(Session()->get('id_user')),
                 'biodata'               => $this->ModelBiodataWeb->detail(1),
             ];
-            return view('pegawai.dashboard', $data);
+            return view('pegawai.v_dashboard', $data);
         } elseif (Session()->get('role') === 'Wakil Direktur') {
             $data = [
-                'title'                 => null,
+                'title'                 => 'Dashboard',
                 'subTitle'              => 'Dashboard',
                 'user'                  => $this->ModelUser->detail(Session()->get('id_user')),
                 'biodata'               => $this->ModelBiodataWeb->detail(1),
             ];
-            return view('wakildirektur.dashboard', $data);
+            return view('wakildirektur.v_dashboard', $data);
         } elseif (Session()->get('role') === 'Ketua Jurusan') {
             $data = [
-                'title'                 => null,
+                'title'                 => 'Dashboard',
                 'subTitle'              => 'Dashboard',
                 'user'                  => $this->ModelUser->detail(Session()->get('id_user')),
                 'biodata'               => $this->ModelBiodataWeb->detail(1),
             ];
-            return view('ketuajurusan.dashboard', $data);
+            return view('ketuajurusan.v_dashboard', $data);
         }
     }
 }
