@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class ModelUser extends Model
+class M_User extends Model
 {
     use HasFactory;
     public $table = 'users';

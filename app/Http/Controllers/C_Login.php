@@ -4,23 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Mail\kirimEmail;
 use Illuminate\Support\Facades\Hash;
-use App\Models\ModelAuth;
-use App\Models\ModelUser;
-use App\Models\ModelBiodataWeb;
+use App\Models\M_Auth;
+use App\Models\M_User;
+use App\Models\M_Website;
 use Illuminate\Support\Facades\Mail;
 
-class Login extends Controller
+class C_Login extends Controller
 {
 
-    private $ModelAuth;
-    private $ModelBiodataWeb;
-    private $ModelUser;
+    private $M_Auth;
+    private $M_Website;
+    private $M_User;
 
     public function __construct()
     {
-        $this->ModelAuth = new ModelAuth();
-        $this->ModelBiodataWeb = new ModelBiodataWeb();
-        $this->ModelUser = new ModelUser();
+        $this->M_Auth = new M_Auth();
+        $this->M_Website = new M_Website();
+        $this->M_User = new M_User();
     }
 
     public function index()
@@ -35,7 +35,7 @@ class Login extends Controller
 
         $data = [
             'title' => 'Login',
-            'biodata'  => $this->ModelBiodataWeb->detail(1),
+            'biodata'  => $this->M_Website->detail(1),
         ];
 
         return view('auth.v_login', $data);
@@ -53,7 +53,7 @@ class Login extends Controller
             'password.min'              => 'Password minimal 6 karakter!',
         ]);
 
-        $cekEmail = $this->ModelAuth->cekEmailUser(Request()->email);
+        $cekEmail = $this->M_Auth->cekEmailUser(Request()->email);
 
         if ($cekEmail) {
             if ($cekEmail->role === "Pegawai") {
@@ -130,7 +130,7 @@ class Login extends Controller
 
         $data = [
             'title' => 'Lupa Password',
-            'biodata'  => $this->ModelBiodataWeb->detail(1),
+            'biodata'  => $this->M_Website->detail(1),
         ];
 
         return view('auth.lupaPassword', $data);
@@ -148,7 +148,7 @@ class Login extends Controller
 
         $data = [
             'title' => 'Lupa Password',
-            'biodata'  => $this->ModelBiodataWeb->detail(1),
+            'biodata'  => $this->M_Website->detail(1),
         ];
 
         return view('auth.lupaPasswordAdmin', $data);
@@ -166,8 +166,8 @@ class Login extends Controller
 
         $data = [
             'title'     => 'Reset Password',
-            'dataUser'  => $this->ModelUser->detail($id_member),
-            'biodata'   => $this->ModelBiodataWeb->detail(1),
+            'dataUser'  => $this->M_User->detail($id_member),
+            'biodata'   => $this->M_Website->detail(1),
         ];
 
         return view('auth.resetPassword', $data);
@@ -186,7 +186,7 @@ class Login extends Controller
         $data = [
             'title'     => 'Reset Password',
             'dataUser'  => $this->ModelAdmin->detail($id_admin),
-            'biodata'   => $this->ModelBiodataWeb->detail(1),
+            'biodata'   => $this->M_Website->detail(1),
         ];
 
         return view('auth.resetPasswordAdmin', $data);
@@ -198,7 +198,7 @@ class Login extends Controller
         $status = Request()->status;
 
         if ($status === 'User') {
-            $data = $this->ModelUser->detailByEmail($email);
+            $data = $this->M_User->detailByEmail($email);
 
             if ($data) {
 
@@ -208,7 +208,7 @@ class Login extends Controller
                     'urlUtama'      => 'http://127.0.0.1:8000',
                     'urlReset'      => 'http://127.0.0.1:8000/reset-password/' . $data->id_member,
                     'dataUser'      => $data,
-                    'biodata'       => $this->ModelBiodataWeb->detail(1),
+                    'biodata'       => $this->M_Website->detail(1),
                 ];
 
                 Mail::to($data->email)->send(new kirimEmail($data_email));
@@ -227,7 +227,7 @@ class Login extends Controller
                     'urlUtama'      => 'http://127.0.0.1:8000',
                     'urlReset'      => 'http://127.0.0.1:8000/reset-password-admin/' . $data->id_admin,
                     'dataUser'      => $data,
-                    'biodata'       => $this->ModelBiodataWeb->detail(1),
+                    'biodata'       => $this->M_Website->detail(1),
                 ];
 
                 Mail::to($data->email)->send(new kirimEmail($data_email));
@@ -253,7 +253,7 @@ class Login extends Controller
             'password'          => Hash::make(Request()->password)
         ];
 
-        $this->ModelUser->edit($data);
+        $this->M_User->edit($data);
         return redirect()->route('login')->with('berhasil', 'Anda baru saja merubah password. Silahkan login!');
     }
 

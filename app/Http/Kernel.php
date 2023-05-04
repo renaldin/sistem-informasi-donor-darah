@@ -65,8 +65,10 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'revalidate' => \App\Http\Middleware\RevalidateBackHistory::class,
         'admin' => \App\Http\Middleware\Admin::class,
-        'pegawai' => \App\Http\Middleware\Pegawai::class,
-        'wakildirektur' => \App\Http\Middleware\WakilDirektur::class,
-        'ketuajurusan' => \App\Http\Middleware\KetuaJurusan::class,
+        'donatur' => \App\Http\Middleware\Donatur::class,
+        'event' => \App\Http\Middleware\Event::class,
+        'petugas_kesehatan' => \App\Http\Middleware\PetugasKesehatan::class,
+        'rumah_sakit' => \App\Http\Middleware\RumahSakit::class,
+        'pusat_pmi' => \App\Http\Middleware\PusatPMI::class,
     ];
 }
