@@ -63,13 +63,13 @@
                     <form class="user" method="POST" action="/login" >
                       @csrf
                       <div class="form-group">
-                        <input type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Masukkan Alamat Email">
+                        <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Masukkan Alamat Email">
                         @error('email')
                           <small class="form-text text-danger">{{ $message }}</small>
                         @enderror
                       </div>
                       <div class="form-group">
-                        <input type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Masukkan Password">
+                        <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Masukkan Password">
                         @error('password')
                           <small class="form-text text-danger">{{ $message }}</small>
                         @enderror

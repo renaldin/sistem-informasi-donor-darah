@@ -25,17 +25,11 @@ class C_Login extends Controller
 
     public function index()
     {
-        if (Session()->get('email')) {
-            if (Session()->get('role') === 'Admin') {
-                return redirect()->route('dashboardAdmin');
-            } elseif (Session()->get('role') === 'Pegawai') {
-                return redirect()->route('dashboardPegawai');
-            }
-        }
+        $this->validasi_role();
 
         $data = [
-            'title' => 'Login',
-            'biodata'  => $this->M_Website->detail(1),
+            'title'     => 'Login',
+            'data_web'  => $this->M_Website->detail(1),
         ];
 
         return view('auth.v_login', $data);
@@ -43,6 +37,8 @@ class C_Login extends Controller
 
     public function login()
     {
+        $this->validasi_role();
+
         Request()->validate([
             'email'             => 'required|email',
             'password'          => 'min:6|required',
@@ -53,53 +49,77 @@ class C_Login extends Controller
             'password.min'              => 'Password minimal 6 karakter!',
         ]);
 
-        $cekEmail = $this->M_Auth->cekEmailUser(Request()->email);
+        $cek_email = $this->M_Auth->cek_email_user(Request()->email);
 
-        if ($cekEmail) {
-            if ($cekEmail->role === "Pegawai") {
-                if (Hash::check(Request()->password, $cekEmail->password)) {
-                    Session()->put('id_user', $cekEmail->id_user);
-                    Session()->put('email', $cekEmail->email);
-                    Session()->put('role', $cekEmail->role);
+        if ($cek_email) {
+            if ($cek_email->role === "Admin") {
+                if (Hash::check(Request()->password, $cek_email->password)) {
+                    Session()->put('id_user', $cek_email->id_user);
+                    Session()->put('email', $cek_email->email);
+                    Session()->put('role', $cek_email->role);
                     Session()->put('log', true);
 
-                    return redirect()->route('dashboardPegawai');
+                    return redirect()->route('dashboard_admin');
                 } else {
                     return back()->with('gagal', 'Password tidak sesuai.');
                 }
-            } else if ($cekEmail->role === "Admin") {
+            } else if ($cek_email->role === "Donatur") {
 
-                if (Hash::check(Request()->password, $cekEmail->password)) {
-                    Session()->put('id_user', $cekEmail->id_user);
-                    Session()->put('email', $cekEmail->email);
-                    Session()->put('role', $cekEmail->role);
+                if (Hash::check(Request()->password, $cek_email->password)) {
+                    Session()->put('id_user', $cek_email->id_user);
+                    Session()->put('email', $cek_email->email);
+                    Session()->put('role', $cek_email->role);
                     Session()->put('log', true);
 
-                    return redirect()->route('dashboardAdmin');
+                    return redirect()->route('dashboard_donatur');
                 } else {
                     return back()->with('gagal', 'Password tidak sesuai.');
                 }
-            } else if ($cekEmail->role === "Wakil Direktur") {
+            } else if ($cek_email->role === "Event") {
 
-                if (Hash::check(Request()->password, $cekEmail->password)) {
-                    Session()->put('id_user', $cekEmail->id_user);
-                    Session()->put('email', $cekEmail->email);
-                    Session()->put('role', $cekEmail->role);
+                if (Hash::check(Request()->password, $cek_email->password)) {
+                    Session()->put('id_user', $cek_email->id_user);
+                    Session()->put('email', $cek_email->email);
+                    Session()->put('role', $cek_email->role);
                     Session()->put('log', true);
 
-                    return redirect()->route('dashboardWadir');
+                    return redirect()->route('dashboard_event');
                 } else {
                     return back()->with('gagal', 'Password tidak sesuai.');
                 }
-            } else if ($cekEmail->role === "Ketua Jurusan") {
+            } else if ($cek_email->role === "Petugas Kesehatan") {
 
-                if (Hash::check(Request()->password, $cekEmail->password)) {
-                    Session()->put('id_user', $cekEmail->id_user);
-                    Session()->put('email', $cekEmail->email);
-                    Session()->put('role', $cekEmail->role);
+                if (Hash::check(Request()->password, $cek_email->password)) {
+                    Session()->put('id_user', $cek_email->id_user);
+                    Session()->put('email', $cek_email->email);
+                    Session()->put('role', $cek_email->role);
                     Session()->put('log', true);
 
-                    return redirect()->route('dashboardKajur');
+                    return redirect()->route('dashboard_petugas_kesehatan');
+                } else {
+                    return back()->with('gagal', 'Password tidak sesuai.');
+                }
+            } else if ($cek_email->role === "Rumah Sakit") {
+
+                if (Hash::check(Request()->password, $cek_email->password)) {
+                    Session()->put('id_user', $cek_email->id_user);
+                    Session()->put('email', $cek_email->email);
+                    Session()->put('role', $cek_email->role);
+                    Session()->put('log', true);
+
+                    return redirect()->route('dashboard_rumah_sakit');
+                } else {
+                    return back()->with('gagal', 'Password tidak sesuai.');
+                }
+            } else if ($cek_email->role === "Pusat PMI") {
+
+                if (Hash::check(Request()->password, $cek_email->password)) {
+                    Session()->put('id_user', $cek_email->id_user);
+                    Session()->put('email', $cek_email->email);
+                    Session()->put('role', $cek_email->role);
+                    Session()->put('log', true);
+
+                    return redirect()->route('dashboard_pusat_pmi');
                 } else {
                     return back()->with('gagal', 'Password tidak sesuai.');
                 }
@@ -118,161 +138,22 @@ class C_Login extends Controller
         return redirect()->route('login')->with('berhasil', 'Logout berhasil!');
     }
 
-    public function lupaPassword()
+    public function validasi_role()
     {
         if (Session()->get('email')) {
-            if (Session()->get('status') === 'User') {
-                return redirect()->route('home');
-            } else {
-                return redirect()->route('dashboard');
+            if (Session()->get('role') === 'Admin') {
+                return redirect()->route('dashboard_admin');
+            } elseif (Session()->get('role') === 'Donatur') {
+                return redirect()->route('dashboard_donatur');
+            } elseif (Session()->get('role') === 'Event') {
+                return redirect()->route('dashboard_event');
+            } elseif (Session()->get('role') === 'Petugas Kesehatan') {
+                return redirect()->route('dashboard_petugas_kesehatan');
+            } elseif (Session()->get('role') === 'Rumah Sakit') {
+                return redirect()->route('dashboard_rumah_sakit');
+            } elseif (Session()->get('role') === 'Pusat PMI') {
+                return redirect()->route('dashboard_pusat_pmi');
             }
         }
-
-        $data = [
-            'title' => 'Lupa Password',
-            'biodata'  => $this->M_Website->detail(1),
-        ];
-
-        return view('auth.lupaPassword', $data);
-    }
-
-    public function lupaPasswordAdmin()
-    {
-        if (Session()->get('email')) {
-            if (Session()->get('status') === 'User') {
-                return redirect()->route('home');
-            } else {
-                return redirect()->route('dashboard');
-            }
-        }
-
-        $data = [
-            'title' => 'Lupa Password',
-            'biodata'  => $this->M_Website->detail(1),
-        ];
-
-        return view('auth.lupaPasswordAdmin', $data);
-    }
-
-    public function resetPassword($id_member)
-    {
-        if (Session()->get('email')) {
-            if (Session()->get('status') === 'User') {
-                return redirect()->route('home');
-            } else {
-                return redirect()->route('dashboard');
-            }
-        }
-
-        $data = [
-            'title'     => 'Reset Password',
-            'dataUser'  => $this->M_User->detail($id_member),
-            'biodata'   => $this->M_Website->detail(1),
-        ];
-
-        return view('auth.resetPassword', $data);
-    }
-
-    public function resetPasswordAdmin($id_admin)
-    {
-        if (Session()->get('email')) {
-            if (Session()->get('status') === 'User') {
-                return redirect()->route('home');
-            } else {
-                return redirect()->route('dashboard');
-            }
-        }
-
-        $data = [
-            'title'     => 'Reset Password',
-            'dataUser'  => $this->ModelAdmin->detail($id_admin),
-            'biodata'   => $this->M_Website->detail(1),
-        ];
-
-        return view('auth.resetPasswordAdmin', $data);
-    }
-
-    public function prosesEmailLupaPassword()
-    {
-        $email = Request()->email;
-        $status = Request()->status;
-
-        if ($status === 'User') {
-            $data = $this->M_User->detailByEmail($email);
-
-            if ($data) {
-
-                $data_email = [
-                    'subject'       => 'Lupa Password',
-                    'sender_name'   => 'renaldinoviandi1@gmail.com',
-                    'urlUtama'      => 'http://127.0.0.1:8000',
-                    'urlReset'      => 'http://127.0.0.1:8000/reset-password/' . $data->id_member,
-                    'dataUser'      => $data,
-                    'biodata'       => $this->M_Website->detail(1),
-                ];
-
-                Mail::to($data->email)->send(new kirimEmail($data_email));
-                return redirect()->route('login')->with('berhasil', 'Kami sudah kirim pesan ke email Anda. Silahkan cek email Anda!');
-            } else {
-                return back()->with('gagal', 'Email belum terdaftar. Silahkan daftar terlebih dahulu!');
-            }
-        } elseif ($status === 'Admin') {
-            $data = $this->ModelAdmin->detailByEmail($email);
-
-            if ($data) {
-
-                $data_email = [
-                    'subject'       => 'Lupa Password',
-                    'sender_name'   => 'renaldinoviandi1@gmail.com',
-                    'urlUtama'      => 'http://127.0.0.1:8000',
-                    'urlReset'      => 'http://127.0.0.1:8000/reset-password-admin/' . $data->id_admin,
-                    'dataUser'      => $data,
-                    'biodata'       => $this->M_Website->detail(1),
-                ];
-
-                Mail::to($data->email)->send(new kirimEmail($data_email));
-                return redirect()->route('admin')->with('berhasil', 'Kami sudah kirim pesan ke email Anda. Silahkan cek email Anda!');
-            } else {
-                return back()->with('gagal', 'Email belum terdaftar. Silahkan daftar terlebih dahulu!');
-            }
-        }
-    }
-
-    public function prosesUbahPassword()
-    {
-        Request()->validate([
-            'password' => 'min:6|required|confirmed',
-        ], [
-            'password.required'    => 'Password baru harus diisi!',
-            'password.min'         => 'Password baru minimal 6 karakter!',
-            'password.confirmed'   => 'Password baru tidak sama!',
-        ]);
-
-        $data = [
-            'id_member'         => Request()->id_member,
-            'password'          => Hash::make(Request()->password)
-        ];
-
-        $this->M_User->edit($data);
-        return redirect()->route('login')->with('berhasil', 'Anda baru saja merubah password. Silahkan login!');
-    }
-
-    public function prosesUbahPasswordAdmin()
-    {
-        Request()->validate([
-            'password' => 'min:6|required|confirmed',
-        ], [
-            'password.required'    => 'Password baru harus diisi!',
-            'password.min'         => 'Password baru minimal 6 karakter!',
-            'password.confirmed'   => 'Password baru tidak sama!',
-        ]);
-
-        $data = [
-            'id_admin'         => Request()->id_admin,
-            'password'          => Hash::make(Request()->password)
-        ];
-
-        $this->ModelAdmin->edit($data);
-        return redirect()->route('admin')->with('berhasil', 'Anda baru saja merubah password. Silahkan login!');
     }
 }

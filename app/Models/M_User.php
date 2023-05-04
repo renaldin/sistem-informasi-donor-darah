@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class M_User extends Model
 {
     use HasFactory;
-    public $table = 'users';
+    public $table = 'user';
 
     public function getData()
     {
