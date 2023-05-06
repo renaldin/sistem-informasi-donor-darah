@@ -26,18 +26,8 @@ class C_Login extends Controller
     public function index()
     {
         if (Session()->get('email')) {
-            if (Session()->get('role') === 'Admin') {
-                return redirect()->route('dashboard_admin');
-            } elseif (Session()->get('role') === 'Donatur') {
-                return redirect()->route('dashboard_donatur');
-            } elseif (Session()->get('role') === 'Event') {
-                return redirect()->route('dashboard_event');
-            } elseif (Session()->get('role') === 'Petugas Kesehatan') {
-                return redirect()->route('dashboard_petugas_kesehatan');
-            } elseif (Session()->get('role') === 'Rumah Sakit') {
-                return redirect()->route('dashboard_rumah_sakit');
-            } elseif (Session()->get('role') === 'Pusat PMI') {
-                return redirect()->route('dashboard_pusat_pmi');
+            if (Session()->get('role')) {
+                return redirect()->route('dashboard');
             }
         }
 
@@ -52,18 +42,8 @@ class C_Login extends Controller
     public function login()
     {
         if (Session()->get('email')) {
-            if (Session()->get('role') === 'Admin') {
-                return redirect()->route('dashboard_admin');
-            } elseif (Session()->get('role') === 'Donatur') {
-                return redirect()->route('dashboard_donatur');
-            } elseif (Session()->get('role') === 'Event') {
-                return redirect()->route('dashboard_event');
-            } elseif (Session()->get('role') === 'Petugas Kesehatan') {
-                return redirect()->route('dashboard_petugas_kesehatan');
-            } elseif (Session()->get('role') === 'Rumah Sakit') {
-                return redirect()->route('dashboard_rumah_sakit');
-            } elseif (Session()->get('role') === 'Pusat PMI') {
-                return redirect()->route('dashboard_pusat_pmi');
+            if (Session()->get('role')) {
+                return redirect()->route('dashboard');
             }
         }
 
@@ -80,74 +60,14 @@ class C_Login extends Controller
         $cek_email = $this->M_Auth->cek_email_user(Request()->email);
 
         if ($cek_email) {
-            if ($cek_email->role === "Admin") {
+            if ($cek_email->role) {
                 if (Hash::check(Request()->password, $cek_email->password)) {
                     Session()->put('id_user', $cek_email->id_user);
                     Session()->put('email', $cek_email->email);
                     Session()->put('role', $cek_email->role);
                     Session()->put('log', true);
 
-                    return redirect()->route('dashboard_admin');
-                } else {
-                    return back()->with('gagal', 'Password tidak sesuai.');
-                }
-            } else if ($cek_email->role === "Donatur") {
-
-                if (Hash::check(Request()->password, $cek_email->password)) {
-                    Session()->put('id_user', $cek_email->id_user);
-                    Session()->put('email', $cek_email->email);
-                    Session()->put('role', $cek_email->role);
-                    Session()->put('log', true);
-
-                    return redirect()->route('dashboard_donatur');
-                } else {
-                    return back()->with('gagal', 'Password tidak sesuai.');
-                }
-            } else if ($cek_email->role === "Event") {
-
-                if (Hash::check(Request()->password, $cek_email->password)) {
-                    Session()->put('id_user', $cek_email->id_user);
-                    Session()->put('email', $cek_email->email);
-                    Session()->put('role', $cek_email->role);
-                    Session()->put('log', true);
-
-                    return redirect()->route('dashboard_event');
-                } else {
-                    return back()->with('gagal', 'Password tidak sesuai.');
-                }
-            } else if ($cek_email->role === "Petugas Kesehatan") {
-
-                if (Hash::check(Request()->password, $cek_email->password)) {
-                    Session()->put('id_user', $cek_email->id_user);
-                    Session()->put('email', $cek_email->email);
-                    Session()->put('role', $cek_email->role);
-                    Session()->put('log', true);
-
-                    return redirect()->route('dashboard_petugas_kesehatan');
-                } else {
-                    return back()->with('gagal', 'Password tidak sesuai.');
-                }
-            } else if ($cek_email->role === "Rumah Sakit") {
-
-                if (Hash::check(Request()->password, $cek_email->password)) {
-                    Session()->put('id_user', $cek_email->id_user);
-                    Session()->put('email', $cek_email->email);
-                    Session()->put('role', $cek_email->role);
-                    Session()->put('log', true);
-
-                    return redirect()->route('dashboard_rumah_sakit');
-                } else {
-                    return back()->with('gagal', 'Password tidak sesuai.');
-                }
-            } else if ($cek_email->role === "Pusat PMI") {
-
-                if (Hash::check(Request()->password, $cek_email->password)) {
-                    Session()->put('id_user', $cek_email->id_user);
-                    Session()->put('email', $cek_email->email);
-                    Session()->put('role', $cek_email->role);
-                    Session()->put('log', true);
-
-                    return redirect()->route('dashboard_pusat_pmi');
+                    return redirect()->route('dashboard');
                 } else {
                     return back()->with('gagal', 'Password tidak sesuai.');
                 }
@@ -164,24 +84,5 @@ class C_Login extends Controller
         Session()->forget('role');
         Session()->forget('log');
         return redirect()->route('login')->with('berhasil', 'Logout berhasil!');
-    }
-
-    public function validasi_role()
-    {
-        if (Session()->get('email')) {
-            if (Session()->get('role') === 'Admin') {
-                return redirect()->route('dashboard_admin');
-            } elseif (Session()->get('role') === 'Donatur') {
-                return redirect()->route('dashboard_donatur');
-            } elseif (Session()->get('role') === 'Event') {
-                return redirect()->route('dashboard_event');
-            } elseif (Session()->get('role') === 'Petugas Kesehatan') {
-                return redirect()->route('dashboard_petugas_kesehatan');
-            } elseif (Session()->get('role') === 'Rumah Sakit') {
-                return redirect()->route('dashboard_rumah_sakit');
-            } elseif (Session()->get('role') === 'Pusat PMI') {
-                return redirect()->route('dashboard_pusat_pmi');
-            }
-        }
     }
 }

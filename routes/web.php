@@ -4,6 +4,7 @@ use App\Http\Controllers\C_Dashboard;
 use App\Http\Controllers\C_User;
 use App\Http\Controllers\Register;
 use App\Http\Controllers\C_Login;
+use App\Http\Controllers\C_PengajuanEvent;
 use App\Http\Controllers\Cetak;
 use App\Http\Controllers\PengaturanWeb;
 use Illuminate\Support\Facades\Route;
@@ -34,9 +35,11 @@ Route::group(['middleware' => 'revalidate'], function () {
     Route::get('/ubah_password', [C_User::class, 'ubah_password'])->name('ubah_password');
     Route::post('/ubah_password/{id}', [C_User::class, 'proses_ubah_password']);
 
+    // Dashboard
+    Route::get('/dashboard', [C_Dashboard::class, 'index'])->name('dashboard');
+
     // Admin
     Route::group(['middleware' => 'admin'], function () {
-        Route::get('/dashboard_admin', [C_Dashboard::class, 'index'])->name('dashboard_admin');
 
         Route::get('/pengaturan-website', [PengaturanWeb::class, 'index'])->name('pengaturan-web');
         Route::post('/pengaturan-website/{id}', [PengaturanWeb::class, 'proses_edit']);
@@ -57,35 +60,33 @@ Route::group(['middleware' => 'revalidate'], function () {
 
     // Donatur
     Route::group(['middleware' => 'donatur'], function () {
-        // dashboard
-        Route::get('/dashboard_donatur', [C_Dashboard::class, 'index'])->name('dashboard_donatur');
     });
 
 
     // Event
     Route::group(['middleware' => 'event'], function () {
-        // dashboard
-        Route::get('/dashboard_event', [C_Dashboard::class, 'index'])->name('dashboard_event');
+        // pengajuan event
+        Route::get('/pengajuan_event', [C_PengajuanEvent::class, 'index'])->name('pengajuan_event');
+        Route::get('/tambah_pengajuan_event', [C_PengajuanEvent::class, 'tambah_pengajuan_event'])->name('tambah_pengajuan_event');
+        Route::post('/tambah_pengajuan_event', [C_PengajuanEvent::class, 'proses_tambah_pengajuan_event']);
+        Route::get('/edit_pengajuan_event/{id}', [C_PengajuanEvent::class, 'edit_pengajuan_event'])->name('edit_pengajuan_event');
+        Route::post('/edit_pengajuan_event/{id}', [C_PengajuanEvent::class, 'proses_edit_pengajuan_event']);
+        Route::get('/hapus_pengajuan_event/{id}', [C_PengajuanEvent::class, 'hapus_pengajuan_event']);
+        Route::get('/kirim_pengajuan_event/{id}', [C_PengajuanEvent::class, 'kirim_pengajuan_event']);
     });
 
 
     // Petugas Kesehatan
     Route::group(['middleware' => 'petugas_kesehatan'], function () {
-        // dashboard
-        Route::get('/dashboard_petugas_kesehatan', [C_Dashboard::class, 'index'])->name('dashboard_petugas_kesehatan');
     });
 
 
     // Rumah Sakit
     Route::group(['middleware' => 'rumah_sakit'], function () {
-        // dashboard
-        Route::get('/dashboard_rumah_sakit', [C_Dashboard::class, 'index'])->name('dashboard_rumah_sakit');
     });
 
 
     // Petugas Kesehatan
     Route::group(['middleware' => 'pusat_pmi'], function () {
-        // dashboard
-        Route::get('/dashboard_pusat_pmi', [C_Dashboard::class, 'index'])->name('dashboard_pusat_pmi');
     });
 });

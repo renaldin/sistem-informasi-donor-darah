@@ -15,6 +15,9 @@
   <link href="{{ asset('template/css/ruang-admin.min.css') }}" rel="stylesheet">
   <link href="{{ asset('template/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
   <link href="{{ asset('template/vendor/select2/dist/css/select2.min.css') }}" rel="stylesheet" type="text/css">
+  <link href="{{ asset('template/vendor/clock-picker/clockpicker.css') }}" rel="stylesheet">
+  <link href="{{ asset('template/vendor/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}" rel="stylesheet" >
+  <link href="{{ asset('template/vendor/bootstrap-touchspin/css/jquery.bootstrap-touchspin.css') }}" rel="stylesheet" >
 </head>
 
 <body id="page-top">
@@ -100,6 +103,9 @@
   <script src="{{ asset('template/vendor/datatables/jquery.dataTables.min.js') }}"></script>
   <script src="{{ asset('template/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
   <script src="{{ asset('template/vendor/select2/dist/js/select2.min.js') }}"></script>
+  <script src="{{ asset('template/vendor/clock-picker/clockpicker.js') }}"></script>
+  <script src="{{ asset('template/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
+  <script src="{{ asset('template/vendor/bootstrap-touchspin/js/jquery.bootstrap-touchspin.js') }}"></script>
 
   <!-- Page level custom scripts -->
   <script>
@@ -120,6 +126,25 @@
 
     // Select2 Multiple
     $('.select2-multiple').select2();
+
+    $('#simple-date1 .input-group.date').datepicker({
+        format: 'yyyy-mm-dd',
+        todayBtn: 'linked',
+        todayHighlight: true,
+        autoclose: true,        
+      });
+
+      $('#clockPicker2').clockpicker({
+        autoclose: true
+      });
+
+      $('#touchSpin1').TouchSpin({
+        min: 0,
+        max: 100,                
+        boostat: 5,
+        maxboostedstep: 10,        
+        initval: 0
+      });
 
   });
 </script>

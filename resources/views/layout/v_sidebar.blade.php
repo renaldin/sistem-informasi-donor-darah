@@ -8,20 +8,37 @@
   </a>
   <hr class="sidebar-divider my-0">
   <li class="nav-item @if($title === 'Dashboard') active @endif">
-    <a class="nav-link" href="/dashboard_admin">
+    <a class="nav-link" href="/dashboard">
       <i class="fas fa-fw fa-tachometer-alt"></i>
       <span>Dashboard</span></a>
   </li>
   <hr class="sidebar-divider">
+  @if ($user->role === 'Admin')
+    <div class="sidebar-heading">
+      Data Master
+    </div>
+    <li class="nav-item @if($title === 'Data User') active @endif">
+      <a class="nav-link" href="/data_user">
+        <i class="fas fa-fw fa-palette"></i>
+        <span>Data User</span>
+      </a>
+    </li>
+  @elseif ($user->role === 'Donatur')
+  @elseif ($user->role === 'Event')
   <div class="sidebar-heading">
-    Data Master
+    Event
   </div>
-  <li class="nav-item @if($title === 'Data User') active @endif">
-    <a class="nav-link" href="/data_user">
+  <li class="nav-item @if($title === 'Pengajuan Event') active @endif">
+    <a class="nav-link" href="/pengajuan_event">
       <i class="fas fa-fw fa-palette"></i>
-      <span>Data User</span>
+      <span>Pengajuan Event</span>
     </a>
   </li>
+  @elseif ($user->role === 'Petugas Kesehatan')
+  @elseif ($user->role === 'Rumah Sakit')
+  @elseif ($user->role === 'Pusat PMI')
+    
+  @endif
   <hr class="sidebar-divider">
 </ul>
 <!-- Sidebar -->
