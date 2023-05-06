@@ -11,7 +11,7 @@ class M_User extends Model
     use HasFactory;
     public $table = 'user';
 
-    public function getData()
+    public function get_data()
     {
         return DB::table($this->table)->orderBy('id_user', 'DESC')->get();
     }
@@ -21,12 +21,12 @@ class M_User extends Model
         return DB::table($this->table)->where('id_user', $id_user)->first();
     }
 
-    public function detailByEmail($email)
+    public function detail_email($email)
     {
         return DB::table($this->table)->where('email', $email)->first();
     }
 
-    public function add($data)
+    public function tambah($data)
     {
         DB::table($this->table)->insert($data);
     }
@@ -36,12 +36,12 @@ class M_User extends Model
         DB::table($this->table)->where('id_user', $data['id_user'])->update($data);
     }
 
-    public function deleteData($id_user)
+    public function hapus($id_user)
     {
         DB::table($this->table)->where('id_user', $id_user)->delete();
     }
 
-    public function jumlahUser()
+    public function jumlah_user()
     {
         return DB::table($this->table)->count();
     }

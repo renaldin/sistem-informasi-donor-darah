@@ -27,10 +27,10 @@ class C_Dashboard extends Controller
         if (Session()->get('role') === 'Admin') {
             $data = [
                 'title'                 => 'Dashboard',
-                'sub_title'              => 'Dashboard',
-                'data_web'               => $this->M_Website->detail(1),
+                'sub_title'             => 'Dashboard',
+                'data_web'              => $this->M_Website->detail(1),
                 'user'                  => $this->M_User->detail(Session()->get('id_user')),
-                'jumlahUser'            => $this->M_User->jumlahUser(),
+                'jumlahUser'            => $this->M_User->jumlah_user(),
             ];
             return view('admin.v_dashboard', $data);
         } elseif (Session()->get('role') === 'Donatur') {

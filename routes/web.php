@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\C_Dashboard;
-use App\Http\Controllers\Users;
+use App\Http\Controllers\C_User;
 use App\Http\Controllers\Register;
 use App\Http\Controllers\C_Login;
 use App\Http\Controllers\Cetak;
@@ -28,6 +28,12 @@ Route::group(['middleware' => 'revalidate'], function () {
     // Logout
     Route::get('/logout', [C_Login::class, 'logout'])->name('logout');
 
+    // profil
+    Route::get('/profil', [C_User::class, 'profil'])->name('profil');
+    Route::post('/edit_profil/{id}', [C_User::class, 'edit_profil']);
+    Route::get('/ubah_password', [C_User::class, 'ubah_password'])->name('ubah_password');
+    Route::post('/ubah_password/{id}', [C_User::class, 'proses_ubah_password']);
+
     // Admin
     Route::group(['middleware' => 'admin'], function () {
         Route::get('/dashboard_admin', [C_Dashboard::class, 'index'])->name('dashboard_admin');
@@ -36,18 +42,12 @@ Route::group(['middleware' => 'revalidate'], function () {
         Route::post('/pengaturan-website/{id}', [PengaturanWeb::class, 'proses_edit']);
 
         // Kelola User
-        Route::get('/kelola-user', [Users::class, 'index'])->name('kelola-user');
-        Route::get('/tambah-user', [Users::class, 'add'])->name('tambah-user');
-        Route::post('/tambah-user', [Users::class, 'addProcess']);
-        Route::get('/edit-user/{id}', [Users::class, 'edit'])->name('edit-user');
-        Route::post('/edit-user/{id}', [Users::class, 'editProcess']);
-        Route::get('/detail-user/{id}', [Users::class, 'detail'])->name('detail-user');
-        Route::get('/hapus-user/{id}', [Users::class, 'deleteProcess']);
-
-        // profil
-        Route::get('/profil-admin', [Users::class, 'profil'])->name('profil-admin');
-        Route::post('/profil-admin/{id}', [Users::class, 'editProfilProcess']);
-        Route::post('/ubah-password-admin/{id}', [Users::class, 'changePasswordProcess']);
+        Route::get('/data_user', [C_User::class, 'index'])->name('data_user');
+        Route::get('/tambah_user', [C_User::class, 'tambah_user']);
+        Route::post('/tambah_user', [C_User::class, 'proses_tambah_user']);
+        Route::get('/edit_user/{id}', [C_User::class, 'edit_user'])->name('edit_user');
+        Route::post('/edit_user/{id}', [C_User::class, 'proses_edit_user']);
+        Route::get('/hapus_user/{id}', [C_User::class, 'hapus_user']);
 
         // Cetak PDF
         Route::post('/cetak-pdf', [Cetak::class, 'index']);
@@ -59,11 +59,6 @@ Route::group(['middleware' => 'revalidate'], function () {
     Route::group(['middleware' => 'donatur'], function () {
         // dashboard
         Route::get('/dashboard_donatur', [C_Dashboard::class, 'index'])->name('dashboard_donatur');
-
-        // Profil User
-        Route::get('/profil', [Users::class, 'profil'])->name('profil');
-        Route::post('/profil/{id}', [Users::class, 'editProfilProcess']);
-        Route::post('/ubah-password/{id}', [Users::class, 'changePasswordProcess']);
     });
 
 
@@ -71,11 +66,6 @@ Route::group(['middleware' => 'revalidate'], function () {
     Route::group(['middleware' => 'event'], function () {
         // dashboard
         Route::get('/dashboard_event', [C_Dashboard::class, 'index'])->name('dashboard_event');
-
-        // Profil User
-        Route::get('/profil-wadir', [Users::class, 'profil'])->name('profil-wadir');
-        Route::post('/profil-wadir/{id}', [Users::class, 'editProfilProcess']);
-        Route::post('/ubah-password-wadir/{id}', [Users::class, 'changePasswordProcess']);
     });
 
 
@@ -83,11 +73,6 @@ Route::group(['middleware' => 'revalidate'], function () {
     Route::group(['middleware' => 'petugas_kesehatan'], function () {
         // dashboard
         Route::get('/dashboard_petugas_kesehatan', [C_Dashboard::class, 'index'])->name('dashboard_petugas_kesehatan');
-
-        // Profil User
-        Route::get('/profil-kajur', [Users::class, 'profil'])->name('profil-kajur');
-        Route::post('/profil-kajur/{id}', [Users::class, 'editProfilProcess']);
-        Route::post('/ubah-password-kajur/{id}', [Users::class, 'changePasswordProcess']);
     });
 
 
@@ -95,11 +80,6 @@ Route::group(['middleware' => 'revalidate'], function () {
     Route::group(['middleware' => 'rumah_sakit'], function () {
         // dashboard
         Route::get('/dashboard_rumah_sakit', [C_Dashboard::class, 'index'])->name('dashboard_rumah_sakit');
-
-        // Profil User
-        Route::get('/profil-kajur', [Users::class, 'profil'])->name('profil-kajur');
-        Route::post('/profil-kajur/{id}', [Users::class, 'editProfilProcess']);
-        Route::post('/ubah-password-kajur/{id}', [Users::class, 'changePasswordProcess']);
     });
 
 
@@ -107,10 +87,5 @@ Route::group(['middleware' => 'revalidate'], function () {
     Route::group(['middleware' => 'pusat_pmi'], function () {
         // dashboard
         Route::get('/dashboard_pusat_pmi', [C_Dashboard::class, 'index'])->name('dashboard_pusat_pmi');
-
-        // Profil User
-        Route::get('/profil-kajur', [Users::class, 'profil'])->name('profil-kajur');
-        Route::post('/profil-kajur/{id}', [Users::class, 'editProfilProcess']);
-        Route::post('/ubah-password-kajur/{id}', [Users::class, 'changePasswordProcess']);
     });
 });

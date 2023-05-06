@@ -13,9 +13,12 @@
   <link href="{{ asset('template/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
   <link href="{{ asset('template/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
   <link href="{{ asset('template/css/ruang-admin.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('template/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('template/vendor/select2/dist/css/select2.min.css') }}" rel="stylesheet" type="text/css">
 </head>
 
 <body id="page-top">
+  @include('sweetalert::alert')
   <div id="wrapper">
     
     {{-- sidebar --}}
@@ -94,6 +97,32 @@
   <script src="{{ asset('template/js/ruang-admin.min.js') }}"></script>
   <script src="{{ asset('template/vendor/chart.js/Chart.min.js') }}"></script>
   <script src="{{ asset('template/js/demo/chart-area-demo.js') }}"></script>  
+  <script src="{{ asset('template/vendor/datatables/jquery.dataTables.min.js') }}"></script>
+  <script src="{{ asset('template/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+  <script src="{{ asset('template/vendor/select2/dist/js/select2.min.js') }}"></script>
+
+  <!-- Page level custom scripts -->
+  <script>
+    $(document).ready(function () {
+      $('#dataTable').DataTable(); // ID From dataTable 
+      $('#dataTableHover').DataTable(); // ID From dataTable with Hover
+    });
+  </script>
+
+<script>
+  $(document).ready(function () {
+
+    // Select2 Single  with Placeholder
+    $('.select2-single-placeholder').select2({
+      placeholder: "-- Pilih --",
+      allowClear: true
+    });      
+
+    // Select2 Multiple
+    $('.select2-multiple').select2();
+
+  });
+</script>
 </body>
 
 </html>

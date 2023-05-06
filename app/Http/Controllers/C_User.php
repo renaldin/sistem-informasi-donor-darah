@@ -3,20 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Hash;
-use App\Models\ModelUser;
-use App\Models\ModelBiodataWeb;
-use GuzzleHttp\Psr7\Request;
+use App\Models\M_User;
+use App\Models\M_Website;
+use RealRashid\SweetAlert\Facades\Alert;
 
-class Users extends Controller
+class C_User extends Controller
 {
 
-    private $ModelUser;
-    private $ModelBiodataWeb;
+    private $M_User;
+    private $M_Website;
 
     public function __construct()
     {
-        $this->ModelUser = new ModelUser();
-        $this->ModelBiodataWeb = new ModelBiodataWeb();
+        $this->M_User = new M_User();
+        $this->M_Website = new M_Website();
     }
 
     public function index()
@@ -26,17 +26,17 @@ class Users extends Controller
         }
 
         $data = [
-            'title'     => 'Data User',
-            'subTitle'  => 'Kelola User',
-            'biodata'   => $this->ModelBiodataWeb->detail(1),
-            'user'      => $this->ModelUser->detail(Session()->get('id_user')),
-            'dataUser'  => $this->ModelUser->getData()
+            'title'         => 'Data User',
+            'sub_title'     => 'Data User',
+            'data_web'      => $this->M_Website->detail(1),
+            'user'          => $this->M_User->detail(Session()->get('id_user')),
+            'data_user'     => $this->M_User->get_data()
         ];
 
-        return view('admin.users.data', $data);
+        return view('admin.user.v_index', $data);
     }
 
-    public function add()
+    public function tambah_user()
     {
         if (!Session()->get('email')) {
             return redirect()->route('login');
@@ -44,23 +44,23 @@ class Users extends Controller
 
         $data = [
             'title'     => 'Data User',
-            'subTitle'  => 'Tambah User',
-            'biodata'   => $this->ModelBiodataWeb->detail(1),
-            'user'      => $this->ModelUser->detail(Session()->get('id_user'))
+            'sub_title' => 'Tambah User',
+            'data_web'  => $this->M_Website->detail(1),
+            'user'      => $this->M_User->detail(Session()->get('id_user'))
         ];
 
-        return view('admin.users.add', $data);
+        return view('admin.user.v_tambah', $data);
     }
 
-    public function addProcess()
+    public function proses_tambah_user()
     {
         Request()->validate([
             'nama'              => 'required',
             'nomor_telepon'     => 'required|numeric',
-            'email'             => 'required|unique:users,email|email',
+            'email'             => 'required|unique:user,email|email',
             'password'          => 'min:6|required',
             'role'              => 'required',
-            'foto_user'         => 'required|mimes:jpeg,png,jpg|max:2048',
+            'foto'              => 'required|mimes:jpeg,png,jpg|max:2048',
         ], [
             'nama.required'             => 'Nama lengkap harus diisi!',
             'nomor_telepon.required'    => 'Nomor telepon harus diisi!',
@@ -71,12 +71,12 @@ class Users extends Controller
             'password.required'         => 'Password harus diisi!',
             'password.min'              => 'Password minimal 6 karakter!',
             'role.required'             => 'Role harus diisi!',
-            'foto_user.required'        => 'Foto Anda harus diisi!',
-            'foto_user.mimes'           => 'Format Foto Anda harus jpg/jpeg/png!',
-            'foto_user.max'             => 'Ukuran Foto Anda maksimal 2 mb',
+            'foto.required'             => 'Foto Anda harus diisi!',
+            'foto.mimes'                => 'Format Foto Anda harus jpg/jpeg/png!',
+            'foto.max'                  => 'Ukuran Foto Anda maksimal 2 mb',
         ]);
 
-        $file1 = Request()->foto_user;
+        $file1 = Request()->foto;
         $fileUser = date('mdYHis') . Request()->nama . '.' . $file1->extension();
         $file1->move(public_path('foto_user'), $fileUser);
 
@@ -89,11 +89,12 @@ class Users extends Controller
             'foto'              => $fileUser,
         ];
 
-        $this->ModelUser->add($data);
-        return redirect()->route('kelola-user')->with('berhasil', 'Data user berhasil ditambahkan !');
+        $this->M_User->tambah($data);
+        Alert::success('Berhasil', 'Data user berhasil ditambah.');
+        return redirect()->route('data_user');
     }
 
-    public function edit($id_user)
+    public function edit_user($id_user)
     {
         if (!Session()->get('email')) {
             return redirect()->route('login');
@@ -101,23 +102,23 @@ class Users extends Controller
 
         $data = [
             'title'     => 'Data User',
-            'subTitle'  => 'Edit User',
-            'biodata'   => $this->ModelBiodataWeb->detail(1),
-            'detail'    => $this->ModelUser->detail($id_user),
-            'user'      => $this->ModelUser->detail(Session()->get('id_user'))
+            'sub_title' => 'Edit User',
+            'data_web'  => $this->M_Website->detail(1),
+            'detail'    => $this->M_User->detail($id_user),
+            'user'      => $this->M_User->detail(Session()->get('id_user'))
         ];
 
-        return view('admin.users.edit', $data);
+        return view('admin.user.v_edit', $data);
     }
 
-    public function editProcess($id_user)
+    public function proses_edit_user($id_user)
     {
         Request()->validate([
             'nama'              => 'required',
             'nomor_telepon'     => 'required|numeric',
             'email'             => 'required|email',
             'role'              => 'required',
-            'foto_user'         => 'mimes:jpeg,png,jpg|max:2048',
+            'foto'              => 'mimes:jpeg,png,jpg|max:2048',
         ], [
             'nama.required'             => 'Nama lengkap harus diisi!',
             'nomor_telepon.required'    => 'Nomor telepon harus diisi!',
@@ -125,20 +126,20 @@ class Users extends Controller
             'email.required'            => 'Email harus diisi!',
             'email.email'               => 'Email harus sesuai format! Contoh: contoh@gmail.com',
             'role.required'             => 'Role harus diisi!',
-            'foto_user.mimes'           => 'Format Foto Anda harus jpg/jpeg/png!',
-            'foto_user.max'             => 'Ukuran Foto Anda maksimal 2 mb',
+            'foto.mimes'                => 'Format Foto Anda harus jpg/jpeg/png!',
+            'foto.max'                  => 'Ukuran Foto Anda maksimal 2 mb',
         ]);
 
         if (Request()->password) {
 
-            $user = $this->ModelUser->detail($id_user);
+            $user = $this->M_User->detail($id_user);
 
-            if (Request()->foto_user <> "") {
+            if (Request()->foto <> "") {
                 if ($user->foto <> "") {
                     unlink(public_path('foto_user') . '/' . $user->foto);
                 }
 
-                $file = Request()->foto_user;
+                $file = Request()->foto;
                 $fileUser = date('mdYHis') . Request()->nama . '.' . $file->extension();
                 $file->move(public_path('foto_user'), $fileUser);
 
@@ -162,14 +163,14 @@ class Users extends Controller
                 ];
             }
         } else {
-            $user = $this->ModelUser->detail($id_user);
+            $user = $this->M_User->detail($id_user);
 
-            if (Request()->foto_user <> "") {
+            if (Request()->foto <> "") {
                 if ($user->foto <> "") {
                     unlink(public_path('foto_user') . '/' . $user->foto);
                 }
 
-                $file = Request()->foto_user;
+                $file = Request()->foto;
                 $fileUser = date('mdYHis') . Request()->nama . '.' . $file->extension();
                 $file->move(public_path('foto_user'), $fileUser);
 
@@ -192,37 +193,22 @@ class Users extends Controller
             }
         }
 
-        $this->ModelUser->edit($data);
-        return redirect()->route('kelola-user')->with('berhasil', 'Data user berhasil diedit !');
+        $this->M_User->edit($data);
+        Alert::success('Berhasil', 'Data user berhasil diedit.');
+        return redirect()->route('data_user');
     }
 
-    public function detail($id_user)
+    public function hapus_user($id_user)
     {
-        if (!Session()->get('email')) {
-            return redirect()->route('login');
-        }
-
-        $data = [
-            'title'     => 'Data User',
-            'subTitle'  => 'Detail User',
-            'biodata'   => $this->ModelBiodataWeb->detail(1),
-            'detail'    => $this->ModelUser->detail($id_user),
-            'user'      => $this->ModelUser->detail(Session()->get('id_user'))
-        ];
-
-        return view('admin.users.detail', $data);
-    }
-
-    public function deleteProcess($id_user)
-    {
-        $user = $this->ModelUser->detail($id_user);
+        $user = $this->M_User->detail($id_user);
 
         if ($user->foto <> "") {
             unlink(public_path('foto_user') . '/' . $user->foto);
         }
 
-        $this->ModelUser->deleteData($id_user);
-        return redirect()->route('kelola-user')->with('berhasil', 'Data user berhasil dihapus !');
+        $this->M_User->hapus($id_user);
+        Alert::success('Berhasil', 'Data user berhasil dihapus.');
+        return redirect()->route('data_user');
     }
 
     public function profil()
@@ -233,39 +219,39 @@ class Users extends Controller
 
         $data = [
             'title'     => 'Profil',
-            'subTitle'  => 'Informasi Profil',
-            'biodata'   => $this->ModelBiodataWeb->detail(1),
-            'user'      => $this->ModelUser->detail(Session()->get('id_user'))
+            'sub_title' => 'Data Profil',
+            'data_web'  => $this->M_Website->detail(1),
+            'user'      => $this->M_User->detail(Session()->get('id_user'))
         ];
 
-        return view('profil.data', $data);
+        return view('profil.v_index', $data);
     }
 
-    public function editProfilProcess($id_user)
+    public function edit_profil($id_user)
     {
         Request()->validate([
             'nama'              => 'required',
             'nomor_telepon'     => 'required|numeric',
             'email'             => 'required|email',
-            'foto_user'         => 'mimes:jpeg,png,jpg|max:2048',
+            'foto'              => 'mimes:jpeg,png,jpg|max:2048',
         ], [
             'nama.required'             => 'Nama lengkap harus diisi!',
             'nomor_telepon.required'    => 'Nomor telepon harus diisi!',
             'nomor_telepon.numeric'     => 'Nomor telepon harus angka!',
             'email.required'            => 'Email harus diisi!',
             'email.email'               => 'Email harus sesuai format! Contoh: contoh@gmail.com',
-            'foto_user.mimes'           => 'Format Foto Anda harus jpg/jpeg/png!',
-            'foto_user.max'             => 'Ukuran Foto Anda maksimal 2 mb',
+            'foto.mimes'                => 'Format Foto Anda harus jpg/jpeg/png!',
+            'foto.max'                  => 'Ukuran Foto Anda maksimal 2 mb',
         ]);
 
-        $user = $this->ModelUser->detail($id_user);
+        $user = $this->M_User->detail($id_user);
 
-        if (Request()->foto_user <> "") {
+        if (Request()->foto <> "") {
             if ($user->foto <> "") {
                 unlink(public_path('foto_user') . '/' . $user->foto);
             }
 
-            $file = Request()->foto_user;
+            $file = Request()->foto;
             $fileUser = date('mdYHis') . Request()->nama . '.' . $file->extension();
             $file->move(public_path('foto_user'), $fileUser);
 
@@ -285,38 +271,33 @@ class Users extends Controller
             ];
         }
 
-        if (Session()->get('role') === 'Admin') {
-            $route = 'profil-admin';
-        } elseif (Session()->get('role') === 'Wakil Direktur') {
-            $route = 'profil-wadir';
-        } elseif (Session()->get('role') === 'Ketua Jurusan') {
-            $route = 'profil-kajur';
-        } elseif (Session()->get('role') === 'Pegawai') {
-            $route = 'profil';
-        }
-
-        $this->ModelUser->edit($data);
-        return redirect()->route($route)->with('berhasil', 'Profil berhasil diedit !');
+        $this->M_User->edit($data);
+        Alert::success('Berhasil', 'Data profil berhasil diedit.');
+        return redirect()->route('profil');
     }
 
-    public function ubahPassword($id_member)
+    public function ubah_password()
     {
         if (!Session()->get('email')) {
             return redirect()->route('login');
         }
 
-
         $data = [
-            'title'     => 'Ubah Password',
-            'biodata'   => $this->ModelBiodataWeb->detail(1),
-            'user'      => $this->ModelUser->detail($id_member)
+            'title'     => 'Profil',
+            'sub_title' => 'Ubah Password',
+            'data_web'  => $this->M_Website->detail(1),
+            'user'      => $this->M_User->detail(Session()->get('id_user'))
         ];
 
-        return view('user.profil.ubahPassword', $data);
+        return view('profil.v_ubah_password', $data);
     }
 
-    public function changePasswordProcess($id_user)
+    public function proses_ubah_password($id_user)
     {
+        if (!Session()->get('email')) {
+            return redirect()->route('login');
+        }
+
         Request()->validate([
             'password_lama'     => 'required|min:6',
             'password_baru'     => 'required|min:6',
@@ -327,18 +308,20 @@ class Users extends Controller
             'password_baru.min'         => 'Password Lama minimal 6 karakter!',
         ]);
 
-        $user = $this->ModelUser->detail($id_user);
+        $user = $this->M_User->detail($id_user);
 
         if (Hash::check(Request()->password_lama, $user->password)) {
             $data = [
                 'id_user'         => $id_user,
-                'password'          => Hash::make(Request()->password_baru)
+                'password'        => Hash::make(Request()->password_baru)
             ];
 
-            $this->ModelUser->edit($data);
-            return back()->with('berhasil-ubah-password', 'Password berhasil diubah !');
+            $this->M_User->edit($data);
+            Alert::success('Berhasil', 'Data password berhasil diubah.');
+            return back();
         } else {
-            return back()->with('gagal-ubah-password', 'Password Lama tidak sesuai.');
+            Alert::error('Gagal', 'Data password lama tidak sesuai.');
+            return back();
         }
     }
 }

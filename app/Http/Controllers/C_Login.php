@@ -25,7 +25,21 @@ class C_Login extends Controller
 
     public function index()
     {
-        $this->validasi_role();
+        if (Session()->get('email')) {
+            if (Session()->get('role') === 'Admin') {
+                return redirect()->route('dashboard_admin');
+            } elseif (Session()->get('role') === 'Donatur') {
+                return redirect()->route('dashboard_donatur');
+            } elseif (Session()->get('role') === 'Event') {
+                return redirect()->route('dashboard_event');
+            } elseif (Session()->get('role') === 'Petugas Kesehatan') {
+                return redirect()->route('dashboard_petugas_kesehatan');
+            } elseif (Session()->get('role') === 'Rumah Sakit') {
+                return redirect()->route('dashboard_rumah_sakit');
+            } elseif (Session()->get('role') === 'Pusat PMI') {
+                return redirect()->route('dashboard_pusat_pmi');
+            }
+        }
 
         $data = [
             'title'     => 'Login',
@@ -37,7 +51,21 @@ class C_Login extends Controller
 
     public function login()
     {
-        $this->validasi_role();
+        if (Session()->get('email')) {
+            if (Session()->get('role') === 'Admin') {
+                return redirect()->route('dashboard_admin');
+            } elseif (Session()->get('role') === 'Donatur') {
+                return redirect()->route('dashboard_donatur');
+            } elseif (Session()->get('role') === 'Event') {
+                return redirect()->route('dashboard_event');
+            } elseif (Session()->get('role') === 'Petugas Kesehatan') {
+                return redirect()->route('dashboard_petugas_kesehatan');
+            } elseif (Session()->get('role') === 'Rumah Sakit') {
+                return redirect()->route('dashboard_rumah_sakit');
+            } elseif (Session()->get('role') === 'Pusat PMI') {
+                return redirect()->route('dashboard_pusat_pmi');
+            }
+        }
 
         Request()->validate([
             'email'             => 'required|email',
