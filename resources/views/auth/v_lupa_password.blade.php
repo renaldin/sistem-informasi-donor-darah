@@ -40,7 +40,7 @@
                   <div class="login-form">
                     <div class="text-center">
                       <h1 class="h4 text-gray-900">{{$title}}</h1>
-                      <p class="text-gray-900 mb-4">Silahkan masukkan data Email dan Paassword</p>
+                      <p class="text-gray-900 mb-4">Silahkan masukkan data email yang sudah terdaftar di website ini.</p>
                     </div>
                     <div>
                       @if (session('berhasil'))
@@ -60,7 +60,7 @@
                       </div>
                       @endif
                     </div>
-                    <form class="user" method="POST" action="/login" >
+                    <form class="user" method="POST" action="/lupa_password" >
                       @csrf
                       <div class="form-group">
                         <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Masukkan Alamat Email">
@@ -69,22 +69,13 @@
                         @enderror
                       </div>
                       <div class="form-group">
-                        <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Masukkan Password">
-                        @error('password')
-                          <small class="form-text text-danger">{{ $message }}</small>
-                        @enderror
-                      </div>
-                      <div class="form-group">
-                        <button type="submit"  class="btn btn-danger btn-block">Login</button>
-                      </div>
-                      <div class="form-group text-right">
-                        <a href="/lupa_password">Lupa Password</a>
+                        <button type="submit"  class="btn btn-danger btn-block">Kirim</button>
                       </div>
                       <hr>
                     </form>
                     <hr>
                     <div class="text-center">
-                      <a class="font-weight-bold small text-gray-900" href="/register">Belum punya akun? Register!</a>
+                      <a class="font-weight-bold small text-gray-900" href="/login">Sudah punya akun? Login!</a>
                     </div>
                     <div class="text-center">
                     </div>

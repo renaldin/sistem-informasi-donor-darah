@@ -13,7 +13,7 @@ $dataUser = $data_email['dataUser'];
   <meta name="x-apple-disable-message-reformatting">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta content="telephone=no" name="format-detection">
-  <title>Sistem Booking Billboard</title>
+  <title>Sistem Donor</title>
   <!--[if (mso 16)]>
     <style type="text/css">
     a {text-decoration: none;}
@@ -335,6 +335,7 @@ $dataUser = $data_email['dataUser'];
     <table class="es-wrapper" width="100%" cellspacing="0" cellpadding="0" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;padding:0;Margin:0;width:100%;height:100%;background-repeat:repeat;background-position:center top;background-color:#EFF2F7">
       <tr style="border-collapse:collapse">
         <td valign="top" style="padding:0;Margin:0">
+
           <table class="es-content" cellspacing="0" cellpadding="0" align="center" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;table-layout:fixed !important;width:100%">
             <tr style="border-collapse:collapse">
               <td align="center" style="padding:0;Margin:0">
@@ -363,107 +364,28 @@ $dataUser = $data_email['dataUser'];
                   </tr>
                   <tr style="border-collapse:collapse">
                     <td align="left" style="padding:0;Margin:0;padding-left:15px;padding-right:15px;padding-top:20px">
-                      <!--[if mso]><table  style="width:570px" cellpadding="0" cellspacing="0"><tr><td style="width:285px" valign="top"><![endif]-->
-                      {{-- <table cellspacing="0" cellpadding="0" align="left" class="es-left" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;float:left">
-                        <tr style="border-collapse:collapse">
-                          <td class="es-m-p20b" valign="top" align="center" style="padding:0;Margin:0;width:285px">
-                            <table width="100%" cellspacing="0" cellpadding="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
-                              <tr style="border-collapse:collapse">
-                                <td align="center" style="padding:0;Margin:0;font-size:0"><span target="_blank" href="#" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:none;color:#0C66FF;font-size:14px"><img class="adapt-img b_image" src="{{ asset('foto_biodata/'.$biodata->logo) }}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="200"></span></td>
-                              </tr>
-                            </table>
-                          </td>
-                        </tr>
-                      </table> --}}
-                      <!--[if mso]></td><td style="width:20px"></td><td style="width:265px" valign="top"><![endif]-->
                       <table cellpadding="0" cellspacing="0" class="es-content" align="left" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;float:left">
                         <tr style="border-collapse:collapse">
-                          <td valign="top" align="center" style="padding:0;Margin:0;">
-                            <table width="100%" cellspacing="0" cellpadding="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
+                          <td align="center" valign="top" style="padding:0;Margin:0;width:570px">
+                            <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                               <tr style="border-collapse:collapse">
-                                <td align="left" class="es-m-txt-l" style="padding:0;Margin:0">
-                                  <h3 style="Margin:0;line-height:19px;mso-line-height-rule:exactly;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;font-size:16px;font-style:normal;font-weight:bold;color:#0c66ff;letter-spacing:0px" class="b_category">Website</h3>
+                                <td align="center" class="es-infoblock es-m-txt-c" style="padding:0;Margin:0;line-height:19px;font-size:16px;color:#FFFFFF">
+                                  <h1 style="Margin:0;line-height:31px;mso-line-height-rule:exactly;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;font-size:26px;font-style:normal;font-weight:bold;color:#000000">Hallo, {{$dataUser->nama}} </h1>
                                 </td>
                               </tr>
                               <tr style="border-collapse:collapse">
-                                <td align="left" class="es-m-txt-l" style="padding:0;Margin:0;padding-bottom:10px">
-                                  <h1 class="b_title" style="Margin:0;line-height:31px;mso-line-height-rule:exactly;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;font-size:26px;font-style:normal;font-weight:bold;color:#3C4858">Sistem Booking Billboard</h1>
+                                <td align="center" class="es-infoblock es-m-txt-c" style="padding:0;Margin:0;padding-top:20px;padding-bottom:20px;line-height:19px;font-size:16px;color:#000000">
+                                  <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'Open Sans', sans-serif;line-height:19px;color:#000000;font-size:16px">Silahkan klik tombol dibawah ini untuk melakukan reset password dan membuat password baru!</p>
                                 </td>
                               </tr>
                               <tr style="border-collapse:collapse">
-                                <td align="left" style="padding:0;Margin:0">
-                                  <p class="b_description" style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'Open Sans', sans-serif;line-height:21px;color:#8492A6;font-size:14px">Sitem ini merupakan website yang dapat melakukan proses booking reklame billboard. Silahkan kunjungi website agar dapat melihat informasi yang lebih lengkap.&nbsp;</p>
-                                </td>
-                              </tr>
-                              <tr style="border-collapse:collapse">
-                                <td align="left" class="es-m-txt-l" style="padding:0;Margin:0;padding-top:20px;padding-bottom:20px"><span class="es-button-border" style="border-style:solid;border-color:#0C66FF;background:#0C66FF;border-width:0px;display:inline-block;border-radius:0px;width:auto"><a href="{{$urlUtama}}" class="es-button" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:14px;border-style:solid;border-color:#0C66FF;border-width:15px 30px 15px 30px;display:inline-block;background:#0C66FF;border-radius:0px;font-family:'Open Sans', sans-serif;font-weight:bold;font-style:normal;line-height:17px;width:auto;text-align:center">LIHAT WEBSITE</a></span></td>
+                                <td align="center" class="es-m-txt-c" style="padding:0;Margin:0;padding-top:20px"><span class="es-button-border" style="border-style:solid;border-color:#0C66FF;background:#000000;border-width:0px;display:inline-block;border-radius:0px;width:auto"><a href="{{$urlReset}}" class="es-button" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#ffff;font-size:14px;border-style:solid;border-color:rgb(252, 84, 75);;border-width:15px 30px 15px 30px;display:inline-block;background:rgb(252, 84, 75);;border-radius:0px;font-family:'Open Sans', sans-serif;font-weight:bold;font-style:normal;line-height:17px;width:auto;text-align:center;">RESET PASSWORD</a></span></td>
                               </tr>
                             </table>
                           </td>
                         </tr>
                       </table>
                       <!--[if mso]></td></tr></table><![endif]-->
-                    </td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-          </table>
-          <table cellpadding="0" cellspacing="0" class="es-content" align="center" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;table-layout:fixed !important;width:100%">
-            <tr style="border-collapse:collapse">
-              <td align="center" bgcolor="#0050d8" style="padding:0;Margin:0;background-color:#0050d8">
-                <table bgcolor="#0c66ff" class="es-content-body" align="center" cellpadding="0" cellspacing="0" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:#0c66ff;width:600px">
-                  <tr style="border-collapse:collapse">
-                    <td align="left" style="Margin:0;padding-left:15px;padding-right:15px;padding-top:40px;padding-bottom:40px">
-                      <table cellpadding="0" cellspacing="0" width="100%" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
-                        <tr style="border-collapse:collapse">
-                          <td align="center" valign="top" style="padding:0;Margin:0;width:570px">
-                            <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
-                              <tr style="border-collapse:collapse">
-                                <td align="center" class="es-infoblock es-m-txt-c" style="padding:0;Margin:0;line-height:19px;font-size:16px;color:#FFFFFF">
-                                  <h1 style="Margin:0;line-height:31px;mso-line-height-rule:exactly;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;font-size:26px;font-style:normal;font-weight:bold;color:#ffffff">Hallo, {{$dataUser->nama}} </h1>
-                                </td>
-                              </tr>
-                              <tr style="border-collapse:collapse">
-                                <td align="center" class="es-infoblock es-m-txt-c" style="padding:0;Margin:0;padding-top:20px;padding-bottom:20px;line-height:19px;font-size:16px;color:#FFFFFF">
-                                  <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'Open Sans', sans-serif;line-height:19px;color:#FFFFFF;font-size:16px">Anda mempunyai masalah lupa password. Silahkan klik tombol dibawah ini untuk melakukan reset password dan membuat password baru!</p>
-                                </td>
-                              </tr>
-                              <tr style="border-collapse:collapse">
-                                <td align="center" class="es-m-txt-c" style="padding:0;Margin:0;padding-top:20px"><span class="es-button-border" style="border-style:solid;border-color:#0C66FF;background:#ffffff;border-width:0px;display:inline-block;border-radius:0px;width:auto"><a href="{{$urlReset}}" class="es-button" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#0c66ff;font-size:14px;border-style:solid;border-color:#ffffff;border-width:15px 30px 15px 30px;display:inline-block;background:#ffffff;border-radius:0px;font-family:'Open Sans', sans-serif;font-weight:bold;font-style:normal;line-height:17px;width:auto;text-align:center">RESET PASSWORD</a></span></td>
-                              </tr>
-                            </table>
-                          </td>
-                        </tr>
-                      </table>
-                    </td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-          </table>
-          <table cellpadding="0" cellspacing="0" class="es-content" align="center" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;table-layout:fixed !important;width:100%">
-            <tr style="border-collapse:collapse">
-              <td align="center" style="padding:0;Margin:0">
-                <table bgcolor="transparent" class="es-content-body" align="center" cellpadding="0" cellspacing="0" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:transparent;width:600px">
-                  <tr style="border-collapse:collapse">
-                    <td align="left" style="Margin:0;padding-left:20px;padding-right:20px;padding-top:30px;padding-bottom:30px">
-                      <table width="100%" cellspacing="0" cellpadding="0" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
-                        <tr style="border-collapse:collapse">
-                          <td valign="top" align="center" style="padding:0;Margin:0;width:560px">
-                            <table width="100%" cellspacing="0" cellpadding="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
-                              {{-- <tr style="border-collapse:collapse">
-                                <td class="es-infoblock made_with" align="center" style="padding:0;Margin:0;line-height:120%;font-size:0;color:#FFFFFF"><span style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:none;color:#FFFFFF;font-size:16px"><img src="{{ asset('foto_biodata/'.$biodata->logo) }}" alt width="125" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"></span></td>
-                              </tr> --}}
-                              <tr style="border-collapse:collapse">
-                                <td class="es-infoblock made_with" align="center" style="padding:0;Margin:0;line-height:120%;font-size:0;color:#FFFFFF"><span style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:none;color:#FFFFFF;font-size:16px">
-                                    <p style="color: black;">{{ $biodata->nama_website }}</p>
-                                  </span></td>
-                              </tr>
-                            </table>
-                          </td>
-                        </tr>
-                      </table>
                     </td>
                   </tr>
                 </table>

@@ -85,4 +85,89 @@ class C_Login extends Controller
         Session()->forget('log');
         return redirect()->route('login')->with('berhasil', 'Logout berhasil!');
     }
+
+    public function lupa_password()
+    {
+        if (Session()->get('email')) {
+            if (Session()->get('role')) {
+                return redirect()->route('dashboard');
+            }
+        }
+
+        $data = [
+            'title'     => 'Lupa Password',
+            'data_web'  => $this->M_Website->detail(1),
+        ];
+
+        return view('auth.v_lupa_password', $data);
+    }
+
+    public function proses_lupa_password()
+    {
+        $email = Request()->email;
+
+        $data = $this->M_User->detail_email($email);
+
+        if ($data) {
+
+            $data_email = [
+                'subject'       => 'Lupa Password',
+                'sender_name'   => 'renaldinoviandi1@gmail.com',
+                'urlUtama'      => 'http://127.0.0.1:8000',
+                'urlReset'      => 'http://127.0.0.1:8000/reset_password/' . $data->id_user,
+                'dataUser'      => $data,
+                'biodata'       => $this->M_Website->detail(1),
+            ];
+
+            Mail::to($data->email)->send(new kirimEmail($data_email));
+            return redirect()->route('login')->with('berhasil', 'Kami sudah kirim pesan ke email Anda. Silahkan cek!');
+        } else {
+            return back()->with('gagal', 'Email belum terdaftar. Silahkan hubungi Admin terlebih dahulu!');
+        }
+    }
+
+    public function reset_password($id_user)
+    {
+        if (Session()->get('email')) {
+            if (Session()->get('role')) {
+                return redirect()->route('dashboard');
+            }
+        }
+
+        $data = [
+            'title'     => 'Reset Password',
+            'detail'    => $this->M_User->detail($id_user),
+            'data_web'  => $this->M_Website->detail(1),
+        ];
+
+        return view('auth.v_reset_password', $data);
+    }
+
+    public function proses_reset_password($id_user)
+    {
+        if (Session()->get('email')) {
+            if (Session()->get('role')) {
+                return redirect()->route('dashboard');
+            }
+        }
+
+        Request()->validate([
+            'password' => 'min:6|required|confirmed',
+            'password_confirmation' => 'min:6|required',
+        ], [
+            'password.required'    => 'Password baru harus diisi!',
+            'password.min'         => 'Password baru minimal 6 karakter!',
+            'password.confirmed'   => 'Password baru tidak sama!',
+            'password_confirmation.required'    => 'Konfimrasi Password harus diisi!',
+            'password_confirmation.min'         => 'Konfimrasi Password minimal 6 karakter!',
+        ]);
+
+        $data = [
+            'id_user'       => $id_user,
+            'password'      => Hash::make(Request()->password)
+        ];
+
+        $this->M_User->edit($data);
+        return redirect()->route('login')->with('berhasil', 'Anda baru saja merubah password. Silahkan login!');
+    }
 }

@@ -40,7 +40,7 @@
                   <div class="login-form">
                     <div class="text-center">
                       <h1 class="h4 text-gray-900">{{$title}}</h1>
-                      <p class="text-gray-900 mb-4">Silahkan masukkan data Email dan Paassword</p>
+                      <p class="text-gray-900 mb-4">Silahkan masukkan data Anda.</p>
                     </div>
                     <div>
                       @if (session('berhasil'))
@@ -113,7 +113,7 @@
                       </div>
                       <div class="col-lg-12">
                         <div class="form-group">
-                          <button type="submit"  class="btn btn-danger btn-block">Login</button>
+                          <button type="submit"  class="btn btn-danger btn-block">Register</button>
                         </div>
                       </div>
                     </form>

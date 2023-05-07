@@ -26,6 +26,10 @@ Route::group(['middleware' => 'revalidate'], function () {
     // login
     Route::get('/', [C_Login::class, 'index'])->name('login');
     Route::post('/login', [C_Login::class, 'login']);
+    Route::get('/lupa_password', [C_Login::class, 'lupa_password'])->name('lupa_password');
+    Route::post('/lupa_password', [C_Login::class, 'proses_lupa_password']);
+    Route::get('/reset_password/{id}', [C_Login::class, 'reset_password'])->name('reset_password');
+    Route::post('/reset_password/{id}', [C_Login::class, 'proses_reset_password']);
 
     // Register
     Route::get('/register', [C_Register::class, 'index'])->name('register');
