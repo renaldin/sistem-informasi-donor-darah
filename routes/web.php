@@ -5,6 +5,7 @@ use App\Http\Controllers\C_User;
 use App\Http\Controllers\Register;
 use App\Http\Controllers\C_Login;
 use App\Http\Controllers\C_PengajuanEvent;
+use App\Http\Controllers\C_Register;
 use App\Http\Controllers\Cetak;
 use App\Http\Controllers\PengaturanWeb;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +26,10 @@ Route::group(['middleware' => 'revalidate'], function () {
     // login
     Route::get('/', [C_Login::class, 'index'])->name('login');
     Route::post('/login', [C_Login::class, 'login']);
+
+    // Register
+    Route::get('/register', [C_Register::class, 'index'])->name('register');
+    Route::post('/register', [C_Register::class, 'register']);
 
     // Logout
     Route::get('/logout', [C_Login::class, 'logout'])->name('logout');
