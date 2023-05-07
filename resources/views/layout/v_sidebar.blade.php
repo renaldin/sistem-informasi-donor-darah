@@ -23,6 +23,24 @@
         <span>Data User</span>
       </a>
     </li>
+    <hr class="sidebar-divider">
+    <div class="sidebar-heading">
+      Fitur
+    </div>
+    <li class="nav-item  @if($title === 'Pengajuan Event') active @endif">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pengajuan_event"
+        aria-expanded="true" aria-controls="pengajuan_event">
+        <i class="far fa-fw fa-window-maximize"></i>
+        <span>Data Pengajuan Event</span>
+      </a>
+      <div id="pengajuan_event" class="collapse @if($title === 'Pengajuan Event') show @endif" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <h6 class="collapse-header">Sub Menu</h6>
+          <a class="collapse-item @if($sub_title === 'Data Pengajuan Event') active @endif" href="/data_pengajuan_event">Data Pengajuan</a>
+          <a class="collapse-item  @if($sub_title === 'Riwayat Pengajuan Event' || $sub_title === 'Tambah Event'|| $sub_title === 'Edit Event') active @endif" href="/riwayat_pengajuan_event">Riwayat Pengajuan</a>
+        </div>
+      </div>
+    </li>
   @elseif ($user->role === 'Donatur')
   @elseif ($user->role === 'Event')
   <div class="sidebar-heading">

@@ -52,6 +52,17 @@ Route::group(['middleware' => 'revalidate'], function () {
         Route::post('/edit_user/{id}', [C_User::class, 'proses_edit_user']);
         Route::get('/hapus_user/{id}', [C_User::class, 'hapus_user']);
 
+        // Data Pengajuan Event
+        Route::get('/data_pengajuan_event', [C_PengajuanEvent::class, 'kelola_pengajuan_event'])->name('data_pengajuan_event');
+        Route::get('/tidak_pengajuan_event/{id}', [C_PengajuanEvent::class, 'tidak_pengajuan_event']);
+        Route::get('/ya_pengajuan_event/{id}', [C_PengajuanEvent::class, 'ya_pengajuan_event']);
+        Route::get('/riwayat_pengajuan_event', [C_PengajuanEvent::class, 'riwayat_pengajuan_event'])->name('riwayat_pengajuan_event');
+        Route::get('/tambah_event', [C_PengajuanEvent::class, 'tambah_event'])->name('tambah_event');
+        Route::post('/tambah_event', [C_PengajuanEvent::class, 'proses_tambah_event']);
+        Route::get('/edit_event/{id}', [C_PengajuanEvent::class, 'edit_event'])->name('edit_event');
+        Route::post('/edit_event/{id}', [C_PengajuanEvent::class, 'proses_edit_event']);
+        Route::get('/hapus_event/{id}', [C_PengajuanEvent::class, 'hapus_pengajuan_event']);
+
         // Cetak PDF
         Route::post('/cetak-pdf', [Cetak::class, 'index']);
         Route::post('/cetak-pdf-order', [Cetak::class, 'cetakOrder']);
