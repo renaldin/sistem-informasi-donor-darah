@@ -23,6 +23,12 @@
         <span>Data User</span>
       </a>
     </li>
+    <li class="nav-item @if($title === 'Data Darah') active @endif">
+      <a class="nav-link" href="/data_darah">
+        <i class="fas fa-fw fa-palette"></i>
+        <span>Data Darah</span>
+      </a>
+    </li>
     <hr class="sidebar-divider">
     <div class="sidebar-heading">
       Fitur
@@ -38,6 +44,21 @@
           <h6 class="collapse-header">Sub Menu</h6>
           <a class="collapse-item @if($sub_title === 'Data Pengajuan Event') active @endif" href="/data_pengajuan_event">Data Pengajuan</a>
           <a class="collapse-item  @if($sub_title === 'Riwayat Pengajuan Event' || $sub_title === 'Tambah Event'|| $sub_title === 'Edit Event') active @endif" href="/riwayat_pengajuan_event">Riwayat Pengajuan</a>
+        </div>
+      </div>
+    </li>
+    <li class="nav-item  @if($title === 'Darah') active @endif">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#darah"
+        aria-expanded="true" aria-controls="darah">
+        <i class="far fa-fw fa-window-maximize"></i>
+        <span>Darah</span>
+      </a>
+      <div id="darah" class="collapse @if($title === 'Darah') show @endif" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <h6 class="collapse-header">Sub Menu</h6>
+          <a class="collapse-item @if($sub_title === 'Darah Masuk') active @endif" href="/data_darah_masuk">Darah Masuk</a>
+          <a class="collapse-item  @if($sub_title === 'Darah Keluar') active @endif" href="/data_darah_keluar">Darah Keluar</a>
+          <a class="collapse-item  @if($sub_title === 'Darah Buang') active @endif" href="/data_darah_buang">Darah Buang</a>
         </div>
       </div>
     </li>

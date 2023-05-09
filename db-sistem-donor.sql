@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 06, 2023 at 12:46 PM
+-- Generation Time: May 09, 2023 at 02:58 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.0.19
 
@@ -46,6 +46,60 @@ INSERT INTO `biodata_web` (`id_biodata_web`, `nama_website`, `email`, `nomor_tel
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `darah`
+--
+
+CREATE TABLE `darah` (
+  `id_darah` int(11) NOT NULL,
+  `no_kantung` varchar(50) DEFAULT NULL,
+  `golongan_darah` varchar(10) DEFAULT NULL,
+  `resus` varchar(50) DEFAULT NULL,
+  `volume_darah` varchar(50) DEFAULT NULL,
+  `tanggal_kedaluwarsa` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `darah_buang`
+--
+
+CREATE TABLE `darah_buang` (
+  `id_darah_buang` int(11) NOT NULL,
+  `id_darah` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `tanggal_buang` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `darah_keluar`
+--
+
+CREATE TABLE `darah_keluar` (
+  `id_darah_keluar` int(11) NOT NULL,
+  `id_darah` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `tanggal_kelaur` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `darah_masuk`
+--
+
+CREATE TABLE `darah_masuk` (
+  `id_darah_masuk` int(11) NOT NULL,
+  `id_darah` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `tanggal_masuk` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `event`
 --
 
@@ -59,7 +113,7 @@ CREATE TABLE `event` (
   `jumlah_orang` int(11) DEFAULT NULL,
   `upload_surat` text DEFAULT NULL,
   `tanggal_pengajuan` date DEFAULT NULL,
-  `status_pengajuan` enum('Menunggu Persetujuan','Disetujui','Tidak Disetujui','Belum Dikirim') DEFAULT NULL
+  `status_pengajuan` enum('Menunggu Persetujuan','Disetujui','Tidak Disetujui','Belum Dikirim','Dibuat Admin') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -67,7 +121,7 @@ CREATE TABLE `event` (
 --
 
 INSERT INTO `event` (`id_event`, `id_user`, `nama_instansi`, `alamat_lengkap`, `tanggal_event`, `jam`, `jumlah_orang`, `upload_surat`, `tanggal_pengajuan`, `status_pengajuan`) VALUES
-(1, 7, 'Politeknik Negeri Subang', 'Cibogo', '2023-06-02', '12:30', 5, '05062023102743 Politeknik Negeri Subang.pdf', '2023-05-06', 'Belum Dikirim');
+(3, 2, 'Politeknik Negeri Subang', 'Cibogo', '2023-05-07', '12:00', 4, '05072023011122 Politeknik Negeri Subang.pdf', '2023-05-07', 'Tidak Disetujui');
 
 -- --------------------------------------------------------
 
@@ -93,11 +147,12 @@ INSERT INTO `user` (`id_user`, `nama`, `email`, `password`, `nomor_telepon`, `ro
 (1, 'Admin Sistem', 'admin122@gmail.com', '$2y$10$FOLMcTQ.ZQmG4XkXHemNkuvTur77scCIzvFMyQyRV9SdbHXGYN0iy', '08989786444', 'Admin', NULL),
 (2, 'Admin Sistem Donor', 'admin@gmail.com', '$2y$10$smeipeg7V7MdF0BNmGaVduxOyL9ugB0d9s8kAYH0ABF./QqXZDzfW', '0896775651', 'Admin', '05062023024216Admin Sistem Donor.png'),
 (5, 'Renaldi Noviandi', 'renaldinoviandi0@gmail.com', '$2y$10$CfofXEParDaLa28vB2/i9uxG0Z8ywPKJycZ9pBYn/vSYeZ6fd4e9a', '08989786444', 'Donatur', NULL),
-(6, 'Teresia Purba', 'renaldinoviandi9@gmail.com', '$2y$10$QnxqGS7U4ncQsXAIff9.Oe5WdsjNV1CUxmR4QAmnKglZ6fysF3QRy', '08989784353', 'Donatur', '05062023011528Teresia Purba.png'),
+(6, 'Teresia Purba', 'renaldinoviandi9@gmail.com', '$2y$10$ZgAD4IiK6USmvSwneu0BguRl3AK.xJ/F6GH2oSCuzsnxyd9gtz3Ue', '08989784353', 'Donatur', '05062023011528Teresia Purba.png'),
 (7, 'Event', 'event@gmail.com', '$2y$10$Mfd7GStgY7g9C2ykYfYkNelJEKrv4x.tilybL3iHTgPtqiP3YyLpm', '08989784353', 'Event', '05062023014106Event.png'),
 (8, 'Petugas Kesehatan', 'pasker@gmail.com', '$2y$10$efC/qal7R6LOIzriA0edce5C3JDCypRJwtmUEhgddXHtX6NeEFSRC', '08989784353', 'Petugas Kesehatan', '05062023014318Petugas Kesehatan.png'),
 (9, 'Rumah Sakit', 'rumahsakit@gmail.com', '$2y$10$V2B.NKXJKtWyPfKXmHBf2.3KlVE7.fEFOhNE1tE0cwlkrJkBf5ITW', '08989784353', 'Rumah Sakit', '05062023014538Rumah Sakit.png'),
-(10, 'Pusat PMI', 'pusatpmi@gmail.com', '$2y$10$VGcpnvPkcrl.trf3NIYp5.EbGumotuG1j2iBXEIXyjQ/W328BxpSi', '08989784353', 'Pusat PMI', '05062023014618Pusat PMI.png');
+(10, 'Pusat PMI', 'pusatpmi@gmail.com', '$2y$10$VGcpnvPkcrl.trf3NIYp5.EbGumotuG1j2iBXEIXyjQ/W328BxpSi', '08989784353', 'Pusat PMI', '05062023014618Pusat PMI.png'),
+(12, 'Teresia Purba', 'rumahsakit1@gmail.com', '$2y$10$ebw0IXTwNtWO6lcJVz2wYOjUXSjU79KIadaLdhbKn7ueGcyZk1vy.', '08989784353', 'Rumah Sakit', NULL);
 
 --
 -- Indexes for dumped tables
@@ -108,6 +163,30 @@ INSERT INTO `user` (`id_user`, `nama`, `email`, `password`, `nomor_telepon`, `ro
 --
 ALTER TABLE `biodata_web`
   ADD PRIMARY KEY (`id_biodata_web`);
+
+--
+-- Indexes for table `darah`
+--
+ALTER TABLE `darah`
+  ADD PRIMARY KEY (`id_darah`);
+
+--
+-- Indexes for table `darah_buang`
+--
+ALTER TABLE `darah_buang`
+  ADD PRIMARY KEY (`id_darah_buang`);
+
+--
+-- Indexes for table `darah_keluar`
+--
+ALTER TABLE `darah_keluar`
+  ADD PRIMARY KEY (`id_darah_keluar`);
+
+--
+-- Indexes for table `darah_masuk`
+--
+ALTER TABLE `darah_masuk`
+  ADD PRIMARY KEY (`id_darah_masuk`);
 
 --
 -- Indexes for table `event`
@@ -132,16 +211,40 @@ ALTER TABLE `biodata_web`
   MODIFY `id_biodata_web` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `darah`
+--
+ALTER TABLE `darah`
+  MODIFY `id_darah` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `darah_buang`
+--
+ALTER TABLE `darah_buang`
+  MODIFY `id_darah_buang` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `darah_keluar`
+--
+ALTER TABLE `darah_keluar`
+  MODIFY `id_darah_keluar` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `darah_masuk`
+--
+ALTER TABLE `darah_masuk`
+  MODIFY `id_darah_masuk` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `event`
 --
 ALTER TABLE `event`
-  MODIFY `id_event` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_event` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
