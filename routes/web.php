@@ -79,6 +79,8 @@ Route::group(['middleware' => 'revalidate'], function () {
         Route::get('/edit_event/{id}', [C_PengajuanEvent::class, 'edit_event'])->name('edit_event');
         Route::post('/edit_event/{id}', [C_PengajuanEvent::class, 'proses_edit_event']);
         Route::get('/hapus_event/{id}', [C_PengajuanEvent::class, 'hapus_pengajuan_event']);
+        Route::get('/jadwal_event', [C_PengajuanEvent::class, 'jadwal_event'])->name('jadwal_event');
+        Route::get('/selesai_event/{id}', [C_PengajuanEvent::class, 'selesai_event']);
 
         // Cetak PDF
         Route::post('/cetak-pdf', [Cetak::class, 'index']);

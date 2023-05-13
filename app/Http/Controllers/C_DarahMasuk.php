@@ -31,8 +31,8 @@ class C_DarahMasuk extends Controller
         }
 
         $data = [
-            'title'         => 'Data Darah',
-            'sub_title'     => 'Data Darah',
+            'title'         => 'Data Darah Masuk',
+            'sub_title'     => 'Data Darah Masuk',
             'data_web'      => $this->M_Website->detail(1),
             'user'          => $this->M_User->detail(Session()->get('id_user')),
             'data_darah'    => $this->M_DarahMasuk->get_data()

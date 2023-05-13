@@ -234,6 +234,7 @@ class C_PengajuanEvent extends Controller
         $data = [
             'id_event'          => $id_event,
             'status_pengajuan'  => "Disetujui",
+            'status_event'      => "Aktif",
         ];
 
         $this->M_Event->edit($data);
@@ -250,10 +251,27 @@ class C_PengajuanEvent extends Controller
         $data = [
             'id_event'          => $id_event,
             'status_pengajuan'  => "Tidak Disetujui",
+            'status_event'      => "Tidak Aktif",
         ];
 
         $this->M_Event->edit($data);
         Alert::success('Berhasil', 'Pengajuan event tidak disetujui.');
+        return back();
+    }
+
+    public function selesai_event($id_event)
+    {
+        if (!Session()->get('email')) {
+            return redirect()->route('login');
+        }
+
+        $data = [
+            'id_event'          => $id_event,
+            'status_event'      => "Tidak Aktif",
+        ];
+
+        $this->M_Event->edit($data);
+        Alert::success('Berhasil', 'Anda berhasil menyelesaikan event.');
         return back();
     }
 
@@ -272,6 +290,23 @@ class C_PengajuanEvent extends Controller
         ];
 
         return view('admin.pengajuan_event.v_riwayat', $data);
+    }
+
+    public function jadwal_event()
+    {
+        if (!Session()->get('email')) {
+            return redirect()->route('login');
+        }
+
+        $data = [
+            'title'         => 'Pengajuan Event',
+            'sub_title'     => 'Jadwal Event',
+            'data_web'      => $this->M_Website->detail(1),
+            'user'          => $this->M_User->detail(Session()->get('id_user')),
+            'data_event'    => $this->M_Event->get_data()
+        ];
+
+        return view('admin.pengajuan_event.v_jadwal_event', $data);
     }
 
     public function tambah_event()
@@ -328,12 +363,13 @@ class C_PengajuanEvent extends Controller
             'jumlah_orang'      => Request()->jumlah_orang,
             'upload_surat'      => $file_surat,
             'status_pengajuan'  => "Dibuat Admin",
+            'status_event'      => "Aktif",
             'tanggal_pengajuan' => date('Y-m-d')
         ];
 
         $this->M_Event->tambah($data);
         Alert::success('Berhasil', 'Data pengajuan event berhasil ditambah.');
-        return redirect()->route('riwayat_pengajuan_event');
+        return redirect()->route('jadwal_event');
     }
 
     public function edit_event($id_event)
@@ -405,6 +441,6 @@ class C_PengajuanEvent extends Controller
 
         $this->M_Event->edit($data);
         Alert::success('Berhasil', 'Data pengajuan event berhasil diedit.');
-        return redirect()->route('riwayat_pengajuan_event');
+        return redirect()->route('jadwal_event');
     }
 }

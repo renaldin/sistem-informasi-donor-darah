@@ -8,9 +8,6 @@
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold">{{$sub_title}}</h6>
             </div>
-            <div class="card-header flex flex-row">
-              <a href="/tambah_event" class="btn btn-primary">Tambah Event</a>
-          </div>
             <div class="table-responsive p-3">
                 <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                     <thead class="thead-light">
@@ -25,7 +22,7 @@
                     <tbody>
                         <?php $no=1;?>
                         @foreach ($data_event as $row)
-                        @if ($row->status_pengajuan !== 'Menunggu Persetujuan' || $row->status_pengajuan !== 'Belum Dikirim')
+                        @if ($row->status_event === 'Tidak Aktif' && $row->status_pengajuan !== 'Belum Dikirim' && $row->status_pengajuan !== 'Menunggu Persetujuan')
                           <tr>
                             <td>{{$no++}}</td>
                             <td>{{$row->nama_instansi}}</td>
@@ -44,13 +41,7 @@
                                 @endif
                             </td>
                             <td>
-                              @if ($row->status_pengajuan === 'Dibuat Admin')
-                                <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#approve{{$row->id_event}}">Approve</button>
-                                <a href="/edit_event/{{$row->id_event}}" class="btn btn-sm btn-success">Edit</a>
-                                <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#hapus{{$row->id_event}}">Hapus</button>
-                              @else 
                                 <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#detail{{$row->id_event}}">Detail</button>   
-                              @endif
                             </td>
                           </tr>
                         @endif
@@ -61,49 +52,6 @@
         </div>
     </div>
 </div>
-
-<!-- Modal -->
-<div class="modal fade" id="hapus{{$row->id_event}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Hapus</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Apakah Anda yakin akan hapus data ini?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Batal</button>
-        <a href="/hapus_event/{{$row->id_event}}" class="btn btn-danger">Hapus</a>
-      </div>
-    </div>
-  </div>
-  </div>
-
-@foreach ($data_event as $row)
-<div class="modal fade" id="approve{{$row->id_event}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog" role="document">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h5 class="modal-title" id="exampleModalLabel">Approve</h5>
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <p>Apakah Anda yakin pengajuan event ini akan diizinkan?</p>
-    </div>
-    <div class="modal-footer">
-      <a href="/tidak_pengajuan_event/{{$row->id_event}}" class="btn btn-outline-danger">Tidak</a>
-      <a href="/ya_pengajuan_event/{{$row->id_event}}" class="btn btn-danger">Ya</a>
-    </div>
-  </div>
-</div>
-</div>
-@endforeach
 
 @foreach ($data_event as $row)
 <div class="modal fade" id="detail{{$row->id_event}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -169,6 +117,17 @@
                         @endif    
                     </td>
                 </tr>
+                <tr>
+                  <th>Status Event</th>
+                  <td>:</td>
+                  <td>
+                      @if ($row->status_event === 'Aktif')
+                          <span class="badge badge-success">{{$row->status_event}}</span>
+                          @elseif($row->status_event === 'Tidak Aktif')    
+                          <span class="badge badge-danger">{{$row->status_event}}</span>
+                      @endif    
+                  </td>
+              </tr>
             </table>
         </div>
         <div class="col-lg-12 mt-3">

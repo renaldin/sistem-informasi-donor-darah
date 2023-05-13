@@ -43,7 +43,8 @@
         <div class="bg-white py-2 collapse-inner rounded">
           <h6 class="collapse-header">Sub Menu</h6>
           <a class="collapse-item @if($sub_title === 'Data Pengajuan Event') active @endif" href="/data_pengajuan_event">Data Pengajuan</a>
-          <a class="collapse-item  @if($sub_title === 'Riwayat Pengajuan Event' || $sub_title === 'Tambah Event'|| $sub_title === 'Edit Event') active @endif" href="/riwayat_pengajuan_event">Riwayat Pengajuan</a>
+          <a class="collapse-item @if($sub_title === 'Jadwal Event' || $sub_title === 'Tambah Event'|| $sub_title === 'Edit Event') active @endif" href="/jadwal_event">Jadwal Event</a>
+          <a class="collapse-item  @if($sub_title === 'Riwayat Pengajuan Event') active @endif" href="/riwayat_pengajuan_event">Riwayat Pengajuan</a>
         </div>
       </div>
     </li>

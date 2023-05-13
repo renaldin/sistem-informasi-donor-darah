@@ -112,7 +112,7 @@ class C_Login extends Controller
 
             $data_email = [
                 'subject'       => 'Lupa Password',
-                'sender_name'   => 'renaldinoviandi1@gmail.com',
+                'sender_name'   => 'purbateresia2@gmail.com',
                 'urlUtama'      => 'http://127.0.0.1:8000',
                 'urlReset'      => 'http://127.0.0.1:8000/reset_password/' . $data->id_user,
                 'dataUser'      => $data,

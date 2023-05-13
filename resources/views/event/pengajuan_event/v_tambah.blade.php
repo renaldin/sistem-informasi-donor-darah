@@ -70,10 +70,7 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label for="upload_surat">Upload Surat</label>
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input @error('upload_surat') is-invalid @enderror" name="upload_surat" id="customFile">
-                            <label class="custom-file-label" for="customFile">Pilih file</label>
-                        </div>
+                        <input type="file" class="form-control @error('upload_surat') is-invalid @enderror" name="upload_surat">
                         @error('upload_surat')
                             <small class="form-text text-danger">{{$message}}</small>
                         @enderror

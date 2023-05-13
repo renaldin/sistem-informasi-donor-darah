@@ -157,6 +157,17 @@
                         @endif    
                     </td>
                 </tr>
+                <tr>
+                    <th>Status Event</th>
+                    <td>:</td>
+                    <td>
+                        @if ($row->status_event === 'Aktif')
+                            <span class="badge badge-success">{{$row->status_event}}</span>
+                            @elseif($row->status_event === 'Tidak Aktif')    
+                            <span class="badge badge-danger">{{$row->status_event}}</span>
+                        @endif    
+                    </td>
+                </tr>
             </table>
         </div>
         <div class="col-lg-12 mt-3">
