@@ -15,7 +15,7 @@
                             <th>No</th>
                             <th>Name Instansi</th>
                             <th>Waktu Event</th>
-                            <th>Status Pengajuan</th>
+                            <th>Status Event</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
