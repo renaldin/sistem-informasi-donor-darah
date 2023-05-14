@@ -8,6 +8,9 @@
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold">{{$sub_title}}</h6>
             </div>
+            <div class="card-header flex flex-row">
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambah">Tambah Darah</button>
+            </div>
             <div class="table-responsive p-3">
                 <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                     <thead class="thead-light">
@@ -43,6 +46,23 @@
 </div>
 
 <!-- Modal -->
+<div class="modal fade" id="tambah" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content modal-sm">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Tambah Darah</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body text-center">
+      <a href="/tambah_darah_online" class="btn btn-danger">Online</a>
+      <a href="/tambah_darah_offline" class="btn btn-danger">Offline</a>
+    </div>
+  </div>
+</div>
+</div>
+
 @foreach ($data_darah as $row)
 <div class="modal fade" id="approve{{$row->id_darah}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 <div class="modal-dialog" role="document">

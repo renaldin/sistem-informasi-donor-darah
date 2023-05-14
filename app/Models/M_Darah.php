@@ -37,4 +37,9 @@ class M_Darah extends Model
     {
         DB::table($this->table)->where('id_darah', $id_darah)->delete();
     }
+
+    public function data_terakhir()
+    {
+        return DB::table($this->table)->limit(1)->orderBy('id_darah', 'DESC')->first();
+    }
 }

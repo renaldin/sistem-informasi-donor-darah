@@ -22,22 +22,16 @@
                     <tbody>
                         <?php $no=1;?>
                         @foreach ($data_event as $row)
-                        @if ($row->status_event === 'Tidak Aktif' && $row->status_pengajuan !== 'Belum Dikirim' && $row->status_pengajuan !== 'Menunggu Persetujuan')
+                        @if ($row->status_event === 'Tidak Aktif' && $row->status_pengajuan === 'Disetujui')
                           <tr>
                             <td>{{$no++}}</td>
                             <td>{{$row->nama_instansi}}</td>
                             <td>{{$row->tanggal_event}} {{$row->jam}}</td>
                             <td>
-                                @if ($row->status_pengajuan === 'Tidak Disetujui')
-                                    <span class="badge badge-danger">{{$row->status_pengajuan}}</span>
-                                    @elseif($row->status_pengajuan === 'Menunggu Persetujuan')    
-                                    <span class="badge badge-primary">{{$row->status_pengajuan}}</span>
-                                    @elseif($row->status_pengajuan === 'Disetujui')    
-                                    <span class="badge badge-success">{{$row->status_pengajuan}}</span>
-                                    @elseif($row->status_pengajuan === 'Belum Dikirim')    
-                                    <span class="badge badge-warning">{{$row->status_pengajuan}}</span>
-                                    @elseif($row->status_pengajuan === 'Dibuat Admin')    
-                                    <span class="badge badge-secondary">{{$row->status_pengajuan}}</span>
+                                @if ($row->status_event === 'Aktif')
+                                    <span class="badge badge-success">{{$row->status_event}}</span>
+                                @elseif($row->status_event === 'Tidak Aktif')    
+                                    <span class="badge badge-dabger">{{$row->status_event}}</span>
                                 @endif
                             </td>
                             <td>
