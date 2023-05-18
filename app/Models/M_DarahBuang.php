@@ -11,30 +11,30 @@ class M_DarahBuang extends Model
     use HasFactory;
     public $table = 'darah_buang';
 
-    public function get_data()
-    {
-        return DB::table($this->table)
-            ->orderBy('id_darah_buang', 'DESC')->get();
-    }
+    // public function get_data()
+    // {
+    //     return DB::table($this->table)
+    //         ->orderBy('id_darah_buang', 'DESC')->get();
+    // }
 
-    public function detail($id_darah_buang)
-    {
-        return DB::table($this->table)
-            ->where('id_darah_buang', $id_darah_buang)->first();
-    }
+    // public function detail($id_darah_buang)
+    // {
+    //     return DB::table($this->table)
+    //         ->where('id_darah_buang', $id_darah_buang)->first();
+    // }
 
-    public function tambah($data)
-    {
-        DB::table($this->table)->insert($data);
-    }
+    // public function tambah($data)
+    // {
+    //     DB::table($this->table)->insert($data);
+    // }
 
-    public function edit($data)
-    {
-        DB::table($this->table)->where('id_darah_buang', $data['id_darah_buang'])->update($data);
-    }
+    // public function edit($data)
+    // {
+    //     DB::table($this->table)->where('id_darah_buang', $data['id_darah_buang'])->update($data);
+    // }
 
-    public function hapus($id_darah_buang)
-    {
-        DB::table($this->table)->where('id_darah_buang', $id_darah_buang)->delete();
-    }
+    // public function hapus($id_darah_buang)
+    // {
+    //     DB::table($this->table)->where('id_darah_buang', $id_darah_buang)->delete();
+    // }
 }

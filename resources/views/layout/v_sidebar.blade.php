@@ -23,6 +23,12 @@
         <span>Data User</span>
       </a>
     </li>
+    <li class="nav-item @if($title === 'Data Stok Darah') active @endif">
+      <a class="nav-link" href="/data_stok_darah">
+        <i class="fas fa-fw fa-palette"></i>
+        <span>Data Stok Darah</span>
+      </a>
+    </li>
     <hr class="sidebar-divider">
     <div class="sidebar-heading">
       Fitur
@@ -41,12 +47,6 @@
           <a class="collapse-item  @if($sub_title === 'Riwayat Pengajuan Event') active @endif" href="/riwayat_pengajuan_event">Riwayat Pengajuan</a>
         </div>
       </div>
-    </li>
-    <li class="nav-item @if($title === 'Data Stok Darah') active @endif">
-      <a class="nav-link" href="/data_stok_darah">
-        <i class="fas fa-fw fa-palette"></i>
-        <span>Data Stok Darah</span>
-      </a>
     </li>
   @elseif ($user->role === 'Donatur')
   @elseif ($user->role === 'Event')

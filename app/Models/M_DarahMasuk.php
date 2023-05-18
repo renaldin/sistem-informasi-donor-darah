@@ -14,27 +14,28 @@ class M_DarahMasuk extends Model
     public function get_data()
     {
         return DB::table($this->table)
+            ->join('darah', 'darah.id_darah', '=', 'darah_masuk.id_darah', 'left')
             ->orderBy('id_darah_masuk', 'DESC')->get();
     }
 
-    public function detail($id_darah_masuk)
-    {
-        return DB::table($this->table)
-            ->where('id_darah_masuk', $id_darah_masuk)->first();
-    }
+    // public function detail($id_darah_masuk)
+    // {
+    //     return DB::table($this->table)
+    //         ->where('id_darah_masuk', $id_darah_masuk)->first();
+    // }
 
     public function tambah($data)
     {
         DB::table($this->table)->insert($data);
     }
 
-    public function edit($data)
-    {
-        DB::table($this->table)->where('id_darah_masuk', $data['id_darah_masuk'])->update($data);
-    }
+    // public function edit($data)
+    // {
+    //     DB::table($this->table)->where('id_darah_masuk', $data['id_darah_masuk'])->update($data);
+    // }
 
-    public function hapus($id_darah_masuk)
-    {
-        DB::table($this->table)->where('id_darah_masuk', $id_darah_masuk)->delete();
-    }
+    // public function hapus($id_darah_masuk)
+    // {
+    //     DB::table($this->table)->where('id_darah_masuk', $id_darah_masuk)->delete();
+    // }
 }

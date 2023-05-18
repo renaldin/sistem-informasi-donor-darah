@@ -63,12 +63,10 @@ Route::group(['middleware' => 'revalidate'], function () {
 
         // Kelola darah
         Route::get('/data_stok_darah', [C_StokDarah::class, 'index'])->name('data_stok_darah');
-        Route::get('/tambah_darah_online', [C_StokDarah::class, 'tambah_darah_online']);
-        Route::get('/tambah_darah_offline', [C_StokDarah::class, 'tambah_darah_offline']);
-        Route::post('/tambah_darah', [C_StokDarah::class, 'proses_tambah_darah']);
-        Route::get('/edit_darah/{id}', [C_StokDarah::class, 'edit_darah'])->name('edit_darah');
-        Route::post('/edit_darah/{id}', [C_StokDarah::class, 'proses_edit_darah']);
-        Route::get('/hapus_darah/{id}', [C_StokDarah::class, 'hapus_darah']);
+        Route::get('/tambah_darah_online', [C_StokDarah::class, 'tambah_darah_online'])->name('tambah_darah_online');
+        Route::post('/tambah_darah_online', [C_StokDarah::class, 'proses_tambah_darah']);
+        Route::get('/tambah_darah_offline', [C_StokDarah::class, 'tambah_darah_offline'])->name('tambah_darah_offline');
+        Route::post('/tambah_darah_offline', [C_StokDarah::class, 'proses_tambah_darah']);
 
         // Data Pengajuan Event
         Route::get('/data_pengajuan_event', [C_PengajuanEvent::class, 'kelola_pengajuan_event'])->name('data_pengajuan_event');

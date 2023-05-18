@@ -9,14 +9,29 @@
           <h6 class="m-0 font-weight-bold">Form {{$sub_title}}</h6>
         </div>
         <div class="card-body">
-            <form action="/tambah_darah_online" method="POST">
+            <form action="/tambah_darah_offline" method="POST">
             @csrf
             <div class="row">
+                <div class="col-lg-12">
+                    <label><strong>Data Anggota</strong></label>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="nama_anggota">Nama Anggota</label>
+                        <input type="text" class="form-control @error('nama_anggota') is-invalid @enderror" name="nama_anggota" id="nama_anggota" value="{{old('nama_anggota');}}" autofocus placeholder="Masukkan Nama Anggota">
+                        @error('nama_anggota')
+                            <small class="form-text text-danger">{{$message}}</small>
+                        @enderror
+                    </div>       
+                </div>
+                <div class="col-lg-12">
+                    <label><strong>Data Darah</strong></label>
+                </div>
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label for="no_kantong">No. Kantong</label>
                         <input type="text" class="form-control @error('no_kantong') is-invalid @enderror" name="no_kantong" id="no_kantong" value="{{$no_kantong;}}" readonly placeholder="Masukkan No. Kantong">
-                        <input type="hidden" class="form-control @error('form_darah') is-invalid @enderror" name="form_darah" id="form_darah" value="Online">
+                        <input type="hidden" class="form-control @error('form_darah') is-invalid @enderror" name="form_darah" id="form_darah" value="Offline">
                         @error('no_kantong')
                             <small class="form-text text-danger">{{$message}}</small>
                         @enderror
@@ -24,24 +39,8 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <label for="id_anggota">Anggota</label>
-                        <select class="select2-single-placeholder form-control @error('id_anggota') is-invalid @enderror" name="id_anggota" id="select2SinglePlaceholder">
-                            <option value="">Pilih</option>
-                            @foreach ($anggota as $row)
-                                @if ($row->status_anggota == 'Ready')
-                                    <option value="{{$row->id_anggota}}">{{$row->nama_anggota}}</option>
-                                @endif
-                            @endforeach
-                        </select>
-                        @error('id_anggota')
-                            <small class="form-text text-danger">{{$message}}</small>
-                        @enderror
-                    </div>       
-                </div>
-                <div class="col-lg-6">
-                    <div class="form-group">
                         <label for="golongan_darah">Golongan Darah</label>
-                        <input type="text" class="form-control @error('golongan_darah') is-invalid @enderror" name="golongan_darah" id="golongan_darah" value="{{old('golongan_darah');}}" autofocus placeholder="Masukkan Golongan Darah">
+                        <input type="text" class="form-control @error('golongan_darah') is-invalid @enderror" name="golongan_darah" id="golongan_darah" value="{{old('golongan_darah');}}" placeholder="Masukkan Golongan Darah">
                         @error('golongan_darah')
                             <small class="form-text text-danger">{{$message}}</small>
                         @enderror
