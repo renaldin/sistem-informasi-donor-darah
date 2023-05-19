@@ -28,10 +28,10 @@ class M_Darah extends Model
         DB::table($this->table)->insert($data);
     }
 
-    // public function edit($data)
-    // {
-    //     DB::table($this->table)->where('id_darah', $data['id_darah'])->update($data);
-    // }
+    public function edit($data)
+    {
+        DB::table($this->table)->where('id_darah', $data['id_darah'])->update($data);
+    }
 
     // public function hapus($id_darah)
     // {

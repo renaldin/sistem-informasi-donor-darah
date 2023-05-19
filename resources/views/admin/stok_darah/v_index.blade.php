@@ -19,6 +19,7 @@
                             <th>No Kantung</th>
                             <th>Golongan Darah</th>
                             <th>Resus</th>
+                            <th>Umur</th>
                             <th>Tanggal Kedaluwarsa</th>
                             <th>Aksi</th>
                         </tr>
@@ -31,10 +32,11 @@
                             <td>{{$row->no_kantong}}</td>
                             <td>{{$row->golongan_darah}}</td>
                             <td>{{$row->resus}}</td>
+                            <td>{{date('Y-m-d') - $row->tanggal_darah_masuk}}</td>
                             <td>{{$row->tanggal_kedaluwarsa}}</td>
                             <td>
-                                <a href="" class="btn btn-sm btn-success">Edit</a>
-                                <button type="button" class="btn btn-sm btn-danger"">Buang</button>   
+                                <a href="/edit_darah/{{$row->id_darah_masuk}}" class="btn btn-sm btn-success">Edit</a>
+                                <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#buang{{$row->id_darah_masuk}}">Buang</button>   
                             </td>
                           </tr>
                         @endforeach
@@ -62,4 +64,27 @@
   </div>
 </div>
 </div>
+
+<!-- Modal -->
+@foreach ($data_darah as $row)
+<div class="modal fade" id="buang{{$row->id_darah_masuk}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Buang Darah</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>Apakah Anda yakin akan buang darah ini ini?</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Batal</button>
+      <a href="/buang_darah/{{$row->id_darah_masuk}}" class="btn btn-danger">Buang</a>
+    </div>
+  </div>
+</div>
+</div>
+@endforeach
 @endsection

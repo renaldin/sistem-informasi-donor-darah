@@ -6,6 +6,7 @@ use App\Models\M_User;
 use App\Models\M_Website;
 use App\Models\M_Darah;
 use App\Models\M_DarahMasuk;
+use App\Models\M_DarahBuang;
 use App\Models\M_Anggota;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -16,6 +17,7 @@ class C_StokDarah extends Controller
     private $M_Website;
     private $M_Darah;
     private $M_DarahMasuk;
+    private $M_DarahBuang;
     private $M_Anggota;
 
     public function __construct()
@@ -24,6 +26,7 @@ class C_StokDarah extends Controller
         $this->M_Website = new M_Website();
         $this->M_Darah = new M_Darah();
         $this->M_DarahMasuk = new M_DarahMasuk();
+        $this->M_DarahBuang = new M_DarahBuang();
         $this->M_Anggota = new M_Anggota();
     }
 
@@ -188,5 +191,83 @@ class C_StokDarah extends Controller
             Alert::success('Berhasil', 'Data darah berhasil ditambah.');
             return redirect()->route('tambah_darah_offline');
         }
+    }
+
+    public function edit_darah($id_darah_masuk)
+    {
+        if (!Session()->get('email')) {
+            return redirect()->route('login');
+        }
+
+        $data = [
+            'title'         => 'Data Stok Darah',
+            'sub_title'     => 'Edit Darah',
+            'data_web'      => $this->M_Website->detail(1),
+            'detail'        => $this->M_DarahMasuk->detail($id_darah_masuk),
+            'user'          => $this->M_User->detail(Session()->get('id_user')),
+        ];
+
+        return view('admin.stok_darah.v_edit', $data);
+    }
+
+    public function proses_edit_darah($id_darah_masuk)
+    {
+        if (!Session()->get('email')) {
+            return redirect()->route('login');
+        }
+
+        Request()->validate([
+            'golongan_darah'        => 'required',
+            'resus'                 => 'required',
+            'volume_darah'          => 'required',
+            'tanggal_kedaluwarsa'   => 'required',
+        ], [
+            'golongan_darah.required'       => 'Golongan darah harus diisi!',
+            'resus.required'                => 'Resus harus diisi!',
+            'volume_darah.required'         => 'Volume darah harus diisi!',
+            'tanggal_kedaluwarsa.required'  => 'Tanggal kedaluwarsa harus diisi!',
+        ]);
+
+        $darah_masuk = $this->M_DarahMasuk->detail($id_darah_masuk);
+
+        $data_darah = [
+            'id_darah'              => $darah_masuk->id_darah,
+            'no_kantong'            => Request()->no_kantong,
+            'golongan_darah'        => Request()->golongan_darah,
+            'resus'                 => Request()->resus,
+            'volume_darah'          => Request()->volume_darah,
+            'tanggal_kedaluwarsa'   => Request()->tanggal_kedaluwarsa,
+        ];
+        $this->M_Darah->edit($data_darah);
+
+        $data_darah_masuk = [
+            'id_darah_masuk' => $darah_masuk->id_darah_masuk,
+            'id_darah'      => $darah_masuk->id_darah,
+            'id_anggota'    => $darah_masuk->id_anggota,
+        ];
+        $this->M_DarahMasuk->edit($data_darah_masuk);
+
+        Alert::success('Berhasil', 'Data darah berhasil diedit.');
+        return redirect()->route('data_stok_darah');
+    }
+
+    public function buang_darah($id_darah_masuk)
+    {
+        if (!Session()->get('email')) {
+            return redirect()->route('login');
+        }
+
+        $darah_masuk = $this->M_DarahMasuk->detail($id_darah_masuk);
+
+        $data_darah_buang = [
+            'id_darah'          => $darah_masuk->id_darah,
+            'id_anggota'        => $darah_masuk->id_anggota,
+            'tanggal_buang'     => date('Y-m-d'),
+        ];
+        $this->M_DarahBuang->tambah($data_darah_buang);
+
+        $this->M_DarahMasuk->hapus($id_darah_masuk);
+        Alert::success('Berhasil', 'Data darah berhasil dibuang.');
+        return redirect()->route('data_stok_darah');
     }
 }

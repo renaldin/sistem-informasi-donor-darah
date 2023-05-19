@@ -23,10 +23,10 @@ class M_DarahBuang extends Model
     //         ->where('id_darah_buang', $id_darah_buang)->first();
     // }
 
-    // public function tambah($data)
-    // {
-    //     DB::table($this->table)->insert($data);
-    // }
+    public function tambah($data)
+    {
+        DB::table($this->table)->insert($data);
+    }
 
     // public function edit($data)
     // {

@@ -25,7 +25,7 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label for="id_anggota">Anggota</label>
-                        <select class="select2-single-placeholder form-control @error('id_anggota') is-invalid @enderror" name="id_anggota" id="select2SinglePlaceholder">
+                        <select class="select2-single-placeholder form-control @error('id_anggota') is-invalid @enderror" name="id_anggota" autofocus id="select2SinglePlaceholder">
                             <option value="">Pilih</option>
                             @foreach ($anggota as $row)
                                 @if ($row->status_anggota == 'Ready')
@@ -41,7 +41,7 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label for="golongan_darah">Golongan Darah</label>
-                        <input type="text" class="form-control @error('golongan_darah') is-invalid @enderror" name="golongan_darah" id="golongan_darah" value="{{old('golongan_darah');}}" autofocus placeholder="Masukkan Golongan Darah">
+                        <input type="text" class="form-control @error('golongan_darah') is-invalid @enderror" name="golongan_darah" id="golongan_darah" value="{{old('golongan_darah');}}" placeholder="Masukkan Golongan Darah">
                         @error('golongan_darah')
                             <small class="form-text text-danger">{{$message}}</small>
                         @enderror
@@ -50,7 +50,7 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label for="resus">Resus</label>
-                        <input type="text" class="form-control @error('resus') is-invalid @enderror" name="resus" id="resus" value="{{old('resus');}}" autofocus placeholder="Masukkan Golongan Darah">
+                        <input type="text" class="form-control @error('resus') is-invalid @enderror" name="resus" id="resus" value="{{old('resus');}}" placeholder="Masukkan Golongan Darah">
                         @error('resus')
                             <small class="form-text text-danger">{{$message}}</small>
                         @enderror
@@ -59,7 +59,7 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label for="volume_darah">Volume Darah</label>
-                        <input type="text" class="form-control @error('volume_darah') is-invalid @enderror" name="volume_darah" id="volume_darah" value="{{old('volume_darah');}}" autofocus placeholder="Masukkan Golongan Darah">
+                        <input type="text" class="form-control @error('volume_darah') is-invalid @enderror" name="volume_darah" id="volume_darah" value="{{old('volume_darah');}}" placeholder="Masukkan Golongan Darah">
                         @error('volume_darah')
                             <small class="form-text text-danger">{{$message}}</small>
                         @enderror
