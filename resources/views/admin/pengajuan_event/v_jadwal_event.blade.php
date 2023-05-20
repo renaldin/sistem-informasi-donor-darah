@@ -10,7 +10,7 @@
             </div>
             <div class="card-header flex flex-row">
               <a href="/tambah_event" class="btn btn-primary">Tambah Event</a>
-          </div>
+            </div>
             <div class="table-responsive p-3">
                 <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                     <thead class="thead-light">

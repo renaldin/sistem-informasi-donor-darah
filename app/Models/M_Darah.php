@@ -17,11 +17,11 @@ class M_Darah extends Model
             ->orderBy('id_darah', 'DESC')->get();
     }
 
-    public function detail($id_darah)
-    {
-        return DB::table($this->table)
-            ->where('id_darah', $id_darah)->first();
-    }
+    // public function detail($id_darah)
+    // {
+    //     return DB::table($this->table)
+    //         ->where('id_darah', $id_darah)->first();
+    // }
 
     public function tambah($data)
     {
@@ -33,8 +33,13 @@ class M_Darah extends Model
         DB::table($this->table)->where('id_darah', $data['id_darah'])->update($data);
     }
 
-    public function hapus($id_darah)
+    // public function hapus($id_darah)
+    // {
+    //     DB::table($this->table)->where('id_darah', $id_darah)->delete();
+    // }
+
+    public function data_terakhir()
     {
-        DB::table($this->table)->where('id_darah', $id_darah)->delete();
+        return DB::table($this->table)->limit(1)->orderBy('id_darah', 'DESC')->first();
     }
 }

@@ -194,7 +194,7 @@ class C_User extends Controller
         }
 
         $this->M_User->edit($data);
-        Alert::success('Berhasil', 'Data user berhasil diedit.');
+        Alert::success('Berhasil', 'Data stok darah berhasil diedit.');
         return redirect()->route('data_user');
     }
 
