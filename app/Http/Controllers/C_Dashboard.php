@@ -41,6 +41,7 @@ class C_Dashboard extends Controller
                 'data_web'               => $this->M_Website->detail(1),
             ];
             return view('donatur.v_dashboard', $data);
+            // return redirect()->route('/')->with('berhasil', 'Login berhasil!');
         } elseif (Session()->get('role') === 'Event') {
             $data = [
                 'title'                 => 'Dashboard',
