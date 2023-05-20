@@ -119,7 +119,7 @@
                     </form>
                     <hr>
                     <div class="text-center">
-                      <a class="font-weight-bold small text-gray-900" href="/">Sudah punya akun? Login!</a>
+                      <a class="font-weight-bold small text-gray-900" href="/login">Sudah punya akun? Login!</a>
                     </div>
                   </div>
                 </div>
