@@ -21,6 +21,7 @@ class C_PengajuanEvent extends Controller
         $this->M_User = new M_User();
         $this->M_Website = new M_Website();
         $this->M_Event = new M_Event();
+        date_default_timezone_set('Asia/Jakarta');
     }
 
     public function index()
@@ -94,7 +95,7 @@ class C_PengajuanEvent extends Controller
             'jumlah_orang'      => Request()->jumlah_orang,
             'upload_surat'      => $file_surat,
             'status_pengajuan'  => "Belum Dikirim",
-            'tanggal_pengajuan' => date('Y-m-d')
+            'tanggal_pengajuan' => date('Y-m-d H:i:s')
         ];
 
         $this->M_Event->tambah($data);
@@ -364,7 +365,7 @@ class C_PengajuanEvent extends Controller
             'upload_surat'      => $file_surat,
             'status_pengajuan'  => "Dibuat Admin",
             'status_event'      => "Aktif",
-            'tanggal_pengajuan' => date('Y-m-d')
+            'tanggal_pengajuan' => date('Y-m-d H:i:s')
         ];
 
         $this->M_Event->tambah($data);

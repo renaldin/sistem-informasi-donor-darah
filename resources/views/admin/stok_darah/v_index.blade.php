@@ -2,6 +2,23 @@
 
 @section('content')
 
+@php
+function hitungUmur($tanggal_darah_masuk) {
+  $tgl_lahir = new DateTime($tanggal_darah_masuk);
+  $sekarang = new DateTime();
+  $perbedaan = $sekarang->diff($tgl_lahir);
+
+  $umur = array(
+    'tahun' => $perbedaan->y,
+    'bulan' => $perbedaan->m,
+    'hari' => $perbedaan->d
+  );
+
+  $data_umur = $umur['tahun'].' tahun, '.$umur['bulan'].' bulan, '.$umur['hari'].' hari.';
+  return $data_umur;
+}
+@endphp
+
 <div class="row">
     <div class="col-lg-12">
         <div class="card mb-4">
@@ -32,11 +49,11 @@
                             <td>{{$row->no_kantong}}</td>
                             <td>{{$row->golongan_darah}}</td>
                             <td>{{$row->resus}}</td>
-                            <td>{{date('Y-m-d') - $row->tanggal_darah_masuk}}</td>
+                            <td>{{ hitungUmur($row->tanggal_darah_masuk) }}</td>
                             <td>{{$row->tanggal_kedaluwarsa}}</td>
-                            <td>
-                                <a href="/edit_darah/{{$row->id_darah_masuk}}" class="btn btn-sm btn-success">Edit</a>
-                                <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#buang{{$row->id_darah_masuk}}">Buang</button>   
+                            <td class="text-center">
+                                <a href="/edit_darah/{{$row->id_darah_masuk}}" class="btn btn-sm btn-success mb-1">Edit</a>
+                                <button type="button" class="btn btn-sm btn-danger mb-1" data-toggle="modal" data-target="#buang{{$row->id_darah_masuk}}">Buang</button>   
                             </td>
                           </tr>
                         @endforeach
