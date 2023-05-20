@@ -8,7 +8,7 @@
       <div class="card-body">
         <div class="row align-items-center">
           <div class="col mr-2">
-            <div class="text-xl font-weight-bold mb-1">Hallo {{$user->role}}. Selamat datang di website Sistem Informasi Donor.</div>
+            <div class="text-xl font-weight-bold mb-1">Selamat datang {{$user->nama}}. Selamat datang di website Sistem Informasi Donor.</div>
           </div>
         </div>
       </div>

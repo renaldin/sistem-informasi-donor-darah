@@ -61,7 +61,7 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label for="touchSpin1">Jumlah Orang</label>
-                        <input id="touchSpin1" type="text" name="jumlah_orang" class="form-control @error('jumlah_orang') is-invalid @enderror">
+                        <input id="touchSpin1" type="text" name="jumlah_orang" class="form-control @error('jumlah_orang') is-invalid @enderror" value="{{old('jumlah_orang')}}">
                         @error('jumlah_orang')
                             <small class="form-text text-danger">{{$message}}</small>
                         @enderror

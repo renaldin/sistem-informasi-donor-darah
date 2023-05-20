@@ -4,6 +4,7 @@ use App\Http\Controllers\C_Dashboard;
 use App\Http\Controllers\C_User;
 use App\Http\Controllers\C_Login;
 use App\Http\Controllers\C_PengajuanEvent;
+use App\Http\Controllers\C_PermohonanDarah;
 use App\Http\Controllers\C_Register;
 use App\Http\Controllers\C_Darah;
 use App\Http\Controllers\C_LandingPage;
@@ -88,6 +89,14 @@ Route::group(['middleware' => 'revalidate'], function () {
         Route::get('/jadwal_event', [C_PengajuanEvent::class, 'jadwal_event'])->name('jadwal_event');
         Route::get('/selesai_event/{id}', [C_PengajuanEvent::class, 'selesai_event']);
 
+        // Data Permohonan Darah
+        Route::get('/distribusi_darah', [C_PermohonanDarah::class, 'distribusi_darah'])->name('distribusi_darah');
+        Route::get('/riwayat_distribusi_darah', [C_PermohonanDarah::class, 'riwayat_distribusi_darah'])->name('riwayat_distribusi_darah');
+        Route::get('/keluarkan_darah/{id}', [C_PermohonanDarah::class, 'keluarkan_darah'])->name('keluarkan_darah');
+        Route::post('/keluarkan_darah/{id}', [C_PermohonanDarah::class, 'proses_keluarkan_darah']);
+        Route::get('/kirim_distribusi_darah/{id}', [C_PermohonanDarah::class, 'kirim_distribusi_darah'])->name('kirim_distribusi_darah');
+        Route::get('/hapus_darah_keluar/{id}', [C_PermohonanDarah::class, 'hapus_darah_keluar'])->name('hapus_darah_keluar');
+
         // Cetak PDF
         Route::post('/cetak-pdf', [Cetak::class, 'index']);
         Route::post('/cetak-pdf-order', [Cetak::class, 'cetakOrder']);
@@ -121,6 +130,18 @@ Route::group(['middleware' => 'revalidate'], function () {
 
     // Rumah Sakit
     Route::group(['middleware' => 'rumah_sakit'], function () {
+        // permohonan dfarah
+        Route::get('/permohonan_darah', [C_PermohonanDarah::class, 'index'])->name('permohonan_darah');
+        Route::get('/tambah_permohonan_darah', [C_PermohonanDarah::class, 'tambah_permohonan_darah'])->name('tambah_permohonan_darah');
+        Route::post('/tambah_permohonan_darah', [C_PermohonanDarah::class, 'proses_tambah_permohonan_darah']);
+        Route::get('/batal_permohonan_darah/{id}', [C_PermohonanDarah::class, 'batal_permohonan_darah'])->name('batal_permohonan_darah');
+        Route::get('/edit_permohonan_darah/{id}', [C_PermohonanDarah::class, 'edit_permohonan_darah'])->name('edit_permohonan_darah');
+        Route::post('/edit_permohonan_darah/{id}', [C_PermohonanDarah::class, 'proses_edit_permohonan_darah']);
+        Route::get('/kirim_permohonan_darah/{id}', [C_PermohonanDarah::class, 'kirim_permohonan_darah'])->name('kirim_permohonan_darah');
+        Route::get('/terima_permohonan_darah/{id}', [C_PermohonanDarah::class, 'terima_permohonan_darah'])->name('terima_permohonan_darah');
+
+        // riwayat permohonan darah
+        Route::get('/riwayat_permohonan_darah', [C_PermohonanDarah::class, 'riwayat_permohonan_darah'])->name('riwayat_permohonan_darah');
     });
 
 

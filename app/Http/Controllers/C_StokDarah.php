@@ -28,6 +28,7 @@ class C_StokDarah extends Controller
         $this->M_DarahMasuk = new M_DarahMasuk();
         $this->M_DarahBuang = new M_DarahBuang();
         $this->M_Anggota = new M_Anggota();
+        date_default_timezone_set('Asia/Jakarta');
     }
 
     public function index()
@@ -120,12 +121,13 @@ class C_StokDarah extends Controller
             ]);
 
             $data_darah = [
+                'id_anggota'            => Request()->id_anggota,
                 'no_kantong'            => Request()->no_kantong,
                 'golongan_darah'        => Request()->golongan_darah,
                 'resus'                 => Request()->resus,
                 'volume_darah'          => Request()->volume_darah,
                 'tanggal_kedaluwarsa'   => Request()->tanggal_kedaluwarsa,
-                'tanggal_darah_masuk'   => date('Y-m-d')
+                'tanggal_darah_masuk'   => date('Y-m-d H:i:s')
             ];
             $this->M_Darah->tambah($data_darah);
 
@@ -133,8 +135,7 @@ class C_StokDarah extends Controller
 
             $data_darah_masuk = [
                 'id_darah'      => $data_terakhir->id_darah,
-                'id_anggota'    => Request()->id_anggota,
-                'tanggal_masuk' => date('Y-m-d')
+                'id_user'       => Session()->get('id_user'),
             ];
             $this->M_DarahMasuk->tambah($data_darah_masuk);
 
@@ -161,17 +162,6 @@ class C_StokDarah extends Controller
                 'tanggal_kedaluwarsa.required'  => 'Tanggal kedaluwarsa harus diisi!',
             ]);
 
-
-            $data_darah = [
-                'no_kantong'            => Request()->no_kantong,
-                'golongan_darah'        => Request()->golongan_darah,
-                'resus'                 => Request()->resus,
-                'volume_darah'          => Request()->volume_darah,
-                'tanggal_kedaluwarsa'   => Request()->tanggal_kedaluwarsa,
-                'tanggal_darah_masuk'   => date('Y-m-d')
-            ];
-            $this->M_Darah->tambah($data_darah);
-
             $data_anggota = [
                 'nama_anggota'      => Request()->nama_anggota,
                 // 'status_anggota'    => 'Selesai'
@@ -179,12 +169,23 @@ class C_StokDarah extends Controller
             $this->M_Anggota->tambah($data_anggota);
 
             $data_terakhir_anggota = $this->M_Anggota->data_terakhir();
+
+            $data_darah = [
+                'id_anggota'            => $data_terakhir_anggota->id_anggota,
+                'no_kantong'            => Request()->no_kantong,
+                'golongan_darah'        => Request()->golongan_darah,
+                'resus'                 => Request()->resus,
+                'volume_darah'          => Request()->volume_darah,
+                'tanggal_kedaluwarsa'   => Request()->tanggal_kedaluwarsa,
+                'tanggal_darah_masuk'   => date('Y-m-d H:i:s')
+            ];
+            $this->M_Darah->tambah($data_darah);
+
             $data_terakhir_darah = $this->M_Darah->data_terakhir();
 
             $data_darah_masuk = [
                 'id_darah'      => $data_terakhir_darah->id_darah,
-                'id_anggota'    => $data_terakhir_anggota->id_anggota,
-                'tanggal_masuk' => date('Y-m-d')
+                'id_user'       => Session()->get('id_user'),
             ];
             $this->M_DarahMasuk->tambah($data_darah_masuk);
 
@@ -242,8 +243,8 @@ class C_StokDarah extends Controller
 
         $data_darah_masuk = [
             'id_darah_masuk' => $darah_masuk->id_darah_masuk,
-            'id_darah'      => $darah_masuk->id_darah,
-            'id_anggota'    => $darah_masuk->id_anggota,
+            'id_darah'       => $darah_masuk->id_darah,
+            'id_user'        => Session()->get('id_user'),
         ];
         $this->M_DarahMasuk->edit($data_darah_masuk);
 
@@ -261,8 +262,8 @@ class C_StokDarah extends Controller
 
         $data_darah_buang = [
             'id_darah'          => $darah_masuk->id_darah,
-            'id_anggota'        => $darah_masuk->id_anggota,
-            'tanggal_buang'     => date('Y-m-d'),
+            'id_user'           => Session()->get('id_user'),
+            'tanggal_buang'     => date('Y-m-d H:i:s')
         ];
         $this->M_DarahBuang->tambah($data_darah_buang);
 

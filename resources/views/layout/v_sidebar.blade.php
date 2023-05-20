@@ -48,6 +48,20 @@
         </div>
       </div>
     </li>
+    <li class="nav-item  @if($title === 'Distribusi Darah') active @endif">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#distribusi_darah"
+        aria-expanded="true" aria-controls="distribusi_darah">
+        <i class="far fa-fw fa-window-maximize"></i>
+        <span>Distribusi Darah</span>
+      </a>
+      <div id="distribusi_darah" class="collapse @if($title === 'Distribusi Darah') show @endif" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <h6 class="collapse-header">Sub Menu</h6>
+          <a class="collapse-item @if($sub_title === 'Data Distribusi Darah' || $sub_title === 'Form Keluarkan Darah') active @endif" href="/distribusi_darah">Data Distribusi Darah</a>
+          <a class="collapse-item  @if($sub_title === 'Riwayat Distribusi Darah') active @endif" href="/riwayat_distribusi_darah">Riwayat Distribusi Darah</a>
+        </div>
+      </div>
+    </li>
   @elseif ($user->role === 'Donatur')
   @elseif ($user->role === 'Event')
   <div class="sidebar-heading">
@@ -61,6 +75,21 @@
   </li>
   @elseif ($user->role === 'Petugas Kesehatan')
   @elseif ($user->role === 'Rumah Sakit')
+  <div class="sidebar-heading">
+    Rumah Sakit
+  </div>
+  <li class="nav-item @if($title === 'Permohonan Darah') active @endif">
+    <a class="nav-link" href="/permohonan_darah">
+      <i class="fas fa-fw fa-palette"></i>
+      <span>Permohonan Darah</span>
+    </a>
+  </li>
+  <li class="nav-item @if($title === 'Riwayat Permohonan Darah') active @endif">
+    <a class="nav-link" href="/riwayat_permohonan_darah">
+      <i class="fas fa-fw fa-palette"></i>
+      <span>Rwiayat</span>
+    </a>
+  </li>
   @elseif ($user->role === 'Pusat PMI')
     
   @endif
