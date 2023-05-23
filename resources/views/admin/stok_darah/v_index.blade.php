@@ -27,6 +27,7 @@ function hitungUmur($tanggal_darah_masuk) {
             </div>
             <div class="card-header flex flex-row">
               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambah">Tambah Darah</button>
+              <a href="/riwayat_buang_darah" class="btn btn-danger">Darah Buang</a>
             </div>
             <div class="table-responsive p-3">
                 <table class="table align-items-center table-flush table-hover" id="dataTableHover">

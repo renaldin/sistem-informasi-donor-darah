@@ -150,12 +150,18 @@ class C_StokDarah extends Controller
         } elseif (Request()->form_darah == 'Offline') {
             Request()->validate([
                 'nama_anggota'          => 'required',
+                'alamat'                => 'required',
+                'jenis_kelamin'         => 'required',
+                'tanggal_terakhir_donor' => 'required',
                 'golongan_darah'        => 'required',
                 'resus'                 => 'required',
                 'volume_darah'          => 'required',
                 'tanggal_kedaluwarsa'   => 'required',
             ], [
                 'nama_anggota.required'         => 'Nama anggota harus diisi!',
+                'alamat.required'               => 'Alamat harus diisi!',
+                'jenis_kelamin.required'        => 'Jenis kelamin harus diisi!',
+                'tanggal_terakhir_donor.required' => 'Tanggal terakhir donor harus diisi!',
                 'golongan_darah.required'       => 'Golongan darah harus diisi!',
                 'resus.required'                => 'Resus harus diisi!',
                 'volume_darah.required'         => 'Volume darah harus diisi!',
@@ -164,6 +170,9 @@ class C_StokDarah extends Controller
 
             $data_anggota = [
                 'nama_anggota'      => Request()->nama_anggota,
+                'alamat'            => Request()->alamat,
+                'jenis_kelamin'     => Request()->jenis_kelamin,
+                'tanggal_terakhir_donor' => Request()->tanggal_terakhir_donor,
                 // 'status_anggota'    => 'Selesai'
             ];
             $this->M_Anggota->tambah($data_anggota);
@@ -270,5 +279,22 @@ class C_StokDarah extends Controller
         $this->M_DarahMasuk->hapus($id_darah_masuk);
         Alert::success('Berhasil', 'Data darah berhasil dibuang.');
         return redirect()->route('data_stok_darah');
+    }
+
+    public function riwayat_buang_darah()
+    {
+        if (!Session()->get('email')) {
+            return redirect()->route('login');
+        }
+
+        $data = [
+            'title'         => 'Data Stok Darah',
+            'sub_title'     => 'Riwayat Buang Darah',
+            'data_web'      => $this->M_Website->detail(1),
+            'user'          => $this->M_User->detail(Session()->get('id_user')),
+            'data_darah'    => $this->M_DarahBuang->get_data()
+        ];
+
+        return view('admin.stok_darah.v_riwayat_buang_darah', $data);
     }
 }

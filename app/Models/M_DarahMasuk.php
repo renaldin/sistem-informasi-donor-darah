@@ -24,6 +24,7 @@ class M_DarahMasuk extends Model
         return DB::table($this->table)
             ->join('user', 'user.id_user', '=', 'darah_masuk.id_user', 'left')
             ->join('darah', 'darah.id_darah', '=', 'darah_masuk.id_darah', 'left')
+            ->join('anggota', 'anggota.id_anggota', '=', 'darah.id_anggota', 'left')
             ->where('id_darah_masuk', $id_darah_masuk)->first();
     }
 

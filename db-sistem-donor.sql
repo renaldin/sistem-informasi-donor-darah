@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 20, 2023 at 06:39 PM
+-- Generation Time: May 23, 2023 at 07:02 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.0.19
 
@@ -30,17 +30,22 @@ SET time_zone = "+00:00";
 CREATE TABLE `anggota` (
   `id_anggota` int(11) NOT NULL,
   `nama_anggota` varchar(100) DEFAULT NULL,
-  `status_anggota` enum('Ready','Selesai') NOT NULL
+  `jenis_kelamin` enum('Laki-laki','Perempuan') NOT NULL,
+  `alamat` varchar(100) NOT NULL,
+  `status_anggota` enum('Ready','Selesai') NOT NULL,
+  `tanggal_terakhir_donor` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `anggota`
 --
 
-INSERT INTO `anggota` (`id_anggota`, `nama_anggota`, `status_anggota`) VALUES
-(1, 'Teresia 1', 'Ready'),
-(2, 'Teresia 2', 'Ready'),
-(3, 'Teresia 3', 'Ready');
+INSERT INTO `anggota` (`id_anggota`, `nama_anggota`, `jenis_kelamin`, `alamat`, `status_anggota`, `tanggal_terakhir_donor`) VALUES
+(1, 'Teresia 1', 'Perempuan', 'Subang', 'Ready', '2023-05-02'),
+(2, 'Teresia 2', 'Perempuan', 'Subang', 'Ready', '2023-05-02'),
+(3, 'Teresia 3', 'Perempuan', 'Subang', 'Ready', '2023-05-02'),
+(4, 'Teresia 5', 'Perempuan', 'Subang', 'Ready', '2023-05-02'),
+(5, 'Teresia 6', 'Perempuan', 'Subang', 'Ready', '2023-05-01');
 
 -- --------------------------------------------------------
 
@@ -89,7 +94,11 @@ INSERT INTO `darah` (`id_darah`, `id_anggota`, `no_kantong`, `golongan_darah`, `
 (1, 1, 'K1', 'A', 'A', 'A', '2023-05-18', '2023-05-18 00:00:00'),
 (2, 2, 'K2', 'C', 'C', 'C', '2023-05-18', '2023-05-18 00:00:00'),
 (3, 2, 'K3', 'B', 'B', 'B', '2023-05-20', '2023-05-20 22:55:30'),
-(4, 1, 'K4', 'O', 'O', 'O', '2023-05-21', '2023-05-20 22:55:56');
+(4, 1, 'K4', 'O', 'O', 'O', '2023-05-21', '2023-05-20 22:55:56'),
+(5, 3, 'K5', 'O', 'B', 'C', '2023-05-23', '2023-05-23 10:25:54'),
+(6, 2, 'K6', 'O', 'B', 'C', '2023-05-23', '2023-05-23 10:31:54'),
+(7, 4, 'K7', 'A', 'A', 'B', '2023-05-23', '2023-05-23 23:30:33'),
+(8, 5, 'K8', 'A', 'A', 'A', '2023-06-10', '2023-05-23 23:43:49');
 
 -- --------------------------------------------------------
 
@@ -109,7 +118,8 @@ CREATE TABLE `darah_buang` (
 --
 
 INSERT INTO `darah_buang` (`id_darah_buang`, `id_darah`, `id_user`, `tanggal_buang`) VALUES
-(1, 2, 3, '2023-05-18 00:00:00');
+(1, 2, 3, '2023-05-18 00:00:00'),
+(2, 8, 2, '2023-05-23 23:53:13');
 
 -- --------------------------------------------------------
 
@@ -130,7 +140,10 @@ CREATE TABLE `darah_keluar` (
 
 INSERT INTO `darah_keluar` (`id_darah_keluar`, `id_darah`, `id_permohonan_darah`, `tanggal_keluar`) VALUES
 (2, 1, 3, '2023-05-20 23:27:24'),
-(3, 3, 3, '2023-05-20 23:27:29');
+(3, 3, 3, '2023-05-20 23:27:29'),
+(5, 5, 4, '2023-05-23 10:32:56'),
+(6, 6, 4, '2023-05-23 10:33:08'),
+(7, 4, 4, '2023-05-23 10:33:25');
 
 -- --------------------------------------------------------
 
@@ -149,7 +162,7 @@ CREATE TABLE `darah_masuk` (
 --
 
 INSERT INTO `darah_masuk` (`id_darah_masuk`, `id_darah`, `id_user`) VALUES
-(4, 4, 2);
+(9, 7, 2);
 
 -- --------------------------------------------------------
 
@@ -205,7 +218,8 @@ CREATE TABLE `permohonan_darah` (
 --
 
 INSERT INTO `permohonan_darah` (`id_permohonan_darah`, `id_user`, `nama_rs`, `golda`, `jumlah`, `upload_surat`, `status_permohonan`, `tanggal_permohonan`) VALUES
-(3, 9, 'Rumah Sakit', 'A', 4, '05202023173242 Rumah Sakit.pdf', 'Diterima', '2023-05-20 17:44:01');
+(3, 9, 'Rumah Sakit', 'A', 4, '05202023173242 Rumah Sakit.pdf', 'Diterima', '2023-05-20 17:44:01'),
+(4, 9, 'Rumah Sakit', 'A', 2, '05232023102308 Rumah Sakit.pdf', 'Diterima', '2023-05-23 10:23:29');
 
 -- --------------------------------------------------------
 
@@ -303,7 +317,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `anggota`
 --
 ALTER TABLE `anggota`
-  MODIFY `id_anggota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_anggota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `biodata_web`
@@ -315,25 +329,25 @@ ALTER TABLE `biodata_web`
 -- AUTO_INCREMENT for table `darah`
 --
 ALTER TABLE `darah`
-  MODIFY `id_darah` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_darah` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `darah_buang`
 --
 ALTER TABLE `darah_buang`
-  MODIFY `id_darah_buang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_darah_buang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `darah_keluar`
 --
 ALTER TABLE `darah_keluar`
-  MODIFY `id_darah_keluar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_darah_keluar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `darah_masuk`
 --
 ALTER TABLE `darah_masuk`
-  MODIFY `id_darah_masuk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_darah_masuk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `event`
@@ -345,7 +359,7 @@ ALTER TABLE `event`
 -- AUTO_INCREMENT for table `permohonan_darah`
 --
 ALTER TABLE `permohonan_darah`
-  MODIFY `id_permohonan_darah` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_permohonan_darah` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user`

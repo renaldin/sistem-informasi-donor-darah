@@ -24,6 +24,37 @@
                         @enderror
                     </div>       
                 </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="alamat">Alamat</label>
+                        <input type="text" class="form-control @error('alamat') is-invalid @enderror" name="alamat" id="alamat" value="{{old('alamat');}}" placeholder="Masukkan Alamat">
+                        @error('alamat')
+                            <small class="form-text text-danger">{{$message}}</small>
+                        @enderror
+                    </div>       
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="jenis_kelamin">Jenis Kelamin</label>
+                        <select name="jenis_kelamin" class="form-control @error('jenis_kelamin') is-invalid @enderror">
+                            <option value="">Pilih</option>
+                            <option value="Laki-laki">Laki-laki</option>
+                            <option value="Perempuan">Perempuan</option>
+                        </select>
+                        @error('jenis_kelamin')
+                            <small class="form-text text-danger">{{$message}}</small>
+                        @enderror
+                    </div>       
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="tanggal_terakhir_donor">Tanggal Terakhir Donor</label>
+                        <input type="date" class="form-control @error('tanggal_terakhir_donor') is-invalid @enderror" name="tanggal_terakhir_donor" id="tanggal_terakhir_donor" value="{{old('tanggal_terakhir_donor');}}" placeholder="Masukkan Tanggal Terakhir Donor">
+                        @error('tanggal_terakhir_donor')
+                            <small class="form-text text-danger">{{$message}}</small>
+                        @enderror
+                    </div>       
+                </div>
                 <div class="col-lg-12">
                     <label><strong>Data Darah</strong></label>
                 </div>
