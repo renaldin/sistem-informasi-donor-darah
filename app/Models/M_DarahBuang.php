@@ -11,11 +11,14 @@ class M_DarahBuang extends Model
     use HasFactory;
     public $table = 'darah_buang';
 
-    // public function get_data()
-    // {
-    //     return DB::table($this->table)
-    //         ->orderBy('id_darah_buang', 'DESC')->get();
-    // }
+    public function get_data()
+    {
+        return DB::table($this->table)
+            ->join('user', 'user.id_user', '=', 'darah_buang.id_user', 'left')
+            ->join('darah', 'darah.id_darah', '=', 'darah_buang.id_darah', 'left')
+            ->join('anggota', 'anggota.id_anggota', '=', 'darah.id_anggota', 'left')
+            ->orderBy('id_darah_buang', 'DESC')->get();
+    }
 
     // public function detail($id_darah_buang)
     // {
