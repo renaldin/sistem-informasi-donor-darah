@@ -7,6 +7,7 @@ use App\Http\Controllers\C_PengajuanEvent;
 use App\Http\Controllers\C_PermohonanDarah;
 use App\Http\Controllers\C_Register;
 use App\Http\Controllers\C_Darah;
+use App\Http\Controllers\C_Donatur;
 use App\Http\Controllers\C_LandingPage;
 use App\Http\Controllers\C_StokDarah;
 use App\Http\Controllers\Cetak;
@@ -25,8 +26,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['middleware' => 'revalidate'], function () {
+
+    // Route::group(['middleware' => 'landing_page'], function () {
     // lading page
     Route::get('/', [C_LandingPage::class, 'index'])->name('landingpage');
+    Route::get('/daftar_donor', [C_Donatur::class, 'index'])->name('daftar_donor');
+    // });
 
     // login
     Route::get('/login', [C_Login::class, 'index'])->name('login');
@@ -107,7 +112,7 @@ Route::group(['middleware' => 'revalidate'], function () {
     // Donatur
     Route::group(['middleware' => 'donatur'], function () {
         // Daftar Donor
-        Route::get('/daftar_donor', [C_Login::class, 'index'])->name('daftar_donor');
+        // Route::get('/daftar_donor', [C_Login::class, 'index'])->name('daftar_donor');
     });
 
 

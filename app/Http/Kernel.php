@@ -70,5 +70,6 @@ class Kernel extends HttpKernel
         'petugas_kesehatan' => \App\Http\Middleware\PetugasKesehatan::class,
         'rumah_sakit' => \App\Http\Middleware\RumahSakit::class,
         'pusat_pmi' => \App\Http\Middleware\PusatPMI::class,
+        'landing_page' => \App\Http\Middleware\LandingPage::class,
     ];
 }
