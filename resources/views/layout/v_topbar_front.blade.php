@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top"
     style="background-color: rgb(252, 84, 75);">
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center text-decoration-none" href="/">
         <div class="sidebar-brand-icon ">
             <img src="{{ asset('template/img/logo/logo2.png') }}" width="40px">
         </div>
@@ -8,14 +8,12 @@
     </a>
     <ul class="navbar-nav ml-auto menu-nav">
         <li class="nav-item dropdown no-arrow">
-            <a class="nav-link dropdown-toggle" href="/" id="searchDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="/">
                 <span>Home</span>
             </a>
         </li>
         <li class="nav-item dropdown no-arrow">
-            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="/daftar_donor">
                 <span>Daftar Donor</span>
             </a>
         </li>
@@ -44,20 +42,27 @@
             <i class="fa fa-bars"></i>
         </button>
         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-            <a class="dropdown-item" href="#">
+            <a class="dropdown-item" href="/">
                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                 Home
             </a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">
+            <a class="dropdown-item" href="/daftar_donor">
                 <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                 Daftar Donor
             </a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="javascript:void(0);" data-toggle="modal" data-target="#logoutModal">
-                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                Login
-            </a>
+            @if ($user != null && $user->role === 'Donatur')
+                <a class="dropdown-item" data-toggle="modal" data-target="#logoutModal">
+                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Logout
+                </a>
+            @else
+                <a class="dropdown-item" href="/login">
+                    <i class="fas fa-sign-in-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Login
+                </a>
+            @endif
             {{-- <button type="button" class="dropdown-item" data-toggle="modal" data-target="#logoutModal">
                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                 Logout

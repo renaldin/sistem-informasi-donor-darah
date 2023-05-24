@@ -30,7 +30,6 @@ Route::group(['middleware' => 'revalidate'], function () {
     // Route::group(['middleware' => 'landing_page'], function () {
     // lading page
     Route::get('/', [C_LandingPage::class, 'index'])->name('landingpage');
-    Route::get('/daftar_donor', [C_Donatur::class, 'index'])->name('daftar_donor');
     // });
 
     // login
@@ -112,7 +111,8 @@ Route::group(['middleware' => 'revalidate'], function () {
     // Donatur
     Route::group(['middleware' => 'donatur'], function () {
         // Daftar Donor
-        // Route::get('/daftar_donor', [C_Login::class, 'index'])->name('daftar_donor');
+        Route::get('/daftar_donor', [C_Donatur::class, 'index'])->name('daftar_donor');
+        Route::post('/submit_kuisioner', [C_Donatur::class, 'submit_kuisioner'])->name('submit_kuisioner');
     });
 
 
