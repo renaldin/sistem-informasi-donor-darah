@@ -62,6 +62,12 @@
         </div>
       </div>
     </li>
+    <li class="nav-item @if($title === 'Anggota') active @endif">
+      <a class="nav-link" href="/anggota">
+        <i class="fas fa-fw fa-palette"></i>
+        <span>Anggota</span>
+      </a>
+    </li>
   @elseif ($user->role === 'Donatur')
   @elseif ($user->role === 'Event')
   <div class="sidebar-heading">
