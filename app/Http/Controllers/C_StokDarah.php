@@ -8,6 +8,7 @@ use App\Models\M_Darah;
 use App\Models\M_DarahMasuk;
 use App\Models\M_DarahBuang;
 use App\Models\M_Anggota;
+use App\Models\M_Donor;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class C_StokDarah extends Controller
@@ -19,6 +20,7 @@ class C_StokDarah extends Controller
     private $M_DarahMasuk;
     private $M_DarahBuang;
     private $M_Anggota;
+    private $M_Donor;
 
     public function __construct()
     {
@@ -28,6 +30,7 @@ class C_StokDarah extends Controller
         $this->M_DarahMasuk = new M_DarahMasuk();
         $this->M_DarahBuang = new M_DarahBuang();
         $this->M_Anggota = new M_Anggota();
+        $this->M_Donor = new M_Donor();
         date_default_timezone_set('Asia/Jakarta');
     }
 
@@ -70,7 +73,7 @@ class C_StokDarah extends Controller
             'sub_title'     => 'Tambah Darah',
             'data_web'      => $this->M_Website->detail(1),
             'no_kantong'    => $no_kantong,
-            'anggota'       => $this->M_Anggota->get_data(),
+            'donor'         => $this->M_Donor->get_data(),
             'user'          => $this->M_User->detail(Session()->get('id_user')),
         ];
 
@@ -105,6 +108,35 @@ class C_StokDarah extends Controller
         return view('admin.stok_darah.v_tambah_offline', $data);
     }
 
+    public function tambah_darah_offline_anggota()
+    {
+        if (!Session()->get('email')) {
+            return redirect()->route('login');
+        }
+
+        $dataTerakhir = $this->M_Darah->data_terakhir();
+
+        if ($dataTerakhir === null) {
+            $no_kantong = 'K1';
+        } else {
+            $kata = $dataTerakhir->no_kantong;
+            // $kata = 'K1';
+            $angka = substr($kata, 1) + 1;
+            $no_kantong = 'K' . $angka;
+        }
+
+        $data = [
+            'title'         => 'Data Stok Darah',
+            'sub_title'     => 'Tambah Darah',
+            'data_web'      => $this->M_Website->detail(1),
+            'no_kantong'    => $no_kantong,
+            'anggota'       => $this->M_Anggota->get_data(),
+            'user'          => $this->M_User->detail(Session()->get('id_user')),
+        ];
+
+        return view('admin.stok_darah.v_tambah_offline_anggota', $data);
+    }
+
     public function proses_tambah_darah()
     {
         if (Request()->form_darah == 'Online') {
@@ -121,7 +153,7 @@ class C_StokDarah extends Controller
             ]);
 
             $data_darah = [
-                'id_anggota'            => Request()->id_anggota,
+                'id_donor'              => Request()->id_donor,
                 'no_kantong'            => Request()->no_kantong,
                 'golongan_darah'        => Request()->golongan_darah,
                 'resus'                 => Request()->resus,
@@ -139,48 +171,88 @@ class C_StokDarah extends Controller
             ];
             $this->M_DarahMasuk->tambah($data_darah_masuk);
 
-            $data_anggota = [
-                'id_anggota'        => Request()->id_anggota,
-                // 'status_anggota'    => 'Selesai'
+            $data_donor = [
+                'id_donor'      => Request()->id_donor,
+                'status_donor'  => 'Selesai'
             ];
-            $this->M_Anggota->edit($data_anggota);
+            $this->M_Donor->edit($data_donor);
 
             Alert::success('Berhasil', 'Data darah berhasil ditambah.');
             return redirect()->route('tambah_darah_online');
         } elseif (Request()->form_darah == 'Offline') {
-            Request()->validate([
-                'nama_anggota'          => 'required',
-                'alamat'                => 'required',
-                'jenis_kelamin'         => 'required',
-                'tanggal_terakhir_donor' => 'required',
-                'golongan_darah'        => 'required',
-                'resus'                 => 'required',
-                'volume_darah'          => 'required',
-                'tanggal_kedaluwarsa'   => 'required',
-            ], [
-                'nama_anggota.required'         => 'Nama anggota harus diisi!',
-                'alamat.required'               => 'Alamat harus diisi!',
-                'jenis_kelamin.required'        => 'Jenis kelamin harus diisi!',
-                'tanggal_terakhir_donor.required' => 'Tanggal terakhir donor harus diisi!',
-                'golongan_darah.required'       => 'Golongan darah harus diisi!',
-                'resus.required'                => 'Resus harus diisi!',
-                'volume_darah.required'         => 'Volume darah harus diisi!',
-                'tanggal_kedaluwarsa.required'  => 'Tanggal kedaluwarsa harus diisi!',
-            ]);
+            if (Request()->form_anggota == 'Anggota') {
+                Request()->validate([
+                    'id_anggota'            => 'required',
+                    'hasil_kusioner'        => 'required',
+                    'deskripsi_hasil_kusioner'        => 'required',
+                    'golongan_darah'        => 'required',
+                    'resus'                 => 'required',
+                    'volume_darah'          => 'required',
+                    'tanggal_kedaluwarsa'   => 'required',
+                ], [
+                    'id_anggota.required'               => 'Nama anggota harus diisi!',
+                    'hasil_kusioner.required'           => 'Hasil kusioner harus diisi!',
+                    'deskripsi_hasil_kusioner.required' => 'Deskripsi hasil kusioner harus diisi!',
+                    'golongan_darah.required'       => 'Golongan darah harus diisi!',
+                    'resus.required'                => 'Resus harus diisi!',
+                    'volume_darah.required'         => 'Volume darah harus diisi!',
+                    'tanggal_kedaluwarsa.required'  => 'Tanggal kedaluwarsa harus diisi!',
+                ]);
 
-            $data_anggota = [
-                'nama_anggota'      => Request()->nama_anggota,
-                'alamat'            => Request()->alamat,
-                'jenis_kelamin'     => Request()->jenis_kelamin,
-                'tanggal_terakhir_donor' => Request()->tanggal_terakhir_donor,
-                // 'status_anggota'    => 'Selesai'
-            ];
-            $this->M_Anggota->tambah($data_anggota);
+                $data_donor = [
+                    'id_anggota'                => Request()->id_anggota,
+                    'tanggal_donor'             => date('Y-m-d H:i:s'),
+                    'status_donor'              => 'Selesai',
+                    'hasil_kusioner'            => Request()->hasil_kusioner,
+                    'deskripsi_hasil_kusioner'  => Request()->deskripsi_hasil_kusioner,
+                ];
+                $this->M_Donor->tambah($data_donor);
+            } elseif (Request()->form_anggota == 'Non Anggota') {
+                Request()->validate([
+                    'nama_anggota'          => 'required',
+                    'alamat'                => 'required',
+                    'jenis_kelamin'         => 'required',
+                    'hasil_kusioner'        => 'required',
+                    'deskripsi_hasil_kusioner'        => 'required',
+                    'golongan_darah'        => 'required',
+                    'resus'                 => 'required',
+                    'volume_darah'          => 'required',
+                    'tanggal_kedaluwarsa'   => 'required',
+                ], [
+                    'nama_anggota.required'         => 'Nama anggota harus diisi!',
+                    'alamat.required'               => 'Alamat harus diisi!',
+                    'jenis_kelamin.required'        => 'Jenis kelamin harus diisi!',
+                    'hasil_kusioner.required'           => 'Hasil kusioner harus diisi!',
+                    'deskripsi_hasil_kusioner.required' => 'Deskripsi hasil kusioner harus diisi!',
+                    'golongan_darah.required'       => 'Golongan darah harus diisi!',
+                    'resus.required'                => 'Resus harus diisi!',
+                    'volume_darah.required'         => 'Volume darah harus diisi!',
+                    'tanggal_kedaluwarsa.required'  => 'Tanggal kedaluwarsa harus diisi!',
+                ]);
 
-            $data_terakhir_anggota = $this->M_Anggota->data_terakhir();
+                $data_anggota = [
+                    'nama_anggota'      => Request()->nama_anggota,
+                    'alamat'            => Request()->alamat,
+                    'jenis_kelamin'     => Request()->jenis_kelamin,
+                ];
+                $this->M_Anggota->tambah($data_anggota);
+
+                $data_terakhir_anggota = $this->M_Anggota->data_terakhir();
+
+                $data_donor = [
+                    'id_anggota'                => $data_terakhir_anggota->id_anggota,
+                    'tanggal_donor'             => date('Y-m-d H:i:s'),
+                    'status_donor'              => 'Ready',
+                    'hasil_kusioner'            => Request()->hasil_kusioner,
+                    'deskripsi_hasil_kusioner'  => Request()->deskripsi_hasil_kusioner,
+                ];
+                $this->M_Donor->tambah($data_donor);
+            }
+
+            $data_terakhir_donor = $this->M_Donor->data_terakhir();
 
             $data_darah = [
-                'id_anggota'            => $data_terakhir_anggota->id_anggota,
+                'id_donor'              => $data_terakhir_donor->id_donor,
                 'no_kantong'            => Request()->no_kantong,
                 'golongan_darah'        => Request()->golongan_darah,
                 'resus'                 => Request()->resus,

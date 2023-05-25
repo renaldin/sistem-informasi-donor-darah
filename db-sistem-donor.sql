@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 23, 2023 at 07:02 PM
+-- Generation Time: May 25, 2023 at 09:50 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.0.19
 
@@ -31,21 +31,21 @@ CREATE TABLE `anggota` (
   `id_anggota` int(11) NOT NULL,
   `nama_anggota` varchar(100) DEFAULT NULL,
   `jenis_kelamin` enum('Laki-laki','Perempuan') NOT NULL,
-  `alamat` varchar(100) NOT NULL,
-  `status_anggota` enum('Ready','Selesai') NOT NULL,
-  `tanggal_terakhir_donor` date DEFAULT NULL
+  `alamat` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `anggota`
 --
 
-INSERT INTO `anggota` (`id_anggota`, `nama_anggota`, `jenis_kelamin`, `alamat`, `status_anggota`, `tanggal_terakhir_donor`) VALUES
-(1, 'Teresia 1', 'Perempuan', 'Subang', 'Ready', '2023-05-02'),
-(2, 'Teresia 2', 'Perempuan', 'Subang', 'Ready', '2023-05-02'),
-(3, 'Teresia 3', 'Perempuan', 'Subang', 'Ready', '2023-05-02'),
-(4, 'Teresia 5', 'Perempuan', 'Subang', 'Ready', '2023-05-02'),
-(5, 'Teresia 6', 'Perempuan', 'Subang', 'Ready', '2023-05-01');
+INSERT INTO `anggota` (`id_anggota`, `nama_anggota`, `jenis_kelamin`, `alamat`) VALUES
+(1, 'Teresia 1', 'Perempuan', 'Subang'),
+(2, 'Teresia 2', 'Perempuan', 'Subang'),
+(3, 'Teresia 3', 'Perempuan', 'Subang'),
+(4, 'Teresia 5', 'Perempuan', 'Subang'),
+(5, 'Teresia 6', 'Perempuan', 'Subang'),
+(6, 'Teresia 7', 'Perempuan', 'Subang'),
+(7, 'Teresia 8', 'Perempuan', 'Subang');
 
 -- --------------------------------------------------------
 
@@ -77,7 +77,7 @@ INSERT INTO `biodata_web` (`id_biodata_web`, `nama_website`, `email`, `nomor_tel
 
 CREATE TABLE `darah` (
   `id_darah` int(11) NOT NULL,
-  `id_anggota` int(11) NOT NULL,
+  `id_donor` int(11) NOT NULL,
   `no_kantong` varchar(50) DEFAULT NULL,
   `golongan_darah` varchar(10) DEFAULT NULL,
   `resus` varchar(50) DEFAULT NULL,
@@ -90,15 +90,19 @@ CREATE TABLE `darah` (
 -- Dumping data for table `darah`
 --
 
-INSERT INTO `darah` (`id_darah`, `id_anggota`, `no_kantong`, `golongan_darah`, `resus`, `volume_darah`, `tanggal_kedaluwarsa`, `tanggal_darah_masuk`) VALUES
+INSERT INTO `darah` (`id_darah`, `id_donor`, `no_kantong`, `golongan_darah`, `resus`, `volume_darah`, `tanggal_kedaluwarsa`, `tanggal_darah_masuk`) VALUES
 (1, 1, 'K1', 'A', 'A', 'A', '2023-05-18', '2023-05-18 00:00:00'),
 (2, 2, 'K2', 'C', 'C', 'C', '2023-05-18', '2023-05-18 00:00:00'),
 (3, 2, 'K3', 'B', 'B', 'B', '2023-05-20', '2023-05-20 22:55:30'),
 (4, 1, 'K4', 'O', 'O', 'O', '2023-05-21', '2023-05-20 22:55:56'),
 (5, 3, 'K5', 'O', 'B', 'C', '2023-05-23', '2023-05-23 10:25:54'),
 (6, 2, 'K6', 'O', 'B', 'C', '2023-05-23', '2023-05-23 10:31:54'),
-(7, 4, 'K7', 'A', 'A', 'B', '2023-05-23', '2023-05-23 23:30:33'),
-(8, 5, 'K8', 'A', 'A', 'A', '2023-06-10', '2023-05-23 23:43:49');
+(7, 4, 'K7', 'C', 'C', 'C', '2023-05-23', '2023-05-23 23:30:33'),
+(8, 5, 'K8', 'A', 'A', 'A', '2023-06-10', '2023-05-23 23:43:49'),
+(9, 1, 'K9', 'A', 'A', 'A', '2023-05-25', '2023-05-25 13:28:59'),
+(10, 7, 'K10', 'A', 'A', 'A', '2023-06-10', '2023-05-25 14:02:20'),
+(11, 8, 'K11', 'A', 'A', 'A', '2023-11-11', '2023-05-25 14:41:16'),
+(12, 9, 'K12', 'A', 'A', 'A', '2023-08-31', '2023-05-25 14:44:43');
 
 -- --------------------------------------------------------
 
@@ -119,7 +123,8 @@ CREATE TABLE `darah_buang` (
 
 INSERT INTO `darah_buang` (`id_darah_buang`, `id_darah`, `id_user`, `tanggal_buang`) VALUES
 (1, 2, 3, '2023-05-18 00:00:00'),
-(2, 8, 2, '2023-05-23 23:53:13');
+(2, 8, 2, '2023-05-23 23:53:13'),
+(3, 9, 2, '2023-05-25 13:32:38');
 
 -- --------------------------------------------------------
 
@@ -162,7 +167,40 @@ CREATE TABLE `darah_masuk` (
 --
 
 INSERT INTO `darah_masuk` (`id_darah_masuk`, `id_darah`, `id_user`) VALUES
-(9, 7, 2);
+(9, 7, 2),
+(12, 10, 2),
+(13, 11, 2),
+(14, 12, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `donor`
+--
+
+CREATE TABLE `donor` (
+  `id_donor` int(11) NOT NULL,
+  `id_anggota` int(11) NOT NULL,
+  `tanggal_donor` datetime DEFAULT NULL,
+  `status_donor` enum('Ready','Proses','Selesai') DEFAULT NULL,
+  `hasil_kusioner` enum('Lolos','Tidak Lolos') DEFAULT NULL,
+  `deskripsi_hasil_kusioner` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `donor`
+--
+
+INSERT INTO `donor` (`id_donor`, `id_anggota`, `tanggal_donor`, `status_donor`, `hasil_kusioner`, `deskripsi_hasil_kusioner`) VALUES
+(1, 1, '2023-05-25 09:18:04', 'Selesai', 'Lolos', 'Lolos kusioner'),
+(2, 2, '2023-05-25 09:18:04', 'Ready', 'Lolos', 'Lolos kusioner'),
+(3, 3, '2023-05-25 09:18:04', 'Ready', 'Lolos', 'Lolos kusioner'),
+(4, 4, '2023-05-25 09:18:04', 'Ready', 'Lolos', 'Lolos kusioner'),
+(5, 5, '2023-05-25 09:18:04', 'Ready', 'Lolos', 'Lolos kusioner'),
+(6, 1, '2023-05-25 09:18:04', 'Proses', 'Lolos', 'Lolos kusioner'),
+(7, 6, '2023-05-25 14:02:20', 'Ready', 'Lolos', 'Lolos kusioner'),
+(8, 7, '2023-05-25 14:41:16', 'Ready', 'Lolos', 'Deskripsi hasil kusioner teresia 8'),
+(9, 1, '2023-05-25 14:44:43', 'Selesai', 'Lolos', 'Deskripsi hasil kusioner teresia 1');
 
 -- --------------------------------------------------------
 
@@ -292,6 +330,12 @@ ALTER TABLE `darah_masuk`
   ADD PRIMARY KEY (`id_darah_masuk`);
 
 --
+-- Indexes for table `donor`
+--
+ALTER TABLE `donor`
+  ADD PRIMARY KEY (`id_donor`);
+
+--
 -- Indexes for table `event`
 --
 ALTER TABLE `event`
@@ -317,7 +361,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `anggota`
 --
 ALTER TABLE `anggota`
-  MODIFY `id_anggota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_anggota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `biodata_web`
@@ -329,13 +373,13 @@ ALTER TABLE `biodata_web`
 -- AUTO_INCREMENT for table `darah`
 --
 ALTER TABLE `darah`
-  MODIFY `id_darah` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_darah` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `darah_buang`
 --
 ALTER TABLE `darah_buang`
-  MODIFY `id_darah_buang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_darah_buang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `darah_keluar`
@@ -347,7 +391,13 @@ ALTER TABLE `darah_keluar`
 -- AUTO_INCREMENT for table `darah_masuk`
 --
 ALTER TABLE `darah_masuk`
-  MODIFY `id_darah_masuk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_darah_masuk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `donor`
+--
+ALTER TABLE `donor`
+  MODIFY `id_donor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `event`

@@ -16,7 +16,7 @@ class M_DarahBuang extends Model
         return DB::table($this->table)
             ->join('user', 'user.id_user', '=', 'darah_buang.id_user', 'left')
             ->join('darah', 'darah.id_darah', '=', 'darah_buang.id_darah', 'left')
-            ->join('anggota', 'anggota.id_anggota', '=', 'darah.id_anggota', 'left')
+            ->join('donor', 'donor.id_donor', '=', 'darah.id_donor', 'left')
             ->orderBy('id_darah_buang', 'DESC')->get();
     }
 

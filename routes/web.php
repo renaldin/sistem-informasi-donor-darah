@@ -75,6 +75,7 @@ Route::group(['middleware' => 'revalidate'], function () {
         Route::get('/tambah_darah_online', [C_StokDarah::class, 'tambah_darah_online'])->name('tambah_darah_online');
         Route::post('/tambah_darah_online', [C_StokDarah::class, 'proses_tambah_darah']);
         Route::get('/tambah_darah_offline', [C_StokDarah::class, 'tambah_darah_offline'])->name('tambah_darah_offline');
+        Route::get('/tambah_darah_offline_anggota', [C_StokDarah::class, 'tambah_darah_offline_anggota'])->name('tambah_darah_offline_anggota');
         Route::post('/tambah_darah_offline', [C_StokDarah::class, 'proses_tambah_darah']);
         Route::get('/edit_darah/{id}', [C_StokDarah::class, 'edit_darah'])->name('edit_darah');
         Route::post('/edit_darah/{id}', [C_StokDarah::class, 'proses_edit_darah']);
