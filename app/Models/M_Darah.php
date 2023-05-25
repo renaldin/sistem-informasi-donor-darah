@@ -14,7 +14,7 @@ class M_Darah extends Model
     public function get_data()
     {
         return DB::table($this->table)
-            ->join('abggota', 'abggota.id_abggota', '=', 'darah.id_abggota', 'left')
+            ->join('donor', 'donor.id_donor', '=', 'darah.id_donor', 'left')
             ->orderBy('id_darah', 'DESC')->get();
     }
 

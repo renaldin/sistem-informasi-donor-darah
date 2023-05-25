@@ -6,34 +6,64 @@
     <div class="col-lg-12">
     <div class="card mb-4">
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-          <h6 class="m-0 font-weight-bold">Form {{$sub_title}}</h6>
+          <h6 class="m-0 font-weight-bold">Form {{$sub_title}} Anggota</h6>
         </div>
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <a href="/tambah_darah_offline" class="btn btn-danger">Form Bukan Anggota</a>
+          </div>
         <div class="card-body">
-            <form action="/tambah_darah_online" method="POST">
+            <form action="/tambah_darah_offline" method="POST">
             @csrf
             <div class="row">
+                <div class="col-lg-12">
+                    <label><strong>Data Anggota</strong></label>
+                </div>
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <label for="no_kantong">No. Kantong</label>
-                        <input type="text" class="form-control @error('no_kantong') is-invalid @enderror" name="no_kantong" id="no_kantong" value="{{$no_kantong;}}" readonly placeholder="Masukkan No. Kantong">
-                        <input type="hidden" class="form-control @error('form_darah') is-invalid @enderror" name="form_darah" id="form_darah" value="Online">
-                        @error('no_kantong')
+                        <label for="id_anggota">Nama Anggota</label>
+                        <input type="hidden" class="form-control @error('form_anggota') is-invalid @enderror" name="form_anggota" id="form_anggota" value="Anggota">
+                        <select class="select2-single-placeholder form-control @error('id_anggota') is-invalid @enderror" name="id_anggota" autofocus id="select2SinglePlaceholder">
+                            <option value="">Pilih</option>
+                            @foreach ($anggota as $row)
+                                    <option value="{{$row->id_anggota}}"><b>{{$row->nama_anggota}}</b></option>
+                            @endforeach
+                        </select>
+                        @error('nama_anggota')
                             <small class="form-text text-danger">{{$message}}</small>
                         @enderror
                     </div>       
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <label for="id_donor">Pendonor</label>
-                        <select class="select2-single-placeholder form-control @error('id_donor') is-invalid @enderror" name="id_donor" autofocus id="select2SinglePlaceholder">
+                        <label for="hasil_kusioner">Hasil Kusioner</label>
+                        <select name="hasil_kusioner" class="form-control @error('hasil_kusioner') is-invalid @enderror" id="hasil_kusioner">
                             <option value="">Pilih</option>
-                            @foreach ($donor as $row)
-                                @if ($row->status_donor == 'Ready')
-                                    <option value="{{$row->id_donor}}"><b>{{$row->nama_anggota}}</b> | {{ date('d F Y H:is', strtotime($row->tanggal_donor)) }}</option>
-                                @endif
-                            @endforeach
+                            <option value="Lolos">Lolos</option>
+                            <option value="Tidak Lolos">Tidak Lolos</option>
                         </select>
-                        @error('id_donor')
+                        @error('hasil_kusioner')
+                            <small class="form-text text-danger">{{$message}}</small>
+                        @enderror
+                    </div>       
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="deskripsi_hasil_kusioner">Deskripsi Hasil Kusioner</label>
+                        <textarea name="deskripsi_hasil_kusioner" class="form-control @error('deskripsi_hasil_kusioner') is-invalid @enderror" cols="10" rows="3" placeholder="Masukkan Deskripsi Hasil Kusioner"></textarea>
+                        @error('deskripsi_hasil_kusioner')
+                            <small class="form-text text-danger">{{$message}}</small>
+                        @enderror
+                    </div>       
+                </div>
+                <div class="col-lg-12">
+                    <label><strong>Data Darah</strong></label>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="no_kantong">No. Kantong</label>
+                        <input type="text" class="form-control @error('no_kantong') is-invalid @enderror" name="no_kantong" id="no_kantong" value="{{$no_kantong;}}" readonly placeholder="Masukkan No. Kantong">
+                        <input type="hidden" class="form-control @error('form_darah') is-invalid @enderror" name="form_darah" id="form_darah" value="Offline">
+                        @error('no_kantong')
                             <small class="form-text text-danger">{{$message}}</small>
                         @enderror
                     </div>       

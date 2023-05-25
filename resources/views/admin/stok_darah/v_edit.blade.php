@@ -45,9 +45,22 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <label for="tanggal_terakhir_donor">Tanggal Terakhir Donor</label>
-                        <input type="date" class="form-control @error('tanggal_terakhir_donor') is-invalid @enderror" name="tanggal_terakhir_donor" id="tanggal_terakhir_donor" value="{{$detail->tanggal_terakhir_donor}}" placeholder="Masukkan Tanggal Terakhir Donor">
-                        @error('tanggal_terakhir_donor')
+                        <label for="hasil_kusioner">Hasil Kusioner</label>
+                        <select name="hasil_kusioner" class="form-control @error('hasil_kusioner') is-invalid @enderror" id="hasil_kusioner" disabled>
+                            <option value="{{$detail->hasil_kusioner}}">{{$detail->hasil_kusioner}}</option>
+                            <option value="Lolos">Lolos</option>
+                            <option value="Tidak Lolos">Tidak Lolos</option>
+                        </select>
+                        @error('hasil_kusioner')
+                            <small class="form-text text-danger">{{$message}}</small>
+                        @enderror
+                    </div>       
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="deskripsi_hasil_kusioner">Deskripsi Hasil Kusioner</label>
+                        <textarea name="deskripsi_hasil_kusioner" class="form-control @error('deskripsi_hasil_kusioner') is-invalid @enderror" cols="10" rows="3" placeholder="Masukkan Deskripsi Hasil Kusioner" readonly>{{$detail->deskripsi_hasil_kusioner}}</textarea>
+                        @error('deskripsi_hasil_kusioner')
                             <small class="form-text text-danger">{{$message}}</small>
                         @enderror
                     </div>       
