@@ -114,6 +114,12 @@
       $('#dataTableHover').DataTable(); // ID From dataTable with Hover
     });
   </script>
+  <script>
+    $(document).ready(function () {
+      $('#dataTable').DataTable(); // ID From dataTable 
+      $('#dataTableHover2').DataTable(); // ID From dataTable with Hover
+    });
+  </script>
 
 <script>
   $(document).ready(function () {

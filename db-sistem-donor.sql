@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 25, 2023 at 09:50 AM
+-- Generation Time: May 25, 2023 at 09:30 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.0.19
 
@@ -31,21 +31,22 @@ CREATE TABLE `anggota` (
   `id_anggota` int(11) NOT NULL,
   `nama_anggota` varchar(100) DEFAULT NULL,
   `jenis_kelamin` enum('Laki-laki','Perempuan') NOT NULL,
-  `alamat` varchar(100) NOT NULL
+  `alamat` varchar(100) NOT NULL,
+  `tanggal_donor_kembali` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `anggota`
 --
 
-INSERT INTO `anggota` (`id_anggota`, `nama_anggota`, `jenis_kelamin`, `alamat`) VALUES
-(1, 'Teresia 1', 'Perempuan', 'Subang'),
-(2, 'Teresia 2', 'Perempuan', 'Subang'),
-(3, 'Teresia 3', 'Perempuan', 'Subang'),
-(4, 'Teresia 5', 'Perempuan', 'Subang'),
-(5, 'Teresia 6', 'Perempuan', 'Subang'),
-(6, 'Teresia 7', 'Perempuan', 'Subang'),
-(7, 'Teresia 8', 'Perempuan', 'Subang');
+INSERT INTO `anggota` (`id_anggota`, `nama_anggota`, `jenis_kelamin`, `alamat`, `tanggal_donor_kembali`) VALUES
+(1, 'Teresia 1', 'Perempuan', 'Subang', '2023-06-22'),
+(2, 'Teresia 2', 'Perempuan', 'Subang', '2023-06-22'),
+(3, 'Teresia 3', 'Perempuan', 'Subang', '2023-06-22'),
+(4, 'Teresia 5', 'Perempuan', 'Subang', '2023-06-22'),
+(5, 'Teresia 6', 'Perempuan', 'Subang', '2023-06-22'),
+(6, 'Teresia 7', 'Perempuan', 'Subang', '2023-06-01'),
+(7, 'Teresia 8', 'Perempuan', 'Subang', '2023-05-20');
 
 -- --------------------------------------------------------
 
@@ -193,13 +194,13 @@ CREATE TABLE `donor` (
 
 INSERT INTO `donor` (`id_donor`, `id_anggota`, `tanggal_donor`, `status_donor`, `hasil_kusioner`, `deskripsi_hasil_kusioner`) VALUES
 (1, 1, '2023-05-25 09:18:04', 'Selesai', 'Lolos', 'Lolos kusioner'),
-(2, 2, '2023-05-25 09:18:04', 'Ready', 'Lolos', 'Lolos kusioner'),
-(3, 3, '2023-05-25 09:18:04', 'Ready', 'Lolos', 'Lolos kusioner'),
-(4, 4, '2023-05-25 09:18:04', 'Ready', 'Lolos', 'Lolos kusioner'),
-(5, 5, '2023-05-25 09:18:04', 'Ready', 'Lolos', 'Lolos kusioner'),
-(6, 1, '2023-05-25 09:18:04', 'Proses', 'Lolos', 'Lolos kusioner'),
-(7, 6, '2023-05-25 14:02:20', 'Ready', 'Lolos', 'Lolos kusioner'),
-(8, 7, '2023-05-25 14:41:16', 'Ready', 'Lolos', 'Deskripsi hasil kusioner teresia 8'),
+(2, 2, '2023-05-25 09:18:04', 'Selesai', 'Lolos', 'Lolos kusioner'),
+(3, 3, '2023-05-25 09:18:04', 'Selesai', 'Lolos', 'Lolos kusioner'),
+(4, 4, '2023-05-25 09:18:04', 'Selesai', 'Lolos', 'Lolos kusioner'),
+(5, 5, '2023-05-25 09:18:04', 'Selesai', 'Lolos', 'Lolos kusioner'),
+(6, 1, '2023-05-25 09:18:04', 'Selesai', 'Lolos', 'Lolos kusioner'),
+(7, 6, '2023-05-25 14:02:20', 'Selesai', 'Lolos', 'Lolos kusioner'),
+(8, 7, '2023-05-25 14:41:16', 'Selesai', 'Lolos', 'Deskripsi hasil kusioner teresia 8'),
 (9, 1, '2023-05-25 14:44:43', 'Selesai', 'Lolos', 'Deskripsi hasil kusioner teresia 1');
 
 -- --------------------------------------------------------

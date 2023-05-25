@@ -7,6 +7,7 @@ use App\Http\Controllers\C_PengajuanEvent;
 use App\Http\Controllers\C_PermohonanDarah;
 use App\Http\Controllers\C_Register;
 use App\Http\Controllers\C_Darah;
+use App\Http\Controllers\C_Anggota;
 use App\Http\Controllers\C_Donatur;
 use App\Http\Controllers\C_LandingPage;
 use App\Http\Controllers\C_StokDarah;
@@ -102,6 +103,9 @@ Route::group(['middleware' => 'revalidate'], function () {
         Route::post('/keluarkan_darah/{id}', [C_PermohonanDarah::class, 'proses_keluarkan_darah']);
         Route::get('/kirim_distribusi_darah/{id}', [C_PermohonanDarah::class, 'kirim_distribusi_darah'])->name('kirim_distribusi_darah');
         Route::get('/hapus_darah_keluar/{id}', [C_PermohonanDarah::class, 'hapus_darah_keluar'])->name('hapus_darah_keluar');
+
+        // Data Permohonan Darah
+        Route::get('/anggota', [C_Anggota::class, 'index'])->name('anggota');
 
         // Cetak PDF
         Route::post('/cetak-pdf', [Cetak::class, 'index']);
