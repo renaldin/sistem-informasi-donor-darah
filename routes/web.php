@@ -95,6 +95,9 @@ Route::group(['middleware' => 'revalidate'], function () {
         Route::get('/hapus_event/{id}', [C_PengajuanEvent::class, 'hapus_pengajuan_event']);
         Route::get('/jadwal_event', [C_PengajuanEvent::class, 'jadwal_event'])->name('jadwal_event');
         Route::get('/selesai_event/{id}', [C_PengajuanEvent::class, 'selesai_event']);
+        Route::get('/tambah_darah_event/{id}', [C_PengajuanEvent::class, 'tambah_darah_event'])->name('tambah_darah_event');
+        Route::post('/tambah_darah_event/{id}', [C_PengajuanEvent::class, 'proses_tambah_darah_event']);
+        Route::get('/detail_event/{id}', [C_PengajuanEvent::class, 'detail_event'])->name('detail_event');
 
         // Data Permohonan Darah
         Route::get('/distribusi_darah', [C_PermohonanDarah::class, 'distribusi_darah'])->name('distribusi_darah');

@@ -49,6 +49,7 @@ function hitungDurasiJadwalDonor($tanggal_donor_kembali) {
                     <tbody>
                         <?php $no=1;?>
                         @foreach ($data_anggota as $row)
+                        @if ($row->status_anggota === 'Mandiri')
                           <tr>
                             <td>{{$no++}}</td>
                             <td>{{$row->nama_anggota}}</td>
@@ -67,6 +68,7 @@ function hitungDurasiJadwalDonor($tanggal_donor_kembali) {
                                 <button type="button" class="btn btn-sm btn-warning mb-1" data-toggle="modal" data-target="#riwayat{{$row->id_anggota}}">Riwayat</button>   
                             </td>
                           </tr>
+                        @endif
                         @endforeach
                     </tbody>
                 </table>
@@ -120,7 +122,6 @@ function hitungDurasiJadwalDonor($tanggal_donor_kembali) {
                         <th>No Kantung</th>
                         <th>Golongan Darah</th>
                         <th>Resus</th>
-                        <th>Umur</th>
                         <th>Tanggal Donor</th>
                     </tr>
                 </thead>
@@ -134,7 +135,6 @@ function hitungDurasiJadwalDonor($tanggal_donor_kembali) {
                             <td>{{$item->no_kantong}}</td>
                             <td>{{$item->golongan_darah}}</td>
                             <td>{{$item->resus}}</td>
-                            <td>{{ hitungUmur($item->tanggal_darah_masuk) }}</td>
                             <td>{{date('d F Y', strtotime($item->tanggal_donor))}}</td>
                           </tr>
                         @endif

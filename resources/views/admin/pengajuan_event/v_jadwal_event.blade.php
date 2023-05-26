@@ -49,8 +49,9 @@
                                 <a href="/edit_event/{{$row->id_event}}" class="btn btn-sm btn-success">Edit</a>
                                 <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#hapus{{$row->id_event}}">Hapus</button>
                               @else 
+                                <a href="/tambah_darah_event/{{$row->id_event}}" class="btn btn-sm btn-primary">Form</a>
                                 <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#selesai{{$row->id_event}}">Selesai</button>
-                                <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#detail{{$row->id_event}}">Detail</button>   
+                                <a href="/detail_event/{{$row->id_event}}" class="btn btn-sm btn-info">Detail</a>   
                               @endif
                             </td>
                           </tr>

@@ -32,4 +32,9 @@ class M_Donor extends Model
     {
         return DB::table($this->table)->limit(1)->orderBy('id_donor', 'DESC')->first();
     }
+
+    public function jumlah_donor_event($id_event)
+    {
+        return DB::table($this->table)->where('id_event', $id_event)->count();
+    }
 }

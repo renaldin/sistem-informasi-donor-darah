@@ -35,7 +35,7 @@
                                 @endif
                             </td>
                             <td>
-                                <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#detail{{$row->id_event}}">Detail</button>   
+                                <a href="/detail_event/{{$row->id_event}}" class="btn btn-sm btn-info">Detail</a>  
                             </td>
                           </tr>
                         @endif
@@ -47,7 +47,7 @@
     </div>
 </div>
 
-@foreach ($data_event as $row)
+{{-- @foreach ($data_event as $row)
 <div class="modal fade" id="detail{{$row->id_event}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
   <div class="modal-content">
@@ -136,5 +136,5 @@
   </div>
 </div>
 </div>
-@endforeach
+@endforeach --}}
 @endsection
