@@ -6,6 +6,10 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\M_User;
 use App\Models\M_Website;
 use App\Models\M_Event;
+use App\Models\M_Darah;
+use App\Models\M_Donor;
+use App\Models\M_Anggota;
+use App\Models\M_DarahMasuk;
 use Illuminate\Contracts\Session\Session;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -15,12 +19,20 @@ class C_PengajuanEvent extends Controller
     private $M_User;
     private $M_Website;
     private $M_Event;
+    private $M_Darah;
+    private $M_Donor;
+    private $M_Anggota;
+    private $M_DarahMasuk;
 
     public function __construct()
     {
         $this->M_User = new M_User();
         $this->M_Website = new M_Website();
         $this->M_Event = new M_Event();
+        $this->M_Darah = new M_Darah();
+        $this->M_Donor = new M_Donor();
+        $this->M_Anggota = new M_Anggota();
+        $this->M_DarahMasuk = new M_DarahMasuk();
         date_default_timezone_set('Asia/Jakarta');
     }
 
@@ -443,5 +455,123 @@ class C_PengajuanEvent extends Controller
         $this->M_Event->edit($data);
         Alert::success('Berhasil', 'Data pengajuan event berhasil diedit.');
         return redirect()->route('jadwal_event');
+    }
+
+    public function tambah_darah_event($id_event)
+    {
+        if (!Session()->get('email')) {
+            return redirect()->route('login');
+        }
+
+        $dataTerakhir = $this->M_Darah->data_terakhir();
+
+        if ($dataTerakhir === null) {
+            $no_kantong = 'K1';
+        } else {
+            $kata = $dataTerakhir->no_kantong;
+            // $kata = 'K1';
+            $angka = substr($kata, 1) + 1;
+            $no_kantong = 'K' . $angka;
+        }
+
+        $data = [
+            'title'         => 'Pengajuan Event',
+            'sub_title'     => 'Jadwal Event',
+            'data_web'      => $this->M_Website->detail(1),
+            'no_kantong'    => $no_kantong,
+            'detail'        => $this->M_Event->detail($id_event),
+            'user'          => $this->M_User->detail(Session()->get('id_user')),
+        ];
+
+        return view('admin.pengajuan_event.v_tambah_darah', $data);
+    }
+
+    public function proses_tambah_darah_event($id_event)
+    {
+        if (!Session()->get('email')) {
+            return redirect()->route('login');
+        }
+
+        Request()->validate([
+            'nama_anggota'          => 'required',
+            'alamat'                => 'required',
+            'jenis_kelamin'         => 'required',
+            'golongan_darah'        => 'required',
+            'resus'                 => 'required',
+            'volume_darah'          => 'required',
+            'tanggal_kedaluwarsa'   => 'required',
+        ], [
+            'nama_anggota.required'         => 'Nama anggota harus diisi!',
+            'alamat.required'               => 'Alamat harus diisi!',
+            'jenis_kelamin.required'        => 'Jenis kelamin harus diisi!',
+            'golongan_darah.required'       => 'Golongan darah harus diisi!',
+            'resus.required'                => 'Resus harus diisi!',
+            'volume_darah.required'         => 'Volume darah harus diisi!',
+            'tanggal_kedaluwarsa.required'  => 'Tanggal kedaluwarsa harus diisi!',
+        ]);
+
+        $data_anggota = [
+            'nama_anggota'      => Request()->nama_anggota,
+            'alamat'            => Request()->alamat,
+            'jenis_kelamin'     => Request()->jenis_kelamin,
+            'status_anggota'    => 'Event',
+            'tanggal_donor_kembali' => date('Y-m-d', strtotime('+30 days', strtotime(date('Y-m-d')))),
+        ];
+        $this->M_Anggota->tambah($data_anggota);
+
+        $data_terakhir_anggota = $this->M_Anggota->data_terakhir();
+
+        $data_donor = [
+            'id_anggota'                => $data_terakhir_anggota->id_anggota,
+            'id_event'                  => $id_event,
+            'tanggal_donor'             => date('Y-m-d H:i:s'),
+            'status_donor'              => 'Selesai',
+            'hasil_kusioner'            => 'Lolos',
+            'deskripsi_hasil_kusioner'  => 'Donor darah dari event',
+        ];
+        $this->M_Donor->tambah($data_donor);
+
+        $data_terakhir_donor = $this->M_Donor->data_terakhir();
+
+        $data_darah = [
+            'id_donor'              => $data_terakhir_donor->id_donor,
+            'no_kantong'            => Request()->no_kantong,
+            'golongan_darah'        => Request()->golongan_darah,
+            'resus'                 => Request()->resus,
+            'volume_darah'          => Request()->volume_darah,
+            'tanggal_kedaluwarsa'   => Request()->tanggal_kedaluwarsa,
+            'tanggal_darah_masuk'   => date('Y-m-d H:i:s')
+        ];
+        $this->M_Darah->tambah($data_darah);
+
+        $data_terakhir_darah = $this->M_Darah->data_terakhir();
+
+        $data_darah_masuk = [
+            'id_darah'      => $data_terakhir_darah->id_darah,
+            'id_user'       => Session()->get('id_user'),
+        ];
+        $this->M_DarahMasuk->tambah($data_darah_masuk);
+
+        Alert::success('Berhasil', 'Data darah berhasil ditambah.');
+        return redirect()->back();
+    }
+
+    public function detail_event($id_event)
+    {
+        if (!Session()->get('email')) {
+            return redirect()->route('login');
+        }
+
+        $data = [
+            'title'         => 'Pengajuan Event',
+            'sub_title'     => 'Detail Event',
+            'data_web'      => $this->M_Website->detail(1),
+            'detail'        => $this->M_Event->detail($id_event),
+            'data_darah'    => $this->M_Darah->get_data(),
+            'jumlah_donor'  => $this->M_Donor->jumlah_donor_event($id_event),
+            'user'          => $this->M_User->detail(Session()->get('id_user')),
+        ];
+
+        return view('admin.pengajuan_event.v_detail', $data);
     }
 }

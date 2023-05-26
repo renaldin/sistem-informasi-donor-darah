@@ -234,6 +234,8 @@ class C_StokDarah extends Controller
                     'nama_anggota'      => Request()->nama_anggota,
                     'alamat'            => Request()->alamat,
                     'jenis_kelamin'     => Request()->jenis_kelamin,
+                    'status_anggota'    => 'Mandiri',
+                    'tanggal_donor_kembali' => date('Y-m-d', strtotime('+30 days', strtotime(date('Y-m-d')))),
                 ];
                 $this->M_Anggota->tambah($data_anggota);
 
@@ -242,7 +244,7 @@ class C_StokDarah extends Controller
                 $data_donor = [
                     'id_anggota'                => $data_terakhir_anggota->id_anggota,
                     'tanggal_donor'             => date('Y-m-d H:i:s'),
-                    'status_donor'              => 'Ready',
+                    'status_donor'              => 'Selesai',
                     'hasil_kusioner'            => Request()->hasil_kusioner,
                     'deskripsi_hasil_kusioner'  => Request()->deskripsi_hasil_kusioner,
                 ];

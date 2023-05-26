@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 25, 2023 at 09:30 PM
+-- Generation Time: May 26, 2023 at 05:43 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.0.19
 
@@ -32,6 +32,7 @@ CREATE TABLE `anggota` (
   `nama_anggota` varchar(100) DEFAULT NULL,
   `jenis_kelamin` enum('Laki-laki','Perempuan') NOT NULL,
   `alamat` varchar(100) NOT NULL,
+  `status_anggota` enum('Mandiri','Event') NOT NULL DEFAULT 'Mandiri',
   `tanggal_donor_kembali` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -39,14 +40,20 @@ CREATE TABLE `anggota` (
 -- Dumping data for table `anggota`
 --
 
-INSERT INTO `anggota` (`id_anggota`, `nama_anggota`, `jenis_kelamin`, `alamat`, `tanggal_donor_kembali`) VALUES
-(1, 'Teresia 1', 'Perempuan', 'Subang', '2023-06-22'),
-(2, 'Teresia 2', 'Perempuan', 'Subang', '2023-06-22'),
-(3, 'Teresia 3', 'Perempuan', 'Subang', '2023-06-22'),
-(4, 'Teresia 5', 'Perempuan', 'Subang', '2023-06-22'),
-(5, 'Teresia 6', 'Perempuan', 'Subang', '2023-06-22'),
-(6, 'Teresia 7', 'Perempuan', 'Subang', '2023-06-01'),
-(7, 'Teresia 8', 'Perempuan', 'Subang', '2023-05-20');
+INSERT INTO `anggota` (`id_anggota`, `nama_anggota`, `jenis_kelamin`, `alamat`, `status_anggota`, `tanggal_donor_kembali`) VALUES
+(1, 'Teresia 1', 'Perempuan', 'Subang', 'Mandiri', '2023-06-22'),
+(2, 'Teresia 2', 'Perempuan', 'Subang', 'Mandiri', '2023-06-22'),
+(3, 'Teresia 3', 'Perempuan', 'Subang', 'Mandiri', '2023-06-22'),
+(4, 'Teresia 5', 'Perempuan', 'Subang', 'Mandiri', '2023-06-22'),
+(5, 'Teresia 6', 'Perempuan', 'Subang', 'Mandiri', '2023-06-22'),
+(6, 'Teresia 7', 'Perempuan', 'Subang', 'Mandiri', '2023-06-01'),
+(7, 'Teresia 8', 'Perempuan', 'Subang', 'Mandiri', '2023-05-20'),
+(9, 'Teresia 1 Event', 'Perempuan', 'Subang', 'Event', '2023-06-25'),
+(10, 'Teresia 2 Event 6', 'Perempuan', 'Subang', 'Event', '2023-06-25'),
+(11, 'Teresia 3 Event 6', 'Perempuan', 'Subang', 'Event', '2023-06-25'),
+(12, 'Teresia 4 Event 6', 'Perempuan', 'Subang', 'Event', '2023-06-25'),
+(13, 'Teresia 5 Event 6', 'Perempuan', 'Subang', 'Event', '2023-06-25'),
+(14, 'Teresia 6 Event 6', 'Perempuan', 'Subang', 'Event', '2023-06-25');
 
 -- --------------------------------------------------------
 
@@ -103,7 +110,13 @@ INSERT INTO `darah` (`id_darah`, `id_donor`, `no_kantong`, `golongan_darah`, `re
 (9, 1, 'K9', 'A', 'A', 'A', '2023-05-25', '2023-05-25 13:28:59'),
 (10, 7, 'K10', 'A', 'A', 'A', '2023-06-10', '2023-05-25 14:02:20'),
 (11, 8, 'K11', 'A', 'A', 'A', '2023-11-11', '2023-05-25 14:41:16'),
-(12, 9, 'K12', 'A', 'A', 'A', '2023-08-31', '2023-05-25 14:44:43');
+(12, 9, 'K12', 'A', 'A', 'A', '2023-08-31', '2023-05-25 14:44:43'),
+(13, 10, 'K13', 'A', 'A', 'A', '2023-06-26', '2023-05-26 09:54:25'),
+(14, 11, 'K14', 'B', 'B', 'B', '2023-06-26', '2023-05-26 10:01:04'),
+(15, 12, 'K15', 'A', 'A', 'A', '2023-06-26', '2023-05-26 10:01:34'),
+(16, 13, 'K16', 'A', 'A', 'A', '2023-06-26', '2023-05-26 10:02:02'),
+(17, 14, 'K17', 'A', 'A', 'A', '2023-06-26', '2023-05-26 10:02:27'),
+(18, 15, 'K18', 'A', 'A', 'A', '2023-06-26', '2023-05-26 10:41:00');
 
 -- --------------------------------------------------------
 
@@ -171,7 +184,13 @@ INSERT INTO `darah_masuk` (`id_darah_masuk`, `id_darah`, `id_user`) VALUES
 (9, 7, 2),
 (12, 10, 2),
 (13, 11, 2),
-(14, 12, 2);
+(14, 12, 2),
+(15, 13, 2),
+(16, 14, 2),
+(17, 15, 2),
+(18, 16, 2),
+(19, 17, 2),
+(20, 18, 2);
 
 -- --------------------------------------------------------
 
@@ -181,7 +200,8 @@ INSERT INTO `darah_masuk` (`id_darah_masuk`, `id_darah`, `id_user`) VALUES
 
 CREATE TABLE `donor` (
   `id_donor` int(11) NOT NULL,
-  `id_anggota` int(11) NOT NULL,
+  `id_anggota` int(11) DEFAULT NULL,
+  `id_event` int(11) DEFAULT NULL,
   `tanggal_donor` datetime DEFAULT NULL,
   `status_donor` enum('Ready','Proses','Selesai') DEFAULT NULL,
   `hasil_kusioner` enum('Lolos','Tidak Lolos') DEFAULT NULL,
@@ -192,16 +212,22 @@ CREATE TABLE `donor` (
 -- Dumping data for table `donor`
 --
 
-INSERT INTO `donor` (`id_donor`, `id_anggota`, `tanggal_donor`, `status_donor`, `hasil_kusioner`, `deskripsi_hasil_kusioner`) VALUES
-(1, 1, '2023-05-25 09:18:04', 'Selesai', 'Lolos', 'Lolos kusioner'),
-(2, 2, '2023-05-25 09:18:04', 'Selesai', 'Lolos', 'Lolos kusioner'),
-(3, 3, '2023-05-25 09:18:04', 'Selesai', 'Lolos', 'Lolos kusioner'),
-(4, 4, '2023-05-25 09:18:04', 'Selesai', 'Lolos', 'Lolos kusioner'),
-(5, 5, '2023-05-25 09:18:04', 'Selesai', 'Lolos', 'Lolos kusioner'),
-(6, 1, '2023-05-25 09:18:04', 'Selesai', 'Lolos', 'Lolos kusioner'),
-(7, 6, '2023-05-25 14:02:20', 'Selesai', 'Lolos', 'Lolos kusioner'),
-(8, 7, '2023-05-25 14:41:16', 'Selesai', 'Lolos', 'Deskripsi hasil kusioner teresia 8'),
-(9, 1, '2023-05-25 14:44:43', 'Selesai', 'Lolos', 'Deskripsi hasil kusioner teresia 1');
+INSERT INTO `donor` (`id_donor`, `id_anggota`, `id_event`, `tanggal_donor`, `status_donor`, `hasil_kusioner`, `deskripsi_hasil_kusioner`) VALUES
+(1, 1, NULL, '2023-05-25 09:18:04', 'Selesai', 'Lolos', 'Lolos kusioner'),
+(2, 2, NULL, '2023-05-25 09:18:04', 'Selesai', 'Lolos', 'Lolos kusioner'),
+(3, 3, NULL, '2023-05-25 09:18:04', 'Selesai', 'Lolos', 'Lolos kusioner'),
+(4, 4, NULL, '2023-05-25 09:18:04', 'Selesai', 'Lolos', 'Lolos kusioner'),
+(5, 5, NULL, '2023-05-25 09:18:04', 'Selesai', 'Lolos', 'Lolos kusioner'),
+(6, 1, NULL, '2023-05-25 09:18:04', 'Selesai', 'Lolos', 'Lolos kusioner'),
+(7, 6, NULL, '2023-05-25 14:02:20', 'Selesai', 'Lolos', 'Lolos kusioner'),
+(8, 7, NULL, '2023-05-25 14:41:16', 'Selesai', 'Lolos', 'Deskripsi hasil kusioner teresia 8'),
+(9, 1, NULL, '2023-05-25 14:44:43', 'Selesai', 'Lolos', 'Deskripsi hasil kusioner teresia 1'),
+(10, 9, 6, '2023-05-26 09:54:25', 'Selesai', 'Lolos', 'Donor darah dari event'),
+(11, 10, 6, '2023-05-26 10:01:04', 'Selesai', 'Lolos', 'Donor darah dari event'),
+(12, 11, 6, '2023-05-26 10:01:34', 'Selesai', 'Lolos', 'Donor darah dari event'),
+(13, 12, 6, '2023-05-26 10:02:02', 'Selesai', 'Lolos', 'Donor darah dari event'),
+(14, 13, 6, '2023-05-26 10:02:27', 'Selesai', 'Lolos', 'Donor darah dari event'),
+(15, 14, 6, '2023-05-26 10:41:00', 'Selesai', 'Lolos', 'Donor darah dari event');
 
 -- --------------------------------------------------------
 
@@ -362,7 +388,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `anggota`
 --
 ALTER TABLE `anggota`
-  MODIFY `id_anggota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_anggota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `biodata_web`
@@ -374,7 +400,7 @@ ALTER TABLE `biodata_web`
 -- AUTO_INCREMENT for table `darah`
 --
 ALTER TABLE `darah`
-  MODIFY `id_darah` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_darah` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `darah_buang`
@@ -392,13 +418,13 @@ ALTER TABLE `darah_keluar`
 -- AUTO_INCREMENT for table `darah_masuk`
 --
 ALTER TABLE `darah_masuk`
-  MODIFY `id_darah_masuk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_darah_masuk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `donor`
 --
 ALTER TABLE `donor`
-  MODIFY `id_donor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_donor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `event`
