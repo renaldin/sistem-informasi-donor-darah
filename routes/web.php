@@ -11,6 +11,7 @@ use App\Http\Controllers\C_Anggota;
 use App\Http\Controllers\C_Donatur;
 use App\Http\Controllers\C_LandingPage;
 use App\Http\Controllers\C_StokDarah;
+use App\Http\Controllers\C_Laporan;
 use App\Http\Controllers\Cetak;
 use App\Http\Controllers\PengaturanWeb;
 use Illuminate\Support\Facades\Route;
@@ -161,5 +162,13 @@ Route::group(['middleware' => 'revalidate'], function () {
 
     // Petugas Kesehatan
     Route::group(['middleware' => 'pusat_pmi'], function () {
+        // laporan
+        Route::get('/laporan_darah_masuk', [C_Laporan::class, 'index'])->name('laporan_darah_masuk');
+        Route::get('/laporan_darah_keluar', [C_Laporan::class, 'darah_keluar'])->name('laporan_darah_keluar');
+        Route::get('/laporan_darah_buang', [C_Laporan::class, 'darah_buang'])->name('laporan_darah_buang');
+
+        Route::post('/cetak_darah_masuk', [C_Laporan::class, 'cetak_darah_masuk'])->name('cetak_darah_masuk');
+        Route::post('/cetak_darah_keluar', [C_Laporan::class, 'cetak_darah_keluar'])->name('cetak_darah_keluar');
+        Route::post('/cetak_darah_buang', [C_Laporan::class, 'cetak_darah_buang'])->name('cetak_darah_keluar');
     });
 });

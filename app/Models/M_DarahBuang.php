@@ -20,6 +20,16 @@ class M_DarahBuang extends Model
             ->orderBy('id_darah_buang', 'DESC')->get();
     }
 
+    public function get_data_tanggal($tanggal_mulai, $tanggal_akhir)
+    {
+        return DB::table($this->table)
+            ->join('user', 'user.id_user', '=', 'darah_buang.id_user', 'left')
+            ->join('darah', 'darah.id_darah', '=', 'darah_buang.id_darah', 'left')
+            ->join('donor', 'donor.id_donor', '=', 'darah.id_donor', 'left')
+            ->whereBetween('tanggal_buang', [$tanggal_mulai, $tanggal_akhir])
+            ->orderBy('id_darah_buang', 'DESC')->get();
+    }
+
     // public function detail($id_darah_buang)
     // {
     //     return DB::table($this->table)

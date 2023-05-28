@@ -19,6 +19,15 @@ class M_DarahKeluar extends Model
             ->orderBy('id_darah_keluar', 'ASC')->get();
     }
 
+    public function get_data_tanggal($tanggal_mulai, $tanggal_akhir)
+    {
+        return DB::table($this->table)
+            ->join('permohonan_darah', 'permohonan_darah.id_permohonan_darah', '=', 'darah_keluar.id_permohonan_darah', 'left')
+            ->join('darah', 'darah.id_darah', '=', 'darah_keluar.id_darah', 'left')
+            ->whereBetween('tanggal_keluar', [$tanggal_mulai, $tanggal_akhir])
+            ->orderBy('id_darah_keluar', 'ASC')->get();
+    }
+
     public function get_data_permohonan($id_permohonan_darah)
     {
         return DB::table($this->table)

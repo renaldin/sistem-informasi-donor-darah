@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 26, 2023 at 05:43 AM
+-- Generation Time: May 28, 2023 at 02:19 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.0.19
 
@@ -75,7 +75,7 @@ CREATE TABLE `biodata_web` (
 --
 
 INSERT INTO `biodata_web` (`id_biodata_web`, `nama_website`, `email`, `nomor_telepon`, `alamat`, `logo`) VALUES
-(1, 'Sistem Donor', 'sistembookingbillboard@gmail.com', '(123) 123-456', 'Jalan Srigunting Raya Nomor 1 Bandung', '04202023074227.png');
+(1, 'Sistem Donor', 'pmi@gmail.com', '(123) 123-456', 'Jalan Srigunting Raya Nomor 1 Subang', '04202023074227.png');
 
 -- --------------------------------------------------------
 
@@ -173,24 +173,25 @@ INSERT INTO `darah_keluar` (`id_darah_keluar`, `id_darah`, `id_permohonan_darah`
 CREATE TABLE `darah_masuk` (
   `id_darah_masuk` int(11) NOT NULL,
   `id_darah` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL
+  `id_user` int(11) NOT NULL,
+  `tanggal_masuk` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `darah_masuk`
 --
 
-INSERT INTO `darah_masuk` (`id_darah_masuk`, `id_darah`, `id_user`) VALUES
-(9, 7, 2),
-(12, 10, 2),
-(13, 11, 2),
-(14, 12, 2),
-(15, 13, 2),
-(16, 14, 2),
-(17, 15, 2),
-(18, 16, 2),
-(19, 17, 2),
-(20, 18, 2);
+INSERT INTO `darah_masuk` (`id_darah_masuk`, `id_darah`, `id_user`, `tanggal_masuk`) VALUES
+(9, 7, 2, '2023-05-23 23:30:33'),
+(12, 10, 2, '2023-05-25 14:02:20'),
+(13, 11, 2, '2023-05-25 14:41:16'),
+(14, 12, 2, '2023-05-25 14:44:43'),
+(15, 13, 2, '2023-05-26 09:54:25'),
+(16, 14, 2, '2023-05-26 10:01:04'),
+(17, 15, 2, '2023-05-26 10:01:34'),
+(18, 16, 2, '2023-05-26 10:02:02'),
+(19, 17, 2, '2023-05-26 10:02:27'),
+(20, 18, 2, '2023-05-26 10:41:00');
 
 -- --------------------------------------------------------
 

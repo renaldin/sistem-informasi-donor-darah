@@ -1,3 +1,19 @@
+@php
+function hitungUmur($tanggal_darah_masuk) {
+  $tgl_lahir = new DateTime($tanggal_darah_masuk);
+  $sekarang = new DateTime();
+  $perbedaan = $sekarang->diff($tgl_lahir);
+
+  $umur = array(
+    'tahun' => $perbedaan->y,
+    'bulan' => $perbedaan->m,
+    'hari' => $perbedaan->d
+  );
+
+  $data_umur = $umur['tahun'].' tahun, '.$umur['bulan'].' bulan, '.$umur['hari'].' hari.';
+  return $data_umur;
+}
+@endphp
 <!DOCTYPE html>
 <html>
 	<head>
@@ -144,14 +160,14 @@
                             <table>
                                 <tr>
                                     <td class="title">
-                                        <img src="https://www.sparksuite.com/images/logo.png" style="width: 100%; max-width: 300px" />
+                                        {{-- <img src="https://www.sparksuite.com/images/logo.png" style="width: 100%; max-width: 300px" /> --}}
                                     </td>
 
                                     <td>
-                                        {{$biodata->nama_website}}<br />
-                                        {{$biodata->alamat}}<br />
-                                        {{$biodata->email}}<br />
-                                        {{$biodata->nomor_telepon}}
+                                        {{$data_web->nama_website}}<br />
+                                        {{$data_web->alamat}}<br />
+                                        {{$data_web->email}}<br />
+                                        {{$data_web->nomor_telepon}}
                                     </td>
                                 </tr>
                             </table>
@@ -167,31 +183,26 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>ID Pesanan</th>
-                        <th>Member</th>
-                        <th>Reklame</th>
-                        <th>Tanggal</th>
-                        <th>Harga</th>
-                        <th>Status</th>
+                        <th>No</th>
+						<th>No Kantung</th>
+						<th>Golongan Darah</th>
+						<th>Resus</th>
+						<th>Umur</th>
+						<th>Tanggal Masuk</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($order as $item)
-                    <tr>
-                        <td>{{$item->id_pesanan}}</td>
-                        <td>{{$item->nama}}</td>
-                        <td>{{$item->lokasi}}</td>
-                        <td>{{ date('d F Y', strtotime($item->tanggal)) }}</td>
-                        <td>
-							@if ($item->harga === NULL)
-							Menunggu Harga <br>
-							@else
-							<?= 'Rp ' . number_format($item->harga, 2, ',', '.'); ?> <br>
-							@endif
-						</td>
-						<td>{{$item->status_order}}</td>
-                    </tr>
-                    @endforeach
+					<?= $no = 1;?>
+					@foreach ($data_darah as $item)
+						<tr>
+							<td>{{$no++}}</td>
+							<td>{{$item->no_kantong}}</td>
+							<td>{{$item->golongan_darah}}</td>
+							<td>{{$item->resus}}</td>
+							<td>{{ hitungUmur($item->tanggal_darah_masuk) }}</td>
+							<td>{{date('d F Y', strtotime($item->tanggal_darah_masuk))}}</td>
+						</tr>
+					@endforeach
                 </tbody>
             </table>
         </section>
