@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 28, 2023 at 02:19 AM
+-- Generation Time: May 28, 2023 at 07:33 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.0.19
 
@@ -299,7 +299,7 @@ CREATE TABLE `user` (
   `email` varchar(100) NOT NULL,
   `password` text NOT NULL,
   `nomor_telepon` varchar(30) NOT NULL,
-  `role` enum('Admin','Donatur','Rumah Sakit','Event','Petugas Kesehatan','Pusat PMI') NOT NULL,
+  `role` enum('Admin','Donatur','Rumah Sakit','Event','Petugas Kesehatan') NOT NULL,
   `foto` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -314,7 +314,7 @@ INSERT INTO `user` (`id_user`, `nama`, `email`, `password`, `nomor_telepon`, `ro
 (7, 'Event', 'event@gmail.com', '$2y$10$Mfd7GStgY7g9C2ykYfYkNelJEKrv4x.tilybL3iHTgPtqiP3YyLpm', '08989784353', 'Event', '05062023014106Event.png'),
 (8, 'Petugas Kesehatan', 'pasker@gmail.com', '$2y$10$efC/qal7R6LOIzriA0edce5C3JDCypRJwtmUEhgddXHtX6NeEFSRC', '08989784353', 'Petugas Kesehatan', '05062023014318Petugas Kesehatan.png'),
 (9, 'Rumah Sakit', 'rumahsakit@gmail.com', '$2y$10$V2B.NKXJKtWyPfKXmHBf2.3KlVE7.fEFOhNE1tE0cwlkrJkBf5ITW', '08989784353', 'Rumah Sakit', '05062023014538Rumah Sakit.png'),
-(10, 'Pusat PMI', 'pusatpmi@gmail.com', '$2y$10$VGcpnvPkcrl.trf3NIYp5.EbGumotuG1j2iBXEIXyjQ/W328BxpSi', '08989784353', 'Pusat PMI', '05062023014618Pusat PMI.png'),
+(10, 'Pusat PMI', 'pusatpmi@gmail.com', '$2y$10$VGcpnvPkcrl.trf3NIYp5.EbGumotuG1j2iBXEIXyjQ/W328BxpSi', '08989784353', '', '05062023014618Pusat PMI.png'),
 (12, 'Teresia Purba', 'rumahsakit@gmail.com', '$2y$10$8gnVgdf9aNhhea02ehOny.RtHpejmoYiyzOYQYWPxky4h4e2utoNq', '08989784353', 'Rumah Sakit', NULL);
 
 --

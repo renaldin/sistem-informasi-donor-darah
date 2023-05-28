@@ -68,6 +68,27 @@
         <span>Anggota</span>
       </a>
     </li>
+    <div class="sidebar-heading">
+      Laporan
+    </div>
+    <li class="nav-item @if($sub_title === 'Laporan Darah Masuk') active @endif">
+      <a class="nav-link" href="/laporan_darah_masuk">
+        <i class="fas fa-fw fa-file"></i>
+        <span>Darah Masuk</span>
+      </a>
+    </li>
+    <li class="nav-item @if($sub_title === 'Laporan Darah Keluar') active @endif">
+      <a class="nav-link" href="/laporan_darah_keluar">
+        <i class="fas fa-fw fa-file"></i>
+        <span>Darah Keluar</span>
+      </a>
+    </li>
+    <li class="nav-item @if($sub_title === 'Laporan Darah Buang') active @endif">
+      <a class="nav-link" href="/laporan_darah_buang">
+        <i class="fas fa-fw fa-file"></i>
+        <span>Darah Buang</span>
+      </a>
+    </li>
   @elseif ($user->role === 'Donatur')
   @elseif ($user->role === 'Event')
   <div class="sidebar-heading">
@@ -94,28 +115,6 @@
     <a class="nav-link" href="/riwayat_permohonan_darah">
       <i class="fas fa-fw fa-palette"></i>
       <span>Rwiayat</span>
-    </a>
-  </li>
-  @elseif ($user->role === 'Pusat PMI')
-  <div class="sidebar-heading">
-    Laporan
-  </div>
-  <li class="nav-item @if($sub_title === 'Laporan Darah Masuk') active @endif">
-    <a class="nav-link" href="/laporan_darah_masuk">
-      <i class="fas fa-fw fa-file"></i>
-      <span>Darah Masuk</span>
-    </a>
-  </li>
-  <li class="nav-item @if($sub_title === 'Laporan Darah Keluar') active @endif">
-    <a class="nav-link" href="/laporan_darah_keluar">
-      <i class="fas fa-fw fa-file"></i>
-      <span>Darah Keluar</span>
-    </a>
-  </li>
-  <li class="nav-item @if($sub_title === 'Laporan Darah Buang') active @endif">
-    <a class="nav-link" href="/laporan_darah_buang">
-      <i class="fas fa-fw fa-file"></i>
-      <span>Darah Buang</span>
     </a>
   </li>
   @endif

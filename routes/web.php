@@ -111,9 +111,14 @@ Route::group(['middleware' => 'revalidate'], function () {
         // Data Permohonan Darah
         Route::get('/anggota', [C_Anggota::class, 'index'])->name('anggota');
 
-        // Cetak PDF
-        Route::post('/cetak-pdf', [Cetak::class, 'index']);
-        Route::post('/cetak-pdf-order', [Cetak::class, 'cetakOrder']);
+        // laporan
+        Route::get('/laporan_darah_masuk', [C_Laporan::class, 'index'])->name('laporan_darah_masuk');
+        Route::get('/laporan_darah_keluar', [C_Laporan::class, 'darah_keluar'])->name('laporan_darah_keluar');
+        Route::get('/laporan_darah_buang', [C_Laporan::class, 'darah_buang'])->name('laporan_darah_buang');
+
+        Route::post('/cetak_darah_masuk', [C_Laporan::class, 'cetak_darah_masuk'])->name('cetak_darah_masuk');
+        Route::post('/cetak_darah_keluar', [C_Laporan::class, 'cetak_darah_keluar'])->name('cetak_darah_keluar');
+        Route::post('/cetak_darah_buang', [C_Laporan::class, 'cetak_darah_buang'])->name('cetak_darah_keluar');
     });
 
 
@@ -157,18 +162,5 @@ Route::group(['middleware' => 'revalidate'], function () {
 
         // riwayat permohonan darah
         Route::get('/riwayat_permohonan_darah', [C_PermohonanDarah::class, 'riwayat_permohonan_darah'])->name('riwayat_permohonan_darah');
-    });
-
-
-    // Petugas Kesehatan
-    Route::group(['middleware' => 'pusat_pmi'], function () {
-        // laporan
-        Route::get('/laporan_darah_masuk', [C_Laporan::class, 'index'])->name('laporan_darah_masuk');
-        Route::get('/laporan_darah_keluar', [C_Laporan::class, 'darah_keluar'])->name('laporan_darah_keluar');
-        Route::get('/laporan_darah_buang', [C_Laporan::class, 'darah_buang'])->name('laporan_darah_buang');
-
-        Route::post('/cetak_darah_masuk', [C_Laporan::class, 'cetak_darah_masuk'])->name('cetak_darah_masuk');
-        Route::post('/cetak_darah_keluar', [C_Laporan::class, 'cetak_darah_keluar'])->name('cetak_darah_keluar');
-        Route::post('/cetak_darah_buang', [C_Laporan::class, 'cetak_darah_buang'])->name('cetak_darah_keluar');
     });
 });
