@@ -168,6 +168,7 @@ class C_StokDarah extends Controller
             $data_darah_masuk = [
                 'id_darah'      => $data_terakhir->id_darah,
                 'id_user'       => Session()->get('id_user'),
+                'tanggal_masuk' => date('Y-m-d H:i:s')
             ];
             $this->M_DarahMasuk->tambah($data_darah_masuk);
 
@@ -269,6 +270,7 @@ class C_StokDarah extends Controller
             $data_darah_masuk = [
                 'id_darah'      => $data_terakhir_darah->id_darah,
                 'id_user'       => Session()->get('id_user'),
+                'tanggal_masuk' => date('Y-m-d H:i:s')
             ];
             $this->M_DarahMasuk->tambah($data_darah_masuk);
 
@@ -328,6 +330,7 @@ class C_StokDarah extends Controller
             'id_darah_masuk' => $darah_masuk->id_darah_masuk,
             'id_darah'       => $darah_masuk->id_darah,
             'id_user'        => Session()->get('id_user'),
+            'tanggal_masuk' => date('Y-m-d H:i:s')
         ];
         $this->M_DarahMasuk->edit($data_darah_masuk);
 

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -144,14 +145,14 @@
                             <table>
                                 <tr>
                                     <td class="title">
-                                        <img src="https://www.sparksuite.com/images/logo.png" style="width: 100%; max-width: 300px" />
+                                        {{-- <img src="https://www.sparksuite.com/images/logo.png" style="width: 100%; max-width: 300px" /> --}}
                                     </td>
 
                                     <td>
-                                        {{$biodata->nama_website}}<br />
-                                        {{$biodata->alamat}}<br />
-                                        {{$biodata->email}}<br />
-                                        {{$biodata->nomor_telepon}}
+                                        {{$data_web->nama_website}}<br />
+                                        {{$data_web->alamat}}<br />
+                                        {{$data_web->email}}<br />
+                                        {{$data_web->nomor_telepon}}
                                     </td>
                                 </tr>
                             </table>
@@ -167,24 +168,25 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>No.</th>
-                        <th>Nama Lengkap</th>
-                        <th>Nomor Telepon</th>
-                        <th>Perusahaan</th>
-                        <th>Tanggal Daftar</th>
+                        <th>No</th>
+						<th>No Kantung</th>
+						<th>Golongan Darah</th>
+						<th>Resus</th>
+						<th>Tanggal Keluar</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?= $no = 1;?>
-                    @foreach ($user as $item)
-                    <tr>
-                        <td class="text-center" width="20">{{$no++}}</td>
-                        <td>{{$item->nama}}</td>
-                        <td>{{$item->nomor_telepon}}</td>
-                        <td>{{$item->nama_perusahaan}}</td>
-                        <td>{{ date('d F Y', strtotime($item->tanggal_daftar)) }}</td>
-                    </tr>
-                    @endforeach
+					@foreach ($data_darah as $item)
+					<tr>
+						<td>{{$no++}}</td>
+						<td>{{$item->no_kantong}}</td>
+						<td>{{$item->golongan_darah}}</td>
+						<td>{{$item->resus}}</td>
+						<td>{{date('d F Y', strtotime($item->tanggal_buang))}}</td>
+					</tr>
+					@endforeach
+                    
                 </tbody>
             </table>
         </section>

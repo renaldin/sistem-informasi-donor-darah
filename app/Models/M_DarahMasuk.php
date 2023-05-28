@@ -19,6 +19,15 @@ class M_DarahMasuk extends Model
             ->orderBy('darah.tanggal_darah_masuk', 'ASC')->get();
     }
 
+    public function get_data_tanggal($tanggal_mulai, $tanggal_akhir)
+    {
+        return DB::table($this->table)
+            ->join('user', 'user.id_user', '=', 'darah_masuk.id_user', 'left')
+            ->join('darah', 'darah.id_darah', '=', 'darah_masuk.id_darah', 'left')
+            ->whereBetween('tanggal_masuk', [$tanggal_mulai, $tanggal_akhir])
+            ->orderBy('darah.tanggal_darah_masuk', 'ASC')->get();
+    }
+
     public function detail($id_darah_masuk)
     {
         return DB::table($this->table)
