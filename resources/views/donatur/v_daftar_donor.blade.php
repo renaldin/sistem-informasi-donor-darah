@@ -34,21 +34,28 @@
                             <div class="col-12 col-lg-4">
                                 <div class="form-group">
                                     <label for="nama">Nama</label>
-                                    <input type="text" class="form-control" id="nama" name="nama_anggota"
-                                        placeholder="Masukan Nama" value="{{ $user->nama }}">
+                                    <input type="text" class="form-control @error('nama') is-invalid @enderror"
+                                        id="nama" name="nama" placeholder="Masukan Nama"
+                                        value="{{ $user->nama }}">
+                                    @error('nama')
+                                        <small class="form-text text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-12 col-lg-4">
                                 <div class="form-group">
                                     <label for="alamat">Alamat</label>
-                                    <input type="text" class="form-control" id="alamat" name="alamat"
-                                        placeholder="Masukan Alamat">
+                                    <input type="text" class="form-control @error('alamat') is-invalid @enderror"
+                                        id="alamat" name="alamat" placeholder="Masukan Alamat">
+                                    @error('alamat')
+                                        <small class="form-text text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-12 col-lg-4">
                                 <div class="form-group">
                                     <label for="jenis_kelamin">Jenis Kelamin</label>
-                                    <div class="custom-control custom-radio">
+                                    <div class="custom-control custom-radio ">
                                         <input type="radio" id="laki-laki" name="jenis_kelamin"
                                             class="custom-control-input" value="Laki-laki">
                                         <label class="custom-control-label" for="laki-laki">Laki-laki</label>
@@ -58,6 +65,9 @@
                                             class="custom-control-input" value="Perempuan">
                                         <label class="custom-control-label" for="perempuan">Perempuan</label>
                                     </div>
+                                    @error('jenis_kelamin')
+                                        <small class="form-text text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
