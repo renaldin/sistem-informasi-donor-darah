@@ -30,4 +30,9 @@ class M_Anggota extends Model
     {
         return DB::table($this->table)->limit(1)->orderBy('id_anggota', 'DESC')->first();
     }
+
+    public function cek_nik($nik)
+    {
+        return DB::table($this->table)->where('nik', $nik)->first();
+    }
 }

@@ -25,44 +25,61 @@
             </div>
             <div class="card mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold">KUISIONER DONOR</h6>
+                    <h6 class="m-0 font-weight-bold">KUESIONER DONOR</h6>
                 </div>
                 <div class="card-body">
                     <form action="/submit_kuisioner" method="POST">
                         @csrf
                         <div class="row border-bottom mb-3">
-                            <div class="col-12 col-lg-4">
+                            <div class="col-12 col-lg-6">
+                                <div class="form-group">
+                                    <label for="nik">NIK</label>
+                                    <input type="text" class="form-control @error('nik') is-invalid @enderror"
+                                        id="nik" name="nik" placeholder="Masukan NIK Anda"
+                                        value="{{ $data ? $data->nik : '' }}" {{ $data ? 'readonly' : '' }}>
+                                    @error('nik')
+                                        <small class="form-text text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6">
                                 <div class="form-group">
                                     <label for="nama">Nama</label>
                                     <input type="text" class="form-control @error('nama') is-invalid @enderror"
                                         id="nama" name="nama" placeholder="Masukan Nama"
-                                        value="{{ $user->nama }}">
+                                        value="{{ $data ? $data->nama_anggota : $user->nama }}"
+                                        {{ $data ? 'readonly' : '' }}>
                                     @error('nama')
                                         <small class="form-text text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-12 col-lg-4">
+                            <div class="col-12 col-lg-6">
                                 <div class="form-group">
                                     <label for="alamat">Alamat</label>
                                     <input type="text" class="form-control @error('alamat') is-invalid @enderror"
-                                        id="alamat" name="alamat" placeholder="Masukan Alamat">
+                                        id="alamat" name="alamat" placeholder="Masukan Alamat"
+                                        value="{{ $data ? $data->alamat : '' }}" {{ $data ? 'readonly' : '' }}>
                                     @error('alamat')
                                         <small class="form-text text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-12 col-lg-4">
+                            <div class="col-12 col-lg-6">
                                 <div class="form-group">
                                     <label for="jenis_kelamin">Jenis Kelamin</label>
                                     <div class="custom-control custom-radio ">
                                         <input type="radio" id="laki-laki" name="jenis_kelamin"
-                                            class="custom-control-input" value="Laki-laki">
+                                            class="custom-control-input" value="Laki-laki"
+                                            {{ $data ? ($data->jenis_kelamin == 'Laki-laki' ? 'checked' : '') : '' }}
+                                            {{ $data ? 'disabled' : '' }}>
                                         <label class="custom-control-label" for="laki-laki">Laki-laki</label>
                                     </div>
                                     <div class="custom-control custom-radio">
                                         <input type="radio" id="perempuan" name="jenis_kelamin"
-                                            class="custom-control-input" value="Perempuan">
+                                            class="custom-control-input" value="Perempuan"
+                                            {{ $data ? ($data->jenis_kelamin == 'Perempuan' ? 'checked' : '') : '' }}
+                                            {{ $data ? 'disabled' : '' }}>
                                         <label class="custom-control-label" for="perempuan">Perempuan</label>
                                     </div>
                                     @error('jenis_kelamin')
@@ -539,4 +556,83 @@
             </div>
         </div>
     </div>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary tombol d-none" data-toggle="modal" data-target="#staticBackdrop">
+        Launch static backdrop modal
+    </button>
+    <button type="button" class="btn btn-primary cari d-none" data-toggle="modal" data-target="#searchnik">
+        nik
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Hai {{ $user->nama }}</h5>
+                    {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button> --}}
+                </div>
+                <div class="modal-body">
+                    @if (session('not_found'))
+                        <div class="alert alert-danger
+                         alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            {{ session('not_found') }}
+                        </div>
+                    @endif
+                    Apakah anda sudah melakukan pendonoran sebelumnya?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary d-none close" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="quest('sudah')">Sudah</button>
+                    <button type="button" class="btn btn-info" onclick="quest('belum')">Belum</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="searchnik" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Cari NIK {{ $user->nama }}</h5>
+                </div>
+                <form action="/daftar_donor" method="get">
+                    <div class="modal-body">
+                        <label for="nik">Silahkan masukan NIK anda yang telah di daftarkan pada pendonoran darah
+                            sebelumnya!.</label>
+                        <input type="number" class="form-control" id="nik" name="nik"
+                            placeholder="Masukan NIK" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary d-none close" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Cari</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    @if (!session('berhasil'))
+        <?php if (!isset($_GET['nik'])) { ?>
+        <script>
+            window.onload = function() {
+                $('.tombol').click();
+            };
+
+            function quest(jawaban) {
+                if (jawaban == 'sudah') {
+                    $('.close').click();
+                    $('.cari').click();
+                } else {
+                    $('.close').click();
+                }
+            }
+        </script>
+        <?php } ?>
+    @endif
 @endsection

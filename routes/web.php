@@ -127,6 +127,7 @@ Route::group(['middleware' => 'revalidate'], function () {
         // Daftar Donor
         Route::get('/daftar_donor', [C_Donatur::class, 'index'])->name('daftar_donor');
         Route::post('/submit_kuisioner', [C_Donatur::class, 'submit_kuisioner'])->name('submit_kuisioner');
+        Route::get('/riwayat_donor', [C_Donatur::class, 'riwayat_donor'])->name('riwayat_donor');
     });
 
 

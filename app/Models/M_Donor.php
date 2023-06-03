@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use League\CommonMark\Extension\CommonMark\Parser\Block\ThematicBreakStartParser;
 
 class M_Donor extends Model
 {
@@ -36,5 +37,12 @@ class M_Donor extends Model
     public function jumlah_donor_event($id_event)
     {
         return DB::table($this->table)->where('id_event', $id_event)->count();
+    }
+
+    public function get_all_by_anggota($id_anggota)
+    {
+        return DB::table($this->table)
+            ->join('anggota', 'anggota.id_anggota', '=', 'donor.id_anggota', 'left')
+            ->where('donor.id_anggota', $id_anggota)->get();
     }
 }
