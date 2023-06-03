@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 28, 2023 at 07:33 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.0.19
+-- Generation Time: Jun 03, 2023 at 04:59 AM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,31 +29,33 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `anggota` (
   `id_anggota` int(11) NOT NULL,
+  `nik` varchar(20) DEFAULT NULL,
   `nama_anggota` varchar(100) DEFAULT NULL,
   `jenis_kelamin` enum('Laki-laki','Perempuan') NOT NULL,
   `alamat` varchar(100) NOT NULL,
   `status_anggota` enum('Mandiri','Event') NOT NULL DEFAULT 'Mandiri',
   `tanggal_donor_kembali` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `anggota`
 --
 
-INSERT INTO `anggota` (`id_anggota`, `nama_anggota`, `jenis_kelamin`, `alamat`, `status_anggota`, `tanggal_donor_kembali`) VALUES
-(1, 'Teresia 1', 'Perempuan', 'Subang', 'Mandiri', '2023-06-22'),
-(2, 'Teresia 2', 'Perempuan', 'Subang', 'Mandiri', '2023-06-22'),
-(3, 'Teresia 3', 'Perempuan', 'Subang', 'Mandiri', '2023-06-22'),
-(4, 'Teresia 5', 'Perempuan', 'Subang', 'Mandiri', '2023-06-22'),
-(5, 'Teresia 6', 'Perempuan', 'Subang', 'Mandiri', '2023-06-22'),
-(6, 'Teresia 7', 'Perempuan', 'Subang', 'Mandiri', '2023-06-01'),
-(7, 'Teresia 8', 'Perempuan', 'Subang', 'Mandiri', '2023-05-20'),
-(9, 'Teresia 1 Event', 'Perempuan', 'Subang', 'Event', '2023-06-25'),
-(10, 'Teresia 2 Event 6', 'Perempuan', 'Subang', 'Event', '2023-06-25'),
-(11, 'Teresia 3 Event 6', 'Perempuan', 'Subang', 'Event', '2023-06-25'),
-(12, 'Teresia 4 Event 6', 'Perempuan', 'Subang', 'Event', '2023-06-25'),
-(13, 'Teresia 5 Event 6', 'Perempuan', 'Subang', 'Event', '2023-06-25'),
-(14, 'Teresia 6 Event 6', 'Perempuan', 'Subang', 'Event', '2023-06-25');
+INSERT INTO `anggota` (`id_anggota`, `nik`, `nama_anggota`, `jenis_kelamin`, `alamat`, `status_anggota`, `tanggal_donor_kembali`) VALUES
+(1, NULL, 'Teresia 1', 'Perempuan', 'Subang', 'Mandiri', '2023-06-22'),
+(2, NULL, 'Teresia 2', 'Perempuan', 'Subang', 'Mandiri', '2023-06-22'),
+(3, NULL, 'Teresia 3', 'Perempuan', 'Subang', 'Mandiri', '2023-06-22'),
+(4, NULL, 'Teresia 5', 'Perempuan', 'Subang', 'Mandiri', '2023-06-22'),
+(5, NULL, 'Teresia 6', 'Perempuan', 'Subang', 'Mandiri', '2023-06-22'),
+(6, NULL, 'Teresia 7', 'Perempuan', 'Subang', 'Mandiri', '2023-06-01'),
+(7, NULL, 'Teresia 8', 'Perempuan', 'Subang', 'Mandiri', '2023-05-20'),
+(9, NULL, 'Teresia 1 Event', 'Perempuan', 'Subang', 'Event', '2023-06-25'),
+(10, NULL, 'Teresia 2 Event 6', 'Perempuan', 'Subang', 'Event', '2023-06-25'),
+(11, NULL, 'Teresia 3 Event 6', 'Perempuan', 'Subang', 'Event', '2023-06-25'),
+(12, NULL, 'Teresia 4 Event 6', 'Perempuan', 'Subang', 'Event', '2023-06-25'),
+(13, NULL, 'Teresia 5 Event 6', 'Perempuan', 'Subang', 'Event', '2023-06-25'),
+(14, '123123', 'Teresia', 'Perempuan', 'Subang', 'Event', '2023-06-25'),
+(15, '112233445566', 'Sumanto', 'Laki-laki', 'Subang', 'Mandiri', '2023-06-03');
 
 -- --------------------------------------------------------
 
@@ -68,7 +70,7 @@ CREATE TABLE `biodata_web` (
   `nomor_telepon` varchar(50) NOT NULL,
   `alamat` text NOT NULL,
   `logo` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `biodata_web`
@@ -92,7 +94,7 @@ CREATE TABLE `darah` (
   `volume_darah` varchar(50) DEFAULT NULL,
   `tanggal_kedaluwarsa` date DEFAULT NULL,
   `tanggal_darah_masuk` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `darah`
@@ -129,7 +131,7 @@ CREATE TABLE `darah_buang` (
   `id_darah` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `tanggal_buang` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `darah_buang`
@@ -151,7 +153,7 @@ CREATE TABLE `darah_keluar` (
   `id_darah` int(11) NOT NULL,
   `id_permohonan_darah` int(11) NOT NULL,
   `tanggal_keluar` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `darah_keluar`
@@ -175,7 +177,7 @@ CREATE TABLE `darah_masuk` (
   `id_darah` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `tanggal_masuk` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `darah_masuk`
@@ -207,7 +209,7 @@ CREATE TABLE `donor` (
   `status_donor` enum('Ready','Proses','Selesai') DEFAULT NULL,
   `hasil_kusioner` enum('Lolos','Tidak Lolos') DEFAULT NULL,
   `deskripsi_hasil_kusioner` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `donor`
@@ -228,7 +230,10 @@ INSERT INTO `donor` (`id_donor`, `id_anggota`, `id_event`, `tanggal_donor`, `sta
 (12, 11, 6, '2023-05-26 10:01:34', 'Selesai', 'Lolos', 'Donor darah dari event'),
 (13, 12, 6, '2023-05-26 10:02:02', 'Selesai', 'Lolos', 'Donor darah dari event'),
 (14, 13, 6, '2023-05-26 10:02:27', 'Selesai', 'Lolos', 'Donor darah dari event'),
-(15, 14, 6, '2023-05-26 10:41:00', 'Selesai', 'Lolos', 'Donor darah dari event');
+(15, 14, 6, '2023-05-26 10:41:00', 'Selesai', 'Lolos', 'Donor darah dari event'),
+(16, 14, NULL, '2023-06-03 01:36:07', 'Ready', 'Lolos', 'Lolos kusioner'),
+(17, 14, NULL, '2023-06-03 08:40:05', 'Ready', 'Lolos', 'Lolos kusioner'),
+(18, 15, NULL, '2023-06-03 08:42:14', 'Ready', 'Lolos', 'Lolos kusioner');
 
 -- --------------------------------------------------------
 
@@ -248,7 +253,7 @@ CREATE TABLE `event` (
   `tanggal_pengajuan` datetime DEFAULT NULL,
   `status_pengajuan` enum('Menunggu Persetujuan','Disetujui','Tidak Disetujui','Belum Dikirim','Dibuat Admin') DEFAULT NULL,
   `status_event` enum('Aktif','Tidak Aktif') NOT NULL DEFAULT 'Tidak Aktif'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `event`
@@ -277,7 +282,7 @@ CREATE TABLE `permohonan_darah` (
   `upload_surat` text DEFAULT NULL,
   `status_permohonan` enum('Belum Dikirim','Menunggu Proses','Dikirim','Diterima') DEFAULT NULL,
   `tanggal_permohonan` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `permohonan_darah`
@@ -301,7 +306,7 @@ CREATE TABLE `user` (
   `nomor_telepon` varchar(30) NOT NULL,
   `role` enum('Admin','Donatur','Rumah Sakit','Event','Petugas Kesehatan') NOT NULL,
   `foto` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user`
@@ -389,7 +394,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `anggota`
 --
 ALTER TABLE `anggota`
-  MODIFY `id_anggota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_anggota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `biodata_web`
@@ -425,7 +430,7 @@ ALTER TABLE `darah_masuk`
 -- AUTO_INCREMENT for table `donor`
 --
 ALTER TABLE `donor`
-  MODIFY `id_donor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_donor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `event`
