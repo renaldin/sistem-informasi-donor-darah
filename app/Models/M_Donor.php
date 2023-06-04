@@ -19,6 +19,13 @@ class M_Donor extends Model
             ->orderBy('tanggal_donor', 'DESC')->get();
     }
 
+    public function get_donor_by_id($id)
+    {
+        return DB::table($this->table)
+            ->join('anggota', 'anggota.id_anggota', '=', 'donor.id_anggota', 'left')
+            ->where('id_donor', $id)->first();
+    }
+
     public function tambah($data)
     {
         DB::table($this->table)->insert($data);

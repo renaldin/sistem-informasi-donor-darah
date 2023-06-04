@@ -85,7 +85,7 @@ class C_Donatur extends Controller
             $data_donor = [
                 'id_anggota'                => $data_terakhir->id_anggota,
                 'tanggal_donor'             => date('Y-m-d H:i:s'),
-                'status_donor'              => 'Ready',
+                'status_donor'              => 'Proses',
                 'hasil_kusioner'            => 'Lolos',
                 'deskripsi_hasil_kusioner'  => 'Lolos kusioner'
             ];

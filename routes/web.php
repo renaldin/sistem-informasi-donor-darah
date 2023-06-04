@@ -12,6 +12,7 @@ use App\Http\Controllers\C_Donatur;
 use App\Http\Controllers\C_LandingPage;
 use App\Http\Controllers\C_StokDarah;
 use App\Http\Controllers\C_Laporan;
+use App\Http\Controllers\C_Antrian;
 use App\Http\Controllers\Cetak;
 use App\Http\Controllers\PengaturanWeb;
 use Illuminate\Support\Facades\Route;
@@ -146,6 +147,11 @@ Route::group(['middleware' => 'revalidate'], function () {
 
     // Petugas Kesehatan
     Route::group(['middleware' => 'petugas_kesehatan'], function () {
+        Route::get('/antrian', [C_Antrian::class, 'index'])->name('antrian');
+        Route::get('/cek_kesehatan/{id}', [C_Antrian::class, 'cek_kesehatan'])->name('cek_kesehatan');
+        Route::post('/tambah_data_kesehatan/{id}', [C_Antrian::class, 'tamabah_data_kesehatan']);
+        Route::get('/cek_kesehatan/{id}/show', [C_Antrian::class, 'lihat_data_kesehatan'])->name('lihat_data_kesehatan');
+        Route::get('/validasi/{id}', [C_Antrian::class, 'validasi_anggota'])->name('validasi_anggota');
     });
 
 
