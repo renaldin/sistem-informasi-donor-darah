@@ -46,4 +46,47 @@ class M_Event extends Model
     {
         DB::table($this->table)->where('id_event', $id_event)->delete();
     }
+
+    public function getEventPerbulan()
+    {
+        $data = [
+            'januari'   => DB::table($this->table)
+                ->whereYear('tanggal_pengajuan', date('Y'))->whereMonth('tanggal_pengajuan', 1)
+                ->where('status_pengajuan', 'Disetujui')->count(),
+            'februari'  => DB::table($this->table)
+                ->whereYear('tanggal_pengajuan', date('Y'))->whereMonth('tanggal_pengajuan', 2)
+                ->where('status_pengajuan', 'Disetujui')->count(),
+            'maret'     => DB::table($this->table)
+                ->whereYear('tanggal_pengajuan', date('Y'))->whereMonth('tanggal_pengajuan', 3)
+                ->where('status_pengajuan', 'Disetujui')->count(),
+            'april'     => DB::table($this->table)
+                ->whereYear('tanggal_pengajuan', date('Y'))->whereMonth('tanggal_pengajuan', 4)
+                ->where('status_pengajuan', 'Disetujui')->count(),
+            'mei'       => DB::table($this->table)
+                ->whereYear('tanggal_pengajuan', date('Y'))->whereMonth('tanggal_pengajuan', 5)
+                ->where('status_pengajuan', 'Disetujui')->count(),
+            'juni'      => DB::table($this->table)
+                ->whereYear('tanggal_pengajuan', date('Y'))->whereMonth('tanggal_pengajuan', 6)
+                ->where('status_pengajuan', 'Disetujui')->count(),
+            'juli'      => DB::table($this->table)
+                ->whereYear('tanggal_pengajuan', date('Y'))->whereMonth('tanggal_pengajuan', 7)
+                ->where('status_pengajuan', 'Disetujui')->count(),
+            'agustus'   => DB::table($this->table)
+                ->whereYear('tanggal_pengajuan', date('Y'))->whereMonth('tanggal_pengajuan', 8)
+                ->where('status_pengajuan', 'Disetujui')->count(),
+            'september' => DB::table($this->table)
+                ->whereYear('tanggal_pengajuan', date('Y'))->whereMonth('tanggal_pengajuan', 9)
+                ->where('status_pengajuan', 'Disetujui')->count(),
+            'oktober'   => DB::table($this->table)
+                ->whereYear('tanggal_pengajuan', date('Y'))->whereMonth('tanggal_pengajuan', 10)
+                ->where('status_pengajuan', 'Disetujui')->count(),
+            'november'  => DB::table($this->table)
+                ->whereYear('tanggal_pengajuan', date('Y'))->whereMonth('tanggal_pengajuan', 11)
+                ->where('status_pengajuan', 'Disetujui')->count(),
+            'desember'  => DB::table($this->table)
+                ->whereYear('tanggal_pengajuan', date('Y'))->whereMonth('tanggal_pengajuan', 12)
+                ->where('status_pengajuan', 'Disetujui')->count(),
+        ];
+        return $data;
+    }
 }
