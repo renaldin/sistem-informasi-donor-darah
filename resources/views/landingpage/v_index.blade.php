@@ -25,7 +25,7 @@
             <div class="col-xl-12 col-lg-12" data-aos="fade-up">
                 <div class="card mb-4">
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-danger">Data Stok Darah</h6>
+                        <h6 class="m-0 font-weight-bold text-danger">Grafik Darah Masuk</h6>
                         <div class="dropdown no-arrow">
                             <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -45,6 +45,46 @@
                         <div class="chart-area">
                             <canvas id="myAreaChart"></canvas>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-8 col-lg-8 col-12" data-aos="fade-up">
+                <div class="card mb-4">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-danger">Bar Chart Event</h6>
+                        {{-- input --}}
+                        <div class="dropdown no-arrow">
+                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                aria-labelledby="dropdownMenuLink">
+                                <div class="dropdown-header">Dropdown Header:</div>
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-bar">
+                            <canvas id="chartPermohonanDarah"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-12" data-aos="fade-up">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-danger">Permohonan Darah</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-pie pt-4">
+                            <canvas id="myPieChart"></canvas>
+                        </div>
+                        <hr>
                     </div>
                 </div>
             </div>
@@ -79,4 +119,48 @@
             </div>
         </div>
     </div>
+    <script>
+        var darah_masuk = [
+            <?= $darah_masuk['januari'] ?>,
+            <?= $darah_masuk['februari'] ?>,
+            <?= $darah_masuk['maret'] ?>,
+            <?= $darah_masuk['april'] ?>,
+            <?= $darah_masuk['mei'] ?>,
+            <?= $darah_masuk['juni'] ?>,
+            <?= $darah_masuk['juli'] ?>,
+            <?= $darah_masuk['agustus'] ?>,
+            <?= $darah_masuk['september'] ?>,
+            <?= $darah_masuk['oktober'] ?>,
+            <?= $darah_masuk['november'] ?>,
+            <?= $darah_masuk['desember'] ?>,
+        ];
+        var event_donor = [
+            <?= $event['januari'] ?>,
+            <?= $event['februari'] ?>,
+            <?= $event['maret'] ?>,
+            <?= $event['april'] ?>,
+            <?= $event['mei'] ?>,
+            <?= $event['juni'] ?>,
+            <?= $event['juli'] ?>,
+            <?= $event['agustus'] ?>,
+            <?= $event['september'] ?>,
+            <?= $event['oktober'] ?>,
+            <?= $event['november'] ?>,
+            <?= $event['desember'] ?>,
+        ];
+        var permohonan_darah = [
+            <?= $permohonan_darah['januari'] ?>,
+            <?= $permohonan_darah['februari'] ?>,
+            <?= $permohonan_darah['maret'] ?>,
+            <?= $permohonan_darah['april'] ?>,
+            <?= $permohonan_darah['mei'] ?>,
+            <?= $permohonan_darah['juni'] ?>,
+            <?= $permohonan_darah['juli'] ?>,
+            <?= $permohonan_darah['agustus'] ?>,
+            <?= $permohonan_darah['september'] ?>,
+            <?= $permohonan_darah['oktober'] ?>,
+            <?= $permohonan_darah['november'] ?>,
+            <?= $permohonan_darah['desember'] ?>,
+        ];
+    </script>
 @endsection

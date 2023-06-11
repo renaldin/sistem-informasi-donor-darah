@@ -52,4 +52,23 @@ class M_DarahMasuk extends Model
     {
         DB::table($this->table)->where('id_darah_masuk', $id_darah_masuk)->delete();
     }
+
+    public function getDataPerBulan()
+    {
+        $data = [
+            'januari'   => DB::table($this->table)->whereYear('tanggal_masuk', date('Y'))->whereMonth('tanggal_masuk', 1)->count(),
+            'februari'  => DB::table($this->table)->whereYear('tanggal_masuk', date('Y'))->whereMonth('tanggal_masuk', 2)->count(),
+            'maret'     => DB::table($this->table)->whereYear('tanggal_masuk', date('Y'))->whereMonth('tanggal_masuk', 3)->count(),
+            'april'     => DB::table($this->table)->whereYear('tanggal_masuk', date('Y'))->whereMonth('tanggal_masuk', 4)->count(),
+            'mei'       => DB::table($this->table)->whereYear('tanggal_masuk', date('Y'))->whereMonth('tanggal_masuk', 5)->count(),
+            'juni'      => DB::table($this->table)->whereYear('tanggal_masuk', date('Y'))->whereMonth('tanggal_masuk', 6)->count(),
+            'juli'      => DB::table($this->table)->whereYear('tanggal_masuk', date('Y'))->whereMonth('tanggal_masuk', 7)->count(),
+            'agustus'   => DB::table($this->table)->whereYear('tanggal_masuk', date('Y'))->whereMonth('tanggal_masuk', 8)->count(),
+            'september' => DB::table($this->table)->whereYear('tanggal_masuk', date('Y'))->whereMonth('tanggal_masuk', 9)->count(),
+            'oktober'   => DB::table($this->table)->whereYear('tanggal_masuk', date('Y'))->whereMonth('tanggal_masuk', 10)->count(),
+            'november'  => DB::table($this->table)->whereYear('tanggal_masuk', date('Y'))->whereMonth('tanggal_masuk', 11)->count(),
+            'desember'  => DB::table($this->table)->whereYear('tanggal_masuk', date('Y'))->whereMonth('tanggal_masuk', 12)->count(),
+        ];
+        return $data;
+    }
 }
