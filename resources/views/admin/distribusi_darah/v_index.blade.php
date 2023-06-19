@@ -66,6 +66,16 @@
                     <td>{{$row->nama_rs}}</td>
                 </tr>
                 <tr>
+                    <th>Nama Dokter</th>
+                    <td>:</td>
+                    <td>{{$row->nama_dokter}}</td>
+                </tr>
+                <tr>
+                    <th>Nama Pasien</th>
+                    <td>:</td>
+                    <td>{{$row->nama_pasien}}</td>
+                </tr>
+                <tr>
                     <th>Tanggal Permohonan</th>
                     <td>:</td>
                     <td>{{$row->tanggal_permohonan}}}}</td>
