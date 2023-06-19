@@ -72,11 +72,15 @@ class C_PermohonanDarah extends Controller
 
         Request()->validate([
             'nama_rs'           => 'required',
+            'nama_dokter'       => 'required',
+            'nama_pasien'       => 'required',
             'golda'             => 'required',
             'jumlah'            => 'required|numeric',
             'upload_surat'      => 'required|mimes:pdf|max:5048',
         ], [
             'nama_rs.required'          => 'Nama Rumah Sakit harus diisi!',
+            'nama_dokter.required'      => 'Nama Dokter harus diisi!',
+            'nama_pasien.required'      => 'Nama Pasien harus diisi!',
             'golda.required'            => 'Golongan Darah harus diisi!',
             'jumlah.required'           => 'Jumlah (Kantong) harus diisi!',
             'jumlah.numeric'            => 'Jumlah (Kantong) harus diisi!',
@@ -93,6 +97,8 @@ class C_PermohonanDarah extends Controller
         $data = [
             'id_user'               => Session()->get('id_user'),
             'nama_rs'               => Request()->nama_rs,
+            'nama_dokter'           => Request()->nama_dokter,
+            'nama_pasien'           => Request()->nama_pasien,
             'golda'                 => Request()->golda,
             'jumlah'                => Request()->jumlah,
             'upload_surat'          => $file_surat,
@@ -130,11 +136,15 @@ class C_PermohonanDarah extends Controller
 
         Request()->validate([
             'nama_rs'           => 'required',
+            'nama_dokter'       => 'required',
+            'nama_pasien'       => 'required',
             'golda'             => 'required',
             'jumlah'            => 'required|numeric',
             'upload_surat'      => 'mimes:pdf|max:5048',
         ], [
             'nama_rs.required'          => 'Nama Rumah Sakit harus diisi!',
+            'nama_dokter.required'      => 'Nama Dokter harus diisi!',
+            'nama_pasien.required'      => 'Nama Pasien harus diisi!',
             'golda.required'            => 'Golongan Darah harus diisi!',
             'jumlah.required'           => 'Jumlah (Kantong) harus diisi!',
             'jumlah.numeric'            => 'Jumlah (Kantong) harus diisi!',
@@ -156,6 +166,8 @@ class C_PermohonanDarah extends Controller
             $data = [
                 'id_permohonan_darah'   => $id_permohonan_darah,
                 'nama_rs'               => Request()->nama_rs,
+                'nama_dokter'           => Request()->nama_dokter,
+                'nama_pasien'           => Request()->nama_pasien,
                 'golda'                 => Request()->golda,
                 'jumlah'                => Request()->jumlah,
                 'upload_surat'          => $file_surat,
@@ -164,6 +176,8 @@ class C_PermohonanDarah extends Controller
             $data = [
                 'id_permohonan_darah'   => $id_permohonan_darah,
                 'nama_rs'               => Request()->nama_rs,
+                'nama_dokter'           => Request()->nama_dokter,
+                'nama_pasien'           => Request()->nama_pasien,
                 'golda'                 => Request()->golda,
                 'jumlah'                => Request()->jumlah,
             ];

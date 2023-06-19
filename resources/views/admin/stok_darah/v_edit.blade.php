@@ -81,7 +81,17 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label for="golongan_darah">Golongan Darah</label>
-                        <input type="text" class="form-control @error('golongan_darah') is-invalid @enderror" name="golongan_darah" id="golongan_darah" value="{{$detail->golongan_darah}}" autofocus placeholder="Masukkan Golongan Darah">
+                        <select name="golongan_darah" class="form-control @error('golongan_darah') is-invalid @enderror" id="golongan_darah">
+                            @if ($detail->golongan_darah)
+                                <option value="{{$detail->golongan_darah}}">{{$detail->golongan_darah}}</option>
+                            @else
+                                <option value="">Pilih</option>
+                            @endif
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="AB">AB</option>
+                            <option value="O">O</option>
+                        </select>
                         @error('golongan_darah')
                             <small class="form-text text-danger">{{$message}}</small>
                         @enderror
@@ -90,7 +100,15 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label for="resus">Resus</label>
-                        <input type="text" class="form-control @error('resus') is-invalid @enderror" name="resus" id="resus" value="{{$detail->resus}}" placeholder="Masukkan Golongan Darah">
+                        <select name="resus" class="form-control @error('resus') is-invalid @enderror" id="resus">
+                            @if ($detail->resus)
+                                <option value="{{$detail->resus}}">{{$detail->resus}}</option>
+                            @else
+                                <option value="">Pilih</option>
+                            @endif
+                            <option value="Positif">Positif</option>
+                            <option value="Negatif">Negatif</option>
+                        </select>
                         @error('resus')
                             <small class="form-text text-danger">{{$message}}</small>
                         @enderror

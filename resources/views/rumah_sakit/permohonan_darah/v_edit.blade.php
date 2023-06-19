@@ -23,8 +23,36 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group">
+                        <label for="nama_dokter">Nama Dokter</label>
+                        <input type="text" class="form-control @error('nama_dokter') is-invalid @enderror" name="nama_dokter" id="nama_dokter" value="{{$detail->nama_dokter}}" placeholder="Masukkan Nama Dokter">
+                        @error('nama_dokter')
+                            <small class="form-text text-danger">{{$message}}</small>
+                        @enderror
+                    </div>       
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="nama_pasien">Nama Pasien</label>
+                        <input type="text" class="form-control @error('nama_pasien') is-invalid @enderror" name="nama_pasien" id="nama_pasien" value="{{$detail->nama_pasien}}" placeholder="Masukkan Nama Pasien">
+                        @error('nama_pasien')
+                            <small class="form-text text-danger">{{$message}}</small>
+                        @enderror
+                    </div>       
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
                         <label for="golda">Golongan Darah</label>
-                        <input type="text" class="form-control @error('golda') is-invalid @enderror" name="golda" id="golda" value="{{$detail->golda}}" placeholder="Masukkan Golongan Darah">
+                        <select name="golda" class="form-control @error('golda') is-invalid @enderror" id="golda">
+                            @if ($detail->golda)
+                                <option value="{{$detail->golda}}">{{$detail->golda}}</option>
+                            @else
+                                <option value="">Pilih</option>
+                            @endif
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="AB">AB</option>
+                            <option value="O">O</option>
+                        </select>
                         @error('golda')
                             <small class="form-text text-danger">{{$message}}</small>
                         @enderror

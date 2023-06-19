@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 04, 2023 at 02:40 PM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.1.12
+-- Generation Time: Jun 19, 2023 at 05:23 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.0.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -35,7 +35,7 @@ CREATE TABLE `anggota` (
   `alamat` varchar(100) NOT NULL,
   `status_anggota` enum('Mandiri','Event') NOT NULL DEFAULT 'Mandiri',
   `tanggal_donor_kembali` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `anggota`
@@ -70,7 +70,7 @@ CREATE TABLE `biodata_web` (
   `nomor_telepon` varchar(50) NOT NULL,
   `alamat` text NOT NULL,
   `logo` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `biodata_web`
@@ -94,7 +94,7 @@ CREATE TABLE `darah` (
   `volume_darah` varchar(50) DEFAULT NULL,
   `tanggal_kedaluwarsa` date DEFAULT NULL,
   `tanggal_darah_masuk` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `darah`
@@ -131,7 +131,7 @@ CREATE TABLE `darah_buang` (
   `id_darah` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `tanggal_buang` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `darah_buang`
@@ -153,7 +153,7 @@ CREATE TABLE `darah_keluar` (
   `id_darah` int(11) NOT NULL,
   `id_permohonan_darah` int(11) NOT NULL,
   `tanggal_keluar` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `darah_keluar`
@@ -164,7 +164,9 @@ INSERT INTO `darah_keluar` (`id_darah_keluar`, `id_darah`, `id_permohonan_darah`
 (3, 3, 3, '2023-05-20 23:27:29'),
 (5, 5, 4, '2023-05-23 10:32:56'),
 (6, 6, 4, '2023-05-23 10:33:08'),
-(7, 4, 4, '2023-05-23 10:33:25');
+(7, 4, 4, '2023-05-23 10:33:25'),
+(8, 7, 6, '2023-06-18 02:39:41'),
+(9, 10, 6, '2023-06-18 02:39:45');
 
 -- --------------------------------------------------------
 
@@ -177,15 +179,13 @@ CREATE TABLE `darah_masuk` (
   `id_darah` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `tanggal_masuk` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `darah_masuk`
 --
 
 INSERT INTO `darah_masuk` (`id_darah_masuk`, `id_darah`, `id_user`, `tanggal_masuk`) VALUES
-(9, 7, 2, '2023-05-23 23:30:33'),
-(12, 10, 2, '2023-05-25 14:02:20'),
 (13, 11, 2, '2023-05-25 14:41:16'),
 (14, 12, 2, '2023-05-25 14:44:43'),
 (15, 13, 2, '2023-05-26 09:54:25'),
@@ -215,7 +215,7 @@ CREATE TABLE `donor` (
   `denyut_nadi` varchar(10) DEFAULT NULL,
   `tinggi_badan` varchar(10) DEFAULT NULL,
   `keadaan_umum` varchar(30) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `donor`
@@ -259,7 +259,7 @@ CREATE TABLE `event` (
   `tanggal_pengajuan` datetime DEFAULT NULL,
   `status_pengajuan` enum('Menunggu Persetujuan','Disetujui','Tidak Disetujui','Belum Dikirim','Dibuat Admin') DEFAULT NULL,
   `status_event` enum('Aktif','Tidak Aktif') NOT NULL DEFAULT 'Tidak Aktif'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `event`
@@ -283,20 +283,23 @@ CREATE TABLE `permohonan_darah` (
   `id_permohonan_darah` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `nama_rs` varchar(100) DEFAULT NULL,
+  `nama_dokter` varchar(100) DEFAULT NULL,
+  `nama_pasien` varchar(255) DEFAULT NULL,
   `golda` varchar(10) DEFAULT NULL,
   `jumlah` int(11) DEFAULT NULL,
   `upload_surat` text DEFAULT NULL,
   `status_permohonan` enum('Belum Dikirim','Menunggu Proses','Dikirim','Diterima') DEFAULT NULL,
   `tanggal_permohonan` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `permohonan_darah`
 --
 
-INSERT INTO `permohonan_darah` (`id_permohonan_darah`, `id_user`, `nama_rs`, `golda`, `jumlah`, `upload_surat`, `status_permohonan`, `tanggal_permohonan`) VALUES
-(3, 9, 'Rumah Sakit', 'A', 4, '05202023173242 Rumah Sakit.pdf', 'Diterima', '2023-05-20 17:44:01'),
-(4, 9, 'Rumah Sakit', 'A', 2, '05232023102308 Rumah Sakit.pdf', 'Diterima', '2023-05-23 10:23:29');
+INSERT INTO `permohonan_darah` (`id_permohonan_darah`, `id_user`, `nama_rs`, `nama_dokter`, `nama_pasien`, `golda`, `jumlah`, `upload_surat`, `status_permohonan`, `tanggal_permohonan`) VALUES
+(3, 9, 'Rumah Sakit', NULL, NULL, 'A', 4, '05202023173242 Rumah Sakit.pdf', 'Diterima', '2023-05-20 17:44:01'),
+(4, 9, 'Rumah Sakit', NULL, NULL, 'A', 2, '05232023102308 Rumah Sakit.pdf', 'Diterima', '2023-05-23 10:23:29'),
+(6, 9, 'Rumah Sakit', 'Nama Dokter Update', 'Nama Pasien Update', 'A', 3, '06182023023327 Rumah Sakit.pdf', 'Diterima', '2023-06-18 02:36:54');
 
 -- --------------------------------------------------------
 
@@ -312,7 +315,7 @@ CREATE TABLE `user` (
   `nomor_telepon` varchar(30) NOT NULL,
   `role` enum('Admin','Donatur','Rumah Sakit','Event','Petugas Kesehatan') NOT NULL,
   `foto` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `user`
@@ -423,7 +426,7 @@ ALTER TABLE `darah_buang`
 -- AUTO_INCREMENT for table `darah_keluar`
 --
 ALTER TABLE `darah_keluar`
-  MODIFY `id_darah_keluar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_darah_keluar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `darah_masuk`
@@ -447,7 +450,7 @@ ALTER TABLE `event`
 -- AUTO_INCREMENT for table `permohonan_darah`
 --
 ALTER TABLE `permohonan_darah`
-  MODIFY `id_permohonan_darah` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_permohonan_darah` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `user`

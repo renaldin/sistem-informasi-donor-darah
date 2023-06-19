@@ -23,8 +23,32 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group">
+                        <label for="nama_dokter">Nama Dokter</label>
+                        <input type="text" class="form-control @error('nama_dokter') is-invalid @enderror" name="nama_dokter" id="nama_dokter" value="{{old('nama_dokter')}}" placeholder="Masukkan Nama Dokter">
+                        @error('nama_dokter')
+                            <small class="form-text text-danger">{{$message}}</small>
+                        @enderror
+                    </div>       
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="nama_pasien">Nama Pasien</label>
+                        <input type="text" class="form-control @error('nama_pasien') is-invalid @enderror" name="nama_pasien" id="nama_pasien" value="{{old('nama_pasien')}}" placeholder="Masukkan Nama Pasien">
+                        @error('nama_pasien')
+                            <small class="form-text text-danger">{{$message}}</small>
+                        @enderror
+                    </div>       
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
                         <label for="golda">Golongan Darah</label>
-                        <input type="text" class="form-control @error('golda') is-invalid @enderror" name="golda" id="golda" value="{{old('golda')}}" placeholder="Masukkan Golongan Darah">
+                        <select name="golda" class="form-control @error('golda') is-invalid @enderror" id="golda">
+                            <option value="">Pilih</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="AB">AB</option>
+                            <option value="O">O</option>
+                        </select>
                         @error('golda')
                             <small class="form-text text-danger">{{$message}}</small>
                         @enderror

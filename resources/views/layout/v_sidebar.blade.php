@@ -80,6 +80,7 @@
                 <span>Anggota</span>
             </a>
         </li>
+        <hr class="sidebar-divider">
         <div class="sidebar-heading">
             Laporan
         </div>
