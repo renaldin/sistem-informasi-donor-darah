@@ -24,6 +24,12 @@
                 <span>Data User</span>
             </a>
         </li>
+        <li class="nav-item @if ($title === 'Data Darah Masuk') active @endif">
+            <a class="nav-link" href="/data_darah_masuk">
+                <i class="fas fa-fw fa-palette"></i>
+                <span>Data Darah Masuk</span>
+            </a>
+        </li>
         <li class="nav-item @if ($title === 'Data Stok Darah') active @endif">
             <a class="nav-link" href="/data_stok_darah">
                 <i class="fas fa-fw fa-palette"></i>

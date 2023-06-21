@@ -25,10 +25,6 @@ function hitungUmur($tanggal_darah_masuk) {
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold">{{$sub_title}}</h6>
             </div>
-            <div class="card-header flex flex-row">
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambah">Tambah Darah</button>
-              <a href="/riwayat_buang_darah" class="btn btn-danger">Darah Buang</a>
-            </div>
             <div class="table-responsive p-3">
                 <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                     <thead class="thead-light">
@@ -45,19 +41,19 @@ function hitungUmur($tanggal_darah_masuk) {
                     <tbody>
                         <?php $no=1;?>
                         @foreach ($data_darah as $row)
-                        @if ($row->status_darah_masuk == 'Sudah Masuk')
-                          <tr>
-                            <td>{{$no++}}</td>
-                            <td>{{$row->no_kantong}}</td>
-                            <td>{{$row->golongan_darah}}</td>
-                            <td>{{$row->resus}}</td>
-                            <td>{{ hitungUmur($row->tanggal_darah_masuk) }}</td>
-                            <td>{{$row->tanggal_kedaluwarsa}}</td>
-                            <td class="text-center">
-                                <a href="/edit_darah/{{$row->id_darah_masuk}}" class="btn btn-sm btn-success mb-1">Edit</a>
-                                <button type="button" class="btn btn-sm btn-danger mb-1" data-toggle="modal" data-target="#buang{{$row->id_darah_masuk}}">Buang</button>   
-                            </td>
-                          </tr>
+                        @if ($row->status_darah_masuk == 'Belum Masuk')
+                        <tr>
+                          <td>{{$no++}}</td>
+                          <td>{{$row->no_kantong}}</td>
+                          <td>{{$row->golongan_darah}}</td>
+                          <td>{{$row->resus}}</td>
+                          <td>{{ hitungUmur($row->tanggal_darah_masuk) }}</td>
+                          <td>{{$row->tanggal_kedaluwarsa}}</td>
+                          <td class="text-center">
+                              <button type="button" class="btn btn-sm btn-success mb-1" data-toggle="modal" data-target="#masuk{{$row->id_darah_masuk}}">Masuk</button>   
+                              <button type="button" class="btn btn-sm btn-danger mb-1" data-toggle="modal" data-target="#buang{{$row->id_darah_masuk}}">Buang</button>   
+                          </td>
+                        </tr>
                         @endif
                         @endforeach
                     </tbody>
@@ -97,7 +93,7 @@ function hitungUmur($tanggal_darah_masuk) {
       </button>
     </div>
     <div class="modal-body">
-      <p>Apakah Anda yakin akan buang darah ini ini?</p>
+      <p>Apakah Anda yakin akan buang darah ini?</p>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Batal</button>
@@ -107,4 +103,28 @@ function hitungUmur($tanggal_darah_masuk) {
 </div>
 </div>
 @endforeach
+<!-- Modal -->
+
+@foreach ($data_darah as $row)
+<div class="modal fade" id="masuk{{$row->id_darah_masuk}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Masuk Darah</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>Apakah Anda yakin akan memasukkan darah ini?</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Batal</button>
+      <a href="/masuk_darah/{{$row->id_darah_masuk}}" class="btn btn-success">Masuk</a>
+    </div>
+  </div>
+</div>
+</div>
+@endforeach
+
 @endsection
