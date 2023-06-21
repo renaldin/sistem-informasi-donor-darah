@@ -71,8 +71,10 @@ function hitungUmur($tanggal_darah_masuk) {
                                         <select class="select2-single-placeholder form-control @error('id_darah_masuk') is-invalid @enderror" name="id_darah_masuk" autofocus id="select2SinglePlaceholder" required>
                                             <option value="">Pilih</option>
                                             @foreach ($data_darah as $row)
-                                                <option value="{{$row->id_darah_masuk}}">{{$row->no_kantong}} | {{$row->golongan_darah}}, {{$row->resus}}, {{$row->volume_darah}} | {{date('d F Y', strtotime($row->tanggal_darah_masuk))}}</option>
-                                            @endforeach
+                                                @if ($item->status_darah_masuk == 'Sudah Masuk')
+                                                    <option value="{{$row->id_darah_masuk}}">{{$row->no_kantong}} | {{$row->golongan_darah}}, {{$row->resus}}, {{$row->volume_darah}} | {{date('d F Y', strtotime($row->tanggal_darah_masuk))}}</option>
+                                                @endif
+                                            @endforeach                                                         
                                         </select>
                                         @error('id_darah_masuk')
                                             <small class="form-text text-danger">{{$message}}</small>

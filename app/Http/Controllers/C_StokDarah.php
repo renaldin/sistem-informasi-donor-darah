@@ -358,6 +358,22 @@ class C_StokDarah extends Controller
         return redirect()->route('data_stok_darah');
     }
 
+    public function masuk_darah($id_darah_masuk)
+    {
+        if (!Session()->get('email')) {
+            return redirect()->route('login');
+        }
+
+        $data = [
+            'id_darah_masuk'    => $id_darah_masuk,
+            'status_darah_masuk' => 'Sudah Masuk',
+        ];
+
+        $this->M_DarahMasuk->edit($data);
+        Alert::success('Berhasil', 'Data darah berhasil dibuang.');
+        return redirect()->route('data_darah_masuk');
+    }
+
     public function riwayat_buang_darah()
     {
         if (!Session()->get('email')) {
@@ -373,5 +389,22 @@ class C_StokDarah extends Controller
         ];
 
         return view('admin.stok_darah.v_riwayat_buang_darah', $data);
+    }
+
+    public function data_darah_masuk()
+    {
+        if (!Session()->get('email')) {
+            return redirect()->route('login');
+        }
+
+        $data = [
+            'title'         => 'Data Darah Masuk',
+            'sub_title'     => 'Data Darah',
+            'data_web'      => $this->M_Website->detail(1),
+            'user'          => $this->M_User->detail(Session()->get('id_user')),
+            'data_darah'    => $this->M_DarahMasuk->get_data()
+        ];
+
+        return view('admin.darah_masuk.v_index', $data);
     }
 }

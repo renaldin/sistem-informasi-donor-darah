@@ -84,6 +84,10 @@ Route::group(['middleware' => 'revalidate'], function () {
         Route::post('/edit_darah/{id}', [C_StokDarah::class, 'proses_edit_darah']);
         Route::get('/buang_darah/{id}', [C_StokDarah::class, 'buang_darah'])->name('buang_darah');
         Route::get('/riwayat_buang_darah', [C_StokDarah::class, 'riwayat_buang_darah'])->name('riwayat_buang_darah');
+        Route::get('/masuk_darah/{id}', [C_StokDarah::class, 'masuk_darah'])->name('masuk_darah');
+
+        // darah masuk
+        Route::get('/data_darah_masuk', [C_StokDarah::class, 'data_darah_masuk'])->name('data_darah_masuk');
 
         // Data Pengajuan Event
         Route::get('/data_pengajuan_event', [C_PengajuanEvent::class, 'kelola_pengajuan_event'])->name('data_pengajuan_event');
