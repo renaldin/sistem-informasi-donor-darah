@@ -22,8 +22,8 @@
             </div>
         </div>
         <div class="row mt-5 justify-content-center">
-            <div class="col-xl-12 col-lg-12" data-aos="fade-up">
-                <div class="card mb-4">
+            <div class="col-xl-6 col-lg-6 col-12" data-aos="fade-up">
+                {{-- <div class="card mb-4">
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                         <h6 class="m-0 font-weight-bold text-danger">Grafik Darah Masuk</h6>
                         <div class="dropdown no-arrow">
@@ -46,12 +46,67 @@
                             <canvas id="myAreaChart"></canvas>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-xl-8 col-lg-8 col-12" data-aos="fade-up">
+                </div> --}}
                 <div class="card mb-4">
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-danger">Bar Chart Event</h6>
+                        <h6 class="m-0 font-weight-bold text-danger">Stok Darah</h6>
+                    </div>
+                    <div class="table-responsive p-3">
+                        <table class="table align-items-center table-flush table-hover" id="dataTableHover">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>No</th>
+                                    <th>Golongan Darah</th>
+                                    <th>Stok</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>A</td>
+                                    <td>{{ $gol['a'] }}</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>B</td>
+                                    <td>{{ $gol['b'] }}</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>AB</td>
+                                    <td>{{ $gol['ab'] }}</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>O</td>
+                                    <td>{{ $gol['o'] }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-6 col-12" data-aos="fade-up">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-danger">Permohonan Darah</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-pie pt-4">
+                                    <canvas id="myPieChart"></canvas>
+                                </div>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 col-12" data-aos="fade-up">
+                <div class="card mb-4">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-danger">Grafik Event</h6>
                         {{-- input --}}
                         <div class="dropdown no-arrow">
                             <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
@@ -75,17 +130,78 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-12" data-aos="fade-up">
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-danger">Permohonan Darah</h6>
+            <div class="col-12 col-sm-10 col-md-8 col-lg-8 text-center m-1" data-aos="fade-up">
+                <h4>AGENDA (EVENT)</h4>
+            </div>
+            <div class="col-lg-10 col-10" data-aos="fade-up">
+                <div class="card mb-4">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-danger">Agenda Kegiatan</h6>
+                        {{-- input --}}
                     </div>
                     <div class="card-body">
-                        <div class="chart-pie pt-4">
-                            <canvas id="myPieChart"></canvas>
+                        <div class="row">
+                            @foreach ($all_event as $row)
+                                <div class="col-4">
+                                    <div class="card"
+                                        style="background-image: url('/foto_event/{{ $row->gambar }}'); width: 100%; height: 200px; background-size: cover">
+                                        <p class="mt-auto pl-2 text-white">{{ $row->nama_instansi }}</p>
+                                    </div>
+                                </div>
+                            @endforeach
                         </div>
-                        <hr>
                     </div>
+                    <div class="d-flex justify-content-center">
+                        {{ $all_event->links('pagination::bootstrap-4') }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-10 col-md-8 col-lg-8 text-center m-1" data-aos="fade-up">
+                <h4>PROSEDUR DONOR DARAH</h4>
+            </div>
+            <div class="col-lg-10 col-10" data-aos="fade-up">
+                <div class="card mb-4">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-dark">Lorem ipsum dolor sit amet consectetur adipisicing
+                            elit. Similique iure consequuntur qui? Doloribus, blanditiis voluptatum ab dicta exercitationem,
+                            qui expedita architecto magni maxime labore saepe aut quis accusantium nam praesentium
+                            reprehenderit odit nisi harum accusamus alias consequatur cupiditate culpa! Atque magnam
+                            corporis deleniti ducimus eius consequuntur aliquid repellat praesentium voluptatum.</h6>
+                    </div>
+                    {{-- <div class="card-body">
+                    </div> --}}
+                </div>
+            </div>
+            <div class="col-12 col-sm-10 col-md-8 col-lg-8 text-center m-1" data-aos="fade-up">
+                <h4>PROSEDUR PERMOHONAN DARAH</h4>
+            </div>
+            <div class="col-lg-10 col-10" data-aos="fade-up">
+                <div class="card mb-4">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-dark">Lorem ipsum dolor sit amet consectetur adipisicing
+                            elit. Similique iure consequuntur qui? Doloribus, blanditiis voluptatum ab dicta exercitationem,
+                            qui expedita architecto magni maxime labore saepe aut quis accusantium nam praesentium
+                            reprehenderit odit nisi harum accusamus alias consequatur cupiditate culpa! Atque magnam
+                            corporis deleniti ducimus eius consequuntur aliquid repellat praesentium voluptatum.</h6>
+                    </div>
+                    {{-- <div class="card-body">
+                    </div> --}}
+                </div>
+            </div>
+            <div class="col-12 col-sm-10 col-md-8 col-lg-8 text-center m-1" data-aos="fade-up">
+                <h4>PROSEDUR PENGAJUAN EVENT</h4>
+            </div>
+            <div class="col-lg-10 col-10" data-aos="fade-up">
+                <div class="card mb-4">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-dark">Lorem ipsum dolor sit amet consectetur adipisicing
+                            elit. Similique iure consequuntur qui? Doloribus, blanditiis voluptatum ab dicta exercitationem,
+                            qui expedita architecto magni maxime labore saepe aut quis accusantium nam praesentium
+                            reprehenderit odit nisi harum accusamus alias consequatur cupiditate culpa! Atque magnam
+                            corporis deleniti ducimus eius consequuntur aliquid repellat praesentium voluptatum.</h6>
+                    </div>
+                    {{-- <div class="card-body">
+                    </div> --}}
                 </div>
             </div>
             <div class="col-12 col-sm-10 col-md-8 col-lg-8 text-center mt-5" data-aos="fade-up">
