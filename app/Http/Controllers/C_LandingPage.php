@@ -33,6 +33,8 @@ class C_LandingPage extends Controller
             'darah_masuk'       => $this->M_DarahMasuk->getDataPerBulan(),
             'event'             => $this->M_Event->getEventPerbulan(),
             'permohonan_darah'  => $this->M_PermohonanDarah->getPermohonanPerbulan(),
+            'gol'               => $this->M_DarahMasuk->countGol(),
+            'all_event'             => $this->M_Event->get_all_data()
         ];
 
         // dd($data['darah_masuk']);

@@ -18,6 +18,13 @@ class M_Event extends Model
             ->orderBy('id_event', 'DESC')->get();
     }
 
+    public function get_all_data()
+    {
+        return DB::table($this->table)
+            ->join('user', 'user.id_user', '=', 'event.id_user', 'left')
+            ->orderBy('id_event', 'DESC')->paginate(3);
+    }
+
     public function get_data_user($id_user)
     {
         return DB::table($this->table)
