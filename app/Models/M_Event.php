@@ -96,4 +96,9 @@ class M_Event extends Model
         ];
         return $data;
     }
+
+    public function countEvent($status)
+    {
+        return DB::table($this->table)->where('status_event', $status)->count();
+    }
 }

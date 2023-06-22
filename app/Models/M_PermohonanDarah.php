@@ -67,4 +67,9 @@ class M_PermohonanDarah extends Model
         ];
         return $data;
     }
+
+    public function countPermohonan($status)
+    {
+        return DB::table($this->table)->where('status_permohonan', $status)->count();
+    }
 }

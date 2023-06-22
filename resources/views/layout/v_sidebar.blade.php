@@ -3,7 +3,7 @@
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#"
         style="background-color: rgb(251, 62, 52);">
         <div class="sidebar-brand-icon">
-            <img src="{{ asset('template/img/logo/logo2.png') }}">
+            <img src="{{ asset('foto_biodata/logo-pmi.png') }}">
         </div>
         <div class="sidebar-brand-text mx-3">{{ $data_web->nama_website }}</div>
     </a>

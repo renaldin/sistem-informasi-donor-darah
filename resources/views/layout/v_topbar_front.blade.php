@@ -2,7 +2,7 @@
     style="background-color: rgb(252, 84, 75);">
     <a class="sidebar-brand d-flex align-items-center justify-content-center text-decoration-none" href="/">
         <div class="sidebar-brand-icon ">
-            <img src="{{ asset('template/img/logo/logo2.png') }}" width="40px">
+            <img src="{{ asset('foto_biodata/logo-pmi.png') }}" width="40px">
         </div>
         <div class="sidebar-brand-text mx-3 text-white"><b>{{ $data_web->nama_website }}</b></div>
     </a>

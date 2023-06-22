@@ -72,13 +72,13 @@ class M_DarahMasuk extends Model
         return $data;
     }
 
-    public function countGol()
+    public function countGol($status)
     {
         $data = [
-            'a' => DB::table($this->table)->join('darah', 'darah.id_darah', '=', 'darah_masuk.id_darah', 'left')->where('tanggal_kedaluwarsa', '>=', date('Y-m-d'))->where('golongan_darah', 'A')->count(),
-            'b' => DB::table($this->table)->join('darah', 'darah.id_darah', '=', 'darah_masuk.id_darah', 'left')->where('tanggal_kedaluwarsa', '>=', date('Y-m-d'))->where('golongan_darah', 'B')->count(),
-            'ab' => DB::table($this->table)->join('darah', 'darah.id_darah', '=', 'darah_masuk.id_darah', 'left')->where('tanggal_kedaluwarsa', '>=', date('Y-m-d'))->where('golongan_darah', 'AB')->count(),
-            'o' => DB::table($this->table)->join('darah', 'darah.id_darah', '=', 'darah_masuk.id_darah', 'left')->where('tanggal_kedaluwarsa', '>=', date('Y-m-d'))->where('golongan_darah', 'O')->count(),
+            'a' => DB::table($this->table)->join('darah', 'darah.id_darah', '=', 'darah_masuk.id_darah', 'left')->where('tanggal_kedaluwarsa', '>=', date('Y-m-d'))->where('golongan_darah', 'A')->where('status_darah_masuk', $status)->count(),
+            'b' => DB::table($this->table)->join('darah', 'darah.id_darah', '=', 'darah_masuk.id_darah', 'left')->where('tanggal_kedaluwarsa', '>=', date('Y-m-d'))->where('golongan_darah', 'B')->where('status_darah_masuk', $status)->count(),
+            'ab' => DB::table($this->table)->join('darah', 'darah.id_darah', '=', 'darah_masuk.id_darah', 'left')->where('tanggal_kedaluwarsa', '>=', date('Y-m-d'))->where('golongan_darah', 'AB')->where('status_darah_masuk', $status)->count(),
+            'o' => DB::table($this->table)->join('darah', 'darah.id_darah', '=', 'darah_masuk.id_darah', 'left')->where('tanggal_kedaluwarsa', '>=', date('Y-m-d'))->where('golongan_darah', 'O')->where('status_darah_masuk', $status)->count(),
         ];
         return $data;
     }
