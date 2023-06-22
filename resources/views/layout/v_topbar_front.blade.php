@@ -58,13 +58,16 @@
             </li>
         @else
             <li class="nav-item dropdown no-arrow">
-                <a class="nav-link " href="/dashboard">
-                    Dashboard
-                    <i class="fas fa-fw fa-tachometer-alt fa-sm fa-fw ml-2 text-gray-400"></i>
-                </a>
-                <a class="nav-link " href="/login" class="btn btn-info">
-                    <span>Login</span>
-                </a>
+                @if ($user != null && $user->role === 'Donatur')
+                    <a class="nav-link " href="/dashboard">
+                        Dashboard
+                        <i class="fas fa-fw fa-tachometer-alt fa-sm fa-fw ml-2 text-gray-400"></i>
+                    </a>
+                @else
+                    <a class="nav-link " href="/login" class="btn btn-info">
+                        <span>Login</span>
+                    </a>
+                @endif
                 {{-- <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
                 <img class="img-profile rounded-circle" src="img/boy.png" style="max-width: 60px">

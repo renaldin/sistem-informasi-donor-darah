@@ -138,7 +138,7 @@ var myLineChart = new Chart(permohonanDarah, {
       pointHoverBorderColor: "rgba(252,84,75,255)",
       pointHitRadius: 10,
       pointBorderWidth: 2,
-      data: event_donor,
+      data: permohonan_darah,
     }],
   },
   options: {
