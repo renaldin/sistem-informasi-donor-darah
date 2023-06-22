@@ -8,11 +8,13 @@
         <div class="sidebar-brand-text mx-3">{{ $data_web->nama_website }}</div>
     </a>
     <hr class="sidebar-divider my-0">
+    @if ($user->role !== 'Petugas Kesehatan')
     <li class="nav-item @if ($title === 'Dashboard') active @endif">
         <a class="nav-link" href="/dashboard">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
+    @endif
     <hr class="sidebar-divider">
     @if ($user->role === 'Admin')
         <div class="sidebar-heading">

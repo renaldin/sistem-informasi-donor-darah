@@ -69,7 +69,7 @@ class C_StokDarah extends Controller
         }
 
         $data = [
-            'title'         => 'Data Stok Darah',
+            'title'         => 'Data Darah Masuk',
             'sub_title'     => 'Tambah Darah',
             'data_web'      => $this->M_Website->detail(1),
             'no_kantong'    => $no_kantong,
@@ -98,7 +98,7 @@ class C_StokDarah extends Controller
         }
 
         $data = [
-            'title'         => 'Data Stok Darah',
+            'title'         => 'Data Darah Masuk',
             'sub_title'     => 'Tambah Darah',
             'data_web'      => $this->M_Website->detail(1),
             'no_kantong'    => $no_kantong,
@@ -126,7 +126,7 @@ class C_StokDarah extends Controller
         }
 
         $data = [
-            'title'         => 'Data Stok Darah',
+            'title'         => 'Data Darah Masuk',
             'sub_title'     => 'Tambah Darah',
             'data_web'      => $this->M_Website->detail(1),
             'no_kantong'    => $no_kantong,
@@ -208,6 +208,12 @@ class C_StokDarah extends Controller
                     'deskripsi_hasil_kusioner'  => Request()->deskripsi_hasil_kusioner,
                 ];
                 $this->M_Donor->tambah($data_donor);
+
+                $data_anggota = [
+                    'id_anggota'    => Request()->id_anggota,
+                    'tanggal_donor_kembali' => date('Y-m-d', strtotime('+60 days', strtotime(date('Y-m-d')))),
+                ];
+                $this->M_Anggota->edit($data_anggota);
             } elseif (Request()->form_anggota == 'Non Anggota') {
                 Request()->validate([
                     'nama_anggota'          => 'required',
@@ -233,10 +239,11 @@ class C_StokDarah extends Controller
 
                 $data_anggota = [
                     'nama_anggota'      => Request()->nama_anggota,
+                    'nik'      => Request()->nik,
                     'alamat'            => Request()->alamat,
                     'jenis_kelamin'     => Request()->jenis_kelamin,
                     'status_anggota'    => 'Mandiri',
-                    'tanggal_donor_kembali' => date('Y-m-d', strtotime('+30 days', strtotime(date('Y-m-d')))),
+                    'tanggal_donor_kembali' => date('Y-m-d', strtotime('+60 days', strtotime(date('Y-m-d')))),
                 ];
                 $this->M_Anggota->tambah($data_anggota);
 

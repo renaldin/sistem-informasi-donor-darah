@@ -25,10 +25,10 @@ function hitungUmur($tanggal_darah_masuk) {
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold">{{$sub_title}}</h6>
             </div>
-            <div class="card-header flex flex-row">
+            {{-- <div class="card-header flex flex-row">
               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambah">Tambah Darah</button>
               <a href="/riwayat_buang_darah" class="btn btn-danger">Darah Buang</a>
-            </div>
+            </div> --}}
             <div class="table-responsive p-3">
                 <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                     <thead class="thead-light">
