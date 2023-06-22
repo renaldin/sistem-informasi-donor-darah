@@ -97,12 +97,12 @@
                                 <div class="col-12 col-lg-4 d-flex">
                                     <div class="custom-control custom-radio mr-3">
                                         <input type="radio" id="Ya1" name="p[1]" class="custom-control-input"
-                                            value="1">
+                                            value="0">
                                         <label class="custom-control-label" for="Ya1">Ya</label>
                                     </div>
                                     <div class="custom-control custom-radio">
                                         <input type="radio" id="tidak1" name="p[1]" class="custom-control-input"
-                                            value="0">
+                                            value="1">
                                         <label class="custom-control-label" for="tidak1">Tidak</label>
                                     </div>
                                 </div>
@@ -618,21 +618,23 @@
         </div>
     </div>
     @if (!session('berhasil'))
-        <?php if (!isset($_GET['nik'])) { ?>
-        <script>
-            window.onload = function() {
-                $('.tombol').click();
-            };
+        @if (!session('gagal'))
+            <?php if (!isset($_GET['nik'])) { ?>
+            <script>
+                window.onload = function() {
+                    $('.tombol').click();
+                };
 
-            function quest(jawaban) {
-                if (jawaban == 'sudah') {
-                    $('.close').click();
-                    $('.cari').click();
-                } else {
-                    $('.close').click();
+                function quest(jawaban) {
+                    if (jawaban == 'sudah') {
+                        $('.close').click();
+                        $('.cari').click();
+                    } else {
+                        $('.close').click();
+                    }
                 }
-            }
-        </script>
-        <?php } ?>
+            </script>
+            <?php } ?>
+        @endif
     @endif
 @endsection

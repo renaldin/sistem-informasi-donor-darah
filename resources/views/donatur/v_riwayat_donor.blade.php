@@ -1,13 +1,20 @@
-@extends('layout.v_template_front')
+@extends('layout.v_template')
 
 @section('content')
-    <h1>{{ $title }}</h1>
     <div class="row">
         <div class="col-xl-12 col-lg-12" data-aos="fade-up">
             <div class="card mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold">{{ $sub_title }}</h6>
                 </div>
+                @if (session('berhasil'))
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        {{ session('berhasil') }}
+                    </div>
+                @endif
                 <div class="table-responsive p-3">
                     <table cellpadding='8' class="mb-2">
                         <tr>

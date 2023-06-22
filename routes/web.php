@@ -112,6 +112,7 @@ Route::group(['middleware' => 'revalidate'], function () {
         Route::post('/keluarkan_darah/{id}', [C_PermohonanDarah::class, 'proses_keluarkan_darah']);
         Route::get('/kirim_distribusi_darah/{id}', [C_PermohonanDarah::class, 'kirim_distribusi_darah'])->name('kirim_distribusi_darah');
         Route::get('/hapus_darah_keluar/{id}', [C_PermohonanDarah::class, 'hapus_darah_keluar'])->name('hapus_darah_keluar');
+        Route::post('/cetak_distribusi_darah', [C_PermohonanDarah::class, 'cetak_distribusi_darah']);
 
         // Data Permohonan Darah
         Route::get('/anggota', [C_Anggota::class, 'index'])->name('anggota');
@@ -132,6 +133,7 @@ Route::group(['middleware' => 'revalidate'], function () {
         // Daftar Donor
         Route::get('/daftar_donor', [C_Donatur::class, 'index'])->name('daftar_donor');
         Route::post('/submit_kuisioner', [C_Donatur::class, 'submit_kuisioner'])->name('submit_kuisioner');
+        Route::get('/hasil_donor/{id}', [C_Donatur::class, 'riwayat_donor'])->name('hasil_donor');
         Route::get('/riwayat_donor', [C_Donatur::class, 'riwayat_donor'])->name('riwayat_donor');
     });
 

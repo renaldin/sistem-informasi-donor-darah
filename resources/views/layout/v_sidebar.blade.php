@@ -109,7 +109,21 @@
             </a>
         </li>
     @elseif ($user->role === 'Donatur')
-
+        <div class="sidebar-heading">
+            Donatur
+        </div>
+        <li class="nav-item @if ($title === 'Pengajuan Event') active @endif">
+            <a class="nav-link" href="/daftar_donor">
+                <i class="fas fa-fw fa-palette"></i>
+                <span>Daftar Donor</span>
+            </a>
+        </li>
+        <li class="nav-item @if ($title === 'Pengajuan Event') active @endif">
+            <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal" id="#myBtn">
+                <i class="fas fa-fw fa-palette"></i>
+                <span>Riwayat Donor</span>
+            </a>
+        </li>
     @elseif ($user->role === 'Event')
         <div class="sidebar-heading">
             Event
@@ -150,3 +164,26 @@
     <hr class="sidebar-divider">
 </ul>
 <!-- Sidebar -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Masukan NIK</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/riwayat_donor" method="get">
+                <div class="modal-body">
+                    <input type="number" class="form-control" id="nik" name="nik"
+                        placeholder="Masukan NIK Anda." required autofocus>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Cari</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

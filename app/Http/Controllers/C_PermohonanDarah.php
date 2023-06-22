@@ -10,6 +10,7 @@ use App\Models\M_DarahKeluar;
 use App\Models\M_DarahMasuk;
 use Illuminate\Contracts\Session\Session;
 use RealRashid\SweetAlert\Facades\Alert;
+use PDF;
 
 class C_PermohonanDarah extends Controller
 {
@@ -364,5 +365,21 @@ class C_PermohonanDarah extends Controller
         $this->M_DarahKeluar->hapus($id_darah_keluar);
         Alert::success('Berhasil', 'Darah batal dikeluarkan.');
         return back();
+    }
+
+    public function cetak_distribusi_darah()
+    {
+        if (!Session()->get('email')) {
+            return redirect()->route('login');
+        }
+
+        $data = [
+            'title'         => 'Rekap Distribusi Darah',
+            'data_web'      => $this->M_Website->detail(1),
+            'data_darah'    => $this->M_DarahKeluar->get_data_tanggal(Request()->tanggal_mulai, Request()->tanggal_akhir)
+        ];
+
+        $pdf = PDF::loadview('cetak/v_cetak_distribusi_darah', $data);
+        return $pdf->download($data['title'] . ' ' . date('d F Y') . '.pdf');
     }
 }
