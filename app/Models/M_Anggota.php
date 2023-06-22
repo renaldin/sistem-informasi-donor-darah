@@ -35,4 +35,9 @@ class M_Anggota extends Model
     {
         return DB::table($this->table)->where('nik', $nik)->first();
     }
+
+    public function jumlah()
+    {
+        return DB::table($this->table)->count();
+    }
 }
