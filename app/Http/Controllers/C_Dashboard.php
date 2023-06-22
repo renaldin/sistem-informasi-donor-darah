@@ -40,9 +40,9 @@ class C_Dashboard extends Controller
                 'user'                  => $this->M_User->detail(Session()->get('id_user')),
                 'data_web'               => $this->M_Website->detail(1),
             ];
-            // return view('donatur.v_dashboard', $data);
+            return view('donatur.v_dashboard', $data);
             // return redirect()->route('/')->with('berhasil', 'Login berhasil!');
-            return redirect()->to('');
+            // return redirect()->to('');
         } elseif (Session()->get('role') === 'Event') {
             $data = [
                 'title'                 => 'Dashboard',

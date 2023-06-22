@@ -53,12 +53,12 @@ class C_Donatur extends Controller
         Request()->validate([
             'nik'                       => 'required',
             'nama'                      => 'required',
-            'jenis_kelamin'             => 'required',
+            // 'jenis_kelamin'             => 'required',
             'alamat'                    => 'required',
         ], [
             'nik.required'              => 'NIK Anggota harus diisi!',
             'nama.required'             => 'Nama Anggota harus diisi!',
-            'jenis_kelamin.required'    => 'Jenis Kelamin harus diisi!',
+            // 'jenis_kelamin.required'    => 'Jenis Kelamin harus diisi!',
             'alamat.required'           => 'Alamat harus diisi!',
         ]);
         // dd(Request()->all());
@@ -90,19 +90,20 @@ class C_Donatur extends Controller
                 'deskripsi_hasil_kusioner'  => 'Lolos kusioner'
             ];
             $this->M_Donor->tambah($data_donor);
-            return redirect()->route('daftar_donor')->with('berhasil', 'Daftar Donor Berhasil. Silahkan Tunggu Informasi Selanjutnya!');
+            return redirect()->to('hasil_donor/' . Request()->nik)->with('berhasil', 'Hasil Kuisioner Donor Berhasil. Silahkan Tunggu Informasi Selanjutnya!');
         }
         // jika ada 1 jawaban saja yg ya
-        return redirect()->route('daftar_donor')->with('gagal', 'Daftar Donor Gagal. Anda Kurang Memenuhi Persyaratan!');
+        return redirect()->route('daftar_donor')->with('gagal', 'Maaf Donor Darah Gagal. Anda Kurang Memenuhi Persyaratan!');
     }
 
-    public function riwayat_donor()
+    public function riwayat_donor($nik = null)
     {
-        if (!Request()->nik) {
+        if (!Request()->nik && $nik == null) {
             return redirect()->route('landingpage')->with('error', 'NIK wajib diisi.');
         }
 
-        $cek_nik = $this->M_Anggota->cek_nik(Request()->nik);
+
+        $cek_nik = $this->M_Anggota->cek_nik(Request()->nik ? Request()->nik : $nik);
 
         if ($cek_nik) {
             $data = [
