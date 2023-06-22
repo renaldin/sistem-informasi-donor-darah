@@ -64,22 +64,26 @@
                                 <tr>
                                     <td>1</td>
                                     <td>A</td>
-                                    <td>{{ $gol['a'] }}</td>
+                                    <td><?= $gol['a'] == 0 ? '<span class="badge badge-danger">' . $gol['a'] . '</span>' : $gol['a'] ?>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>2</td>
                                     <td>B</td>
-                                    <td>{{ $gol['b'] }}</td>
+                                    <td><?= $gol['b'] == 0 ? '<span class="badge badge-danger">' . $gol['b'] . '</span>' : $gol['b'] ?>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>3</td>
                                     <td>AB</td>
-                                    <td>{{ $gol['ab'] }}</td>
+                                    <td><?= $gol['ab'] == 0 ? '<span class="badge badge-danger">' . $gol['ab'] . '</span>' : $gol['ab'] ?>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>4</td>
                                     <td>O</td>
-                                    <td>{{ $gol['o'] }}</td>
+                                    <td><?= $gol['o'] == 0 ? '<span class="badge badge-danger">' . $gol['o'] . '</span>' : $gol['o'] ?>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -94,38 +98,10 @@
                                 <h6 class="m-0 font-weight-bold text-danger">Permohonan Darah</h6>
                             </div>
                             <div class="card-body">
-                                <div class="chart-pie pt-4">
-                                    <canvas id="myPieChart"></canvas>
+                                <div class="chart-bar">
+                                    <canvas id="chartPermohonanDarah"></canvas>
                                 </div>
-                                <hr>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-12 col-12" data-aos="fade-up">
-                <div class="card mb-4">
-                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-danger">Grafik Event</h6>
-                        {{-- input --}}
-                        <div class="dropdown no-arrow">
-                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                aria-labelledby="dropdownMenuLink">
-                                <div class="dropdown-header">Dropdown Header:</div>
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="chart-bar">
-                            <canvas id="chartPermohonanDarah"></canvas>
                         </div>
                     </div>
                 </div>
@@ -161,12 +137,50 @@
             </div>
             <div class="col-lg-10 col-10" data-aos="fade-up">
                 <div class="card mb-4">
-                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-dark">Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Similique iure consequuntur qui? Doloribus, blanditiis voluptatum ab dicta exercitationem,
-                            qui expedita architecto magni maxime labore saepe aut quis accusantium nam praesentium
-                            reprehenderit odit nisi harum accusamus alias consequatur cupiditate culpa! Atque magnam
-                            corporis deleniti ducimus eius consequuntur aliquid repellat praesentium voluptatum.</h6>
+                    <div class="card-header py-3 ">
+                        <p style="text-indent: 4em;" align="justify">Untuk menjadi pendonor darah, ada beberapa syarat yang
+                            harus dipenuhi,
+                            mulai dari usia hingga
+                            kondisi tubuh saat akan mendonorkan darah. Berikut ini adalah beberapa persyaratan dasar untuk
+                            melakukan donor darah:
+                        </p>
+                        <ol>
+                            <li>Berusia 17-60 tahun untuk orang yang baru pertama kali mendonorkan darah
+                            <li>Pendonor pertama kali yang berusia lebih dari 60 tahun dan pendonor ulang yang berusia
+                                lebih
+                                dari 65 tahun dapat mendonorkan darah, tetapi mendapatkan perhatian khusus berdasarkan
+                                kondisi
+                                kesehatannya
+                            <li>Memiliki berat badan minimal 45 kg
+                            <li>Memiliki tekanan darah normal atau berkisar antara 90/60-150/80 mmHg
+                            <li>Memiliki kadar hemoglobin sekitar 12,5-17 g/dL dan tidak lebih dari 20 g/dL
+                            <li>Jarak waktu donor darah terakhir minimal 3 bulan atau 12 minggu, jika sebelumnya sudah
+                                pernah
+                                menjadi pendonor darah
+                            <li>Tidak sedang dalam kondisi sakit atau memiliki keluhan tertentu, seperti lemas, batuk, atau
+                                demam
+                            <li>Bersedia menyumbangkan darah secara sukarela dengan menyetujui informed consent
+
+                        </ol>
+                        <p style="text-indent: 4em;" align="justify">Sebelum melakukan donor darah, pastikan kondisi tubuh
+                            Anda sedang
+                            sehat. Untuk menjaga kualitas darah sebelum melakukan donor darah, hindari konsumsi makanan
+                            berlemak dan usahakan untuk mencukupi asupan protein, vitamin C, dan zat besi. Selain itu,
+                            jangan lupa pula untuk minum air putih yang banyak. Anda juga disarankan untuk tidak melakukan
+                            aktivitas fisik atau olahraga berat dan tidak mengonsumsi minuman keras setidaknya 1 hari
+                            sebelum melakukan donor darah.</p>
+                        <p style="text-indent: 4em;" align="justify">Selain memenuhi syarat donor darah, berikut ini adalah
+                            beberapa hal yang perlu Anda perhatikan dan lakukan setelah mendonorkan darah:</p>
+                        <ul>
+                            <li>Jangan melepas plester pada area bekas tusukan jarum setidaknya selama 5 jam setelah donor
+                                darah.
+                            <li>Hindari merokok paling tidak selama 3 jam setelah donor darah.
+                            <li>Hindari mengangkat barang-barang berat setidaknya 5 jam setelah donor darah.
+                            <li>Perbanyak minum air putih.
+                            <li>Konsumsi makanan yang kaya akan zat besi, seperti daging dan kacang-kacangan, atau suplemen
+                                zat besi.
+
+                        </ul>
                     </div>
                     {{-- <div class="card-body">
                     </div> --}}
@@ -178,17 +192,34 @@
             <div class="col-lg-10 col-10" data-aos="fade-up">
                 <div class="card mb-4">
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-dark">Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Similique iure consequuntur qui? Doloribus, blanditiis voluptatum ab dicta exercitationem,
-                            qui expedita architecto magni maxime labore saepe aut quis accusantium nam praesentium
-                            reprehenderit odit nisi harum accusamus alias consequatur cupiditate culpa! Atque magnam
-                            corporis deleniti ducimus eius consequuntur aliquid repellat praesentium voluptatum.</h6>
+                        <ol align="justify">
+                            <li>Dokter pemeriksa harus membuatkan pihak keluarga pasie surat pengantar mengambil darah.
+                                Surat itu berisikan: </li>
+                            <ol type="a">
+                                <li>Nama pasien
+                                <li>Nama rumah sakit
+                                <li>Golongan darah pasien
+                                <li>Jenis komponen darah
+                                <li>Jumlah darah yang dibutuhkan pasien
+
+                            </ol>
+                            <li> Perawat rumah sakit dan keluarga pasien membawa surat pengantar tadi ke Unit Tranfusi Darah
+                                PMI.
+                            <li> Petugas PMI akan memutuskan apakah mereka dapat memenuhi permintaan atau tidak dan apakah
+                                mereka membutuhkan donor dari teman atau keluarga pasien sebagai ganti darah yang tidak ada.
+                            <li> Untuk memastikan kebenaran info dari petugas PMI kalau stok darah habis, pihak keluarga
+                                dapat
+                                menghubungi langsung ke staf PMI.
+                            <li> Apabila tersedia, pihak yang membutuhkan harus menunggu dulu karena darah harus melewati
+                                proses uji saring dan pemisahan darah.
+
+                        </ol>
                     </div>
                     {{-- <div class="card-body">
                     </div> --}}
                 </div>
             </div>
-            <div class="col-12 col-sm-10 col-md-8 col-lg-8 text-center m-1" data-aos="fade-up">
+            {{-- <div class="col-12 col-sm-10 col-md-8 col-lg-8 text-center m-1" data-aos="fade-up">
                 <h4>PROSEDUR PENGAJUAN EVENT</h4>
             </div>
             <div class="col-lg-10 col-10" data-aos="fade-up">
@@ -200,10 +231,8 @@
                             reprehenderit odit nisi harum accusamus alias consequatur cupiditate culpa! Atque magnam
                             corporis deleniti ducimus eius consequuntur aliquid repellat praesentium voluptatum.</h6>
                     </div>
-                    {{-- <div class="card-body">
-                    </div> --}}
                 </div>
-            </div>
+            </div> --}}
             <div class="col-12 col-sm-10 col-md-8 col-lg-8 text-center mt-5" data-aos="fade-up">
                 <p>Sistem Informasi Donor Darah memberikan informasi dan kemudahan kepada masyarakat yang ingin
                     mendonorkan darah</p>
