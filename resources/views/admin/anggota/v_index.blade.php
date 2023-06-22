@@ -35,6 +35,7 @@ function hitungDurasiJadwalDonor($tanggal_donor_kembali) {
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold">{{$sub_title}}</h6>
             </div>
+            
             <div class="table-responsive p-3">
                 <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                     <thead class="thead-light">
@@ -53,7 +54,7 @@ function hitungDurasiJadwalDonor($tanggal_donor_kembali) {
                           <tr>
                             <td>{{$no++}}</td>
                             <td>{{$row->nama_anggota}}</td>
-                            <td>{{hitungDurasiJadwalDonor($row->tanggal_donor_kembali)}}</td>
+                            <td>{{$row->alamat}}</td>
                             <td>
                               @if (hitungDurasiJadwalDonor($row->tanggal_donor_kembali) > 5)
                                 <span class="badge badge-success">{{date('d F Y', strtotime($row->tanggal_donor_kembali))}}</span>
@@ -65,7 +66,7 @@ function hitungDurasiJadwalDonor($tanggal_donor_kembali) {
                             </td>
                             <td class="text-center">
                                 <button type="button" class="btn btn-sm btn-success mb-1" data-toggle="modal" data-target="#kirim_jadwal{{$row->id_anggota}}">Kirim WA</button>
-                                <button type="button" class="btn btn-sm btn-warning mb-1" data-toggle="modal" data-target="#riwayat{{$row->id_anggota}}">Riwayat</button>   
+                                <button type="button" class="btn btn-sm btn-primary mb-1" data-toggle="modal" data-target="#riwayat{{$row->id_anggota}}">Detail</button>   
                             </td>
                           </tr>
                         @endif

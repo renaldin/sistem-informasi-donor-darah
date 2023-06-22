@@ -31,11 +31,16 @@
                       </tr>
                   </thead>
                   <tbody>
-                      {{-- <tr>
-                          <td>1</td>
-                          <td>A</td>
-                          <td>{{ $gol['a'] }}</td>
-                      </tr> --}}
+                    <?php $no=1;?>
+                    @foreach ($event as $row)
+                    @if ($row->id_user === $user->id_user && $row->status_event == 'Tidak Aktif')
+                    <tr>
+                        <td>{{$no++}}</td>
+                        <td>{{$row->nama_instansi}}</td>
+                        <td>{{$row->tanggal_event}} {{$row->jam}}</td>
+                    </tr>
+                    @endif
+                    @endforeach
                   </tbody>
               </table>
           </div>
@@ -50,17 +55,22 @@
               <table class="table align-items-center table-flush table-hover" id="dataTableHover2">
                   <thead class="thead-light">
                       <tr>
-                          <th>No</th>
-                          <th>Golongan Darah</th>
-                          <th>Stok</th>
+                        <th>No</th>
+                        <th>Name Instansi</th>
+                        <th>Waktu Event</th>
                       </tr>
                   </thead>
                   <tbody>
-                      {{-- <tr>
-                          <td>1</td>
-                          <td>A</td>
-                          <td>{{ $gol_belum_masuk['a'] }}</td>
-                      </tr> --}}
+                    <?php $no=1;?>
+                    @foreach ($event as $row)
+                    @if ($row->id_user === $user->id_user && $row->status_event == 'Aktif')
+                    <tr>
+                        <td>{{$no++}}</td>
+                        <td>{{$row->nama_instansi}}</td>
+                        <td>{{$row->tanggal_event}} {{$row->jam}}</td>
+                    </tr>
+                    @endif
+                    @endforeach
                   </tbody>
               </table>
           </div>

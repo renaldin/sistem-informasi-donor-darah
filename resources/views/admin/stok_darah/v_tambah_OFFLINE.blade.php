@@ -30,6 +30,15 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group">
+                        <label for="nik">NIK</label>
+                        <input type="number" class="form-control @error('nik') is-invalid @enderror" name="nik" id="nik" value="{{old('nik');}}" placeholder="Masukkan NIK">
+                        @error('nik')
+                            <small class="form-text text-danger">{{$message}}</small>
+                        @enderror
+                    </div>       
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
                         <label for="alamat">Alamat</label>
                         <input type="text" class="form-control @error('alamat') is-invalid @enderror" name="alamat" id="alamat" value="{{old('alamat');}}" placeholder="Masukkan Alamat">
                         @error('alamat')

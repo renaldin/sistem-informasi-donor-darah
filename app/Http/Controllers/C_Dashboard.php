@@ -52,11 +52,16 @@ class C_Dashboard extends Controller
             ];
             return view('admin.v_dashboard', $data);
         } elseif (Session()->get('role') === 'Donatur') {
+
+            $user = $this->M_User->detail(Session()->get('id_user'));
+
             $data = [
                 'title'                 => 'Dashboard',
                 'sub_title'              => 'Dashboard',
-                'user'                  => $this->M_User->detail(Session()->get('id_user')),
+                'user'                  => $user,
                 'data_web'               => $this->M_Website->detail(1),
+                'gol'                   => $this->M_DarahMasuk->countGol('Sudah Masuk'),
+                'anggota'                   => $this->M_Anggota->cek_nik($user->nik),
             ];
             return view('donatur.v_dashboard', $data);
             // return redirect()->route('/')->with('berhasil', 'Login berhasil!');
@@ -67,6 +72,7 @@ class C_Dashboard extends Controller
                 'sub_title'              => 'Dashboard',
                 'user'                  => $this->M_User->detail(Session()->get('id_user')),
                 'data_web'               => $this->M_Website->detail(1),
+                'event'               => $this->M_Event->get_data(),
             ];
             return view('event.v_dashboard', $data);
         } elseif (Session()->get('role') === 'Petugas Kesehatan') {
@@ -76,13 +82,15 @@ class C_Dashboard extends Controller
                 'user'                  => $this->M_User->detail(Session()->get('id_user')),
                 'data_web'               => $this->M_Website->detail(1),
             ];
-            return view('petugas_kesehatan.v_dashboard', $data);
+            return redirect()->route('antrian');
         } elseif (Session()->get('role') === 'Rumah Sakit') {
             $data = [
                 'title'                 => 'Dashboard',
                 'sub_title'              => 'Dashboard',
                 'user'                  => $this->M_User->detail(Session()->get('id_user')),
                 'data_web'               => $this->M_Website->detail(1),
+                'gol'                   => $this->M_DarahMasuk->countGol('Sudah Masuk'),
+                'data_permohonan_darah' => $this->M_PermohonanDarah->get_data_user(Session()->get('id_user')),
             ];
             return view('rumah_sakit.v_dashboard', $data);
         } elseif (Session()->get('role') === 'Pusat PMI') {
