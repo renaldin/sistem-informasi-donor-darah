@@ -15,7 +15,7 @@ function hitungUmur($tanggal_darah) {
     'hari' => $perbedaan->d
   );
 
-  $data_umur = $umur['tahun'].' tahun, '.$umur['bulan'].' bulan, '.$umur['hari'].' hari.';
+  $data_umur = $umur['bulan'].' bulan, '.$umur['hari'].' hari.';
   return $data_umur;
 }
 
