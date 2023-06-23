@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\M_User;
 use App\Models\M_Website;
 use RealRashid\SweetAlert\Facades\Alert;
+use Twilio\Rest\Client;
 
 class C_User extends Controller
 {
@@ -324,4 +325,26 @@ class C_User extends Controller
             return back();
         }
     }
+
+    public function kirimJadwal($id) 
+     {
+         $sid = "AC3152032a13274daaa83569dad0c55b43";
+         $token = "ffd93e355ec798e02be02dfc06a9fb28";
+         $twilioNumber = "+14155238886";
+         $recipientNumber = "+6282239668826";
+         $client = new Client($sid, $token);
+    
+         $message = $client->messages->create(
+             'whatsapp:' . $recipientNumber, // Replace with the recipient's WhatsApp number
+             [
+                 'from' => 'whatsapp:' . $twilioNumber,
+                 'body' => 'Hallo,Ayo donor brok.', // Replace with your desired message
+             ]
+         );
+    
+         return response()->json(['message' => 'WhatsApp message sent successfully.', 'messageSid' => $message->sid]);
+        }
+    
+
+    
 }
