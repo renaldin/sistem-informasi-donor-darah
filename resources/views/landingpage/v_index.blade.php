@@ -121,7 +121,10 @@
                                 <div class="col-4">
                                     <div class="card"
                                         style="background-image: url('/foto_event/{{ $row->gambar }}'); width: 100%; height: 200px; background-size: cover">
-                                        <p class="mt-auto pl-2 text-white">{{ $row->nama_instansi }}</p>
+                                        <span class="mt-auto pl-2 text-white">{{ $row->nama_instansi }}</span>
+                                        <span class=" pl-2 text-white">Alamat : {{ $row->alamat_lengkap }}</span>
+                                        <span class=" pl-2 text-white">Tanggal :
+                                            {{ date('l, d m Y', strtotime($row->tanggal_pengajuan)) }}</span>
                                     </div>
                                 </div>
                             @endforeach
