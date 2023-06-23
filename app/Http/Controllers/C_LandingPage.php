@@ -37,7 +37,7 @@ class C_LandingPage extends Controller
             'all_event'             => $this->M_Event->get_all_data()
         ];
 
-        // dd($data['darah_masuk']);
+        // dd($data['permohonan_darah']);
 
         return view('landingpage.v_index', $data);
     }
