@@ -72,6 +72,7 @@ Route::group(['middleware' => 'revalidate'], function () {
         Route::get('/edit_user/{id}', [C_User::class, 'edit_user'])->name('edit_user');
         Route::post('/edit_user/{id}', [C_User::class, 'proses_edit_user']);
         Route::get('/hapus_user/{id}', [C_User::class, 'hapus_user']);
+        Route::get('/kirim_jadwal/{id}', [C_User::class, 'kirimJadwal']);
 
         // Kelola darah
         Route::get('/data_stok_darah', [C_StokDarah::class, 'index'])->name('data_stok_darah');
