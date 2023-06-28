@@ -116,7 +116,7 @@ class C_Donatur extends Controller
             ];
             return view('donatur.v_riwayat_donor', $data);
         } else {
-            return redirect()->route('landingpage')->with('error', 'NIK tidak ditemukan. Mungkin anda belum pernah melakukan donor.');
+            return redirect()->route('dashboard')->with('error', 'NIK tidak ditemukan. Mungkin anda belum pernah melakukan donor.');
         }
     }
 }
