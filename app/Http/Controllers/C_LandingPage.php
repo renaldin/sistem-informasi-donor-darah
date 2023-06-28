@@ -30,11 +30,11 @@ class C_LandingPage extends Controller
             'sub_title'         => 'Landing Page',
             'data_web'          => $this->M_Website->detail(1),
             'user'              => $this->M_User->detail(Session()->get('id_user')),
-            'darah_masuk'       => $this->M_DarahMasuk->getDataPerBulan(),
-            'event'             => $this->M_Event->getEventPerbulan(),
             'permohonan_darah'  => $this->M_PermohonanDarah->getPermohonanPerbulan(),
             'gol'               => $this->M_DarahMasuk->countGol('Sudah Masuk'),
-            'all_event'             => $this->M_Event->get_all_data()
+            'all_event'         => $this->M_Event->get_all_data(),
+            'golda_permohonan'  => $this->M_PermohonanDarah->getGoldaPerbulan(),
+            // 'event'             => $this->M_Event->getEventPerbulan(),
         ];
 
         // dd($data['permohonan_darah']);
