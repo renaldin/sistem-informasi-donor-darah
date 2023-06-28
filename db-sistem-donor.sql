@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 23, 2023 at 12:07 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.0.19
+-- Generation Time: Jun 28, 2023 at 08:37 AM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -36,7 +36,7 @@ CREATE TABLE `anggota` (
   `no_wa` varchar(30) DEFAULT NULL,
   `status_anggota` enum('Mandiri','Event') NOT NULL DEFAULT 'Mandiri',
   `tanggal_donor_kembali` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `anggota`
@@ -71,7 +71,7 @@ CREATE TABLE `biodata_web` (
   `nomor_telepon` varchar(50) NOT NULL,
   `alamat` text NOT NULL,
   `logo` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `biodata_web`
@@ -95,31 +95,31 @@ CREATE TABLE `darah` (
   `volume_darah` varchar(50) DEFAULT NULL,
   `tanggal_kedaluwarsa` date DEFAULT NULL,
   `tanggal_darah_masuk` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `darah`
 --
 
 INSERT INTO `darah` (`id_darah`, `id_donor`, `no_kantong`, `golongan_darah`, `resus`, `volume_darah`, `tanggal_kedaluwarsa`, `tanggal_darah_masuk`) VALUES
-(1, 1, 'K1', 'A', 'A', 'A', '2023-05-18', '2023-05-18 00:00:00'),
-(2, 2, 'K2', 'C', 'C', 'C', '2023-05-18', '2023-05-18 00:00:00'),
-(3, 2, 'K3', 'B', 'B', 'B', '2023-05-20', '2023-05-20 22:55:30'),
-(4, 1, 'K4', 'O', 'O', 'O', '2023-05-21', '2023-05-20 22:55:56'),
-(5, 3, 'K5', 'O', 'B', 'C', '2023-05-23', '2023-05-23 10:25:54'),
-(6, 2, 'K6', 'O', 'B', 'C', '2023-05-23', '2023-05-23 10:31:54'),
-(7, 4, 'K7', 'C', 'C', 'C', '2023-05-23', '2023-05-23 23:30:33'),
-(8, 5, 'K8', 'A', 'A', 'A', '2023-06-10', '2023-05-23 23:43:49'),
-(9, 1, 'K9', 'A', 'A', 'A', '2023-05-25', '2023-05-25 13:28:59'),
-(10, 7, 'K10', 'A', 'A', 'A', '2023-06-10', '2023-05-25 14:02:20'),
-(11, 8, 'K11', 'A', 'A', 'A', '2023-11-11', '2023-05-25 14:41:16'),
-(12, 9, 'K12', 'A', 'A', 'A', '2023-08-31', '2023-05-25 14:44:43'),
-(13, 10, 'K13', 'A', 'A', 'A', '2023-06-26', '2023-05-26 09:54:25'),
-(14, 11, 'K14', 'B', 'B', 'B', '2023-06-26', '2023-05-26 10:01:04'),
-(15, 12, 'K15', 'A', 'A', 'A', '2023-06-26', '2023-05-26 10:01:34'),
-(16, 13, 'K16', 'A', 'A', 'A', '2023-06-26', '2023-05-26 10:02:02'),
-(17, 14, 'K17', 'A', 'A', 'A', '2023-06-26', '2023-05-26 10:02:27'),
-(18, 15, 'K18', 'A', 'A', 'A', '2023-06-26', '2023-05-26 10:41:00'),
+(1, 1, 'K1', 'A', 'Positif', 'A', '2023-05-18', '2023-05-18 00:00:00'),
+(2, 2, 'K2', 'C', 'Negatif', 'C', '2023-05-18', '2023-05-18 00:00:00'),
+(3, 2, 'K3', 'B', 'Positif', 'B', '2023-05-20', '2023-05-20 22:55:30'),
+(4, 1, 'K4', 'O', 'Negatif', 'O', '2023-05-21', '2023-05-20 22:55:56'),
+(5, 3, 'K5', 'O', 'Positif', 'C', '2023-05-23', '2023-05-23 10:25:54'),
+(6, 2, 'K6', 'O', 'Negatif', 'C', '2023-05-23', '2023-05-23 10:31:54'),
+(7, 4, 'K7', 'C', 'Negatif', 'C', '2023-05-23', '2023-05-23 23:30:33'),
+(8, 5, 'K8', 'A', 'Positif', 'A', '2023-06-10', '2023-05-23 23:43:49'),
+(9, 1, 'K9', 'A', 'Negatif', 'A', '2023-05-25', '2023-05-25 13:28:59'),
+(10, 7, 'K10', 'A', 'Positif', 'A', '2023-06-10', '2023-05-25 14:02:20'),
+(11, 8, 'K11', 'A', 'Negatif', 'A', '2023-11-11', '2023-05-25 14:41:16'),
+(12, 9, 'K12', 'A', 'Negatif', 'A', '2023-08-31', '2023-05-25 14:44:43'),
+(13, 10, 'K13', 'A', 'Positif', 'A', '2023-06-26', '2023-05-26 09:54:25'),
+(14, 11, 'K14', 'B', 'Positif', 'B', '2023-06-26', '2023-05-26 10:01:04'),
+(15, 12, 'K15', 'A', 'Negatif', 'A', '2023-06-26', '2023-05-26 10:01:34'),
+(16, 13, 'K16', 'A', 'Positif', 'A', '2023-06-26', '2023-05-26 10:02:02'),
+(17, 14, 'K17', 'A', 'Positif', 'A', '2023-06-26', '2023-05-26 10:02:27'),
+(18, 15, 'K18', 'A', 'Negatif', 'A', '2023-06-26', '2023-05-26 10:41:00'),
 (19, 19, 'K19', 'A', 'Positif', '1', '2023-11-09', '2023-06-23 04:02:26');
 
 -- --------------------------------------------------------
@@ -133,7 +133,7 @@ CREATE TABLE `darah_buang` (
   `id_darah` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `tanggal_buang` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `darah_buang`
@@ -155,7 +155,7 @@ CREATE TABLE `darah_keluar` (
   `id_darah` int(11) NOT NULL,
   `id_permohonan_darah` int(11) NOT NULL,
   `tanggal_keluar` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `darah_keluar`
@@ -182,7 +182,7 @@ CREATE TABLE `darah_masuk` (
   `id_user` int(11) NOT NULL,
   `status_darah_masuk` enum('Belum Masuk','Sudah Masuk') NOT NULL DEFAULT 'Belum Masuk',
   `tanggal_masuk` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `darah_masuk`
@@ -219,7 +219,7 @@ CREATE TABLE `donor` (
   `denyut_nadi` varchar(10) DEFAULT NULL,
   `tinggi_badan` varchar(10) DEFAULT NULL,
   `keadaan_umum` varchar(30) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `donor`
@@ -265,7 +265,7 @@ CREATE TABLE `event` (
   `status_pengajuan` enum('Menunggu Persetujuan','Disetujui','Tidak Disetujui','Belum Dikirim','Dibuat Admin') DEFAULT NULL,
   `status_event` enum('Aktif','Tidak Aktif') NOT NULL DEFAULT 'Tidak Aktif',
   `gambar` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `event`
@@ -296,7 +296,7 @@ CREATE TABLE `permohonan_darah` (
   `upload_surat` text DEFAULT NULL,
   `status_permohonan` enum('Belum Dikirim','Menunggu Proses','Dikirim','Diterima') DEFAULT NULL,
   `tanggal_permohonan` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `permohonan_darah`
@@ -322,7 +322,7 @@ CREATE TABLE `user` (
   `nomor_telepon` varchar(30) NOT NULL,
   `role` enum('Admin','Donatur','Rumah Sakit','Event','Petugas Kesehatan') NOT NULL,
   `foto` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user`

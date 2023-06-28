@@ -52,7 +52,7 @@
                         <h6 class="m-0 font-weight-bold text-danger">Stok Darah</h6>
                     </div>
                     <div class="table-responsive p-3">
-                        <table class="table align-items-center table-flush table-hover" id="dataTableHover">
+                        <table class="table align-items-center table-flush table-hover">
                             <thead class="thead-light">
                                 <tr>
                                     <th>No</th>
@@ -130,10 +130,139 @@
                             <div class="card-header py-3">
                                 <h6 class="m-0 font-weight-bold text-danger">Permohonan Darah</h6>
                             </div>
-                            <div class="card-body">
-                                <div class="chart-bar">
-                                    <canvas id="chartPermohonanDarah"></canvas>
-                                </div>
+                            <div class="table-responsive p-3">
+                                <table class="table align-items-center table-flush table-hover">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Bulan</th>
+                                            <th>Jumlah Permohonan</th>
+                                            <th>Golda</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1.</td>
+                                            <td>Januari</td>
+                                            <td>{{ $permohonan_darah['januari'] }}</td>
+                                            <td>
+                                                @foreach ($golda_permohonan['goldajan'] as $item)
+                                                    {{ $item->golda }}
+                                                @endforeach
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>2.</td>
+                                            <td>Februari</td>
+                                            <td>{{ $permohonan_darah['februari'] }}</td>
+                                            <td>
+                                                @foreach ($golda_permohonan['goldafeb'] as $item)
+                                                    {{ $item->golda }}
+                                                @endforeach
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>3.</td>
+                                            <td>Maret</td>
+                                            <td>{{ $permohonan_darah['maret'] }}</td>
+                                            <td>
+                                                @foreach ($golda_permohonan['goldamar'] as $item)
+                                                    {{ $item->golda }}
+                                                @endforeach
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>4.</td>
+                                            <td>April</td>
+                                            <td>{{ $permohonan_darah['april'] }}</td>
+                                            <td>
+                                                @foreach ($golda_permohonan['goldaapr'] as $item)
+                                                    {{ $item->golda }}
+                                                @endforeach
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>5.</td>
+                                            <td>Mei</td>
+                                            <td>{{ $permohonan_darah['mei'] }}</td>
+                                            <td>
+                                                @foreach ($golda_permohonan['goldamei'] as $item)
+                                                    {{ $item->golda }}
+                                                @endforeach
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>6.</td>
+                                            <td>Juni</td>
+                                            <td>{{ $permohonan_darah['juni'] }}</td>
+                                            <td>
+                                                @foreach ($golda_permohonan['goldajun'] as $item)
+                                                    {{ $item->golda }}
+                                                @endforeach
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>7.</td>
+                                            <td>Juli</td>
+                                            <td>{{ $permohonan_darah['juli'] }}</td>
+                                            <td>
+                                                @foreach ($golda_permohonan['goldajul'] as $item)
+                                                    {{ $item->golda }}
+                                                @endforeach
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>8.</td>
+                                            <td>Agustus</td>
+                                            <td>{{ $permohonan_darah['agustus'] }}</td>
+                                            <td>
+                                                @foreach ($golda_permohonan['goldaagu'] as $item)
+                                                    {{ $item->golda }}
+                                                @endforeach
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>9.</td>
+                                            <td>September</td>
+                                            <td>{{ $permohonan_darah['september'] }}</td>
+                                            <td>
+                                                @foreach ($golda_permohonan['goldasep'] as $item)
+                                                    {{ $item->golda }}
+                                                @endforeach
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>10.</td>
+                                            <td>Oktober</td>
+                                            <td>{{ $permohonan_darah['oktober'] }}</td>
+                                            <td>
+                                                @foreach ($golda_permohonan['goldaokt'] as $item)
+                                                    {{ $item->golda }}
+                                                @endforeach
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>11.</td>
+                                            <td>November</td>
+                                            <td>{{ $permohonan_darah['november'] }}</td>
+                                            <td>
+                                                @foreach ($golda_permohonan['goldanov'] as $item)
+                                                    {{ $item->golda }}
+                                                @endforeach
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>12.</td>
+                                            <td>Desember</td>
+                                            <td>{{ $permohonan_darah['desember'] }}</td>
+                                            <td>
+                                                @foreach ($golda_permohonan['goldades'] as $item)
+                                                    {{ $item->golda }}
+                                                @endforeach
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -300,48 +429,4 @@
             </div>
         </div>
     </div>
-    <script>
-        var darah_masuk = [
-            <?= $darah_masuk['januari'] ?>,
-            <?= $darah_masuk['februari'] ?>,
-            <?= $darah_masuk['maret'] ?>,
-            <?= $darah_masuk['april'] ?>,
-            <?= $darah_masuk['mei'] ?>,
-            <?= $darah_masuk['juni'] ?>,
-            <?= $darah_masuk['juli'] ?>,
-            <?= $darah_masuk['agustus'] ?>,
-            <?= $darah_masuk['september'] ?>,
-            <?= $darah_masuk['oktober'] ?>,
-            <?= $darah_masuk['november'] ?>,
-            <?= $darah_masuk['desember'] ?>,
-        ];
-        var event_donor = [
-            <?= $event['januari'] ?>,
-            <?= $event['februari'] ?>,
-            <?= $event['maret'] ?>,
-            <?= $event['april'] ?>,
-            <?= $event['mei'] ?>,
-            <?= $event['juni'] ?>,
-            <?= $event['juli'] ?>,
-            <?= $event['agustus'] ?>,
-            <?= $event['september'] ?>,
-            <?= $event['oktober'] ?>,
-            <?= $event['november'] ?>,
-            <?= $event['desember'] ?>,
-        ];
-        var permohonan_darah = [
-            <?= $permohonan_darah['januari'] ?>,
-            <?= $permohonan_darah['februari'] ?>,
-            <?= $permohonan_darah['maret'] ?>,
-            <?= $permohonan_darah['april'] ?>,
-            <?= $permohonan_darah['mei'] ?>,
-            <?= $permohonan_darah['juni'] ?>,
-            <?= $permohonan_darah['juli'] ?>,
-            <?= $permohonan_darah['agustus'] ?>,
-            <?= $permohonan_darah['september'] ?>,
-            <?= $permohonan_darah['oktober'] ?>,
-            <?= $permohonan_darah['november'] ?>,
-            <?= $permohonan_darah['desember'] ?>,
-        ];
-    </script>
 @endsection
