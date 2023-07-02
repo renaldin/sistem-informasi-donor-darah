@@ -45,6 +45,9 @@ Route::group(['middleware' => 'revalidate'], function () {
 
     // Register
     Route::get('/register', [C_Register::class, 'index'])->name('register');
+    Route::get('/register_event', [C_Register::class, 'register_event'])->name('register_event');
+    Route::get('/register_donatur', [C_Register::class, 'register_donatur'])->name('register_donatur');
+    Route::get('/register_rumah_sakit', [C_Register::class, 'register_rumah_sakit'])->name('register_donatur');
     Route::post('/register', [C_Register::class, 'register']);
 
     // Logout
@@ -72,7 +75,6 @@ Route::group(['middleware' => 'revalidate'], function () {
         Route::get('/edit_user/{id}', [C_User::class, 'edit_user'])->name('edit_user');
         Route::post('/edit_user/{id}', [C_User::class, 'proses_edit_user']);
         Route::get('/hapus_user/{id}', [C_User::class, 'hapus_user']);
-        Route::get('/kirim_jadwal/{id}', [C_User::class, 'kirimJadwal']);
 
         // Kelola darah
         Route::get('/data_stok_darah', [C_StokDarah::class, 'index'])->name('data_stok_darah');
@@ -117,13 +119,16 @@ Route::group(['middleware' => 'revalidate'], function () {
 
         // Data Permohonan Darah
         Route::get('/anggota', [C_Anggota::class, 'index'])->name('anggota');
+        Route::get('/kirim_jadwal/{id}', [C_Anggota::class, 'kirim_jadwal']);
 
         // laporan
         Route::get('/laporan_darah_masuk', [C_Laporan::class, 'index'])->name('laporan_darah_masuk');
+        Route::get('/laporan_stok_darah', [C_Laporan::class, 'stok_darah'])->name('laporan_stok_darah');
         Route::get('/laporan_darah_keluar', [C_Laporan::class, 'darah_keluar'])->name('laporan_darah_keluar');
         Route::get('/laporan_darah_buang', [C_Laporan::class, 'darah_buang'])->name('laporan_darah_buang');
 
         Route::post('/cetak_darah_masuk', [C_Laporan::class, 'cetak_darah_masuk'])->name('cetak_darah_masuk');
+        Route::post('/cetak_stok_darah', [C_Laporan::class, 'cetak_stok_darah'])->name('cetak_stok_darah');
         Route::post('/cetak_darah_keluar', [C_Laporan::class, 'cetak_darah_keluar'])->name('cetak_darah_keluar');
         Route::post('/cetak_darah_buang', [C_Laporan::class, 'cetak_darah_buang'])->name('cetak_darah_keluar');
     });

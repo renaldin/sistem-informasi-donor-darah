@@ -17,11 +17,38 @@
                 <h6 class="m-0 font-weight-bold">{{$user->nama}}</h6>
             </div>
             <div class="card-body">
+                @if ($user->role === 'Event')
+                <div class="form-group">
+                    <label>Kode Instansi : {{$user->kode_instansi}}</label>
+                </div>
+                @endif
+                @if ($user->role === 'Rumah Sakit')
+                <div class="form-group">
+                    <label>Kode Rumah Sakit : {{$user->kode_rs}}</label>
+                </div>
+                @endif
+                @if ($user->role === 'Donatur')
+                <div class="form-group">
+                    <label>NIK : {{$user->nik}}</label>
+                </div>
+                <div class="form-group">
+                    <label>Jenis Kelamin : {{$user->jk}}</label>
+                </div>
+                <div class="form-group">
+                    <label>Tanggal Lahir : {{date('d F Y', strtotime($user->tanggal_lahir))}}</label>
+                </div>
+                <div class="form-group">
+                    <label>Golongan Darah : {{$user->gol_darah ? $user->gol_darah : '-'}}</label>
+                </div>
+                @endif
                 <div class="form-group">
                     <label>Nomor Telepon : {{$user->nomor_telepon}}</label>
                 </div>
                 <div class="form-group">
                     <label>Email : {{$user->email}}</label>
+                </div>
+                <div class="form-group">
+                    <label>Alamat : {{$user->alamat_user}}</label>
                 </div>
                 <div class="form-group">
                     <label>Status : {{$user->role}}</label>
@@ -38,15 +65,108 @@
             <form action="/edit_profil/{{$user->id_user}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row">
+
+                @if ($user->role === 'Event')
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="kode_instansi">Kode Instansi</label>
+                            <input type="text" class="form-control @error('kode_instansi') is-invalid @enderror" name="kode_instansi" id="kode_instansi" value="{{$user->kode_instansi}}" placeholder="Masukkan Kode Instansi" required>
+                            @error('kode_instansi')
+                                <small class="form-text text-danger">{{$message}}</small>
+                            @enderror
+                        </div>       
+                    </div>
+                @endif
+
+                @if ($user->role === 'Rumah Sakit')
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="kode_rs">Kode Rumah Sakit</label>
+                            <input type="text" class="form-control @error('kode_rs') is-invalid @enderror" name="kode_rs" id="kode_rs" value="{{$user->kode_rs}}" placeholder="Masukkan Kode Rumah Sakit" required>
+                            @error('kode_rs')
+                                <small class="form-text text-danger">{{$message}}</small>
+                            @enderror
+                        </div>       
+                    </div>
+                @endif
+
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <label for="nama">Nama Lengkap</label>
+                        <label for="nama">@if($user->role === 'Event') Nama Instansi @elseif($user->role === 'Rumah Sakit') Nama Rumah Sakit @else Nama Lengkap @endif</label>
                         <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" id="nama" value="{{$user->nama}}" placeholder="Masukkan Nama Lengkap">
+                        <input type="hidden" class="form-control" name="role" value="{{$user->role}}">
                         @error('nama')
                             <small class="form-text text-danger">{{$message}}</small>
                         @enderror
                     </div>       
                 </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="nama">Alamat</label>
+                        <input type="text" class="form-control @error('alamat_user') is-invalid @enderror" name="alamat_user" id="alamat_user" value="{{$user->alamat_user}}" placeholder="Masukkan Alamat">
+                        @error('alamat_user')
+                            <small class="form-text text-danger">{{$message}}</small>
+                        @enderror
+                    </div>       
+                </div>
+
+                @if ($user->role === 'Donatur')
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="nik">NIK</label>
+                            <input type="number" class="form-control @error('nik') is-invalid @enderror" name="nik" id="nik" value="{{$user->nik}}" placeholder="Masukkan NIK" required>
+                            @error('nik')
+                                <small class="form-text text-danger">{{$message}}</small>
+                            @enderror
+                        </div>       
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="tanggal_lahir">Tanggal Lahir</label>
+                            <input type="date" class="form-control @error('tanggal_lahir') is-invalid @enderror" name="tanggal_lahir" id="tanggal_lahir" value="{{$user->tanggal_lahir}}" placeholder="Masukkan Tanggal Lahir" required>
+                            @error('tanggal_lahir')
+                                <small class="form-text text-danger">{{$message}}</small>
+                            @enderror
+                        </div>       
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="jk">Jenis Kelamin</label>
+                            <select class="form-control @error('jk') is-invalid @enderror" name="jk" required>
+                                @if ($user->jk)
+                                    <option value="{{$user->jk}}">{{$user->jk}}</option>
+                                @else
+                                    <option value="">-- Pilih --</option>
+                                @endif
+                                <option value="Laki-laki">Laki-laki</option>
+                                <option value="Perempuan">Perempuan</option>
+                            </select>
+                            @error('jk')
+                                <small class="form-text text-danger">{{$message}}</small>
+                            @enderror
+                        </div>       
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="gol_darah">Golongan Darah</label>
+                            <select class="form-control @error('gol_darah') is-invalid @enderror" name="gol_darah">
+                                @if ($user->gol_darah)
+                                    <option value="{{$user->gol_darah}}">{{$user->gol_darah}}</option>
+                                @else
+                                    <option value="">-- Pilih --</option>
+                                @endif
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="AB">AB</option>
+                                <option value="O">O</option>
+                            </select>
+                            @error('gol_darah')
+                                <small class="form-text text-danger">{{$message}}</small>
+                            @enderror
+                        </div>       
+                    </div>
+                @endif
+
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label for="nomor_telepon">Nomor Telepon</label>
@@ -68,10 +188,7 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label for="foto">Foto</label>
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input @error('foto') is-invalid @enderror" name="foto" id="customFile">
-                            <label class="custom-file-label" for="customFile">Pilih file</label>
-                        </div>
+                        <input type="file" class="form-control @error('foto') is-invalid @enderror" name="foto">
                         @error('foto')
                             <small class="form-text text-danger">{{$message}}</small>
                         @enderror

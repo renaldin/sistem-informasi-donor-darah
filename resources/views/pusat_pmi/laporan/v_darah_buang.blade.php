@@ -14,7 +14,7 @@ function hitungUmur($tanggal_darah_masuk) {
     'hari' => $perbedaan->d
   );
 
-  $data_umur = $umur['tahun'].' tahun, '.$umur['bulan'].' bulan, '.$umur['hari'].' hari.';
+  $data_umur = $umur['bulan'].' bulan, '.$umur['hari'].' hari.';
   return $data_umur;
 }
 @endphp
@@ -37,7 +37,6 @@ function hitungUmur($tanggal_darah_masuk) {
                             <th>Golongan Darah</th>
                             <th>Resus</th>
                             <th>Tanggal Buang</th>
-                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -49,10 +48,6 @@ function hitungUmur($tanggal_darah_masuk) {
                             <td>{{$row->golongan_darah}}</td>
                             <td>{{$row->resus}}</td>
                             <td>{{date('d F Y', strtotime($row->tanggal_buang))}}</td>
-                            <td class="text-center">
-                                <a href="/edit_darah/{{$row->id_darah_buang}}" class="btn btn-sm btn-success mb-1">Edit</a>
-                                <button type="button" class="btn btn-sm btn-danger mb-1" data-toggle="modal" data-target="#buang{{$row->id_darah_buang}}">Buang</button>   
-                            </td>
                           </tr>
                         @endforeach
                     </tbody>

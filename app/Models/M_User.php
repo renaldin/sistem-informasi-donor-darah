@@ -13,7 +13,8 @@ class M_User extends Model
 
     public function get_data()
     {
-        return DB::table($this->table)->orderBy('id_user', 'DESC')->get();
+        return DB::table($this->table)
+            ->orderBy('id_user', 'DESC')->get();
     }
 
     public function detail($id_user)
@@ -44,5 +45,83 @@ class M_User extends Model
     public function jumlah_user()
     {
         return DB::table($this->table)->count();
+    }
+
+    public function countUser($role)
+    {
+        return DB::table($this->table)->where('role', $role)->count();
+    }
+
+    public function last_data()
+    {
+        return DB::table($this->table)->orderBy('id_user', 'DESC')->limit(1)->first();
+    }
+
+
+    // Beda Tabel
+    public function tambah_donatur($data)
+    {
+        DB::table('user_donatur')->insert($data);
+    }
+
+    public function edit_donatur($data)
+    {
+        DB::table('user_donatur')->where('id_user_donatur', $data['id_user_donatur'])->update($data);
+    }
+
+    public function detail_user_donatur($id_user)
+    {
+        return DB::table('user_donatur')
+            ->join('user', 'user.id_user', '=', 'user_donatur.id_user')
+            ->where('user_donatur.id_user', $id_user)->first();
+    }
+
+    public function hapus_user_donatur($id_user)
+    {
+        DB::table('user_donatur')->where('id_user', $id_user)->delete();
+    }
+
+    public function tambah_event($data)
+    {
+        DB::table('user_event')->insert($data);
+    }
+
+    public function edit_event($data)
+    {
+        DB::table('user_event')->where('id_user_event', $data['id_user_event'])->update($data);
+    }
+
+    public function detail_user_event($id_user)
+    {
+        return DB::table('user_event')
+            ->join('user', 'user.id_user', '=', 'user_event.id_user')
+            ->where('user_event.id_user', $id_user)->first();
+    }
+
+    public function hapus_user_event($id_user)
+    {
+        DB::table('user_event')->where('id_user', $id_user)->delete();
+    }
+
+    public function tambah_rumah_sakit($data)
+    {
+        DB::table('user_rs')->insert($data);
+    }
+
+    public function edit_rs($data)
+    {
+        DB::table('user_rs')->where('id_user_rs', $data['id_user_rs'])->update($data);
+    }
+
+    public function detail_user_rs($id_user)
+    {
+        return DB::table('user_rs')
+            ->join('user', 'user.id_user', '=', 'user_rs.id_user')
+            ->where('user_rs.id_user', $id_user)->first();
+    }
+
+    public function hapus_user_rs($id_user)
+    {
+        DB::table('user_rs')->where('id_user', $id_user)->delete();
     }
 }

@@ -59,4 +59,19 @@ class M_DarahKeluar extends Model
     {
         DB::table($this->table)->where('id_darah_keluar', $id_darah_keluar)->delete();
     }
+
+    public function countGol()
+    {
+        $data = [
+            'a+' => DB::table($this->table)->join('darah', 'darah.id_darah', '=', 'darah_keluar.id_darah', 'left')->where('golongan_darah', 'A')->where('resus', 'Positif')->count(),
+            'b+' => DB::table($this->table)->join('darah', 'darah.id_darah', '=', 'darah_keluar.id_darah', 'left')->where('golongan_darah', 'B')->where('resus', 'Positif')->count(),
+            'ab+' => DB::table($this->table)->join('darah', 'darah.id_darah', '=', 'darah_keluar.id_darah', 'left')->where('golongan_darah', 'AB')->where('resus', 'Positif')->count(),
+            'o+' => DB::table($this->table)->join('darah', 'darah.id_darah', '=', 'darah_keluar.id_darah', 'left')->where('golongan_darah', 'O')->where('resus', 'Positif')->count(),
+            'a-' => DB::table($this->table)->join('darah', 'darah.id_darah', '=', 'darah_keluar.id_darah', 'left')->where('golongan_darah', 'A')->where('resus', 'Negatif')->count(),
+            'b-' => DB::table($this->table)->join('darah', 'darah.id_darah', '=', 'darah_keluar.id_darah', 'left')->where('golongan_darah', 'B')->where('resus', 'Negatif')->count(),
+            'ab-' => DB::table($this->table)->join('darah', 'darah.id_darah', '=', 'darah_keluar.id_darah', 'left')->where('golongan_darah', 'AB')->where('resus', 'Negatif')->count(),
+            'o-' => DB::table($this->table)->join('darah', 'darah.id_darah', '=', 'darah_keluar.id_darah', 'left')->where('golongan_darah', 'O')->where('resus', 'Negatif')->count(),
+        ];
+        return $data;
+    }
 }

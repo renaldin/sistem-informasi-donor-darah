@@ -28,12 +28,13 @@
 </head>
 
 <body class="bg-gradient-login">
+  @include('sweetalert::alert')
   <!-- Login Content -->
   <main class="main-img">
     <div class="container-login">
       <div class="row justify-content-center">
         <div class="col-xl-6 col-lg-12 col-md-9">
-          <div class="card shadow-sm" style="margin-top: 90px">
+          <div class="card shadow-sm" style="@if($register === 'Pilihan') margin-top: 170px @else margin-top: 90px @endif">
             <div class="card-body p-0">
               <div class="row">
                 <div class="col-lg-12">
@@ -42,81 +43,236 @@
                       <h1 class="h4 text-gray-900">{{$title}}</h1>
                       <p class="text-gray-900 mb-4">Silahkan masukkan data Anda.</p>
                     </div>
-                    <div>
-                      @if (session('berhasil'))
-                      <div class="alert alert-success alert-dismissible" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                        {{ session('berhasil') }}
-                      </div>
-                      @endif
-                      @if (session('gagal'))
-                      <div class="alert alert-danger alert-dismissible" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                        {{ session('gagal') }}
-                      </div>
-                      @endif
-                    </div>
+                    
                     <form class="user" method="POST" action="/register" >
                       @csrf
-                      <div class="row">
-                        <div class="col-lg-6">
-                          <div class="form-group">
-                            <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror" value="{{old('nama')}}" placeholder="Masukkan Nama Lengkap">
-                            @error('nama')
-                              <small class="form-text text-danger">{{ $message }}</small>
-                            @enderror
+
+                      @if ($register === 'Donatur')
+
+                        <div class="row">
+                          <div class="col-lg-6">
+                            <div class="form-group">
+                              <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror" value="{{old('nama')}}" placeholder="Masukkan Nama Lengkap" required>
+                              <input type="hidden" name="role" class="form-control" value="Donatur">
+                              @error('nama')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                              @enderror
+                            </div>
+                          </div>
+                          <div class="col-lg-6">
+                            <div class="form-group">
+                              <input type="text" name="alamat_user" class="form-control @error('alamat_user') is-invalid @enderror" value="{{old('alamat_user')}}" placeholder="Masukkan Alamat Lengkap" required>
+                              @error('alamat_user')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                              @enderror
+                            </div>
+                          </div>
+                          <div class="col-lg-4">
+                            <div class="form-group">
+                              <input type="number" name="nik" class="form-control @error('nik') is-invalid @enderror" value="{{old('nik')}}" placeholder="Masukkan NIK" required>
+                              @error('nik')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                              @enderror
+                            </div>
+                          </div>
+                          <div class="col-lg-4">
+                            <div class="form-group">
+                              <input type="date" name="tanggal_lahir" class="form-control @error('tanggal_lahir') is-invalid @enderror" value="{{old('tanggal_lahir')}}" placeholder="Masukkan Tanggal Lahir" required>
+                              @error('tanggal_lahir')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                              @enderror
+                            </div>
+                          </div>
+                          <div class="col-lg-4">
+                            <div class="form-group">
+                              <input type="number" name="nomor_telepon" class="form-control @error('nomor_telepon') is-invalid @enderror" value="{{old('nomor_telepon')}}" placeholder="Nomor Telepon" required>
+                              @error('nomor_telepon')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                              @enderror
+                            </div>
+                          </div>
+                          <div class="col-lg-6">
+                            <div class="form-group">
+                              <select name="jk" class="form-control @error('jk') is-invalid @enderror" required>
+                                <option value="">-- Pilih Jenis Kelamin --</option>
+                                <option value="Laki-laki">Laki-laki</option>
+                                <option value="Perempuan">Perempuan</option>
+                              </select>
+                              @error('jk')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                              @enderror
+                            </div>
+                          </div>
+                          <div class="col-lg-6">
+                            <div class="form-group">
+                              <select name="gol_darah" class="form-control @error('gol_darah') is-invalid @enderror">
+                                <option value="">-- Pilih Gol Darah (Opsional) --</option>
+                                <option value="A">A</option>
+                                <option value="AB">AB</option>
+                                <option value="B">B</option>
+                                <option value="O">O</option>
+                              </select>
+                              @error('gol_darah')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                              @enderror
+                            </div>
+                          </div>
+                          <div class="col-lg-6">
+                            <div class="form-group">
+                              <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{old('email')}}" placeholder="Masukkan Alamat Email" required>
+                              @error('email')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                              @enderror
+                            </div>
+                          </div>
+                          <div class="col-lg-6">
+                            <div class="form-group">
+                              <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Masukkan Password" required>
+                              @error('password')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                              @enderror
+                            </div>
                           </div>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-12">
                           <div class="form-group">
-                            <input type="number" name="nomor_telepon" class="form-control @error('nomor_telepon') is-invalid @enderror" value="{{old('nomor_telepon')}}" placeholder="Masukkan Nomor Telepon">
-                            @error('nomor_telepon')
-                              <small class="form-text text-danger">{{ $message }}</small>
-                            @enderror
+                            <button type="submit"  class="btn btn-danger btn-block">Register</button>
                           </div>
                         </div>
-                        <div class="col-lg-6">
-                          <div class="form-group">
-                            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{old('email')}}" placeholder="Masukkan Alamat Email">
-                            @error('email')
-                              <small class="form-text text-danger">{{ $message }}</small>
-                            @enderror
+
+                      @elseif ($register === 'Event')
+
+                        <div class="row">
+                          <div class="col-lg-6">
+                            <div class="form-group">
+                              <input type="text" name="kode_instansi" class="form-control @error('kode_instansi') is-invalid @enderror" value="{{old('kode_instansi')}}" placeholder="Masukkan Kode Instansi" required>
+                              <input type="hidden" name="role" class="form-control" value="Event">
+                              @error('kode_instansi')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                              @enderror
+                            </div>
+                          </div>
+                          <div class="col-lg-6">
+                            <div class="form-group">
+                              <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror" value="{{old('nama')}}" placeholder="Masukkan Nama Instansi" required>
+                              @error('nama')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                              @enderror
+                            </div>
+                          </div>
+                          <div class="col-lg-6">
+                            <div class="form-group">
+                              <input type="number" name="nomor_telepon" class="form-control @error('nomor_telepon') is-invalid @enderror" value="{{old('nomor_telepon')}}" placeholder="Masukkan Nomor Telepon" required>
+                              @error('nomor_telepon')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                              @enderror
+                            </div>
+                          </div>
+                          <div class="col-lg-6">
+                            <div class="form-group">
+                              <input type="text" name="alamat_user" class="form-control @error('alamat_user') is-invalid @enderror" value="{{old('alamat_user')}}" placeholder="Masukkan Alamat Lengkap" required>
+                              @error('alamat_user')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                              @enderror
+                            </div>
+                          </div>
+                          <div class="col-lg-6">
+                            <div class="form-group">
+                              <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{old('email')}}" placeholder="Masukkan Alamat Email" required>
+                              @error('email')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                              @enderror
+                            </div>
+                          </div>
+                          <div class="col-lg-6">
+                            <div class="form-group">
+                              <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Masukkan Password" required>
+                              @error('password')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                              @enderror
+                            </div>
                           </div>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-12">
                           <div class="form-group">
-                            <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Masukkan Password">
-                            @error('password')
-                              <small class="form-text text-danger">{{ $message }}</small>
-                            @enderror
+                            <button type="submit"  class="btn btn-danger btn-block">Register</button>
                           </div>
                         </div>
-                        <div class="col-lg-6">
-                          <div class="form-group">
-                            <select name="role" class="form-control @error('role') is-invalid @enderror">
-                              <option value="">-- Pilih Role --</option>
-                              <option value="Donatur">Donatur</option>
-                              <option value="Event">Event</option>
-                              <option value="Petugas Kesehatan">Petugas Kesehatan</option>
-                              <option value="Rumah Sakit">Rumah Sakit</option>
-                              <option value="Pusat PMI">Pusat PMI</option>
-                            </select>
-                            @error('role')
-                              <small class="form-text text-danger">{{ $message }}</small>
-                            @enderror
+
+                      @elseif ($register === 'Rumah Sakit')
+
+                        <div class="row">
+                          <div class="col-lg-6">
+                            <div class="form-group">
+                              <input type="text" name="kode_rs" class="form-control @error('kode_rs') is-invalid @enderror" value="{{old('kode_rs')}}" placeholder="Masukkan Kode Rumah Sakit" required>
+                              <input type="hidden" name="role" class="form-control" value="Rumah Sakit">
+                              @error('kode_rs')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                              @enderror
+                            </div>
+                          </div>
+                          <div class="col-lg-6">
+                            <div class="form-group">
+                              <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror" value="{{old('nama')}}" placeholder="Masukkan Nama Rumah Sakit" required>
+                              @error('nama')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                              @enderror
+                            </div>
+                          </div>
+                          <div class="col-lg-6">
+                            <div class="form-group">
+                              <input type="number" name="nomor_telepon" class="form-control @error('nomor_telepon') is-invalid @enderror" value="{{old('nomor_telepon')}}" placeholder="Masukkan Nomor Telepon" required>
+                              @error('nomor_telepon')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                              @enderror
+                            </div>
+                          </div>
+                          <div class="col-lg-6">
+                            <div class="form-group">
+                              <input type="text" name="alamat_user" class="form-control @error('alamat_user') is-invalid @enderror" value="{{old('alamat_user')}}" placeholder="Masukkan Alamat Lengkap" required>
+                              @error('alamat_user')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                              @enderror
+                            </div>
+                          </div>
+                          <div class="col-lg-6">
+                            <div class="form-group">
+                              <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{old('email')}}" placeholder="Masukkan Alamat Email" required>
+                              @error('email')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                              @enderror
+                            </div>
+                          </div>
+                          <div class="col-lg-6">
+                            <div class="form-group">
+                              <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Masukkan Password" required>
+                              @error('password')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                              @enderror
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <div class="col-lg-12">
-                        <div class="form-group">
-                          <button type="submit"  class="btn btn-danger btn-block">Register</button>
+                        <div class="col-lg-12">
+                          <div class="form-group">
+                            <button type="submit"  class="btn btn-danger btn-block">Register</button>
+                          </div>
                         </div>
-                      </div>
+
+                      @else
+                        <div class="row">
+                          <div class="col-lg-4">
+                            <a href="/register_donatur" class="btn btn-danger btn-block">Donatur</a>
+                          </div>
+                          <div class="col-lg-4">
+                            <a href="/register_event" class="btn btn-danger btn-block">Event</a>
+                          </div>
+                          <div class="col-lg-4">
+                            <a href="/register_rumah_sakit" class="btn btn-danger btn-block">Rumah Sakit</a>
+                          </div>
+                        </div>
+                      @endif
                     </form>
+
                     <hr>
                     <div class="text-center">
                       <a class="font-weight-bold small text-gray-900" href="/login">Sudah punya akun? Login!</a>

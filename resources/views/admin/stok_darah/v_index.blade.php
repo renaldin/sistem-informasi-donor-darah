@@ -6,15 +6,10 @@
 function hitungUmur($tanggal_darah_masuk) {
   $tgl_lahir = new DateTime($tanggal_darah_masuk);
   $sekarang = new DateTime();
-  $perbedaan = $sekarang->diff($tgl_lahir);
+  $diff = $tgl_lahir->diff($sekarang);
+  $umur = $diff->days;
 
-  $umur = array(
-    'tahun' => $perbedaan->y,
-    'bulan' => $perbedaan->m,
-    'hari' => $perbedaan->d
-  );
-
-  $data_umur = $umur['bulan'].' bulan, '.$umur['hari'].' hari.';
+  $data_umur = $umur.' hari.';
   return $data_umur;
 }
 @endphp
@@ -24,6 +19,18 @@ function hitungUmur($tanggal_darah_masuk) {
         <div class="card mb-4">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold">{{$sub_title}}</h6>
+            </div>
+            <div class="card-header flex flex-row">
+              <table>
+                <tr>
+                  <th colspan="3">Keterangan Tanggal Kedaluwarsa:</th>
+                </tr>
+                <tr>
+                  <td><span class="badge badge-danger">Merah</span></td>
+                  <td>:</td>
+                  <td>Sudah Kedaluwarsa</td>
+                </tr>
+              </table>
             </div>
             {{-- <div class="card-header flex flex-row">
               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambah">Tambah Darah</button>
@@ -52,7 +59,13 @@ function hitungUmur($tanggal_darah_masuk) {
                             <td>{{$row->golongan_darah}}</td>
                             <td>{{$row->resus}}</td>
                             <td>{{ hitungUmur($row->tanggal_darah_masuk) }}</td>
-                            <td>{{$row->tanggal_kedaluwarsa}}</td>
+                            <td>
+                              @if ($row->tanggal_kedaluwarsa < date('Y-m-d'))
+                                <span class="badge badge-danger">{{$row->tanggal_kedaluwarsa}}</span>
+                              @else
+                                <span class="badge badge-success">{{$row->tanggal_kedaluwarsa}}</span>
+                              @endif
+                            </td>
                             <td class="text-center">
                                 <a href="/edit_darah/{{$row->id_darah_masuk}}" class="btn btn-sm btn-success mb-1">Edit</a>
                                 <button type="button" class="btn btn-sm btn-danger mb-1" data-toggle="modal" data-target="#buang{{$row->id_darah_masuk}}">Buang</button>   

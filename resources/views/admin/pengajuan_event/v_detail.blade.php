@@ -2,6 +2,18 @@
 
 @section('content')
 
+@php
+function hitungUmur($tanggal_darah_masuk) {
+  $tgl_lahir = new DateTime($tanggal_darah_masuk);
+  $sekarang = new DateTime();
+  $diff = $tgl_lahir->diff($sekarang);
+  $umur = $diff->days;
+
+  $data_umur = $umur.' hari.';
+  return $data_umur;
+}
+@endphp
+
 <div class="row">
     <div class="col-lg-12">
         <div class="card mb-4">
@@ -33,7 +45,7 @@
                                 <td>{{$detail->tanggal_event}} {{$detail->jam}}</td>
                             </tr>
                             <tr>
-                                <th>Jumlah Orang</th>
+                                <th>Target Pendonor</th>
                                 <td>:</td>
                                 <td>{{$detail->jumlah_orang}}</td>
                             </tr>
@@ -104,7 +116,7 @@
                                         <td>{{$item->no_kantong}}</td>
                                         <td>{{$item->golongan_darah}}</td>
                                         <td>{{$item->resus}}</td>
-                                        <td>{{$item->tanggal_darah_masuk }}</td>
+                                        <td>{{ hitungUmur($item->tanggal_darah_masuk) }}</td>
                                         <td>{{$item->tanggal_kedaluwarsa}}</td>
                                       </tr>
                                     @endif

@@ -32,7 +32,7 @@
                     <thead class="thead-light">
                         <tr>
                             <th>No</th>
-                            <th>Name</th>
+                            <th>Nama Lengkap</th>
                             <th>Nomor Telepon</th>
                             <th>Role</th>
                             <th>Foto</th>
