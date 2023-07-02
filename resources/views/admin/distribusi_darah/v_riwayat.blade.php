@@ -8,8 +8,8 @@
             $sekarang = new DateTime();
             $diff = $tgl_lahir->diff($sekarang);
             $umur = $diff->days;
-
-            $data_umur = $umur.' hari.';
+        
+            $data_umur = $umur . ' hari.';
             return $data_umur;
         }
     @endphp
@@ -112,7 +112,7 @@
                                     <tr>
                                         <th>Golongan Darah</th>
                                         <td>:</td>
-                                        <td>{{$row->golda}}</td>
+                                        <td>{{ $row->golda }}</td>
                                     </tr>
                                     <tr>
                                         <th>Jumlah {Kantong}</th>

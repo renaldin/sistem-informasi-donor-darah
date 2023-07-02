@@ -116,6 +116,7 @@ Route::group(['middleware' => 'revalidate'], function () {
         Route::get('/kirim_distribusi_darah/{id}', [C_PermohonanDarah::class, 'kirim_distribusi_darah'])->name('kirim_distribusi_darah');
         Route::get('/hapus_darah_keluar/{id}', [C_PermohonanDarah::class, 'hapus_darah_keluar'])->name('hapus_darah_keluar');
         Route::post('/cetak_distribusi_darah', [C_PermohonanDarah::class, 'cetak_distribusi_darah']);
+        Route::get('/cetak_invoice_distribusi/{id}', [C_PermohonanDarah::class, 'cetak_invoice_distribusi'])->name('cetak_invoice_distribusi');
 
         // Data Permohonan Darah
         Route::get('/anggota', [C_Anggota::class, 'index'])->name('anggota');

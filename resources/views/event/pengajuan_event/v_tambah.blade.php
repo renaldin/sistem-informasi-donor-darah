@@ -85,16 +85,6 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="upload_surat">Upload Gambar Event</label>
-                                    <input type="file" class="form-control @error('upload_gambar') is-invalid @enderror"
-                                        name="upload_gambar">
-                                    @error('upload_gambar')
-                                        <small class="form-text text-danger">{{ $message }}</small>
-                                    @enderror
-                                </div>
-                            </div>
                             <div class="col-lg-12 mt-4">
                                 <button type="submit" class="btn btn-primary">Simpan</button>
                             </div>
