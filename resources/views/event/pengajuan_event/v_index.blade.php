@@ -128,7 +128,7 @@
                     <td>{{$row->tanggal_event}} {{$row->jam}}</td>
                 </tr>
                 <tr>
-                    <th>Jumlah Orang</th>
+                    <th>Target Pendonor</th>
                     <td>:</td>
                     <td>{{$row->jumlah_orang}}</td>
                 </tr>

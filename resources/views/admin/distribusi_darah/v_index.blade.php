@@ -13,7 +13,7 @@
                     <thead class="thead-light">
                         <tr>
                             <th>No</th>
-                            <th>Name RS</th>
+                            <th>Nama RS</th>
                             <th>Tanggal</th>
                             <th>Golda</th>
                             <th>Jumlah</th>
@@ -78,7 +78,12 @@
                 <tr>
                     <th>Tanggal Permohonan</th>
                     <td>:</td>
-                    <td>{{$row->tanggal_permohonan}}}}</td>
+                    <td>{{$row->tanggal_permohonan}}</td>
+                </tr>
+                <tr>
+                    <th>Golongan Darah</th>
+                    <td>:</td>
+                    <td>{{$row->golda}}</td>
                 </tr>
                 <tr>
                     <th>Jumlah {Kantong}</th>

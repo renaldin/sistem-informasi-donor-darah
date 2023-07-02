@@ -48,7 +48,15 @@
                                 <tr>
                                     <td>{{ $no++ }}</td>
                                     <td>{{ $row->tanggal_donor }}</td>
-                                    <td>{{ $row->status_donor }}</td>
+                                    <td>
+                                    @if ($row->status_donor  === 'Ready')
+                                        Proses Input Darah
+                                    @elseif ($row->status_donor  === 'Proses')
+                                        Proses Cek Kesehatan
+                                    @elseif ($row->status_donor  === 'Selesai')
+                                        Selesai
+                                    @endif
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

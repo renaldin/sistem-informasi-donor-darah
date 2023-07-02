@@ -30,7 +30,7 @@ class C_Donatur extends Controller
                 'sub_title' => 'Daftar Donor',
                 'data_web'  => $this->M_Website->detail(1),
                 'data'      => null,
-                'user'      => $this->M_User->detail(Session()->get('id_user')),
+                'user'      => $this->M_User->detail_user_donatur(Session()->get('id_user')),
             ];
         } else {
             $nik = $this->M_Anggota->cek_nik(Request()->nik);
@@ -42,7 +42,7 @@ class C_Donatur extends Controller
                 'sub_title' => 'Daftar Donor',
                 'data_web'  => $this->M_Website->detail(1),
                 'data'      => $nik,
-                'user'      => $this->M_User->detail(Session()->get('id_user')),
+                'user'      => $this->M_User->detail_user_donatur(Session()->get('id_user')),
             ];
         }
         return view('donatur.v_daftar_donor', $data);
@@ -72,9 +72,10 @@ class C_Donatur extends Controller
                 'nik'                   => Request()->nik,
                 'nama_anggota'          => Request()->nama,
                 'jenis_kelamin'         => Request()->jenis_kelamin,
+                'no_wa'                 => Request()->no_wa,
                 'alamat'                => Request()->alamat,
                 'status_anggota'        => 'Mandiri',
-                'tanggal_donor_kembali' => date('Y-m-d'),
+                'tanggal_donor_kembali' => date('Y-m-d', strtotime('+60 days', strtotime(date('Y-m-d')))),
             ];
             $cek_nik = $this->M_Anggota->cek_nik(Request()->nik);
             $data_terakhir = $cek_nik;
@@ -112,7 +113,7 @@ class C_Donatur extends Controller
                 'data_web'  => $this->M_Website->detail(1),
                 'detail'    => $cek_nik,
                 'data'      => $this->M_Donor->get_all_by_anggota($cek_nik->id_anggota),
-                'user'      => $this->M_User->detail(Session()->get('id_user')),
+                'user'      => $this->M_User->detail_user_donatur(Session()->get('id_user')),
             ];
             return view('donatur.v_riwayat_donor', $data);
         } else {

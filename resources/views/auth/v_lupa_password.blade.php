@@ -28,6 +28,7 @@
 </head>
 
 <body class="bg-gradient-login">
+  @include('sweetalert::alert')
   <!-- Login Content -->
   <main class="main-img">
     <div class="container-login">

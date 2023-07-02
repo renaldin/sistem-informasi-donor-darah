@@ -15,7 +15,7 @@
                             </div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-building fa-2x text-danger"></i>
+                            <i class="fas fa-box fa-2x text-danger"></i>
                         </div>
                     </div>
                 </div>
@@ -26,8 +26,8 @@
                 <div class="card-body">
                     <div class="row align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-uppercase mb-1">Event Tidak Aktif</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $event_tidak_aktif }}</div>
+                            <div class="text-xs font-weight-bold text-uppercase mb-1">Rumah Sakit Yang Bergabung</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $jumlah_rumah_sakit }}</div>
                             <div class="mt-2 mb-0 text-muted text-xs">
                                 <span class="text-success mr-2"></span>
                             </div>
@@ -213,7 +213,7 @@
                             <h6 class="m-0 font-weight-bold">Darah Masuk</h6>
                         </div>
                         <div class="table-responsive p-3">
-                            <table class="table align-items-center table-flush table-hover" id="dataTableHover2">
+                            <table class="table align-items-center table-flush table-hover">
                                 <thead class="thead-light">
                                     <tr>
                                         <th>No</th>
@@ -270,6 +270,144 @@
                                         <td>O</td>
                                         <td>Negatif</td>
                                         <td>{{ $gol_belum_masuk['o-'] }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold">Darah Keluar</h6>
+                        </div>
+                        <div class="table-responsive p-3">
+                            <table class="table align-items-center table-flush table-hover">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Golongan Darah</th>
+                                        <th>Resus</th>
+                                        <th>Stok</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>A</td>
+                                        <td>Positif</td>
+                                        <td>{{ $gol_darah_keluar['a+'] }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>B</td>
+                                        <td>Positif</td>
+                                        <td>{{ $gol_darah_keluar['b+'] }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>AB</td>
+                                        <td>Positif</td>
+                                        <td>{{ $gol_darah_keluar['ab+'] }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>O</td>
+                                        <td>Positif</td>
+                                        <td>{{ $gol_darah_keluar['o+'] }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>A</td>
+                                        <td>Negatif</td>
+                                        <td>{{ $gol_darah_keluar['a-'] }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>6</td>
+                                        <td>B</td>
+                                        <td>Negatif</td>
+                                        <td>{{ $gol_darah_keluar['b-'] }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>7</td>
+                                        <td>AB</td>
+                                        <td>Negatif</td>
+                                        <td>{{ $gol_darah_keluar['ab-'] }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>8</td>
+                                        <td>O</td>
+                                        <td>Negatif</td>
+                                        <td>{{ $gol_darah_keluar['o-'] }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold">Darah Buang</h6>
+                        </div>
+                        <div class="table-responsive p-3">
+                            <table class="table align-items-center table-flush table-hover">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Golongan Darah</th>
+                                        <th>Resus</th>
+                                        <th>Stok</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>A</td>
+                                        <td>Positif</td>
+                                        <td>{{ $gol_darah_buang['a+'] }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>B</td>
+                                        <td>Positif</td>
+                                        <td>{{ $gol_darah_buang['b+'] }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>AB</td>
+                                        <td>Positif</td>
+                                        <td>{{ $gol_darah_buang['ab+'] }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>O</td>
+                                        <td>Positif</td>
+                                        <td>{{ $gol_darah_buang['o+'] }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>A</td>
+                                        <td>Negatif</td>
+                                        <td>{{ $gol_darah_buang['a-'] }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>6</td>
+                                        <td>B</td>
+                                        <td>Negatif</td>
+                                        <td>{{ $gol_darah_buang['b-'] }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>7</td>
+                                        <td>AB</td>
+                                        <td>Negatif</td>
+                                        <td>{{ $gol_darah_buang['ab-'] }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>8</td>
+                                        <td>O</td>
+                                        <td>Negatif</td>
+                                        <td>{{ $gol_darah_buang['o-'] }}</td>
                                     </tr>
                                 </tbody>
                             </table>

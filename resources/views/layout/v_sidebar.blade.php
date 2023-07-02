@@ -98,6 +98,12 @@
                 <span>Darah Masuk</span>
             </a>
         </li>
+        <li class="nav-item @if ($sub_title === 'Laporan Stok Darah') active @endif">
+            <a class="nav-link" href="/laporan_stok_darah">
+                <i class="fas fa-fw fa-file"></i>
+                <span>Stok Darah</span>
+            </a>
+        </li>
         <li class="nav-item @if ($sub_title === 'Laporan Darah Keluar') active @endif">
             <a class="nav-link" href="/laporan_darah_keluar">
                 <i class="fas fa-fw fa-file"></i>

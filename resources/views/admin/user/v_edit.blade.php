@@ -12,11 +12,103 @@
             <form action="/edit_user/{{$detail->id_user}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row">
+
+                {{-- @if ($detail->role === 'Event')
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="kode_instansi">Kode Instansi</label>
+                            <input type="text" class="form-control @error('kode_instansi') is-invalid @enderror" name="kode_instansi" id="kode_instansi" value="{{$detail->kode_instansi}}" placeholder="Masukkan Kode Instansi">
+                            @error('kode_instansi')
+                                <small class="form-text text-danger">{{$message}}</small>
+                            @enderror
+                        </div>       
+                    </div>
+                @endif --}}
+
+                {{-- @if ($detail->role === 'Rumah Sakit')
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="kode_rs">Kode Rumah Sakit</label>
+                            <input type="text" class="form-control @error('kode_rs') is-invalid @enderror" name="kode_rs" id="kode_rs" value="{{$detail->kode_rs}}" placeholder="Masukkan Kode Rumah Sakit">
+                            @error('kode_rs')
+                                <small class="form-text text-danger">{{$message}}</small>
+                            @enderror
+                        </div>       
+                    </div>
+                @endif --}}
+
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <label for="nama">Nama Lengkap</label>
+                        <label for="nama">@if($detail->role === 'Event') Nama Instansi @elseif($detail->role === 'Rumah Sakit') Nama Rumah Sakit @else Nama Lengkap @endif</label>
                         <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" id="nama" value="{{$detail->nama}}" placeholder="Masukkan Nama Lengkap">
                         @error('nama')
+                            <small class="form-text text-danger">{{$message}}</small>
+                        @enderror
+                    </div>       
+                </div>
+
+                {{-- @if ($detail->role === 'Donatur')
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="nik">NIK</label>
+                            <input type="number" class="form-control @error('nik') is-invalid @enderror" name="nik" id="nik" value="{{$detail->nik}}" placeholder="Masukkan NIK">
+                            @error('nik')
+                                <small class="form-text text-danger">{{$message}}</small>
+                            @enderror
+                        </div>       
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="tanggal_lahir">Tanggal Lahir</label>
+                            <input type="number" class="form-control @error('tanggal_lahir') is-invalid @enderror" name="tanggal_lahir" id="tanggal_lahir" value="{{$detail->tanggal_lahir}}" placeholder="Masukkan Tanggal Lahir">
+                            @error('tanggal_lahir')
+                                <small class="form-text text-danger">{{$message}}</small>
+                            @enderror
+                        </div>       
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="jk">Jenis Kelamin</label>
+                            <select class="select2-single-placeholder form-control @error('jk') is-invalid @enderror" name="jk" id="select2SinglePlaceholder">
+                                @if ($detail->jk)
+                                    <option value="{{$detail->jk}}">{{$detail->jk}}</option>
+                                @else
+                                    <option value="">-- Pilih --</option>
+                                @endif
+                                <option value="Laki-laki">Laki-laki</option>
+                                <option value="Perempuan">Perempuan</option>
+                            </select>
+                            @error('jk')
+                                <small class="form-text text-danger">{{$message}}</small>
+                            @enderror
+                        </div>       
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="gol_darah">Golongan Darah</label>
+                            <select class="select2-single-placeholder form-control @error('gol_darah') is-invalid @enderror" name="gol_darah" id="select2SinglePlaceholder">
+                                @if ($detail->gol_darah)
+                                    <option value="{{$detail->gol_darah}}">{{$detail->gol_darah}}</option>
+                                @else
+                                    <option value="">-- Pilih --</option>
+                                @endif
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="AB">AB</option>
+                                <option value="O">O</option>
+                            </select>
+                            @error('gol_darah')
+                                <small class="form-text text-danger">{{$message}}</small>
+                            @enderror
+                        </div>       
+                    </div>
+                @endif --}}
+
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="alamat_user">Alamat</label>
+                        <input type="text" class="form-control @error('alamat_user') is-invalid @enderror" name="alamat_user" id="alamat_user" value="{{$detail->alamat_user}}" placeholder="Masukkan Alamat">
+                        @error('alamat_user')
                             <small class="form-text text-danger">{{$message}}</small>
                         @enderror
                     </div>       
@@ -50,28 +142,8 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <label for="role">Role</label>
-                        <select class="select2-single-placeholder form-control @error('role') is-invalid @enderror" name="role" id="select2SinglePlaceholder">
-                            <option value="{{$detail->role}}">{{$detail->role}}</option>
-                            <option value="Admin">Admin</option>
-                            <option value="Donatur">Donatur</option>
-                            <option value="Event">Event</option>
-                            <option value="Petugas Kesehatan">Petugas Kesehatan</option>
-                            <option value="Rumah Sakit">Rumah Sakit</option>
-                            <option value="Pusat PMI">Pusat PMI</option>
-                        </select>
-                        @error('role')
-                            <small class="form-text text-danger">{{$message}}</small>
-                        @enderror
-                    </div>       
-                </div>
-                <div class="col-lg-6">
-                    <div class="form-group">
                         <label for="foto">Foto</label>
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input @error('foto') is-invalid @enderror" name="foto" id="customFile">
-                            <label class="custom-file-label" for="customFile">Pilih file</label>
-                        </div>
+                        <input type="file" class="form-control @error('foto') is-invalid @enderror" name="foto">
                         @error('foto')
                             <small class="form-text text-danger">{{$message}}</small>
                         @enderror

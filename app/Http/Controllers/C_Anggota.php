@@ -7,6 +7,7 @@ use App\Models\M_Website;
 use App\Models\M_Anggota;
 use App\Models\M_Darah;
 use RealRashid\SweetAlert\Facades\Alert;
+use Twilio\Rest\Client;
 
 class C_Anggota extends Controller
 {
@@ -41,5 +42,31 @@ class C_Anggota extends Controller
         ];
 
         return view('admin.anggota.v_index', $data);
+    }
+
+    public function kirim_jadwal($id_anggota)
+    {
+        $detail = $this->M_Anggota->detail($id_anggota);
+
+        $sid = "AC3152032a13274daaa83569dad0c55b43";
+        $token = "ffd93e355ec798e02be02dfc06a9fb28";
+        // $sid    = "AC944f941fef8a459f011bb10c3236df78";
+        // $token  = "df97bc683bb53f68b7bb6e2dd0274dc4";
+        $client = new Client($sid, $token);
+
+        $noWa = substr($detail->no_wa, 1);
+        $twilioNumber = "+14155238886";
+        $recipientNumber = "+62" . $noWa;
+
+        $message = $client->messages->create(
+            'whatsapp:' . $recipientNumber, // Replace with the recipient's WhatsApp number
+            [
+                'from' => 'whatsapp:' . $twilioNumber,
+                'body' => "Hallo {$detail->nama_anggota}!!!.\n\nAnda telah memasuki jadwal donor. Anda dapat melakukan donor darah online atau offline. Ayo segera donor!!!\n\nTerima kasih.", // Replace with your desired message
+            ]
+        );
+
+        Alert::success('Berhasil', "Anda berhasil mengirimkan pesan Whatsapp ke anggota yang bernama {$detail->nama_anggota}.");
+        return redirect()->route('anggota');
     }
 }

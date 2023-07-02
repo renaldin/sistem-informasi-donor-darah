@@ -39,6 +39,15 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group">
+                        <label for="no_wa">No. Whatsapp</label>
+                        <input type="number" class="form-control @error('no_wa') is-invalid @enderror" name="no_wa" id="no_wa" value="{{old('no_wa');}}" placeholder="Masukkan Nomor Whatsapp">
+                        @error('no_wa')
+                            <small class="form-text text-danger">{{$message}}</small>
+                        @enderror
+                    </div>       
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
                         <label for="alamat">Alamat</label>
                         <input type="text" class="form-control @error('alamat') is-invalid @enderror" name="alamat" id="alamat" value="{{old('alamat');}}" placeholder="Masukkan Alamat">
                         @error('alamat')
@@ -131,7 +140,7 @@
                         @enderror
                     </div>       
                 </div>
-                <div class="col-lg-6">
+                {{-- <div class="col-lg-6">
                     <div class="form-group">
                         <label for="tanggal_kedaluwarsa">Tanggal Kedaluwarsa</label>
                         <div class="input-group date">
@@ -144,7 +153,7 @@
                             <small class="form-text text-danger">{{$message}}</small>
                         @enderror
                     </div>       
-                </div>
+                </div> --}}
                 <div class="col-lg-12 mt-4">
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>

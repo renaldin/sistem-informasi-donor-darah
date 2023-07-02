@@ -107,7 +107,7 @@
                         @enderror
                     </div>       
                 </div>
-                <div class="col-lg-6">
+                {{-- <div class="col-lg-6">
                     <div class="form-group">
                         <label for="tanggal_kedaluwarsa">Tanggal Kedaluwarsa</label>
                         <div class="input-group date">
@@ -120,7 +120,7 @@
                             <small class="form-text text-danger">{{$message}}</small>
                         @enderror
                     </div>       
-                </div>
+                </div> --}}
                 <div class="col-lg-12 mt-4">
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>

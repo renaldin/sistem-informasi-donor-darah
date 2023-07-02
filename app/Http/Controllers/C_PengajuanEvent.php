@@ -512,7 +512,6 @@ class C_PengajuanEvent extends Controller
             'golongan_darah'        => 'required',
             'resus'                 => 'required',
             'volume_darah'          => 'required',
-            'tanggal_kedaluwarsa'   => 'required',
         ], [
             'nama_anggota.required'         => 'Nama anggota harus diisi!',
             'alamat.required'               => 'Alamat harus diisi!',
@@ -520,11 +519,12 @@ class C_PengajuanEvent extends Controller
             'golongan_darah.required'       => 'Golongan darah harus diisi!',
             'resus.required'                => 'Resus harus diisi!',
             'volume_darah.required'         => 'Volume darah harus diisi!',
-            'tanggal_kedaluwarsa.required'  => 'Tanggal kedaluwarsa harus diisi!',
         ]);
 
         $data_anggota = [
             'nama_anggota'      => Request()->nama_anggota,
+            'nik'               => Request()->nik,
+            'no_wa'             => Request()->no_wa,
             'alamat'            => Request()->alamat,
             'jenis_kelamin'     => Request()->jenis_kelamin,
             'status_anggota'    => 'Event',
@@ -552,7 +552,7 @@ class C_PengajuanEvent extends Controller
             'golongan_darah'        => Request()->golongan_darah,
             'resus'                 => Request()->resus,
             'volume_darah'          => Request()->volume_darah,
-            'tanggal_kedaluwarsa'   => Request()->tanggal_kedaluwarsa,
+            'tanggal_kedaluwarsa'   => date('Y-m-d', strtotime('+35 days', strtotime(date('Y-m-d')))),
             'tanggal_darah_masuk'   => date('Y-m-d H:i:s')
         ];
         $this->M_Darah->tambah($data_darah);

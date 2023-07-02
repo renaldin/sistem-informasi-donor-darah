@@ -190,7 +190,7 @@ function hitungUmur($tanggal_darah_masuk) {
                 <tbody>
 					<?= $no = 1;?>
 					@foreach ($data_darah as $item)
-					@if ($item->status_darah_masuk === 'Belum Masuk')
+					@if ($item->status_darah_masuk === 'Sudah Masuk')
 					<tr>
 						<td>{{$no++}}</td>
 						<td>{{$item->no_kantong}}</td>

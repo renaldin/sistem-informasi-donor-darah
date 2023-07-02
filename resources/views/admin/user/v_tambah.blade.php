@@ -23,6 +23,15 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group">
+                        <label for="alamat_user">Alamat</label>
+                        <input type="text" class="form-control @error('alamat_user') is-invalid @enderror" name="alamat_user" id="alamat_user" value="{{old('alamat_user')}}" placeholder="Masukkan Alamat">
+                        @error('alamat_user')
+                            <small class="form-text text-danger">{{$message}}</small>
+                        @enderror
+                    </div>       
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
                         <label for="nomor_telepon">Nomor Telepon</label>
                         <input type="text" class="form-control @error('nomor_telepon') is-invalid @enderror" name="nomor_telepon" id="nomor_telepon" value="{{old('nomor_telepon')}}" placeholder="Masukkan Nomor Telepon">
                         @error('nomor_telepon')
@@ -54,11 +63,11 @@
                         <select class="select2-single-placeholder form-control @error('role') is-invalid @enderror" name="role" id="select2SinglePlaceholder">
                             <option value="">Pilih</option>
                             <option value="Admin">Admin</option>
-                            <option value="Donatur">Donatur</option>
-                            <option value="Event">Event</option>
                             <option value="Petugas Kesehatan">Petugas Kesehatan</option>
-                            <option value="Rumah Sakit">Rumah Sakit</option>
-                            <option value="Pusat PMI">Pusat PMI</option>
+                            {{-- <option value="Donatur">Donatur</option>
+                            <option value="Event">Event</option> --}}
+                            {{-- <option value="Rumah Sakit">Rumah Sakit</option> --}}
+                            {{-- <option value="Pusat PMI">Pusat PMI</option> --}}
                         </select>
                         @error('role')
                             <small class="form-text text-danger">{{$message}}</small>
@@ -68,10 +77,7 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label for="foto">Foto</label>
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input @error('foto') is-invalid @enderror" name="foto" id="customFile">
-                            <label class="custom-file-label" for="customFile">Pilih file</label>
-                        </div>
+                        <input type="file" class="form-control @error('foto') is-invalid @enderror" name="foto">
                         @error('foto')
                             <small class="form-text text-danger">{{$message}}</small>
                         @enderror

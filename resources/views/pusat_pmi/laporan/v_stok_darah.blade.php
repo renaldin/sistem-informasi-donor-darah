@@ -38,7 +38,7 @@ function hitungUmur($tanggal_darah_masuk) {
                     <tbody>
                         <?php $no=1;?>
                         @foreach ($data_darah as $row)
-                        @if ($row->status_darah_masuk === 'Belum Masuk')
+                        @if ($row->status_darah_masuk === 'Sudah Masuk')
                         <tr>
                           <td>{{$no++}}</td>
                           <td>{{$row->no_kantong}}</td>
@@ -67,7 +67,7 @@ function hitungUmur($tanggal_darah_masuk) {
       </button>
     </div>
     <div class="modal-body">
-      <form action="/cetak_darah_masuk" method="POST">
+      <form action="/cetak_stok_darah" method="POST">
         @csrf;
         <div class="form-group">
           <label for="tanggal_mulai">Mulai Dari Tanggal</label>

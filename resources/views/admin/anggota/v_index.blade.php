@@ -15,7 +15,7 @@ function hitungUmur($tanggal_darah) {
     'hari' => $perbedaan->d
   );
 
-  $data_umur = $umur['tahun'].' tahun, '.$umur['bulan'].' bulan, '.$umur['hari'].' hari.';
+  $data_umur = $umur['bulan'].' bulan, '.$umur['hari'].' hari.';
   return $data_umur;
 }
 
@@ -101,6 +101,11 @@ function hitungDurasiJadwalDonor($tanggal_donor_kembali) {
                     <th>Jenis Kelamin</th>
                     <td>:</td>
                     <td>{{$row->jenis_kelamin}}</td>
+                </tr>
+                <tr>
+                    <th>Nomor Whatsapp</th>
+                    <td>:</td>
+                    <td>{{$row->no_wa}}</td>
                 </tr>
                 <tr>
                     <th>Alamat</th>

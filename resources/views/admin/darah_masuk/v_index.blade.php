@@ -6,15 +6,10 @@
 function hitungUmur($tanggal_darah_masuk) {
   $tgl_lahir = new DateTime($tanggal_darah_masuk);
   $sekarang = new DateTime();
-  $perbedaan = $sekarang->diff($tgl_lahir);
+  $diff = $tgl_lahir->diff($sekarang);
+  $umur = $diff->days;
 
-  $umur = array(
-    'tahun' => $perbedaan->y,
-    'bulan' => $perbedaan->m,
-    'hari' => $perbedaan->d
-  );
-
-  $data_umur = $umur['bulan'].' bulan, '.$umur['hari'].' hari.';
+  $data_umur = $umur.' hari.';
   return $data_umur;
 }
 @endphp
@@ -38,7 +33,7 @@ function hitungUmur($tanggal_darah_masuk) {
                             <th>Golongan Darah</th>
                             <th>Resus</th>
                             <th>Umur</th>
-                            <th>Tanggal Kedaluwarsa</th>
+                            <th>Tanggal Masuk</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -52,7 +47,7 @@ function hitungUmur($tanggal_darah_masuk) {
                           <td>{{$row->golongan_darah}}</td>
                           <td>{{$row->resus}}</td>
                           <td>{{ hitungUmur($row->tanggal_darah_masuk) }}</td>
-                          <td>{{$row->tanggal_kedaluwarsa}}</td>
+                          <td>{{date('Y-m-d', strtotime($row->tanggal_darah_masuk))}}</td>
                           <td class="text-center">
                               <button type="button" class="btn btn-sm btn-success mb-1" data-toggle="modal" data-target="#masuk{{$row->id_darah_masuk}}">Masuk</button>   
                               <button type="button" class="btn btn-sm btn-danger mb-1" data-toggle="modal" data-target="#buang{{$row->id_darah_masuk}}">Buang</button>   

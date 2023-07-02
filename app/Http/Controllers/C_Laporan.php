@@ -46,6 +46,23 @@ class C_Laporan extends Controller
         return view('pusat_pmi.laporan.v_index', $data);
     }
 
+    public function stok_darah()
+    {
+        if (!Session()->get('email')) {
+            return redirect()->route('login');
+        }
+
+        $data = [
+            'title'         => 'Laporan',
+            'sub_title'     => 'Laporan Stok Darah',
+            'data_web'      => $this->M_Website->detail(1),
+            'user'          => $this->M_User->detail(Session()->get('id_user')),
+            'data_darah'    => $this->M_DarahMasuk->get_data()
+        ];
+
+        return view('pusat_pmi.laporan.v_stok_darah', $data);
+    }
+
     public function darah_keluar()
     {
         if (!Session()->get('email')) {
@@ -93,6 +110,22 @@ class C_Laporan extends Controller
         ];
 
         $pdf = PDF::loadview('cetak/v_cetak_darah_masuk', $data);
+        return $pdf->download($data['title'] . ' ' . date('d F Y') . '.pdf');
+    }
+
+    public function cetak_stok_darah()
+    {
+        if (!Session()->get('email')) {
+            return redirect()->route('login');
+        }
+
+        $data = [
+            'title'         => 'Rekap Stok Darah',
+            'data_web'      => $this->M_Website->detail(1),
+            'data_darah'    => $this->M_DarahMasuk->get_data_tanggal(Request()->tanggal_mulai, Request()->tanggal_akhir)
+        ];
+
+        $pdf = PDF::loadview('cetak/v_cetak_stok_darah', $data);
         return $pdf->download($data['title'] . ' ' . date('d F Y') . '.pdf');
     }
 

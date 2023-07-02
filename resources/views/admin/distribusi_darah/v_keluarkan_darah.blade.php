@@ -6,15 +6,10 @@
 function hitungUmur($tanggal_darah_masuk) {
   $tgl_lahir = new DateTime($tanggal_darah_masuk);
   $sekarang = new DateTime();
-  $perbedaan = $sekarang->diff($tgl_lahir);
+  $diff = $tgl_lahir->diff($sekarang);
+  $umur = $diff->days;
 
-  $umur = array(
-    'tahun' => $perbedaan->y,
-    'bulan' => $perbedaan->m,
-    'hari' => $perbedaan->d
-  );
-
-  $data_umur = $umur['tahun'].' tahun, '.$umur['bulan'].' bulan, '.$umur['hari'].' hari.';
+  $data_umur = $umur.' hari.';
   return $data_umur;
 }
 @endphp
@@ -37,7 +32,12 @@ function hitungUmur($tanggal_darah_masuk) {
                             <tr>
                                 <th>Tanggal Permohonan</th>
                                 <td>:</td>
-                                <td>{{$detail->tanggal_permohonan}}}}</td>
+                                <td>{{$detail->tanggal_permohonan}}</td>
+                            </tr>
+                            <tr>
+                                <th>Golongan Darah</th>
+                                <td>:</td>
+                                <td>{{$detail->golda}}</td>
                             </tr>
                             <tr>
                                 <th>Jumlah {Kantong}</th>
@@ -71,8 +71,8 @@ function hitungUmur($tanggal_darah_masuk) {
                                         <select class="select2-single-placeholder form-control @error('id_darah_masuk') is-invalid @enderror" name="id_darah_masuk" autofocus id="select2SinglePlaceholder" required>
                                             <option value="">Pilih</option>
                                             @foreach ($data_darah as $row)
-                                                @if ($row->status_darah_masuk == 'Sudah Masuk')
-                                                    <option value="{{$row->id_darah_masuk}}">{{$row->no_kantong}} | {{$row->golongan_darah}}, {{$row->resus}}, {{$row->volume_darah}} | {{date('d F Y', strtotime($row->tanggal_darah_masuk))}}</option>
+                                                @if ($row->status_darah_masuk == 'Sudah Masuk' && $row->tanggal_kedaluwarsa >= date('Y-m-d') ) 
+                                                    <option value="{{$row->id_darah_masuk}}">{{$row->no_kantong}} | {{$row->golongan_darah}} | {{$row->resus}} | {{ hitungUmur($row->tanggal_darah_masuk) }}</option>
                                                 @endif
                                             @endforeach                                                         
                                         </select>

@@ -6,15 +6,10 @@
         {
             $tgl_lahir = new DateTime($tanggal_darah_masuk);
             $sekarang = new DateTime();
-            $perbedaan = $sekarang->diff($tgl_lahir);
-        
-            $umur = [
-                'tahun' => $perbedaan->y,
-                'bulan' => $perbedaan->m,
-                'hari' => $perbedaan->d,
-            ];
-        
-            $data_umur = $umur['tahun'] . ' tahun, ' . $umur['bulan'] . ' bulan, ' . $umur['hari'] . ' hari.';
+            $diff = $tgl_lahir->diff($sekarang);
+            $umur = $diff->days;
+
+            $data_umur = $umur.' hari.';
             return $data_umur;
         }
     @endphp
@@ -34,7 +29,7 @@
                         <thead class="thead-light">
                             <tr>
                                 <th>No</th>
-                                <th>Name RS</th>
+                                <th>Nama RS</th>
                                 <th>Tanggal</th>
                                 <th>Golda</th>
                                 <th>Jumlah</th>
@@ -112,7 +107,12 @@
                                     <tr>
                                         <th>Tanggal Permohonan</th>
                                         <td>:</td>
-                                        <td>{{ $row->tanggal_permohonan }}}}</td>
+                                        <td>{{ $row->tanggal_permohonan }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Golongan Darah</th>
+                                        <td>:</td>
+                                        <td>{{$row->golda}}</td>
                                     </tr>
                                     <tr>
                                         <th>Jumlah {Kantong}</th>

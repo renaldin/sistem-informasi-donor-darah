@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\M_User;
 use App\Models\M_Website;
 use RealRashid\SweetAlert\Facades\Alert;
-use Twilio\Rest\Client;
 
 class C_User extends Controller
 {
@@ -57,6 +56,7 @@ class C_User extends Controller
     {
         Request()->validate([
             'nama'              => 'required',
+            'alamat_user'       => 'required',
             'nomor_telepon'     => 'required|numeric',
             'email'             => 'required|unique:user,email|email',
             'password'          => 'min:6|required',
@@ -64,6 +64,7 @@ class C_User extends Controller
             'foto'              => 'required|mimes:jpeg,png,jpg|max:2048',
         ], [
             'nama.required'             => 'Nama lengkap harus diisi!',
+            'alamat_user.required'      => 'Alamat harus diisi!',
             'nomor_telepon.required'    => 'Nomor telepon harus diisi!',
             'nomor_telepon.numeric'     => 'Nomor telepon harus angka!',
             'email.required'            => 'Email harus diisi!',
@@ -83,6 +84,7 @@ class C_User extends Controller
 
         $data = [
             'nama'              => Request()->nama,
+            'alamat_user'       => Request()->alamat_user,
             'nomor_telepon'     => Request()->nomor_telepon,
             'email'             => Request()->email,
             'password'          => Hash::make(Request()->password),
@@ -116,9 +118,9 @@ class C_User extends Controller
     {
         Request()->validate([
             'nama'              => 'required',
+            'alamat_user'       => 'required',
             'nomor_telepon'     => 'required|numeric',
             'email'             => 'required|email',
-            'role'              => 'required',
             'foto'              => 'mimes:jpeg,png,jpg|max:2048',
         ], [
             'nama.required'             => 'Nama lengkap harus diisi!',
@@ -126,7 +128,6 @@ class C_User extends Controller
             'nomor_telepon.numeric'     => 'Nomor telepon harus angka!',
             'email.required'            => 'Email harus diisi!',
             'email.email'               => 'Email harus sesuai format! Contoh: contoh@gmail.com',
-            'role.required'             => 'Role harus diisi!',
             'foto.mimes'                => 'Format Foto Anda harus jpg/jpeg/png!',
             'foto.max'                  => 'Ukuran Foto Anda maksimal 2 mb',
         ]);
@@ -147,20 +148,20 @@ class C_User extends Controller
                 $data = [
                     'id_user'           => $id_user,
                     'nama'              => Request()->nama,
+                    'alamat_user'       => Request()->alamat_user,
                     'nomor_telepon'     => Request()->nomor_telepon,
                     'email'             => Request()->email,
                     'password'          => Hash::make(Request()->password),
-                    'role'              => Request()->role,
                     'foto '             => $fileUser,
                 ];
             } else {
                 $data = [
                     'id_user'           => $id_user,
                     'nama'              => Request()->nama,
+                    'alamat_user'       => Request()->alamat_user,
                     'nomor_telepon'     => Request()->nomor_telepon,
                     'email'             => Request()->email,
                     'password'          => Hash::make(Request()->password),
-                    'role'              => Request()->role,
                 ];
             }
         } else {
@@ -178,18 +179,18 @@ class C_User extends Controller
                 $data = [
                     'id_user'           => $id_user,
                     'nama'              => Request()->nama,
+                    'alamat_user'       => Request()->alamat_user,
                     'nomor_telepon'     => Request()->nomor_telepon,
                     'email'             => Request()->email,
-                    'role'              => Request()->role,
                     'foto'              => $fileUser,
                 ];
             } else {
                 $data = [
                     'id_user'           => $id_user,
                     'nama'              => Request()->nama,
+                    'alamat_user'       => Request()->alamat_user,
                     'nomor_telepon'     => Request()->nomor_telepon,
                     'email'             => Request()->email,
-                    'role'              => Request()->role,
                 ];
             }
         }
@@ -207,6 +208,14 @@ class C_User extends Controller
             unlink(public_path('foto_user') . '/' . $user->foto);
         }
 
+        if ($user->role === 'Donatur') {
+            $this->M_User->hapus_user_donatur($id_user);
+        } elseif ($user->role === 'Event') {
+            $this->M_User->hapus_user_event($id_user);
+        } elseif ($user->role === 'Rumah Sakit') {
+            $this->M_User->hapus_user_rs($id_user);
+        }
+
         $this->M_User->hapus($id_user);
         Alert::success('Berhasil', 'Data user berhasil dihapus.');
         return redirect()->route('data_user');
@@ -218,11 +227,21 @@ class C_User extends Controller
             return redirect()->route('login');
         }
 
+        if (Session()->get('role') === 'Donatur') {
+            $user = $this->M_User->detail_user_donatur(Session()->get('id_user'));
+        } elseif (Session()->get('role') === 'Event') {
+            $user = $this->M_User->detail_user_event(Session()->get('id_user'));
+        } elseif (Session()->get('role') === 'Rumah Sakit') {
+            $user = $this->M_User->detail_user_rs(Session()->get('id_user'));
+        } else {
+            $user = $this->M_User->detail(Session()->get('id_user'));
+        }
+
         $data = [
             'title'     => 'Profil',
             'sub_title' => 'Data Profil',
             'data_web'  => $this->M_Website->detail(1),
-            'user'      => $this->M_User->detail(Session()->get('id_user'))
+            'user'      => $user,
         ];
 
         return view('profil.v_index', $data);
@@ -232,11 +251,13 @@ class C_User extends Controller
     {
         Request()->validate([
             'nama'              => 'required',
+            'alamat_user'       => 'required',
             'nomor_telepon'     => 'required|numeric',
             'email'             => 'required|email',
             'foto'              => 'mimes:jpeg,png,jpg|max:2048',
         ], [
             'nama.required'             => 'Nama lengkap harus diisi!',
+            'alamat_user.required'      => 'Alamat harus diisi!',
             'nomor_telepon.required'    => 'Nomor telepon harus diisi!',
             'nomor_telepon.numeric'     => 'Nomor telepon harus angka!',
             'email.required'            => 'Email harus diisi!',
@@ -245,7 +266,39 @@ class C_User extends Controller
             'foto.max'                  => 'Ukuran Foto Anda maksimal 2 mb',
         ]);
 
-        $user = $this->M_User->detail($id_user);
+        if (Session()->get('role') === 'Donatur') {
+            $user = $this->M_User->detail_user_donatur(Session()->get('id_user'));
+
+            $data_donatur = [
+                'id_user_donatur' => $user->id_user_donatur,
+                'id_user'         => $id_user,
+                'nik'             => Request()->nik,
+                'tanggal_lahir'   => Request()->tanggal_lahir,
+                'jk'              => Request()->jk,
+                'gol_darah'       => Request()->gol_darah,
+            ];
+            $this->M_User->edit_donatur($data_donatur);
+        } elseif (Session()->get('role') === 'Event') {
+            $user = $this->M_User->detail_user_event(Session()->get('id_user'));
+
+            $data_event = [
+                'id_user_event'     => $user->id_user_event,
+                'id_user'           => $id_user,
+                'kode_instansi'     => Request()->kode_instansi,
+            ];
+            $this->M_User->edit_event($data_event);
+        } elseif (Session()->get('role') === 'Rumah Sakit') {
+            $user = $this->M_User->detail_user_rs(Session()->get('id_user'));
+
+            $data_rs = [
+                'id_user_rs'        => $user->id_user_rs,
+                'id_user'           => $id_user,
+                'kode_rs'           => Request()->kode_rs,
+            ];
+            $this->M_User->edit_rs($data_rs);
+        } else {
+            $user = $this->M_User->detail(Session()->get('id_user'));
+        }
 
         if (Request()->foto <> "") {
             if ($user->foto <> "") {
@@ -259,6 +312,7 @@ class C_User extends Controller
             $data = [
                 'id_user'           => $id_user,
                 'nama'              => Request()->nama,
+                'alamat_user'       => Request()->alamat_user,
                 'nomor_telepon'     => Request()->nomor_telepon,
                 'email'             => Request()->email,
                 'foto'              => $fileUser
@@ -267,6 +321,7 @@ class C_User extends Controller
             $data = [
                 'id_user'           => $id_user,
                 'nama'              => Request()->nama,
+                'alamat_user'       => Request()->alamat_user,
                 'nomor_telepon'     => Request()->nomor_telepon,
                 'email'             => Request()->email,
             ];
@@ -325,26 +380,4 @@ class C_User extends Controller
             return back();
         }
     }
-
-    public function kirimJadwal($id) 
-     {
-         $sid = "AC3152032a13274daaa83569dad0c55b43";
-         $token = "ffd93e355ec798e02be02dfc06a9fb28";
-         $twilioNumber = "+14155238886";
-         $recipientNumber = "+6282239668826";
-         $client = new Client($sid, $token);
-    
-         $message = $client->messages->create(
-             'whatsapp:' . $recipientNumber, // Replace with the recipient's WhatsApp number
-             [
-                 'from' => 'whatsapp:' . $twilioNumber,
-                 'body' => 'Hallo,Ayo donor brok.', // Replace with your desired message
-             ]
-         );
-    
-         return response()->json(['message' => 'WhatsApp message sent successfully.', 'messageSid' => $message->sid]);
-        }
-    
-
-    
 }

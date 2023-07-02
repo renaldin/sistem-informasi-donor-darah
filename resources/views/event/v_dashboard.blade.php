@@ -27,8 +27,8 @@
                                 <thead class="thead-light">
                                     <tr>
                                         <th>No</th>
-                                        <th>Golongan Darah</th>
-                                        <th>Stok</th>
+                                        <th>Name Instansi</th>
+                                        <th>Waktu Event</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -53,7 +53,7 @@
                             <h6 class="m-0 font-weight-bold">Event Yang Akan Dilaksanakan</h6>
                         </div>
                         <div class="table-responsive p-3">
-                            <table class="table align-items-center table-flush table-hover">
+                            <table class="table align-items-center table-flush table-hover" id="dataTableHover2">
                                 <thead class="thead-light">
                                     <tr>
                                         <th>No</th>

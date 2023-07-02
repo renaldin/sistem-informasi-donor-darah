@@ -144,12 +144,10 @@ class C_StokDarah extends Controller
                 'golongan_darah'        => 'required',
                 'resus'                 => 'required',
                 'volume_darah'          => 'required',
-                'tanggal_kedaluwarsa'   => 'required',
             ], [
                 'golongan_darah.required'       => 'Golongan darah harus diisi!',
                 'resus.required'                => 'Resus harus diisi!',
                 'volume_darah.required'         => 'Volume darah harus diisi!',
-                'tanggal_kedaluwarsa.required'  => 'Tanggal kedaluwarsa harus diisi!',
             ]);
 
             $data_darah = [
@@ -158,7 +156,7 @@ class C_StokDarah extends Controller
                 'golongan_darah'        => Request()->golongan_darah,
                 'resus'                 => Request()->resus,
                 'volume_darah'          => Request()->volume_darah,
-                'tanggal_kedaluwarsa'   => Request()->tanggal_kedaluwarsa,
+                'tanggal_kedaluwarsa'   => date('Y-m-d', strtotime('+35 days', strtotime(date('Y-m-d')))),
                 'tanggal_darah_masuk'   => date('Y-m-d H:i:s')
             ];
             $this->M_Darah->tambah($data_darah);
@@ -178,6 +176,14 @@ class C_StokDarah extends Controller
             ];
             $this->M_Donor->edit($data_donor);
 
+            $detail_donor = $this->M_Donor->detail(Request()->id_donor);
+
+            $data_anggota = [
+                'id_anggota'            => $detail_donor->id_anggota,
+                'tanggal_donor_kembali' => date('Y-m-d', strtotime('+60 days', strtotime(date('Y-m-d')))),
+            ];
+            $this->M_Anggota->edit($data_anggota);
+
             Alert::success('Berhasil', 'Data darah berhasil ditambah.');
             return redirect()->route('tambah_darah_online');
         } elseif (Request()->form_darah == 'Offline') {
@@ -189,7 +195,6 @@ class C_StokDarah extends Controller
                     'golongan_darah'        => 'required',
                     'resus'                 => 'required',
                     'volume_darah'          => 'required',
-                    'tanggal_kedaluwarsa'   => 'required',
                 ], [
                     'id_anggota.required'               => 'Nama anggota harus diisi!',
                     'hasil_kusioner.required'           => 'Hasil kusioner harus diisi!',
@@ -197,7 +202,6 @@ class C_StokDarah extends Controller
                     'golongan_darah.required'       => 'Golongan darah harus diisi!',
                     'resus.required'                => 'Resus harus diisi!',
                     'volume_darah.required'         => 'Volume darah harus diisi!',
-                    'tanggal_kedaluwarsa.required'  => 'Tanggal kedaluwarsa harus diisi!',
                 ]);
 
                 $data_donor = [
@@ -218,29 +222,30 @@ class C_StokDarah extends Controller
                 Request()->validate([
                     'nama_anggota'          => 'required',
                     'alamat'                => 'required',
+                    'no_wa'                => 'required',
                     'jenis_kelamin'         => 'required',
                     'hasil_kusioner'        => 'required',
                     'deskripsi_hasil_kusioner'        => 'required',
                     'golongan_darah'        => 'required',
                     'resus'                 => 'required',
                     'volume_darah'          => 'required',
-                    'tanggal_kedaluwarsa'   => 'required',
                 ], [
                     'nama_anggota.required'         => 'Nama anggota harus diisi!',
                     'alamat.required'               => 'Alamat harus diisi!',
+                    'no_wa.required'               => 'Nomor whatsapp harus diisi!',
                     'jenis_kelamin.required'        => 'Jenis kelamin harus diisi!',
                     'hasil_kusioner.required'           => 'Hasil kusioner harus diisi!',
                     'deskripsi_hasil_kusioner.required' => 'Deskripsi hasil kusioner harus diisi!',
                     'golongan_darah.required'       => 'Golongan darah harus diisi!',
                     'resus.required'                => 'Resus harus diisi!',
                     'volume_darah.required'         => 'Volume darah harus diisi!',
-                    'tanggal_kedaluwarsa.required'  => 'Tanggal kedaluwarsa harus diisi!',
                 ]);
 
                 $data_anggota = [
                     'nama_anggota'      => Request()->nama_anggota,
                     'nik'      => Request()->nik,
                     'alamat'            => Request()->alamat,
+                    'no_wa'            => Request()->no_wa,
                     'jenis_kelamin'     => Request()->jenis_kelamin,
                     'status_anggota'    => 'Mandiri',
                     'tanggal_donor_kembali' => date('Y-m-d', strtotime('+60 days', strtotime(date('Y-m-d')))),
@@ -267,7 +272,7 @@ class C_StokDarah extends Controller
                 'golongan_darah'        => Request()->golongan_darah,
                 'resus'                 => Request()->resus,
                 'volume_darah'          => Request()->volume_darah,
-                'tanggal_kedaluwarsa'   => Request()->tanggal_kedaluwarsa,
+                'tanggal_kedaluwarsa'   => date('Y-m-d', strtotime('+35 days', strtotime(date('Y-m-d')))),
                 'tanggal_darah_masuk'   => date('Y-m-d H:i:s')
             ];
             $this->M_Darah->tambah($data_darah);
@@ -313,12 +318,10 @@ class C_StokDarah extends Controller
             'golongan_darah'        => 'required',
             'resus'                 => 'required',
             'volume_darah'          => 'required',
-            'tanggal_kedaluwarsa'   => 'required',
         ], [
             'golongan_darah.required'       => 'Golongan darah harus diisi!',
             'resus.required'                => 'Resus harus diisi!',
             'volume_darah.required'         => 'Volume darah harus diisi!',
-            'tanggal_kedaluwarsa.required'  => 'Tanggal kedaluwarsa harus diisi!',
         ]);
 
         $darah_masuk = $this->M_DarahMasuk->detail($id_darah_masuk);
@@ -329,7 +332,6 @@ class C_StokDarah extends Controller
             'golongan_darah'        => Request()->golongan_darah,
             'resus'                 => Request()->resus,
             'volume_darah'          => Request()->volume_darah,
-            'tanggal_kedaluwarsa'   => Request()->tanggal_kedaluwarsa,
         ];
         $this->M_Darah->edit($data_darah);
 
@@ -337,7 +339,7 @@ class C_StokDarah extends Controller
             'id_darah_masuk' => $darah_masuk->id_darah_masuk,
             'id_darah'       => $darah_masuk->id_darah,
             'id_user'        => Session()->get('id_user'),
-            'tanggal_masuk' => date('Y-m-d H:i:s')
+            'tanggal_masuk'  => date('Y-m-d H:i:s')
         ];
         $this->M_DarahMasuk->edit($data_darah_masuk);
 

@@ -67,8 +67,8 @@
       <p>Apakah Anda yakin pengajuan event ini akan diizinkan?</p>
     </div>
     <div class="modal-footer">
-      <a href="/tidak_pengajuan_event/{{$row->id_event}}" class="btn btn-outline-danger">Tidak</a>
-      <a href="/ya_pengajuan_event/{{$row->id_event}}" class="btn btn-danger">Ya</a>
+      <a href="/tidak_pengajuan_event/{{$row->id_event}}" class="btn btn-outline-danger">Tolak</a>
+      <a href="/ya_pengajuan_event/{{$row->id_event}}" class="btn btn-danger">Terima</a>
     </div>
   </div>
 </div>
@@ -110,7 +110,7 @@
                     <td>{{$row->tanggal_event}} {{$row->jam}}</td>
                 </tr>
                 <tr>
-                    <th>Jumlah Orang</th>
+                    <th>Target Pendonor</th>
                     <td>:</td>
                     <td>{{$row->jumlah_orang}}</td>
                 </tr>

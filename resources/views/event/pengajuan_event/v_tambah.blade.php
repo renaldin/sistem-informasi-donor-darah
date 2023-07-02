@@ -15,7 +15,7 @@
                                 <div class="form-group">
                                     <label for="nama_instansi">Nama Instansi</label>
                                     <input type="text" class="form-control @error('nama_instansi') is-invalid @enderror"
-                                        name="nama_instansi" id="nama_instansi" value="{{ old('nama_instansi') }}"
+                                        name="nama_instansi" id="nama_instansi" value="{{ $user->nama }}"
                                         placeholder="Masukkan Nama Instansi">
                                     @error('nama_instansi')
                                         <small class="form-text text-danger">{{ $message }}</small>
@@ -66,7 +66,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label for="touchSpin1">Jumlah Orang</label>
+                                    <label for="touchSpin1">Target Pendonor</label>
                                     <input id="touchSpin1" type="text" name="jumlah_orang"
                                         class="form-control @error('jumlah_orang') is-invalid @enderror"
                                         value="{{ old('jumlah_orang') }}">
