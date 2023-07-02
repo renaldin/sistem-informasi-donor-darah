@@ -37,6 +37,15 @@ class M_DarahKeluar extends Model
             ->orderBy('id_darah_keluar', 'DESC')->get();
     }
 
+    public function get_darah_keluar($id_darah_keluar)
+    {
+        return DB::table($this->table)
+            ->join('permohonan_darah', 'permohonan_darah.id_permohonan_darah', '=', 'darah_keluar.id_permohonan_darah', 'left')
+            ->join('darah', 'darah.id_darah', '=', 'darah_keluar.id_darah', 'left')
+            ->where('darah_keluar.id_darah_keluar', $id_darah_keluar)
+            ->orderBy('id_darah_keluar', 'DESC')->first();
+    }
+
     public function detail($id_darah_keluar)
     {
         return DB::table($this->table)

@@ -82,6 +82,7 @@ class C_Dashboard extends Controller
                 'data_web'               => $this->M_Website->detail(1),
                 'event'               => $this->M_Event->get_data(),
             ];
+            // dd(Session()->get('id_user'));
             return view('event.v_dashboard', $data);
         } elseif (Session()->get('role') === 'Petugas Kesehatan') {
             $data = [

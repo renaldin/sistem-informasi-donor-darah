@@ -82,7 +82,6 @@ class C_PengajuanEvent extends Controller
             'jam'               => 'required',
             'jumlah_orang'      => 'required',
             'upload_surat'      => 'required|mimes:pdf|max:5048',
-            'upload_gambar'     => 'required|mimes:jpeg,png,jpg|max:5048',
         ], [
             'nama_instansi.required'    => 'Nama Instansi harus diisi!',
             'alamat_lengkap.required'   => 'Alamat Lengkap harus diisi!',
@@ -92,19 +91,12 @@ class C_PengajuanEvent extends Controller
             'upload_surat.required'     => 'Surat harus diisi!',
             'upload_surat.mimes'        => 'Format Surat harus PDF!',
             'upload_surat.max'          => 'Ukuran Surat maksimal 5 mb',
-            'upload_gambar.required'    => 'Gambar harus diisi!',
-            'upload_gambar.mimes'       => 'Format Gambar harus jpeg/png/jpg!',
-            'upload_gambar.max'         => 'Ukuran Gambar maksimal 5 mb',
         ]);
 
 
         $file = Request()->upload_surat;
         $file_surat = date('mdYHis') . ' ' . Request()->nama_instansi . '.' . $file->extension();
         $file->move(public_path('foto_surat'), $file_surat);
-
-        $gambar = Request()->upload_gambar;
-        $file_gambar = Request()->nama_instansi . '.' . $gambar->extension();
-        $gambar->move(public_path('foto_event'), $file_gambar);
 
         $data = [
             'id_user'           => Session()->get('id_user'),
@@ -114,7 +106,6 @@ class C_PengajuanEvent extends Controller
             'jam'               => Request()->jam,
             'jumlah_orang'      => Request()->jumlah_orang,
             'upload_surat'      => $file_surat,
-            'gambar'            => $file_gambar,
             'status_pengajuan'  => "Belum Dikirim",
             'tanggal_pengajuan' => date('Y-m-d H:i:s')
         ];
@@ -206,10 +197,6 @@ class C_PengajuanEvent extends Controller
 
         if ($event->upload_surat <> "") {
             unlink(public_path('foto_surat') . '/' . $event->upload_surat);
-        }
-
-        if ($event->gambar <> "") {
-            unlink(public_path('foto_event') . '/' . $event->gambar);
         }
 
         $this->M_Event->hapus($id_event);
