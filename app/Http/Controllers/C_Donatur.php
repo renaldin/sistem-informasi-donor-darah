@@ -45,11 +45,14 @@ class C_Donatur extends Controller
                 'user'      => $this->M_User->detail_user_donatur(Session()->get('id_user')),
             ];
         }
+        // dd($data['data']);
         return view('donatur.v_daftar_donor', $data);
     }
 
     public function submit_kuisioner()
     {
+
+        // dd(Request());
         Request()->validate([
             'nik'                       => 'required',
             'nama'                      => 'required',
