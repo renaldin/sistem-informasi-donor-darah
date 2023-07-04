@@ -39,7 +39,8 @@
                                 @endif
                             </td>
                             <td>
-                                <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#approve{{$row->id_event}}">Approve</button>
+                                <a href="/tidak_pengajuan_event/{{$row->id_event}}" class="btn btn-danger btn-sm ">Tolak</a>
+                                <a href="/ya_pengajuan_event/{{$row->id_event}}" class="btn btn-success btn-sm ">Terima</a>
                                 <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#detail{{$row->id_event}}">Detail</button>   
                             </td>
                           </tr>
