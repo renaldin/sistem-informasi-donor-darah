@@ -13,9 +13,11 @@
         <div class="row">
             <div class="col-12 col-xs-12 col-sm-12 col-md-6 col-lg-6 pt-5 mt-3" data-aos="fade-right">
                 <h1 class="text-uppercase text-dark font-weight-bold" style="font-weight: bolder;">Donor Darah</h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem praesentium aspernatur harum
-                    placeat aperiam dolores architecto iusto repellat voluptatum ex laudantium, ipsa optio, delectus
-                    doloribus? Rerum ducimus ut commodi labore.</p>
+                <p align="justify">Website Donor Darah adalah sebuah platform online yang bertujuan untuk memfasilitasi
+                    proses donor darah.
+                    Website ini menyediakan informasi dan layanan yang dibutuhkan oleh para calon pendonor darah, pusat
+                    donor darah, dan penerima darah. Bertujuan untuk memudahkan pendonor darah dalam proses donasi dan
+                    memberikan informasi yang akurat dan lengkap mengenai donor darah.</p>
             </div>
             <div class="col-12 col-xs-12 col-sm-12 col-md-6 col-lg-6 text-center" data-aos="fade-left">
                 <img src="/gambar/donor.jpg" alt="donor darah" class="w-100">
@@ -282,10 +284,10 @@
                             @foreach ($all_event as $row)
                                 <div class="col-4">
                                     <div class="card"
-                                        style="background-image: url('/foto_event/{{ $row->gambar }}'); width: 100%; height: 200px; background-size: cover">
-                                        <span class="mt-auto pl-2 text-white">{{ $row->nama_instansi }}</span>
-                                        <span class=" pl-2 text-white">Alamat : {{ $row->alamat_lengkap }}</span>
-                                        <span class=" pl-2 text-white">Tanggal :
+                                        style="background-image: url('/foto_biodata/logo-pmi.png'); width: 100%; height: 200px; background-size: cover">
+                                        <span class="mt-auto pl-2 text-black">{{ $row->nama_instansi }}</span>
+                                        <span class=" pl-2 text-black">Alamat : {{ $row->alamat_lengkap }}</span>
+                                        <span class=" pl-2 text-black">Tanggal :
                                             {{ date('l, d m Y', strtotime($row->tanggal_pengajuan)) }}</span>
                                     </div>
                                 </div>

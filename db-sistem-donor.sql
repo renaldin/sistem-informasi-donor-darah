@@ -3,9 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 10, 2023 at 07:19 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.0.19
+
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -36,7 +34,7 @@ CREATE TABLE `anggota` (
   `no_wa` varchar(30) DEFAULT NULL,
   `status_anggota` enum('Mandiri','Event') NOT NULL DEFAULT 'Mandiri',
   `tanggal_donor_kembali` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `anggota`
@@ -59,7 +57,8 @@ INSERT INTO `anggota` (`id_anggota`, `nik`, `nama_anggota`, `jenis_kelamin`, `al
 (15, '112233445566', 'Sumanto', 'Laki-laki', 'Subang', '0895336928026', 'Mandiri', '2023-08-22'),
 (16, '99999999999', 'Teresia 9', 'Perempuan', 'Subang', '0895336928026', 'Mandiri', '2023-08-29'),
 (17, '11111111111111', 'Event Donor 1', 'Perempuan', 'Subang', '0895336928026', 'Event', '2023-08-01'),
-(18, '22222222222222', 'Event 12 Donor 2', 'Perempuan', 'Subang', '089878672368', 'Event', '2023-08-01');
+(18, '22222222222222', 'Event 12 Donor 2', 'Perempuan', 'Subang', '089878672368', 'Event', '2023-08-01'),
+(19, '10101010101010', 'Teresia Purba', 'Perempuan', 'Subang', '08989784353', 'Mandiri', '2023-09-02');
 
 -- --------------------------------------------------------
 
@@ -74,7 +73,7 @@ CREATE TABLE `biodata_web` (
   `nomor_telepon` varchar(50) NOT NULL,
   `alamat` text NOT NULL,
   `logo` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `biodata_web`
@@ -98,7 +97,7 @@ CREATE TABLE `darah` (
   `volume_darah` varchar(50) DEFAULT NULL,
   `tanggal_kedaluwarsa` date DEFAULT NULL,
   `tanggal_darah_masuk` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `darah`
@@ -141,7 +140,7 @@ CREATE TABLE `darah_buang` (
   `id_darah` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `tanggal_buang` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `darah_buang`
@@ -166,7 +165,7 @@ CREATE TABLE `darah_keluar` (
   `id_darah` int(11) NOT NULL,
   `id_permohonan_darah` int(11) NOT NULL,
   `tanggal_keluar` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `darah_keluar`
@@ -195,7 +194,7 @@ CREATE TABLE `darah_masuk` (
   `id_user` int(11) NOT NULL,
   `status_darah_masuk` enum('Belum Masuk','Sudah Masuk') NOT NULL DEFAULT 'Belum Masuk',
   `tanggal_masuk` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `darah_masuk`
@@ -232,7 +231,7 @@ CREATE TABLE `donor` (
   `denyut_nadi` varchar(10) DEFAULT NULL,
   `tinggi_badan` varchar(10) DEFAULT NULL,
   `keadaan_umum` varchar(30) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `donor`
@@ -260,7 +259,10 @@ INSERT INTO `donor` (`id_donor`, `id_anggota`, `id_event`, `tanggal_donor`, `sta
 (19, 15, NULL, '2023-06-23 04:02:26', 'Selesai', 'Lolos', 'Deskripsi', NULL, NULL, NULL, NULL, NULL, NULL),
 (20, 16, NULL, '2023-06-30 10:26:28', 'Selesai', 'Lolos', 'Lulus Kusioner', NULL, NULL, NULL, NULL, NULL, NULL),
 (21, 17, 12, '2023-07-02 08:59:49', 'Selesai', 'Lolos', 'Donor darah dari event', NULL, NULL, NULL, NULL, NULL, NULL),
-(22, 18, 12, '2023-07-02 09:12:15', 'Selesai', 'Lolos', 'Donor darah dari event', NULL, NULL, NULL, NULL, NULL, NULL);
+(22, 18, 12, '2023-07-02 09:12:15', 'Selesai', 'Lolos', 'Donor darah dari event', NULL, NULL, NULL, NULL, NULL, NULL),
+(23, 19, NULL, '2023-07-04 23:46:34', 'Proses', 'Lolos', 'Lolos kusioner', NULL, NULL, NULL, NULL, NULL, NULL),
+(24, 19, NULL, '2023-07-04 23:47:06', 'Proses', 'Lolos', 'Lolos kusioner', NULL, NULL, NULL, NULL, NULL, NULL),
+(25, 19, NULL, '2023-07-04 23:48:39', 'Proses', 'Lolos', 'Lolos kusioner', NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -282,22 +284,13 @@ CREATE TABLE `event` (
   `status_pengajuan` enum('Menunggu Persetujuan','Disetujui','Tidak Disetujui','Belum Dikirim','Dibuat Admin') DEFAULT NULL,
   `status_event` enum('Aktif','Tidak Aktif') NOT NULL DEFAULT 'Tidak Aktif',
   `gambar` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `event`
 --
 
-INSERT INTO `event` (`id_event`, `id_user`, `kd_instansi`, `nama_instansi`, `alamat_lengkap`, `tanggal_event`, `jam`, `jumlah_orang`, `upload_surat`, `tanggal_pengajuan`, `status_pengajuan`, `status_event`, `gambar`) VALUES
-(3, 2, 'E-002', 'Politeknik Negeri Subang', 'Cibogo', '2023-05-07', '12:00', 4, '05072023011122 Politeknik Negeri Subang.pdf', '2023-05-07 00:00:00', 'Tidak Disetujui', 'Tidak Aktif', 'event1.jpeg'),
-(4, 7, 'E-003', 'Politeknik Negeri Subang', 'Cibogo', '2023-05-12', '12:00', 2, '05122023072455 Politeknik Negeri Subang.pdf', '2023-05-12 00:00:00', 'Tidak Disetujui', 'Tidak Aktif', 'event2.jpg'),
-(6, 7, 'E-004', 'Politeknik Negeri Subang', 'Cibogo', '2023-05-13', '12:00', 3, '05132023081819 Politeknik Negeri Subang.pdf', '2023-05-13 00:00:00', 'Disetujui', 'Tidak Aktif', 'event3.jpg'),
-(7, 2, 'E-005', 'Politeknik Negeri Subang', 'Cibogo Update', '2023-05-13', '02:00', 3, '05132023082930 Politeknik Negeri Subang.pdf', '2023-05-13 00:00:00', 'Disetujui', 'Tidak Aktif', 'event4.jpeg'),
-(9, 7, 'E-002', 'Politeknik Negeri Subang Update', 'Cibogo Update', '2023-05-13', '12:00', 3, '05132023084032 Politeknik Negeri Subang Update.pdf', '2023-05-13 00:00:00', 'Disetujui', 'Tidak Aktif', 'event5.jpg'),
-(10, 2, 'E-002', 'Politeknik Negeri Subang Update', 'Cibogo Update', '2023-05-13', '12:00', 3, '05132023084418 Politeknik Negeri Subang Update.pdf', '2023-05-13 00:00:00', 'Disetujui', 'Tidak Aktif', 'event6.jpg'),
-(12, 18, 'E-002', 'Event Instansi 1', 'Cibogo', '2023-08-01', '08:00', 50, '07022023082319 Event Instansi 1.pdf', '2023-07-02 00:00:00', 'Disetujui', 'Aktif', 'Event Instansi 1.png'),
-(13, 2, 'E-001', 'Politeknik Negeri Subang', 'Cibogo', '2023-07-26', '08:00', 45, '07102023214606 Politeknik Negeri Subang.pdf', '2023-07-10 21:46:06', 'Disetujui', 'Aktif', NULL),
-(14, 18, 'E-010', 'Event Instansi 1', 'Cibogo', '2023-07-12', '08:00', 10, '07102023220307 Event Instansi 1.pdf', '2023-07-10 00:00:00', 'Disetujui', 'Aktif', 'Event Instansi 1.png');
+
 
 -- --------------------------------------------------------
 
@@ -317,17 +310,19 @@ CREATE TABLE `permohonan_darah` (
   `upload_surat` text DEFAULT NULL,
   `status_permohonan` enum('Belum Dikirim','Menunggu Proses','Dikirim','Diterima') DEFAULT NULL,
   `tanggal_permohonan` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `permohonan_darah`
 --
+
 
 INSERT INTO `permohonan_darah` (`id_permohonan_darah`, `id_user`, `nama_rs`, `nama_dokter`, `nama_pasien`, `golda`, `rhesus`, `jumlah`, `upload_surat`, `status_permohonan`, `tanggal_permohonan`) VALUES
 (4, 9, 'Rumah Sakit', 'Nama Dokter Update', 'Nama Pasien Update', 'A', 'Positif', 2, '05232023102308 Rumah Sakit.pdf', 'Diterima', '2023-05-23 10:23:29'),
 (6, 9, 'Rumah Sakit', 'Nama Dokter Update', 'Nama Pasien Update', 'A', 'Positif', 3, '06182023023327 Rumah Sakit.pdf', 'Diterima', '2023-06-18 02:36:54'),
 (7, 19, 'Rumah Sakit 10', 'Nama Dokter Rumah Sakit 10', 'Nama Pasien', 'A', 'Positif', 2, '07022023092312 Rumah Sakit 10.pdf', 'Diterima', '2023-07-02 09:23:49'),
 (8, 19, 'Rumah Sakit 10', 'Nama Dokter', 'Nama Pasien', 'A', 'Positif', 3, '07102023205910 Rumah Sakit 10.pdf', 'Menunggu Proses', '2023-07-10 20:59:42');
+
 
 -- --------------------------------------------------------
 
@@ -344,22 +339,22 @@ CREATE TABLE `user` (
   `nomor_telepon` varchar(30) NOT NULL,
   `role` enum('Admin','Donatur','Rumah Sakit','Event','Petugas Kesehatan') NOT NULL,
   `foto` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`id_user`, `nama`, `alamat_user`, `email`, `password`, `nomor_telepon`, `role`, `foto`) VALUES
-(1, 'Admin Sistem', NULL, 'admin122@gmail.com', '$2y$10$FOLMcTQ.ZQmG4XkXHemNkuvTur77scCIzvFMyQyRV9SdbHXGYN0iy', '08989786444', 'Admin', NULL),
+(1, 'Admin Sistem', 'Subang', 'admin122@gmail.com', '$2y$10$FOLMcTQ.ZQmG4XkXHemNkuvTur77scCIzvFMyQyRV9SdbHXGYN0iy', '08989786444', 'Admin', '07042023171439Admin Sistem.jpg'),
 (2, 'Admin Sistem Donor', 'Subang', 'admin@gmail.com', '$2y$10$smeipeg7V7MdF0BNmGaVduxOyL9ugB0d9s8kAYH0ABF./QqXZDzfW', '0896775651', 'Admin', '07022023010547Admin Sistem Donor Update.png'),
-(6, 'Teresia Purba', NULL, 'teresia9@gmail.com', '$2y$10$BQYqnOd3iOCUmYDjhJH56eSRpNtJ.MA6uE0YKTRucaFkYitpVoz4u', '08989784353', 'Donatur', '05062023011528Teresia Purba.png'),
-(7, 'Event', NULL, 'event@gmail.com', '$2y$10$Mfd7GStgY7g9C2ykYfYkNelJEKrv4x.tilybL3iHTgPtqiP3YyLpm', '08989784353', 'Event', '05062023014106Event.png'),
-(8, 'Petugas Kesehatan 1', 'Subang', 'paskes1@gmail.com', '$2y$10$efC/qal7R6LOIzriA0edce5C3JDCypRJwtmUEhgddXHtX6NeEFSRC', '08989784353', 'Petugas Kesehatan', NULL),
-(9, 'Rumah Sakit', NULL, 'rumahsakit@gmail.com', '$2y$10$V2B.NKXJKtWyPfKXmHBf2.3KlVE7.fEFOhNE1tE0cwlkrJkBf5ITW', '08989784353', 'Rumah Sakit', '05062023014538Rumah Sakit.png'),
-(17, 'Teresia Purba', 'Subang', 'teresia10@gmail.com', '$2y$10$Hm9aEtEEiKdHETLVtLX04OSFsP5ib4dIzNPsIswzwd4/W3VbXwr4i', '08989784353', 'Donatur', '07022023010834Teresia Purba.png'),
-(18, 'Event Instansi 1', 'Subang', 'event10@gmail.com', '$2y$10$y1q.KZMJzytfGRRbuxS9henEg6WHTPT/pK0Dh8YMdoslJuHDlzWmC', '08989784353', 'Event', NULL),
-(19, 'Rumah Sakit 10', 'Subang', 'rumahsakit10@gmail.com', '$2y$10$QX2zJRL0qCQtm9bJuphgx.hCPQaicUIQhvbaFBU5yGbRRXXWWeDuC', '08989784353', 'Rumah Sakit', NULL);
+(6, 'Teresia Purba', 'Subang', 'teresia9@gmail.com', '$2y$10$BQYqnOd3iOCUmYDjhJH56eSRpNtJ.MA6uE0YKTRucaFkYitpVoz4u', '08989784353', 'Donatur', '07042023171506Teresia Purba.png'),
+(7, 'Event', 'Subang', 'event@gmail.com', '$2y$10$Mfd7GStgY7g9C2ykYfYkNelJEKrv4x.tilybL3iHTgPtqiP3YyLpm', '08989784353', 'Event', '05062023014106Event.png'),
+(8, 'Petugas Kesehatan 1', 'Subang', 'paskes1@gmail.com', '$2y$10$efC/qal7R6LOIzriA0edce5C3JDCypRJwtmUEhgddXHtX6NeEFSRC', '08989784353', 'Petugas Kesehatan', '07042023170842Petugas Kesehatan 1.png'),
+(9, 'Rumah Sakit', 'Subang', 'rumahsakit@gmail.com', '$2y$10$V2B.NKXJKtWyPfKXmHBf2.3KlVE7.fEFOhNE1tE0cwlkrJkBf5ITW', '08989784353', 'Rumah Sakit', '05062023014538Rumah Sakit.png'),
+(17, 'Teresia Purba', 'Subang', 'teresia10@gmail.com', '$2y$10$Hm9aEtEEiKdHETLVtLX04OSFsP5ib4dIzNPsIswzwd4/W3VbXwr4i', '08989784353', 'Donatur', '07042023170806Teresia Purba.png'),
+(18, 'Event Instansi 1', 'Subang', 'event10@gmail.com', '$2y$10$y1q.KZMJzytfGRRbuxS9henEg6WHTPT/pK0Dh8YMdoslJuHDlzWmC', '08989784353', 'Event', '07042023170754Event Instansi 1.png'),
+(19, 'Rumah Sakit 10', 'Subang', 'rumahsakit10@gmail.com', '$2y$10$QX2zJRL0qCQtm9bJuphgx.hCPQaicUIQhvbaFBU5yGbRRXXWWeDuC', '08989784353', 'Rumah Sakit', '07042023170409Rumah Sakit 10.png');
 
 -- --------------------------------------------------------
 
@@ -374,14 +369,15 @@ CREATE TABLE `user_donatur` (
   `tanggal_lahir` date DEFAULT NULL,
   `jk` enum('Laki-laki','Perempuan') DEFAULT NULL,
   `gol_darah` varchar(10) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user_donatur`
 --
 
 INSERT INTO `user_donatur` (`id_user_donatur`, `id_user`, `nik`, `tanggal_lahir`, `jk`, `gol_darah`) VALUES
-(3, 17, '10101010101010', '2001-07-12', 'Perempuan', NULL);
+(3, 17, '10101010101010', '2001-07-12', 'Perempuan', NULL),
+(4, 6, '3211236544567899', '2001-07-03', 'Laki-laki', NULL);
 
 -- --------------------------------------------------------
 
@@ -393,14 +389,15 @@ CREATE TABLE `user_event` (
   `id_user_event` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `kode_instansi` varchar(30) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user_event`
 --
 
 INSERT INTO `user_event` (`id_user_event`, `id_user`, `kode_instansi`) VALUES
-(2, 18, 'E-010');
+(2, 18, 'E-010'),
+(4, 7, 'E-05');
 
 -- --------------------------------------------------------
 
@@ -412,14 +409,15 @@ CREATE TABLE `user_rs` (
   `id_user_rs` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `kode_rs` varchar(30) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user_rs`
 --
 
 INSERT INTO `user_rs` (`id_user_rs`, `id_user`, `kode_rs`) VALUES
-(2, 19, 'RS-010');
+(2, 19, 'RS-010'),
+(3, 9, 'RS-005');
 
 --
 -- Indexes for dumped tables
@@ -511,7 +509,7 @@ ALTER TABLE `user_rs`
 -- AUTO_INCREMENT for table `anggota`
 --
 ALTER TABLE `anggota`
-  MODIFY `id_anggota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_anggota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `biodata_web`
@@ -547,12 +545,13 @@ ALTER TABLE `darah_masuk`
 -- AUTO_INCREMENT for table `donor`
 --
 ALTER TABLE `donor`
-  MODIFY `id_donor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_donor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `event`
 --
 ALTER TABLE `event`
+
   MODIFY `id_event` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
@@ -571,19 +570,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `user_donatur`
 --
 ALTER TABLE `user_donatur`
-  MODIFY `id_user_donatur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_user_donatur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user_event`
 --
 ALTER TABLE `user_event`
-  MODIFY `id_user_event` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_user_event` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user_rs`
 --
 ALTER TABLE `user_rs`
-  MODIFY `id_user_rs` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_user_rs` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

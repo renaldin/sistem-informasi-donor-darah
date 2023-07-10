@@ -61,7 +61,7 @@
                                     <label for="alamat">Alamat</label>
                                     <input type="text" class="form-control @error('alamat') is-invalid @enderror"
                                         id="alamat" name="alamat" placeholder="Masukan Alamat"
-                                        value="{{ $data ? $data->alamat : $user->alamat_user  }}" readonly>
+                                        value="{{ $data ? $data->alamat : $user->alamat_user }}" readonly>
                                     @error('alamat')
                                         <small class="form-text text-danger">{{ $message }}</small>
                                     @enderror
@@ -73,8 +73,7 @@
                                     <div class="custom-control custom-radio ">
                                         <input type="radio" id="laki-laki" name="jenis_kelamin"
                                             class="custom-control-input" value="Laki-laki"
-                                            {{ $user ? ($user->jk == 'Laki-laki' ? 'checked' : '') : '' }}
-                                            {{ $user ? 'disabled' : '' }}>
+                                            {{ $user ? ($user->jk == 'Laki-laki' ? 'checked' : '') : '' }}>
                                         {{-- <input type="radio" id="laki-laki" name="jenis_kelamin"
                                             class="custom-control-input" value="Laki-laki"
                                             {{ $data ? ($data->jenis_kelamin == 'Laki-laki' ? 'checked' : '') : '' }}
@@ -84,8 +83,7 @@
                                     <div class="custom-control custom-radio">
                                         <input type="radio" id="perempuan" name="jenis_kelamin"
                                             class="custom-control-input" value="Perempuan"
-                                            {{ $user ? ($user->jk == 'Perempuan' ? 'checked' : '') : '' }}
-                                            {{ $user ? 'disabled' : '' }}>
+                                            {{ $user ? ($user->jk == 'Perempuan' ? 'checked' : '') : '' }}>
                                         {{-- <input type="radio" id="perempuan" name="jenis_kelamin"
                                             class="custom-control-input" value="Perempuan"
                                             {{ $data ? ($data->jenis_kelamin == 'Perempuan' ? 'checked' : '') : '' }}
@@ -102,7 +100,7 @@
                                     <label for="no_wa">Nomor Whatsapp</label>
                                     <input type="number" class="form-control @error('no_wa') is-invalid @enderror"
                                         id="no_wa" name="no_wa" placeholder="Masukan Nomor Whatsapp"
-                                        value="{{ $user->nomor_telepon  }}" required>
+                                        value="{{ $user->nomor_telepon }}" required>
                                     @error('no_wa')
                                         <small class="form-text text-danger">{{ $message }}</small>
                                     @enderror

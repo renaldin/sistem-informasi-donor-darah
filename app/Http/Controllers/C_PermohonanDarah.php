@@ -389,4 +389,20 @@ class C_PermohonanDarah extends Controller
         $pdf = PDF::loadview('cetak/v_cetak_distribusi_darah', $data);
         return $pdf->download($data['title'] . ' ' . date('d F Y') . '.pdf');
     }
+
+    public function cetak_invoice_distribusi($id_darah_keluar)
+    {
+        if (!Session()->get('email')) {
+            return redirect()->route('login');
+        }
+
+        $data = [
+            'title'         => 'Invoice Distribusi Darah',
+            'data_web'      => $this->M_Website->detail(1),
+            'data_darah'    => $this->M_DarahKeluar->get_darah_keluar($id_darah_keluar)
+        ];
+
+        $pdf = PDF::loadview('cetak/v_cetak_invoice_distribusi', $data);
+        return $pdf->download($data['title'] . ' ' . date('d F Y') . '.pdf');
+    }
 }

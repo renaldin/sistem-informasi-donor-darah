@@ -1,18 +1,18 @@
 @extends('layout.v_template')
 
 @section('content')
-
-@php
-function hitungUmur($tanggal_darah_masuk) {
-  $tgl_lahir = new DateTime($tanggal_darah_masuk);
-  $sekarang = new DateTime();
-  $diff = $tgl_lahir->diff($sekarang);
-  $umur = $diff->days;
-
-  $data_umur = $umur.' hari.';
-  return $data_umur;
-}
-@endphp
+    @php
+        function hitungUmur($tanggal_darah_masuk)
+        {
+            $tgl_lahir = new DateTime($tanggal_darah_masuk);
+            $sekarang = new DateTime();
+            $diff = $tgl_lahir->diff($sekarang);
+            $umur = $diff->days;
+        
+            $data_umur = $umur . ' hari.';
+            return $data_umur;
+        }
+    @endphp
 
 <div class="row">
     <div class="col-lg-12">
@@ -87,58 +87,61 @@ function hitungUmur($tanggal_darah_masuk) {
                                             <small class="form-text text-danger">{{$message}}</small>
                                         @enderror
                                     </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#keluarkan">Keluarkan</button>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary" data-toggle="modal"
+                                                data-target="#keluarkan">Keluarkan</button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="card-header flex flex-row">
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#kirim">Kirim</button>
-            </div>
-            <div class="table-responsive p-3">
-                <table class="table align-items-center table-flush table-hover" id="dataTableHover">
-                    <thead class="thead-light">
-                        <tr>
-                            <th>No</th>
-                            <th>No Kantung</th>
-                            <th>Golongan Darah</th>
-                            <th>Resus</th>
-                            <th>Umur</th>
-                            <th>Tanggal Kedaluwarsa</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php $no=1;?>
-                        @foreach ($data_darah_keluar as $row)
-                          <tr>
-                            <td>{{$no++}}</td>
-                            <td>{{$row->no_kantong}}</td>
-                            <td>{{$row->golongan_darah}}</td>
-                            <td>{{$row->resus}}</td>
-                            <td>{{ hitungUmur($row->tanggal_darah_masuk) }}</td>
-                            <td>{{$row->tanggal_kedaluwarsa}}</td>
-                            <td>
-                                <a href="/hapus_darah_keluar/{{$row->id_darah_keluar}}" class="btn btn-sm btn-danger">Hapus</a>
-                            </td>
-                          </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                <div class="card-header flex flex-row">
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#kirim">Kirim</button>
+                </div>
+                <div class="table-responsive p-3">
+                    <table class="table align-items-center table-flush table-hover" id="dataTableHover">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>No</th>
+                                <th>No Kantung</th>
+                                <th>Golongan Darah</th>
+                                <th>Resus</th>
+                                <th>Umur</th>
+                                <th>Tanggal Kedaluwarsa</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php $no = 1; ?>
+                            @foreach ($data_darah_keluar as $row)
+                                <tr>
+                                    <td>{{ $no++ }}</td>
+                                    <td>{{ $row->no_kantong }}</td>
+                                    <td>{{ $row->golongan_darah }}</td>
+                                    <td>{{ $row->resus }}</td>
+                                    <td>{{ hitungUmur($row->tanggal_darah_masuk) }}</td>
+                                    <td>{{ $row->tanggal_kedaluwarsa }}</td>
+                                    <td>
+                                        <a href="/hapus_darah_keluar/{{ $row->id_darah_keluar }}"
+                                            class="btn btn-sm btn-danger">Hapus</a>
+                                        <a href="/cetak_invoice_distribusi/{{ $row->id_darah_keluar }}"
+                                            class="btn btn-success btn-sm">Cetak</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-{{-- Modal --}}
+    {{-- Modal --}}
 
-{{-- <div class="modal fade" id="keluarkan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    {{-- <div class="modal fade" id="keluarkan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 <div class="modal-dialog" role="document">
   <div class="modal-content">
     <div class="modal-header">
@@ -231,24 +234,24 @@ function hitungUmur($tanggal_darah_masuk) {
 </div> --}}
 
 
-<div class="modal fade" id="kirim" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog" role="document">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h5 class="modal-title" id="exampleModalLabel">Kirim</h5>
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
+    <div class="modal fade" id="kirim" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Kirim</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Apakah Anda yakin akan kirim distribusi darah ini?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Batal</button>
+                    <a href="/kirim_distribusi_darah/{{ $detail->id_permohonan_darah }}" class="btn btn-danger">Kirim</a>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="modal-body">
-      <p>Apakah Anda yakin akan kirim distribusi darah ini?</p>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Batal</button>
-      <a href="/kirim_distribusi_darah/{{$detail->id_permohonan_darah}}" class="btn btn-danger">Kirim</a>
-    </div>
-  </div>
-</div>
-</div>
-
 @endsection
