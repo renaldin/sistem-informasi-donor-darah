@@ -15,7 +15,7 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label for="nama_rs">Nama Rumah Sakit</label>
-                        <input type="text" class="form-control @error('nama_rs') is-invalid @enderror" name="nama_rs" id="nama_rs" value="{{$detail->nama_rs}}" autofocus placeholder="Masukkan Nama Rumah Sakit">
+                        <input type="text" class="form-control @error('nama_rs') is-invalid @enderror" name="nama_rs" id="nama_rs" value="{{$detail->nama_rs}}" autofocus placeholder="Masukkan Nama Rumah Sakit" readonly>
                         @error('nama_rs')
                             <small class="form-text text-danger">{{$message}}</small>
                         @enderror
@@ -54,6 +54,23 @@
                             <option value="O">O</option>
                         </select>
                         @error('golda')
+                            <small class="form-text text-danger">{{$message}}</small>
+                        @enderror
+                    </div>       
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="rhesus">Rhesus</label>
+                        <select name="rhesus" class="form-control @error('rhesus') is-invalid @enderror" id="rhesus">
+                            @if ($detail->rhesus)
+                                <option value="{{$detail->rhesus}}">{{$detail->rhesus}}</option>
+                            @else
+                                <option value="">Pilih</option>
+                            @endif
+                            <option value="Positif">Positif</option>
+                            <option value="Negatif">Negatif</option>
+                        </select>
+                        @error('rhesus')
                             <small class="form-text text-danger">{{$message}}</small>
                         @enderror
                     </div>       

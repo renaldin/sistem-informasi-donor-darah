@@ -14,76 +14,78 @@
         }
     @endphp
 
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card mb-4">
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold">{{ $sub_title }}</h6>
-                </div>
-                <div class="card-header">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <table>
-                                <tr>
-                                    <th>Nama Rumah Sakit</th>
-                                    <td>:</td>
-                                    <td>{{ $detail->nama_rs }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Tanggal Permohonan</th>
-                                    <td>:</td>
-                                    <td>{{ $detail->tanggal_permohonan }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Golongan Darah</th>
-                                    <td>:</td>
-                                    <td>{{ $detail->golda }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Jumlah {Kantong}</th>
-                                    <td>:</td>
-                                    <td>{{ $detail->jumlah }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Status Permohonan</th>
-                                    <td>:</td>
-                                    <td>
-                                        @if ($detail->status_permohonan === 'Belum Dikirim')
-                                            <span class="badge badge-danger">{{ $detail->status_permohonan }}</span>
-                                        @elseif($detail->status_permohonan === 'Menunggu Proses')
-                                            <span class="badge badge-primary">{{ $detail->status_permohonan }}</span>
-                                        @elseif($detail->status_permohonan === 'Diterima')
-                                            <span class="badge badge-success">{{ $detail->status_permohonan }}</span>
-                                        @elseif($detail->status_permohonan === 'Dikirim')
-                                            <span class="badge badge-warning">{{ $detail->status_permohonan }}</span>
-                                        @endif
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="col-lg-6">
-                            <form action="/keluarkan_darah/{{ $detail->id_permohonan_darah }}" method="POST">
-                                @csrf
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <label for="id_darah_masuk">Darah</label>
-                                            <select
-                                                class="select2-single-placeholder form-control @error('id_darah_masuk') is-invalid @enderror"
-                                                name="id_darah_masuk" autofocus id="select2SinglePlaceholder" required>
-                                                <option value="">Pilih</option>
-                                                @foreach ($data_darah as $row)
-                                                    @if ($row->status_darah_masuk == 'Sudah Masuk' && $row->tanggal_kedaluwarsa >= date('Y-m-d'))
-                                                        <option value="{{ $row->id_darah_masuk }}">{{ $row->no_kantong }}
-                                                            | {{ $row->golongan_darah }} | {{ $row->resus }} |
-                                                            {{ hitungUmur($row->tanggal_darah_masuk) }}</option>
-                                                    @endif
-                                                @endforeach
-                                            </select>
-                                            @error('id_darah_masuk')
-                                                <small class="form-text text-danger">{{ $message }}</small>
-                                            @enderror
-                                        </div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card mb-4">
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold">{{$sub_title}}</h6>
+            </div>
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <table>
+                            <tr>
+                                <th>Nama Rumah Sakit</th>
+                                <td>:</td>
+                                <td>{{$detail->nama_rs}}</td>
+                            </tr>
+                            <tr>
+                                <th>Tanggal Permohonan</th>
+                                <td>:</td>
+                                <td>{{$detail->tanggal_permohonan}}</td>
+                            </tr>
+                            <tr>
+                                <th>Golongan Darah</th>
+                                <td>:</td>
+                                <td>{{$detail->golda}}</td>
+                            </tr>
+                            <tr>
+                                <th>Rhesus</th>
+                                <td>:</td>
+                                <td>{{$detail->rhesus}}</td>
+                            </tr>
+                            <tr>
+                                <th>Jumlah {Kantong}</th>
+                                <td>:</td>
+                                <td>{{$detail->jumlah}}</td>
+                            </tr>
+                            <tr>
+                                <th>Status Permohonan</th>
+                                <td>:</td>
+                                <td>
+                                    @if ($detail->status_permohonan === 'Belum Dikirim')
+                                        <span class="badge badge-danger">{{$detail->status_permohonan}}</span>
+                                        @elseif($detail->status_permohonan === 'Menunggu Proses')    
+                                        <span class="badge badge-primary">{{$detail->status_permohonan}}</span>
+                                        @elseif($detail->status_permohonan === 'Diterima')    
+                                        <span class="badge badge-success">{{$detail->status_permohonan}}</span>
+                                        @elseif($detail->status_permohonan === 'Dikirim')    
+                                        <span class="badge badge-warning">{{$detail->status_permohonan}}</span>
+                                    @endif    
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-lg-6">
+                        <form action="/keluarkan_darah/{{$detail->id_permohonan_darah}}" method="POST">
+                            @csrf
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label for="id_darah_masuk">Darah</label>
+                                        <select class="select2-single-placeholder form-control @error('id_darah_masuk') is-invalid @enderror" name="id_darah_masuk" autofocus id="select2SinglePlaceholder" required>
+                                            <option value="">Pilih</option>
+                                            @foreach ($data_darah as $row)
+                                                @if ($row->status_darah_masuk == 'Sudah Masuk' && $row->tanggal_kedaluwarsa >= date('Y-m-d') ) 
+                                                    @if ($row->golongan_darah === $detail->golda && $row->resus === $detail->rhesus)
+                                                        <option value="{{$row->id_darah_masuk}}">{{$row->no_kantong}} | {{$row->golongan_darah}} | {{$row->resus}} | {{ hitungUmur($row->tanggal_darah_masuk) }}</option>
+                                                    @endif    
+                                                @endif
+                                            @endforeach                                                         
+                                        </select>
+                                        @error('id_darah_masuk')
+                                            <small class="form-text text-danger">{{$message}}</small>
+                                        @enderror
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="form-group">

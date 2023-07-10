@@ -16,6 +16,7 @@
                             <th>Name Instansi</th>
                             <th>Waktu Event</th>
                             <th>Status Pengajuan</th>
+                            <th>Status Event</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -37,6 +38,13 @@
                                     @elseif($row->status_pengajuan === 'Belum Dikirim')    
                                     <span class="badge badge-warning">{{$row->status_pengajuan}}</span>
                                 @endif
+                            </td>
+                            <td>
+                              @if ($row->status_event === 'Aktif')
+                                  <span class="badge badge-success">{{$row->status_event}}</span>
+                              @elseif($row->status_event === 'Tidak Aktif')    
+                                  <span class="badge badge-danger">{{$row->status_event}}</span>
+                              @endif  
                             </td>
                             <td>
                                 <a href="/tidak_pengajuan_event/{{$row->id_event}}" class="btn btn-danger btn-sm ">Tolak</a>
@@ -99,6 +107,11 @@
                     <th>Email Pengaju</th>
                     <td>:</td>
                     <td>{{$row->email}}</td>
+                </tr>
+                <tr>
+                    <th>Kode Instansi</th>
+                    <td>:</td>
+                    <td>{{$row->kd_instansi}}</td>
                 </tr>
                 <tr>
                     <th>Nama Instansi</th>

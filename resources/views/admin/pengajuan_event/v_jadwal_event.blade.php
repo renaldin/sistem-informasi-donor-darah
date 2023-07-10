@@ -19,6 +19,7 @@
                             <th>Name Instansi</th>
                             <th>Waktu Event</th>
                             <th>Status Pengajuan</th>
+                            <th>Status Event</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -42,6 +43,13 @@
                                     @elseif($row->status_pengajuan === 'Dibuat Admin')    
                                     <span class="badge badge-secondary">{{$row->status_pengajuan}}</span>
                                 @endif
+                            </td>
+                            <td>
+                              @if ($row->status_event === 'Aktif')
+                                  <span class="badge badge-success">{{$row->status_event}}</span>
+                              @elseif($row->status_event === 'Tidak Aktif')    
+                                  <span class="badge badge-danger">{{$row->status_event}}</span>
+                              @endif  
                             </td>
                             <td>
                               @if ($row->status_pengajuan === 'Dibuat Admin')

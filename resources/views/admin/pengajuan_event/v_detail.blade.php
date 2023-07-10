@@ -35,6 +35,11 @@ function hitungUmur($tanggal_darah_masuk) {
                                 <td>{{$detail->email}}</td>
                             </tr>
                             <tr>
+                                <th>Kode Instansi</th>
+                                <td>:</td>
+                                <td>{{$detail->kd_instansi}}</td>
+                            </tr>
+                            <tr>
                                 <th>Nama Instansi</th>
                                 <td>:</td>
                                 <td>{{$detail->nama_instansi}}</td>
