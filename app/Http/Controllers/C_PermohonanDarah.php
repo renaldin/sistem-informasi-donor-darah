@@ -76,6 +76,7 @@ class C_PermohonanDarah extends Controller
             'nama_dokter'       => 'required',
             'nama_pasien'       => 'required',
             'golda'             => 'required',
+            'rhesus'             => 'required',
             'jumlah'            => 'required|numeric',
             'upload_surat'      => 'required|mimes:pdf|max:5048',
         ], [
@@ -83,6 +84,7 @@ class C_PermohonanDarah extends Controller
             'nama_dokter.required'      => 'Nama Dokter harus diisi!',
             'nama_pasien.required'      => 'Nama Pasien harus diisi!',
             'golda.required'            => 'Golongan Darah harus diisi!',
+            'rhesus.required'            => 'Rhesus harus diisi!',
             'jumlah.required'           => 'Jumlah (Kantong) harus diisi!',
             'jumlah.numeric'            => 'Jumlah (Kantong) harus diisi!',
             'upload_surat.required'     => 'Surat harus diisi!',
@@ -101,6 +103,7 @@ class C_PermohonanDarah extends Controller
             'nama_dokter'           => Request()->nama_dokter,
             'nama_pasien'           => Request()->nama_pasien,
             'golda'                 => Request()->golda,
+            'rhesus'                 => Request()->rhesus,
             'jumlah'                => Request()->jumlah,
             'upload_surat'          => $file_surat,
             'status_permohonan'     => "Belum Dikirim",
@@ -140,6 +143,7 @@ class C_PermohonanDarah extends Controller
             'nama_dokter'       => 'required',
             'nama_pasien'       => 'required',
             'golda'             => 'required',
+            'rhesus'             => 'required',
             'jumlah'            => 'required|numeric',
             'upload_surat'      => 'mimes:pdf|max:5048',
         ], [
@@ -147,6 +151,7 @@ class C_PermohonanDarah extends Controller
             'nama_dokter.required'      => 'Nama Dokter harus diisi!',
             'nama_pasien.required'      => 'Nama Pasien harus diisi!',
             'golda.required'            => 'Golongan Darah harus diisi!',
+            'rhesus.required'            => 'Rhesus harus diisi!',
             'jumlah.required'           => 'Jumlah (Kantong) harus diisi!',
             'jumlah.numeric'            => 'Jumlah (Kantong) harus diisi!',
             'upload_surat.mimes'        => 'Format Surat harus PDF!',
@@ -170,6 +175,7 @@ class C_PermohonanDarah extends Controller
                 'nama_dokter'           => Request()->nama_dokter,
                 'nama_pasien'           => Request()->nama_pasien,
                 'golda'                 => Request()->golda,
+                'rhesus'                 => Request()->rhesus,
                 'jumlah'                => Request()->jumlah,
                 'upload_surat'          => $file_surat,
             ];
@@ -180,6 +186,7 @@ class C_PermohonanDarah extends Controller
                 'nama_dokter'           => Request()->nama_dokter,
                 'nama_pasien'           => Request()->nama_pasien,
                 'golda'                 => Request()->golda,
+                'rhesus'                 => Request()->rhesus,
                 'jumlah'                => Request()->jumlah,
             ];
         }

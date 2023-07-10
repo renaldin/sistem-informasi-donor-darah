@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 02, 2023 at 05:07 AM
+-- Generation Time: Jul 10, 2023 at 07:19 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.0.19
 
@@ -151,7 +151,9 @@ INSERT INTO `darah_buang` (`id_darah_buang`, `id_darah`, `id_user`, `tanggal_bua
 (1, 2, 3, '2023-05-18 00:00:00'),
 (2, 8, 2, '2023-05-23 23:53:13'),
 (3, 9, 2, '2023-05-25 13:32:38'),
-(4, 20, 2, '2023-07-02 09:38:59');
+(4, 20, 2, '2023-07-02 09:38:59'),
+(5, 11, 2, '2023-07-10 21:05:51'),
+(6, 12, 2, '2023-07-10 21:05:57');
 
 -- --------------------------------------------------------
 
@@ -200,8 +202,6 @@ CREATE TABLE `darah_masuk` (
 --
 
 INSERT INTO `darah_masuk` (`id_darah_masuk`, `id_darah`, `id_user`, `status_darah_masuk`, `tanggal_masuk`) VALUES
-(13, 11, 2, 'Sudah Masuk', '2023-05-25 14:41:16'),
-(14, 12, 2, 'Sudah Masuk', '2023-05-25 14:44:43'),
 (16, 14, 2, 'Sudah Masuk', '2023-05-26 10:01:04'),
 (19, 17, 2, 'Sudah Masuk', '2023-05-26 10:02:27'),
 (20, 18, 2, 'Sudah Masuk', '2023-05-26 10:41:00'),
@@ -271,6 +271,7 @@ INSERT INTO `donor` (`id_donor`, `id_anggota`, `id_event`, `tanggal_donor`, `sta
 CREATE TABLE `event` (
   `id_event` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
+  `kd_instansi` varchar(30) DEFAULT NULL,
   `nama_instansi` varchar(100) DEFAULT NULL,
   `alamat_lengkap` varchar(255) DEFAULT NULL,
   `tanggal_event` date DEFAULT NULL,
@@ -287,14 +288,16 @@ CREATE TABLE `event` (
 -- Dumping data for table `event`
 --
 
-INSERT INTO `event` (`id_event`, `id_user`, `nama_instansi`, `alamat_lengkap`, `tanggal_event`, `jam`, `jumlah_orang`, `upload_surat`, `tanggal_pengajuan`, `status_pengajuan`, `status_event`, `gambar`) VALUES
-(3, 2, 'Politeknik Negeri Subang', 'Cibogo', '2023-05-07', '12:00', 4, '05072023011122 Politeknik Negeri Subang.pdf', '2023-05-07 00:00:00', 'Tidak Disetujui', 'Tidak Aktif', 'event1.jpeg'),
-(4, 7, 'Politeknik Negeri Subang', 'Cibogo', '2023-05-12', '12:00', 2, '05122023072455 Politeknik Negeri Subang.pdf', '2023-05-12 00:00:00', 'Tidak Disetujui', 'Tidak Aktif', 'event2.jpg'),
-(6, 7, 'Politeknik Negeri Subang', 'Cibogo', '2023-05-13', '12:00', 3, '05132023081819 Politeknik Negeri Subang.pdf', '2023-05-13 00:00:00', 'Disetujui', 'Tidak Aktif', 'event3.jpg'),
-(7, 2, 'Politeknik Negeri Subang', 'Cibogo Update', '2023-05-13', '02:00', 3, '05132023082930 Politeknik Negeri Subang.pdf', '2023-05-13 00:00:00', 'Disetujui', 'Tidak Aktif', 'event4.jpeg'),
-(9, 7, 'Politeknik Negeri Subang Update', 'Cibogo Update', '2023-05-13', '12:00', 3, '05132023084032 Politeknik Negeri Subang Update.pdf', '2023-05-13 00:00:00', 'Disetujui', 'Tidak Aktif', 'event5.jpg'),
-(10, 2, 'Politeknik Negeri Subang Update', 'Cibogo Update', '2023-05-13', '12:00', 3, '05132023084418 Politeknik Negeri Subang Update.pdf', '2023-05-13 00:00:00', 'Disetujui', 'Tidak Aktif', 'event6.jpg'),
-(12, 18, 'Event Instansi 1', 'Cibogo', '2023-08-01', '08:00', 50, '07022023082319 Event Instansi 1.pdf', '2023-07-02 00:00:00', 'Disetujui', 'Aktif', 'Event Instansi 1.png');
+INSERT INTO `event` (`id_event`, `id_user`, `kd_instansi`, `nama_instansi`, `alamat_lengkap`, `tanggal_event`, `jam`, `jumlah_orang`, `upload_surat`, `tanggal_pengajuan`, `status_pengajuan`, `status_event`, `gambar`) VALUES
+(3, 2, 'E-002', 'Politeknik Negeri Subang', 'Cibogo', '2023-05-07', '12:00', 4, '05072023011122 Politeknik Negeri Subang.pdf', '2023-05-07 00:00:00', 'Tidak Disetujui', 'Tidak Aktif', 'event1.jpeg'),
+(4, 7, 'E-003', 'Politeknik Negeri Subang', 'Cibogo', '2023-05-12', '12:00', 2, '05122023072455 Politeknik Negeri Subang.pdf', '2023-05-12 00:00:00', 'Tidak Disetujui', 'Tidak Aktif', 'event2.jpg'),
+(6, 7, 'E-004', 'Politeknik Negeri Subang', 'Cibogo', '2023-05-13', '12:00', 3, '05132023081819 Politeknik Negeri Subang.pdf', '2023-05-13 00:00:00', 'Disetujui', 'Tidak Aktif', 'event3.jpg'),
+(7, 2, 'E-005', 'Politeknik Negeri Subang', 'Cibogo Update', '2023-05-13', '02:00', 3, '05132023082930 Politeknik Negeri Subang.pdf', '2023-05-13 00:00:00', 'Disetujui', 'Tidak Aktif', 'event4.jpeg'),
+(9, 7, 'E-002', 'Politeknik Negeri Subang Update', 'Cibogo Update', '2023-05-13', '12:00', 3, '05132023084032 Politeknik Negeri Subang Update.pdf', '2023-05-13 00:00:00', 'Disetujui', 'Tidak Aktif', 'event5.jpg'),
+(10, 2, 'E-002', 'Politeknik Negeri Subang Update', 'Cibogo Update', '2023-05-13', '12:00', 3, '05132023084418 Politeknik Negeri Subang Update.pdf', '2023-05-13 00:00:00', 'Disetujui', 'Tidak Aktif', 'event6.jpg'),
+(12, 18, 'E-002', 'Event Instansi 1', 'Cibogo', '2023-08-01', '08:00', 50, '07022023082319 Event Instansi 1.pdf', '2023-07-02 00:00:00', 'Disetujui', 'Aktif', 'Event Instansi 1.png'),
+(13, 2, 'E-001', 'Politeknik Negeri Subang', 'Cibogo', '2023-07-26', '08:00', 45, '07102023214606 Politeknik Negeri Subang.pdf', '2023-07-10 21:46:06', 'Disetujui', 'Aktif', NULL),
+(14, 18, 'E-010', 'Event Instansi 1', 'Cibogo', '2023-07-12', '08:00', 10, '07102023220307 Event Instansi 1.pdf', '2023-07-10 00:00:00', 'Disetujui', 'Aktif', 'Event Instansi 1.png');
 
 -- --------------------------------------------------------
 
@@ -309,6 +312,7 @@ CREATE TABLE `permohonan_darah` (
   `nama_dokter` varchar(100) DEFAULT NULL,
   `nama_pasien` varchar(255) DEFAULT NULL,
   `golda` varchar(10) DEFAULT NULL,
+  `rhesus` enum('Positif','Negatif') NOT NULL,
   `jumlah` int(11) DEFAULT NULL,
   `upload_surat` text DEFAULT NULL,
   `status_permohonan` enum('Belum Dikirim','Menunggu Proses','Dikirim','Diterima') DEFAULT NULL,
@@ -319,10 +323,11 @@ CREATE TABLE `permohonan_darah` (
 -- Dumping data for table `permohonan_darah`
 --
 
-INSERT INTO `permohonan_darah` (`id_permohonan_darah`, `id_user`, `nama_rs`, `nama_dokter`, `nama_pasien`, `golda`, `jumlah`, `upload_surat`, `status_permohonan`, `tanggal_permohonan`) VALUES
-(4, 9, 'Rumah Sakit', 'Nama Dokter Update', 'Nama Pasien Update', 'A', 2, '05232023102308 Rumah Sakit.pdf', 'Diterima', '2023-05-23 10:23:29'),
-(6, 9, 'Rumah Sakit', 'Nama Dokter Update', 'Nama Pasien Update', 'A', 3, '06182023023327 Rumah Sakit.pdf', 'Diterima', '2023-06-18 02:36:54'),
-(7, 19, 'Rumah Sakit 10', 'Nama Dokter Rumah Sakit 10', 'Nama Pasien', 'A', 2, '07022023092312 Rumah Sakit 10.pdf', 'Diterima', '2023-07-02 09:23:49');
+INSERT INTO `permohonan_darah` (`id_permohonan_darah`, `id_user`, `nama_rs`, `nama_dokter`, `nama_pasien`, `golda`, `rhesus`, `jumlah`, `upload_surat`, `status_permohonan`, `tanggal_permohonan`) VALUES
+(4, 9, 'Rumah Sakit', 'Nama Dokter Update', 'Nama Pasien Update', 'A', 'Positif', 2, '05232023102308 Rumah Sakit.pdf', 'Diterima', '2023-05-23 10:23:29'),
+(6, 9, 'Rumah Sakit', 'Nama Dokter Update', 'Nama Pasien Update', 'A', 'Positif', 3, '06182023023327 Rumah Sakit.pdf', 'Diterima', '2023-06-18 02:36:54'),
+(7, 19, 'Rumah Sakit 10', 'Nama Dokter Rumah Sakit 10', 'Nama Pasien', 'A', 'Positif', 2, '07022023092312 Rumah Sakit 10.pdf', 'Diterima', '2023-07-02 09:23:49'),
+(8, 19, 'Rumah Sakit 10', 'Nama Dokter', 'Nama Pasien', 'A', 'Positif', 3, '07102023205910 Rumah Sakit 10.pdf', 'Menunggu Proses', '2023-07-10 20:59:42');
 
 -- --------------------------------------------------------
 
@@ -524,7 +529,7 @@ ALTER TABLE `darah`
 -- AUTO_INCREMENT for table `darah_buang`
 --
 ALTER TABLE `darah_buang`
-  MODIFY `id_darah_buang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_darah_buang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `darah_keluar`
@@ -548,13 +553,13 @@ ALTER TABLE `donor`
 -- AUTO_INCREMENT for table `event`
 --
 ALTER TABLE `event`
-  MODIFY `id_event` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_event` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `permohonan_darah`
 --
 ALTER TABLE `permohonan_darah`
-  MODIFY `id_permohonan_darah` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_permohonan_darah` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `user`

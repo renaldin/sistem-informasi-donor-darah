@@ -13,10 +13,21 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
+                                    <label for="kd_instansi">Kode Instansi</label>
+                                    <input type="text" class="form-control @error('kd_instansi') is-invalid @enderror"
+                                        name="kd_instansi" id="kd_instansi" value="{{ $user->kode_instansi }}"
+                                        placeholder="Masukkan Kode Instansi" readonly>
+                                    @error('kd_instansi')
+                                        <small class="form-text text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
                                     <label for="nama_instansi">Nama Instansi</label>
                                     <input type="text" class="form-control @error('nama_instansi') is-invalid @enderror"
                                         name="nama_instansi" id="nama_instansi" value="{{ $user->nama }}"
-                                        placeholder="Masukkan Nama Instansi">
+                                        placeholder="Masukkan Nama Instansi" readonly>
                                     @error('nama_instansi')
                                         <small class="form-text text-danger">{{ $message }}</small>
                                     @enderror

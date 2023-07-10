@@ -40,6 +40,11 @@ function hitungUmur($tanggal_darah_masuk) {
                                 <td>{{$detail->golda}}</td>
                             </tr>
                             <tr>
+                                <th>Rhesus</th>
+                                <td>:</td>
+                                <td>{{$detail->rhesus}}</td>
+                            </tr>
+                            <tr>
                                 <th>Jumlah {Kantong}</th>
                                 <td>:</td>
                                 <td>{{$detail->jumlah}}</td>
@@ -72,7 +77,9 @@ function hitungUmur($tanggal_darah_masuk) {
                                             <option value="">Pilih</option>
                                             @foreach ($data_darah as $row)
                                                 @if ($row->status_darah_masuk == 'Sudah Masuk' && $row->tanggal_kedaluwarsa >= date('Y-m-d') ) 
-                                                    <option value="{{$row->id_darah_masuk}}">{{$row->no_kantong}} | {{$row->golongan_darah}} | {{$row->resus}} | {{ hitungUmur($row->tanggal_darah_masuk) }}</option>
+                                                    @if ($row->golongan_darah === $detail->golda && $row->resus === $detail->rhesus)
+                                                        <option value="{{$row->id_darah_masuk}}">{{$row->no_kantong}} | {{$row->golongan_darah}} | {{$row->resus}} | {{ hitungUmur($row->tanggal_darah_masuk) }}</option>
+                                                    @endif    
                                                 @endif
                                             @endforeach                                                         
                                         </select>
