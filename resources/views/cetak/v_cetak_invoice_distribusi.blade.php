@@ -197,7 +197,7 @@
                 <td>{{ $data_darah->golongan_darah }}</td>
             </tr>
             <tr>
-                <td style="font-weight: bold">Resus</td>
+                <td style="font-weight: bold">Rhesus</td>
                 <td>:</td>
                 <td>{{ $data_darah->resus }}</td>
             </tr>

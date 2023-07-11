@@ -59,7 +59,7 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Golongan Darah</th>
-                                    <th>Resus</th>
+                                    <th>Rhesus</th>
                                     <th>Stok</th>
                                 </tr>
                             </thead>
@@ -289,6 +289,7 @@
                                         <span class=" pl-2 text-black">Alamat : {{ $row->alamat_lengkap }}</span>
                                         <span class=" pl-2 text-black">Tanggal :
                                             {{ date('l, d m Y', strtotime($row->tanggal_pengajuan)) }}</span>
+                                        <span class=" pl-2 text-black">Jam : {{ $row->jam }}</span>
                                     </div>
                                 </div>
                             @endforeach
@@ -300,43 +301,171 @@
                 </div>
             </div>
             <div class="col-12 col-sm-10 col-md-8 col-lg-8 text-center m-1" data-aos="fade-up">
-                <h4>PROSEDUR DONOR DARAH</h4>
+                <h4><b>INFORMASI</b></h4>
             </div>
-            <div class="col-lg-10 col-10" data-aos="fade-up">
+            <div class="col-lg-12 col-12" data-aos="fade-up">
                 <div class="card mb-4">
                     <div class="card-header py-3 ">
-                        <p style="text-indent: 4em;" align="justify">Untuk menjadi pendonor darah, ada beberapa syarat yang
-                            harus dipenuhi,
-                            mulai dari usia hingga
-                            kondisi tubuh saat akan mendonorkan darah. Berikut ini adalah beberapa persyaratan dasar untuk
-                            melakukan donor darah:
-                        </p>
-                        <ol>
-                            <li>Berusia 17-60 tahun untuk orang yang baru pertama kali mendonorkan darah
-                            <li>Pendonor pertama kali yang berusia lebih dari 60 tahun dan pendonor ulang yang berusia
-                                lebih
-                                dari 65 tahun dapat mendonorkan darah, tetapi mendapatkan perhatian khusus berdasarkan
-                                kondisi
-                                kesehatannya
-                            <li>Memiliki berat badan minimal 45 kg
-                            <li>Memiliki tekanan darah normal atau berkisar antara 90/60-150/80 mmHg
-                            <li>Memiliki kadar hemoglobin sekitar 12,5-17 g/dL dan tidak lebih dari 20 g/dL
-                            <li>Jarak waktu donor darah terakhir minimal 3 bulan atau 12 minggu, jika sebelumnya sudah
-                                pernah
-                                menjadi pendonor darah
-                            <li>Tidak sedang dalam kondisi sakit atau memiliki keluhan tertentu, seperti lemas, batuk, atau
-                                demam
-                            <li>Bersedia menyumbangkan darah secara sukarela dengan menyetujui informed consent
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <style>
+                                    a.side-info:hover {
+                                        color: red !important;
+                                        cursor: pointer;
+                                    }
+                                </style>
+                                <hr class="sidebar-divider">
+                                <div class="sidebar-heading">
+                                    <a class="nav-link side-info" id="manfaat">
+                                        <span>Informasi Manfaat Donor</span>
+                                    </a>
+                                </div>
+                                <hr class="sidebar-divider">
+                                <div class="sidebar-heading">
+                                    <a class="nav-link side-info" id="prosedur">
+                                        <span>Informasi Prosedur Donor</span>
+                                    </a>
+                                </div>
+                                <hr class="sidebar-divider">
+                                <div class="sidebar-heading">
+                                    <a class="nav-link side-info" id="permohonan">
+                                        <span>Informasi Prosedur Permohonan Darah</span>
+                                    </a>
+                                </div>
+                                <hr class="sidebar-divider">
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="manfaat">
+                                    <h4><b>Informasi Manfaat Donor</b></h4>
+                                    <p class="text-danger">Manfaat Donor Darah</p>
+                                    <p>Pernahkah Anda melakukan donor darah? Beruntunglah jika pernah atau bahkan rutin
+                                        melakukannya berikut ini manfaat dari donor darah: </p>
+                                    <ol>
+                                        <li>Bentuk kepedulian terhadap sesama
+                                        <li>Memperpanjang hidup oran lain.
+                                        <li>Membantu hidup orang lain.
+                                        <li>Satu kantong darah dapat menyelamatkan 3 nyawa
+                                        <li>Membantu menurunkan berat badan
+                                        <li>Membantu membakar kalori
+                                        <li>Deteksi dini resiko kesehatan
+                                        <li>Melindungi jantung
+                                        <li>Mencegah stroke
+                                        <li>Mengatur kontrol kesehatan
+                                        <li>Meningkatkan sel darah merah
+                                        <li>Meningkatkan kapasitas paru-paru dan ginjal
+                                        <li>Meningkatkan kesehatan psikologis
+                                        <li>Membantu sirkulasi darah
+                                        <li>Memaksimalkan darah dalam paru-paru
+                                        <li>Menurunkan zat seng dalam darah
+                                        <li>Memperbaharui sel darah baru
+                                        <li>Mencegah resiko kesehatan
+                                        <li>Mencegah penyakit langka
+                                        <li>Menghilangkan kaku di pundak
+                                        <li>Mengalahkan kelebihan zat besi
+                                        <li>Mengetahui lebih lanjut tentang tipe darah individu
+                                    </ol>
+                                </div>
+                                <div class="prosedur d-none">
+                                    <h4><b>Informasi Prosedur Donor</b></h4>
+                                    <p class="text-danger">Jika Anda sudah memenuhi syarat untuk donor darah, yuk simak
+                                        tahapan-tahapan dalam mendonorkan darah :</p>
+                                    <ol>
+                                        <b>
+                                            <li>Tahap Registrasi
+                                        </b>
+                                        <ul>
+                                            <li>Mengisi formulir pendaftaran dan kuisioner kesehatan</li>
+                                        </ul>
+                                        <b>
+                                            <li>Tahap Pemeriksaan Pendahuluan
+                                        </b>
+                                        <ul>
+                                            <li>Pengukuran berat badan
+                                            <li>Pemeriksaan kadar haemoglobin darah
+                                            <li>Pemeriksaan golongan darah bagi pendonor pemula
+                                        </ul>
+                                        <b>
+                                            <li>Tahap Pemeriksaan Kesehatan oleh Dokter
+                                        </b>
+                                        <ul>
+                                            <li>Anamnesis
+                                            <li>Pemeriksaan tekanan darah
+                                            <li>Pemeriksaan fisik sederhana
+                                        </ul>
+                                        <b>
+                                            <li>Tahap Pengambilan Darah Donor
+                                        </b>
+                                        <ul>
+                                            <li>Cuci lengan donor
+                                            <li>Pengambilan darah
+                                            <li>Pengambilan sampel darah
+                                        </ul>
+                                        <b>
+                                            <li>Tahap Administrasi
+                                        </b>
+                                        <ul>
+                                            <li>Mengambil kartu donor dan vitamin
+                                        </ul>
+                                        <b>
+                                            <li>Tahap Pemulihan
+                                        </b>
+                                        <ul>
+                                            <li>Pendonor dianjurkan untuk istirahat dan menikmati hidangan ringan yang kami
+                                                sajikan
+                                        </ul>
+                                    </ol>
+                                    <p><b>Persyaratan donor darah dapat kamu lihat disini : <a href="/syarat_donor"
+                                                class="text-decoration-none">syarat
+                                                donor</a></b></p>
+                                </div>
+                                <div class="permohonan d-none">
+                                    <h4><b>Informasi Prosedur Permohonan Donor</b></h4>
+                                    <p class="text-danger">Prosedur Permohonan Darah</p>
+                                    <ol align="justify">
+                                        <li>Dokter pemeriksa harus membuatkan pihak keluarga pasie surat pengantar mengambil
+                                            darah.
+                                            Surat itu berisikan: </li>
+                                        <ol type="a">
+                                            <li>Nama pasien
+                                            <li>Nama rumah sakit
+                                            <li>Golongan darah pasien
+                                            <li>Jenis komponen darah
+                                            <li>Jumlah darah yang dibutuhkan pasien
 
-                        </ol>
-                        <p style="text-indent: 4em;" align="justify">Sebelum melakukan donor darah, pastikan kondisi tubuh
+                                        </ol>
+                                        <li> Perawat rumah sakit dan keluarga pasien membawa surat pengantar tadi ke Unit
+                                            Tranfusi Darah
+                                            PMI.
+                                        <li> Petugas PMI akan memutuskan apakah mereka dapat memenuhi permintaan atau tidak
+                                            dan
+                                            apakah
+                                            mereka membutuhkan donor dari teman atau keluarga pasien sebagai ganti darah
+                                            yang
+                                            tidak ada.
+                                        <li> Untuk memastikan kebenaran info dari petugas PMI kalau stok darah habis, pihak
+                                            keluarga
+                                            dapat
+                                            menghubungi langsung ke staf PMI.
+                                        <li> Apabila tersedia, pihak yang membutuhkan harus menunggu dulu karena darah harus
+                                            melewati
+                                            proses uji saring dan pemisahan darah.
+
+                                    </ol>
+                                    <img src="{{ asset('gambar/permohonan-darah.png') }}" alt="permohonan darah"
+                                        class="w-100">
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- <p style="text-indent: 4em;" align="justify">Sebelum melakukan donor darah, pastikan kondisi tubuh
                             Anda sedang
                             sehat. Untuk menjaga kualitas darah sebelum melakukan donor darah, hindari konsumsi makanan
                             berlemak dan usahakan untuk mencukupi asupan protein, vitamin C, dan zat besi. Selain itu,
                             jangan lupa pula untuk minum air putih yang banyak. Anda juga disarankan untuk tidak melakukan
                             aktivitas fisik atau olahraga berat dan tidak mengonsumsi minuman keras setidaknya 1 hari
                             sebelum melakukan donor darah.</p>
-                        <p style="text-indent: 4em;" align="justify">Selain memenuhi syarat donor darah, berikut ini adalah
+                        <p style="text-indent: 4em;" align="justify">Selain memenuhi syarat donor darah, berikut ini
+                            adalah
                             beberapa hal yang perlu Anda perhatikan dan lakukan setelah mendonorkan darah:</p>
                         <ul>
                             <li>Jangan melepas plester pada area bekas tusukan jarum setidaknya selama 5 jam setelah donor
@@ -347,40 +476,7 @@
                             <li>Konsumsi makanan yang kaya akan zat besi, seperti daging dan kacang-kacangan, atau suplemen
                                 zat besi.
 
-                        </ul>
-                    </div>
-                    {{-- <div class="card-body">
-                    </div> --}}
-                </div>
-            </div>
-            <div class="col-12 col-sm-10 col-md-8 col-lg-8 text-center m-1" data-aos="fade-up">
-                <h4>PROSEDUR PERMOHONAN DARAH</h4>
-            </div>
-            <div class="col-lg-10 col-10" data-aos="fade-up">
-                <div class="card mb-4">
-                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <ol align="justify">
-                            <li>Dokter pemeriksa harus membuatkan pihak keluarga pasie surat pengantar mengambil darah.
-                                Surat itu berisikan: </li>
-                            <ol type="a">
-                                <li>Nama pasien
-                                <li>Nama rumah sakit
-                                <li>Golongan darah pasien
-                                <li>Jenis komponen darah
-                                <li>Jumlah darah yang dibutuhkan pasien
-
-                            </ol>
-                            <li> Perawat rumah sakit dan keluarga pasien membawa surat pengantar tadi ke Unit Tranfusi Darah
-                                PMI.
-                            <li> Petugas PMI akan memutuskan apakah mereka dapat memenuhi permintaan atau tidak dan apakah
-                                mereka membutuhkan donor dari teman atau keluarga pasien sebagai ganti darah yang tidak ada.
-                            <li> Untuk memastikan kebenaran info dari petugas PMI kalau stok darah habis, pihak keluarga
-                                dapat
-                                menghubungi langsung ke staf PMI.
-                            <li> Apabila tersedia, pihak yang membutuhkan harus menunggu dulu karena darah harus melewati
-                                proses uji saring dan pemisahan darah.
-
-                        </ol>
+                        </ul> --}}
                     </div>
                     {{-- <div class="card-body">
                     </div> --}}
@@ -410,25 +506,53 @@
                             class="bi bi-postcard-heart" style="font-size: 100px;"></i>
                         <p class="text-uppercase text-dark font-weight-bold text-center"
                             style="margin-top: -25px; font-size: large">
-                            Daftar Mudah</p>
+                            Layanan Permohonan Darah</p>
                     </div>
                     <div class="col-12 col-sm-6 col-lg-4 col-xl-4 text-center" data-aos="zoom-in-up"><i
-                            class="bi bi-postcard-heart" style="font-size: 100px;"></i>
+                            class="bi bi-calendar-event" style="font-size: 100px;"></i>
                         <p class="text-uppercase text-dark font-weight-bold text-center"
                             style="margin-top: -25px; font-size: large">
-                            Proses Cepat</p>
+                            Layanan Pengajuan Event</p>
                     </div>
                     <div class="col-12 col-sm-6 col-lg-4 col-xl-4 text-center" data-aos="zoom-in-right"><i
-                            class="bi bi-postcard-heart" style="font-size: 100px;"></i>
+                            class="bi bi-calendar-heart" style="font-size: 100px;"></i>
                         <p class="text-uppercase text-dark font-weight-bold text-center"
                             style="margin-top: -25px; font-size: large">
-                            Bebas Biaya</p>
+                            Layanan Pendonoran Darah</p>
                     </div>
                 </div>
             </div>
             <div class="col-12 mt-5 mb-5 text-center">
-                <a href="/daftar_donor" class="btn btn-danger btn-lg" data-aos="zoom-in-up">Daftar Menjadi Bagian</a>
+                <a href="/register" class="btn btn-danger btn-lg" data-aos="zoom-in-up">Daftar</a>
             </div>
         </div>
     </div>
+
+    {{-- javascript untuk konten informasi --}}
+    <script>
+        $('#prosedur').on('click', function() {
+            $('.manfaat').addClass('d-none')
+            $('.permohonan').addClass('d-none')
+            $('.prosedur').removeClass('d-none')
+            $('#manfaat').removeClass('text-danger')
+            $('#permohonan').removeClass('text-danger')
+            $(this).addClass('text-danger')
+        })
+        $('#manfaat').on('click', function() {
+            $('.prosedur').addClass('d-none')
+            $('.permohonan').addClass('d-none')
+            $('.manfaat').removeClass('d-none')
+            $('#prosedur').removeClass('text-danger')
+            $('#permohonan').removeClass('text-danger')
+            $(this).addClass('text-danger')
+        })
+        $('#permohonan').on('click', function() {
+            $('.prosedur').addClass('d-none')
+            $('.manfaat').addClass('d-none')
+            $('.permohonan').removeClass('d-none')
+            $('#prosedur').removeClass('text-danger')
+            $('#manfaat').removeClass('text-danger')
+            $(this).addClass('text-danger')
+        })
+    </script>
 @endsection

@@ -22,6 +22,7 @@ class M_Event extends Model
     {
         return DB::table($this->table)
             ->join('user', 'user.id_user', '=', 'event.id_user', 'left')
+            ->where('tanggal_event', '>=', date('Y-m-d'))
             ->orderBy('id_event', 'DESC')->paginate(3);
     }
 

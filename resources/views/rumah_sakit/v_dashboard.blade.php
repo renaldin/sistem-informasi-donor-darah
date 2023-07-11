@@ -29,7 +29,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Golongan Darah</th>
-                                        <th>Resus</th>
+                                        <th>Rhesus</th>
                                         <th>Stok</th>
                                     </tr>
                                 </thead>
