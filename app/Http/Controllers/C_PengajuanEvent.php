@@ -23,6 +23,7 @@ class C_PengajuanEvent extends Controller
     private $M_Donor;
     private $M_Anggota;
     private $M_DarahMasuk;
+    private $public_path;
 
     public function __construct()
     {
@@ -33,6 +34,7 @@ class C_PengajuanEvent extends Controller
         $this->M_Donor = new M_Donor();
         $this->M_Anggota = new M_Anggota();
         $this->M_DarahMasuk = new M_DarahMasuk();
+        $this->public_path = 'foto_surat';
         date_default_timezone_set('Asia/Jakarta');
     }
 
@@ -98,7 +100,7 @@ class C_PengajuanEvent extends Controller
 
         $file = Request()->upload_surat;
         $file_surat = date('mdYHis') . ' ' . Request()->nama_instansi . '.' . $file->extension();
-        $file->move(public_path('foto_surat'), $file_surat);
+        $file->move(public_path($this->public_path), $file_surat);
 
         $data = [
             'id_user'           => Session()->get('id_user'),
@@ -160,12 +162,12 @@ class C_PengajuanEvent extends Controller
 
         if (Request()->upload_surat <> "") {
             if ($event->upload_surat <> "") {
-                unlink(public_path('foto_surat') . '/' . $event->upload_surat);
+                unlink(public_path($this->public_path) . '/' . $event->upload_surat);
             }
 
             $file = Request()->upload_surat;
             $file_surat = date('mdYHis') . ' ' . Request()->nama_instansi . '.' . $file->extension();
-            $file->move(public_path('foto_surat'), $file_surat);
+            $file->move(public_path($this->public_path), $file_surat);
 
             $data = [
                 'id_event'          => $id_event,
@@ -203,7 +205,7 @@ class C_PengajuanEvent extends Controller
         $event = $this->M_Event->detail($id_event);
 
         if ($event->upload_surat <> "") {
-            unlink(public_path('foto_surat') . '/' . $event->upload_surat);
+            unlink(public_path($this->public_path) . '/' . $event->upload_surat);
         }
 
         $this->M_Event->hapus($id_event);
@@ -374,7 +376,7 @@ class C_PengajuanEvent extends Controller
 
         $file = Request()->upload_surat;
         $file_surat = date('mdYHis') . ' ' . Request()->nama_instansi . '.' . $file->extension();
-        $file->move(public_path('foto_surat'), $file_surat);
+        $file->move(public_path($this->public_path), $file_surat);
 
         $data = [
             'id_user'           => Session()->get('id_user'),
@@ -437,12 +439,12 @@ class C_PengajuanEvent extends Controller
 
         if (Request()->upload_surat <> "") {
             if ($event->upload_surat <> "") {
-                unlink(public_path('foto_surat') . '/' . $event->upload_surat);
+                unlink(public_path($this->public_path) . '/' . $event->upload_surat);
             }
 
             $file = Request()->upload_surat;
             $file_surat = date('mdYHis') . ' ' . Request()->nama_instansi . '.' . $file->extension();
-            $file->move(public_path('foto_surat'), $file_surat);
+            $file->move(public_path($this->public_path), $file_surat);
 
             $data = [
                 'id_event'          => $id_event,

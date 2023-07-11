@@ -20,6 +20,7 @@ class C_PermohonanDarah extends Controller
     private $M_PermohonanDarah;
     private $M_DarahKeluar;
     private $M_DarahMasuk;
+    private $public_path;
 
     public function __construct()
     {
@@ -28,6 +29,7 @@ class C_PermohonanDarah extends Controller
         $this->M_PermohonanDarah = new M_PermohonanDarah();
         $this->M_DarahKeluar = new M_DarahKeluar();
         $this->M_DarahMasuk = new M_DarahMasuk();
+        $this->public_path = 'surat_permohonan_darah';
         date_default_timezone_set('Asia/Jakarta');
     }
 
@@ -95,7 +97,7 @@ class C_PermohonanDarah extends Controller
 
         $file = Request()->upload_surat;
         $file_surat = date('mdYHis') . ' ' . Request()->nama_rs . '.' . $file->extension();
-        $file->move(public_path('surat_permohonan_darah'), $file_surat);
+        $file->move(public_path($this->public_path), $file_surat);
 
         $data = [
             'id_user'               => Session()->get('id_user'),
@@ -162,12 +164,12 @@ class C_PermohonanDarah extends Controller
 
         if (Request()->upload_surat <> "") {
             if ($detail->upload_surat <> "") {
-                unlink(public_path('surat_permohonan_darah') . '/' . $detail->upload_surat);
+                unlink(public_path($this->public_path) . '/' . $detail->upload_surat);
             }
 
             $file = Request()->upload_surat;
             $file_surat = date('mdYHis') . ' ' . Request()->nama_rs . '.' . $file->extension();
-            $file->move(public_path('surat_permohonan_darah'), $file_surat);
+            $file->move(public_path($this->public_path), $file_surat);
 
             $data = [
                 'id_permohonan_darah'   => $id_permohonan_darah,
@@ -205,7 +207,7 @@ class C_PermohonanDarah extends Controller
         $detail = $this->M_PermohonanDarah->detail($id_permohonan_darah);
 
         if ($detail->upload_surat <> "") {
-            unlink(public_path('surat_permohonan_darah') . '/' . $detail->upload_surat);
+            unlink(public_path($this->public_path) . '/' . $detail->upload_surat);
         }
 
         $this->M_PermohonanDarah->hapus($id_permohonan_darah);

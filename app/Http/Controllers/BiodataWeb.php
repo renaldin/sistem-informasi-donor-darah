@@ -10,11 +10,13 @@ class BiodataWeb extends Controller
 
     private $ModelBiodataWeb;
     private $ModelUser;
+    private $public_path;
 
     public function __construct()
     {
         $this->ModelBiodataWeb = new ModelBiodataWeb();
         $this->ModelUser = new ModelUser();
+        $this->public_path = 'foto_biodata';
     }
 
     public function index()
@@ -56,12 +58,12 @@ class BiodataWeb extends Controller
         if (Request()->logo <> "") {
             $biodata = $this->ModelBiodataWeb->detail($id_biodata_web);
             if ($biodata->logo <> "") {
-                unlink(public_path('foto_biodata') . '/' . $biodata->logo);
+                unlink(public_path($this->public_path) . '/' . $biodata->logo);
             }
 
             $file = Request()->logo;
             $fileName = date('mdYHis') . Request()->id_biodata_web . '.' . $file->extension();
-            $file->move(public_path('foto_biodata'), $fileName);
+            $file->move(public_path($this->public_path), $fileName);
 
             $data = [
                 'id_biodata_web'    => $id_biodata_web,
