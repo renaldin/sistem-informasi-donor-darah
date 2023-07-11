@@ -29,9 +29,14 @@ class kirimEmail extends Mailable
      */
     public function build()
     {
-
-        return $this->subject($this->data_email['subject'])
-            ->from($this->data_email['sender_name'])
-            ->view('mail.kirimEmailPassword');
+        if ($this->data_email['tipe'] === 'Lupa Password') {
+            return $this->subject($this->data_email['subject'])
+                ->from($this->data_email['sender_name'])
+                ->view('mail.kirimEmailPassword');
+        } elseif ($this->data_email['tipe'] === 'Verifikasi') {
+            return $this->subject($this->data_email['subject'])
+                ->from($this->data_email['sender_name'])
+                ->view('mail.kirimEmailVerifikasi');
+        }
     }
 }

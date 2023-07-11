@@ -86,4 +86,29 @@ class M_DarahMasuk extends Model
         ];
         return $data;
     }
+
+    public function jumlah($status)
+    {
+        return DB::table($this->table)->join('darah', 'darah.id_darah', '=', 'darah_masuk.id_darah', 'left')->where('tanggal_kedaluwarsa', '>=', date('Y-m-d'))->where('status_darah_masuk', $status)->count();
+    }
+
+    public function jumlah_kedaluwarsa()
+    {
+        return DB::table($this->table)->join('darah', 'darah.id_darah', '=', 'darah_masuk.id_darah', 'left')->where('tanggal_kedaluwarsa', '<=', date('Y-m-d'))->count();
+    }
+
+    public function countGolExpired()
+    {
+        $data = [
+            'a+' => DB::table($this->table)->join('darah', 'darah.id_darah', '=', 'darah_masuk.id_darah', 'left')->where('tanggal_kedaluwarsa', '<=', date('Y-m-d'))->where('golongan_darah', 'A')->where('status_darah_masuk', 'Sudah Masuk')->where('resus', 'Positif')->count(),
+            'b+' => DB::table($this->table)->join('darah', 'darah.id_darah', '=', 'darah_masuk.id_darah', 'left')->where('tanggal_kedaluwarsa', '<=', date('Y-m-d'))->where('golongan_darah', 'B')->where('status_darah_masuk', 'Sudah Masuk')->where('resus', 'Positif')->count(),
+            'ab+' => DB::table($this->table)->join('darah', 'darah.id_darah', '=', 'darah_masuk.id_darah', 'left')->where('tanggal_kedaluwarsa', '<=', date('Y-m-d'))->where('golongan_darah', 'AB')->where('status_darah_masuk', 'Sudah Masuk')->where('resus', 'Positif')->count(),
+            'o+' => DB::table($this->table)->join('darah', 'darah.id_darah', '=', 'darah_masuk.id_darah', 'left')->where('tanggal_kedaluwarsa', '<=', date('Y-m-d'))->where('golongan_darah', 'O')->where('status_darah_masuk', 'Sudah Masuk')->where('resus', 'Positif')->count(),
+            'a-' => DB::table($this->table)->join('darah', 'darah.id_darah', '=', 'darah_masuk.id_darah', 'left')->where('tanggal_kedaluwarsa', '<=', date('Y-m-d'))->where('golongan_darah', 'A')->where('status_darah_masuk', 'Sudah Masuk')->where('resus', 'Negatif')->count(),
+            'b-' => DB::table($this->table)->join('darah', 'darah.id_darah', '=', 'darah_masuk.id_darah', 'left')->where('tanggal_kedaluwarsa', '<=', date('Y-m-d'))->where('golongan_darah', 'B')->where('status_darah_masuk', 'Sudah Masuk')->where('resus', 'Negatif')->count(),
+            'ab-' => DB::table($this->table)->join('darah', 'darah.id_darah', '=', 'darah_masuk.id_darah', 'left')->where('tanggal_kedaluwarsa', '<=', date('Y-m-d'))->where('golongan_darah', 'AB')->where('status_darah_masuk', 'Sudah Masuk')->where('resus', 'Negatif')->count(),
+            'o-' => DB::table($this->table)->join('darah', 'darah.id_darah', '=', 'darah_masuk.id_darah', 'left')->where('tanggal_kedaluwarsa', '<=', date('Y-m-d'))->where('golongan_darah', 'O')->where('status_darah_masuk', 'Sudah Masuk')->where('resus', 'Negatif')->count(),
+        ];
+        return $data;
+    }
 }

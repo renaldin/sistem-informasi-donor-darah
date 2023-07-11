@@ -83,4 +83,9 @@ class M_DarahKeluar extends Model
         ];
         return $data;
     }
+
+    public function jumlah()
+    {
+        return DB::table($this->table)->count();
+    }
 }

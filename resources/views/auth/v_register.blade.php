@@ -25,6 +25,16 @@
         width: 100%;
     }
   </style>
+
+<script>
+  function hanyaAngka(evt) {
+      var charCode = (evt.which) ? evt.which : event.keyCode;
+      if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+          return false;
+      }
+      return true;
+  }
+</script>
 </head>
 
 <body class="bg-gradient-login">
@@ -67,10 +77,18 @@
                               @enderror
                             </div>
                           </div>
-                          <div class="col-lg-4">
+                          <div class="col-lg-6">
                             <div class="form-group">
-                              <input type="number" name="nik" class="form-control @error('nik') is-invalid @enderror" value="{{old('nik')}}" placeholder="Masukkan NIK" required>
+                              <input type="text" name="nik" onkeydown="return hanyaAngka(event)" class="form-control @error('nik') is-invalid @enderror" value="{{old('nik')}}" placeholder="Masukkan NIK" required>
                               @error('nik')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                              @enderror
+                            </div>
+                          </div>
+                          <div class="col-lg-6">
+                            <div class="form-group">
+                              <input type="text" name="nomor_telepon" onkeydown="return hanyaAngka(event)" class="form-control @error('nomor_telepon') is-invalid @enderror" value="{{old('nomor_telepon')}}" placeholder="Nomor Telepon" required>
+                              @error('nomor_telepon')
                                 <small class="form-text text-danger">{{ $message }}</small>
                               @enderror
                             </div>
@@ -85,16 +103,8 @@
                           </div>
                           <div class="col-lg-4">
                             <div class="form-group">
-                              <input type="number" name="nomor_telepon" class="form-control @error('nomor_telepon') is-invalid @enderror" value="{{old('nomor_telepon')}}" placeholder="Nomor Telepon" required>
-                              @error('nomor_telepon')
-                                <small class="form-text text-danger">{{ $message }}</small>
-                              @enderror
-                            </div>
-                          </div>
-                          <div class="col-lg-6">
-                            <div class="form-group">
                               <select name="jk" class="form-control @error('jk') is-invalid @enderror" required>
-                                <option value="">-- Pilih Jenis Kelamin --</option>
+                                <option value="">-- Jenis Kelamin --</option>
                                 <option value="Laki-laki">Laki-laki</option>
                                 <option value="Perempuan">Perempuan</option>
                               </select>
@@ -103,10 +113,10 @@
                               @enderror
                             </div>
                           </div>
-                          <div class="col-lg-6">
+                          <div class="col-lg-4">
                             <div class="form-group">
                               <select name="gol_darah" class="form-control @error('gol_darah') is-invalid @enderror">
-                                <option value="">-- Pilih Gol Darah (Opsional) --</option>
+                                <option value="">-- Gol Darah --</option>
                                 <option value="A">A</option>
                                 <option value="AB">AB</option>
                                 <option value="B">B</option>
@@ -162,7 +172,7 @@
                           </div>
                           <div class="col-lg-6">
                             <div class="form-group">
-                              <input type="number" name="nomor_telepon" class="form-control @error('nomor_telepon') is-invalid @enderror" value="{{old('nomor_telepon')}}" placeholder="Masukkan Nomor Telepon" required>
+                              <input type="text" name="nomor_telepon" onkeydown="return hanyaAngka(event)" class="form-control @error('nomor_telepon') is-invalid @enderror" value="{{old('nomor_telepon')}}" placeholder="Masukkan Nomor Telepon" required>
                               @error('nomor_telepon')
                                 <small class="form-text text-danger">{{ $message }}</small>
                               @enderror
@@ -221,7 +231,7 @@
                           </div>
                           <div class="col-lg-6">
                             <div class="form-group">
-                              <input type="number" name="nomor_telepon" class="form-control @error('nomor_telepon') is-invalid @enderror" value="{{old('nomor_telepon')}}" placeholder="Masukkan Nomor Telepon" required>
+                              <input type="text" name="nomor_telepon" onkeydown="return hanyaAngka(event)" class="form-control @error('nomor_telepon') is-invalid @enderror" value="{{old('nomor_telepon')}}" placeholder="Masukkan Nomor Telepon" required>
                               @error('nomor_telepon')
                                 <small class="form-text text-danger">{{ $message }}</small>
                               @enderror

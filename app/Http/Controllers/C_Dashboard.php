@@ -10,6 +10,7 @@ use App\Models\M_DarahKeluar;
 use App\Models\M_Event;
 use App\Models\M_PermohonanDarah;
 use App\Models\M_Anggota;
+use App\Models\M_Darah;
 
 class C_Dashboard extends Controller
 {
@@ -22,6 +23,7 @@ class C_Dashboard extends Controller
     private $M_Event;
     private $M_PermohonanDarah;
     private $M_Anggota;
+    private $M_Darah;
 
     public function __construct()
     {
@@ -33,6 +35,7 @@ class C_Dashboard extends Controller
         $this->M_Event = new M_Event();
         $this->M_PermohonanDarah = new M_PermohonanDarah();
         $this->M_Anggota = new M_Anggota();
+        $this->M_Darah = new M_Darah();
     }
 
     public function index()
@@ -51,12 +54,23 @@ class C_Dashboard extends Controller
                 'jumlahUser'            => $this->M_User->jumlah_user(),
                 'gol'                   => $this->M_DarahMasuk->countGol('Sudah Masuk'),
                 'gol_belum_masuk'       => $this->M_DarahMasuk->countGol('Belum Masuk'),
+                'gol_kedaluwarsa'       => $this->M_DarahMasuk->countGolExpired(),
                 'gol_darah_buang'       => $this->M_DarahBuang->countGol(),
                 'gol_darah_keluar'      => $this->M_DarahKeluar->countGol(),
                 'event'                 => $this->M_Event->countEvent('Aktif'),
+                'data_event'                 => $this->M_Event->get_data(),
                 'jumlah_rumah_sakit'    => $this->M_User->countUser('Rumah Sakit'),
+                'data_rumah_sakit'    => $this->M_User->get_data(),
                 'permohonan_darah'      => $this->M_PermohonanDarah->countPermohonan('Menunggu Proses'),
+                'data_permohonan_darah'      => $this->M_PermohonanDarah->get_data(),
                 'anggota'               => $this->M_Anggota->jumlah(),
+                'data_anggota'               => $this->M_Anggota->get_data(),
+                'data_darah'    => $this->M_Darah->get_data(),
+                'jumlah_stok_darah'     => $this->M_DarahMasuk->jumlah('Sudah Masuk'),
+                'jumlah_darah_masuk'     => $this->M_DarahMasuk->jumlah('Belum Masuk'),
+                'jumlah_darah_buang'     => $this->M_DarahBuang->jumlah(),
+                'jumlah_darah_keluar'     => $this->M_DarahKeluar->jumlah(),
+                'jumlah_darah_kedaluwarsa'     => $this->M_DarahMasuk->jumlah_kedaluwarsa(),
             ];
             return view('admin.v_dashboard', $data);
         } elseif (Session()->get('role') === 'Donatur') {

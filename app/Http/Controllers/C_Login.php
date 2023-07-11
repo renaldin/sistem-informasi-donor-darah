@@ -8,6 +8,7 @@ use App\Models\M_Auth;
 use App\Models\M_User;
 use App\Models\M_Website;
 use Illuminate\Support\Facades\Mail;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class C_Login extends Controller
 {
@@ -60,20 +61,27 @@ class C_Login extends Controller
         $cek_email = $this->M_Auth->cek_email_user(Request()->email);
 
         if ($cek_email) {
-            if ($cek_email->role) {
-                if (Hash::check(Request()->password, $cek_email->password)) {
-                    Session()->put('id_user', $cek_email->id_user);
-                    Session()->put('email', $cek_email->email);
-                    Session()->put('role', $cek_email->role);
-                    Session()->put('log', true);
+            if ($cek_email->status_verifikasi === 'Belum') {
+                Alert::error('Gagal', "Akun Anda belum verifikasi. Silahkan cek email untuk verifikasi!");
+                return back();
+            } else {
+                if ($cek_email->role) {
+                    if (Hash::check(Request()->password, $cek_email->password)) {
+                        Session()->put('id_user', $cek_email->id_user);
+                        Session()->put('email', $cek_email->email);
+                        Session()->put('role', $cek_email->role);
+                        Session()->put('log', true);
 
-                    return redirect()->route('dashboard');
-                } else {
-                    return back()->with('gagal', 'Password tidak sesuai.');
+                        return redirect()->route('dashboard');
+                    } else {
+                        Alert::error('Gagal', "Password tidak sesuai");
+                        return back();
+                    }
                 }
             }
         } else {
-            return back()->with('gagal', 'Email belum terdaftar.');
+            Alert::error('Gagal', "Email belum terdaftar.");
+            return back();
         }
     }
 
@@ -114,6 +122,7 @@ class C_Login extends Controller
                 'subject'       => 'Lupa Password',
                 'sender_name'   => 'purbateresia2@gmail.com',
                 'urlUtama'      => 'http://127.0.0.1:8000',
+                'tipe'          => 'Lupa Password',
                 'urlReset'      => 'http://127.0.0.1:8000/reset_password/' . $data->id_user,
                 'dataUser'      => $data,
                 'biodata'       => $this->M_Website->detail(1),
