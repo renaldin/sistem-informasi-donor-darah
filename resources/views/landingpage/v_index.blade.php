@@ -507,26 +507,26 @@
                     </div>
                 </div>
             </div> --}}
-            <div class="col-12 col-sm-10 col-md-8 col-lg-8 text-center mt-5" data-aos="fade-up">
+            <div class="col-12 col-sm-10 col-md-8 col-lg-8 text-center mt-5">
                 <p>Sistem Informasi Donor Darah memberikan informasi dan kemudahan kepada masyarakat yang ingin
                     mendonorkan darah</p>
             </div>
             <div class="col-12">
                 <div class="row justify-content-center">
-                    <div class="col-12 col-sm-6 col-lg-4 col-xl-4 text-center" data-aos="zoom-in-right"><i
-                            class="bi bi-postcard-heart" style="font-size: 100px;"></i>
+                    <div class="col-12 col-sm-6 col-lg-4 col-xl-4 text-center"><i class="bi bi-postcard-heart"
+                            style="font-size: 100px;"></i>
                         <p class="text-uppercase text-dark font-weight-bold text-center"
                             style="margin-top: -25px; font-size: large">
                             Layanan Permohonan Darah</p>
                     </div>
-                    <div class="col-12 col-sm-6 col-lg-4 col-xl-4 text-center" data-aos="zoom-in-up"><i
-                            class="bi bi-calendar-event" style="font-size: 100px;"></i>
+                    <div class="col-12 col-sm-6 col-lg-4 col-xl-4 text-center"><i class="bi bi-calendar-event"
+                            style="font-size: 100px;"></i>
                         <p class="text-uppercase text-dark font-weight-bold text-center"
                             style="margin-top: -25px; font-size: large">
                             Layanan Pengajuan Event</p>
                     </div>
-                    <div class="col-12 col-sm-6 col-lg-4 col-xl-4 text-center" data-aos="zoom-in-right"><i
-                            class="bi bi-calendar-heart" style="font-size: 100px;"></i>
+                    <div class="col-12 col-sm-6 col-lg-4 col-xl-4 text-center"><i class="bi bi-calendar-heart"
+                            style="font-size: 100px;"></i>
                         <p class="text-uppercase text-dark font-weight-bold text-center"
                             style="margin-top: -25px; font-size: large">
                             Layanan Pendonoran Darah</p>
@@ -534,7 +534,7 @@
                 </div>
             </div>
             <div class="col-12 mt-5 mb-5 text-center">
-                <a href="/register" class="btn btn-danger btn-lg" data-aos="zoom-in-up">Daftar</a>
+                <a href="/register" class="btn btn-danger btn-lg">Daftar</a>
             </div>
         </div>
     </div>
