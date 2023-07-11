@@ -13,11 +13,11 @@
         <div class="row">
             <div class="col-12 col-xs-12 col-sm-12 col-md-6 col-lg-6 pt-5 mt-3" data-aos="fade-right">
                 <h1 class="text-uppercase text-dark font-weight-bold" style="font-weight: bolder;">Donor Darah</h1>
-                <p align="justify">Website Donor Darah adalah sebuah platform online yang bertujuan untuk memfasilitasi
-                    proses donor darah.
-                    Website ini menyediakan informasi dan layanan yang dibutuhkan oleh para calon pendonor darah, pusat
-                    donor darah, dan penerima darah. Bertujuan untuk memudahkan pendonor darah dalam proses donasi dan
-                    memberikan informasi yang akurat dan lengkap mengenai donor darah.</p>
+                <p align="justify">Donor darah adalah prosedur sukarela yang dapat membantu menyelamatkan nyawa orang lain.
+                    Darah dari setiap pendonor akan dikumpulkan lewat jarum steril sekali pakai, kemudian ditampung dalam
+                    kantong darah steril. Prosedur ini bisa jadi dilakukan dengan menyumbangkan darah utuh atau komponen
+                    darah tertentu, seperti trombosit atau plasma. Jumlah yang diberikan dalam prosedur donor darah komponen
+                    darah tertentu ini akan bergantung pada tinggi badan, berat badan, dan jumlah trombosit Anda.</p>
             </div>
             <div class="col-12 col-xs-12 col-sm-12 col-md-6 col-lg-6 text-center" data-aos="fade-left">
                 <img src="/gambar/donor.jpg" alt="donor darah" class="w-100">
@@ -333,6 +333,12 @@
                                     </a>
                                 </div>
                                 <hr class="sidebar-divider">
+                                <div class="sidebar-heading">
+                                    <a class="nav-link side-info" id="urgent">
+                                        <span>Informasi Darah Urgent</span>
+                                    </a>
+                                </div>
+                                <hr class="sidebar-divider">
                             </div>
                             <div class="col-lg-8">
                                 <div class="manfaat">
@@ -454,6 +460,11 @@
                                     <img src="{{ asset('gambar/permohonan-darah.png') }}" alt="permohonan darah"
                                         class="w-100">
                                 </div>
+                                <div class="urgent d-none">
+                                    <h4><b>Informasi Darah Urgent</b></h4>
+                                    <p class="text-danger">Darah Urgent yaitu darah yang saat ini sedang dibutuhkan atau
+                                        darah sedang kosong.</p>
+                                </div>
                             </div>
                         </div>
 
@@ -533,25 +544,41 @@
         $('#prosedur').on('click', function() {
             $('.manfaat').addClass('d-none')
             $('.permohonan').addClass('d-none')
+            $('.urgent').addClass('d-none')
             $('.prosedur').removeClass('d-none')
             $('#manfaat').removeClass('text-danger')
             $('#permohonan').removeClass('text-danger')
+            $('#urgent').removeClass('text-danger')
             $(this).addClass('text-danger')
         })
         $('#manfaat').on('click', function() {
             $('.prosedur').addClass('d-none')
             $('.permohonan').addClass('d-none')
+            $('.urgent').addClass('d-none')
             $('.manfaat').removeClass('d-none')
             $('#prosedur').removeClass('text-danger')
             $('#permohonan').removeClass('text-danger')
+            $('#urgent').removeClass('text-danger')
             $(this).addClass('text-danger')
         })
         $('#permohonan').on('click', function() {
             $('.prosedur').addClass('d-none')
             $('.manfaat').addClass('d-none')
+            $('.urgent').addClass('d-none')
             $('.permohonan').removeClass('d-none')
             $('#prosedur').removeClass('text-danger')
             $('#manfaat').removeClass('text-danger')
+            $('#urgent').removeClass('text-danger')
+            $(this).addClass('text-danger')
+        })
+        $('#urgent').on('click', function() {
+            $('.prosedur').addClass('d-none')
+            $('.manfaat').addClass('d-none')
+            $('.permohonan').addClass('d-none')
+            $('.urgent').removeClass('d-none')
+            $('#prosedur').removeClass('text-danger')
+            $('#manfaat').removeClass('text-danger')
+            $('#permohonan').removeClass('text-danger')
             $(this).addClass('text-danger')
         })
     </script>
