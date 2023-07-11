@@ -63,7 +63,7 @@ class C_PengajuanEvent extends Controller
             'title'         => 'Pengajuan Event',
             'sub_title'     => 'Tambah Pengajuan Event',
             'data_web'      => $this->M_Website->detail(1),
-            'user'          => $this->M_User->detail(Session()->get('id_user'))
+            'user'          => $this->M_User->detail_user_event(Session()->get('id_user'))
         ];
 
         return view('event.pengajuan_event.v_tambah', $data);
@@ -76,6 +76,7 @@ class C_PengajuanEvent extends Controller
         }
 
         Request()->validate([
+            'kd_instansi'     => 'required',
             'nama_instansi'     => 'required',
             'alamat_lengkap'    => 'required',
             'tanggal_event'     => 'required',
@@ -83,6 +84,7 @@ class C_PengajuanEvent extends Controller
             'jumlah_orang'      => 'required',
             'upload_surat'      => 'required|mimes:pdf|max:5048',
         ], [
+            'kd_instansi.required'    => 'Kode Instansi harus diisi!',
             'nama_instansi.required'    => 'Nama Instansi harus diisi!',
             'alamat_lengkap.required'   => 'Alamat Lengkap harus diisi!',
             'tanggal_event.required'    => 'Tanggal Eevnt harus diisi!',
@@ -100,6 +102,7 @@ class C_PengajuanEvent extends Controller
 
         $data = [
             'id_user'           => Session()->get('id_user'),
+            'kd_instansi'     => Request()->kd_instansi,
             'nama_instansi'     => Request()->nama_instansi,
             'alamat_lengkap'    => Request()->alamat_lengkap,
             'tanggal_event'     => Request()->tanggal_event,
@@ -135,6 +138,7 @@ class C_PengajuanEvent extends Controller
     public function proses_edit_pengajuan_event($id_event)
     {
         Request()->validate([
+            'kd_instansi'     => 'required',
             'nama_instansi'     => 'required',
             'alamat_lengkap'    => 'required',
             'tanggal_event'     => 'required',
@@ -142,6 +146,7 @@ class C_PengajuanEvent extends Controller
             'jumlah_orang'      => 'required',
             'upload_surat'      => 'mimes:pdf|max:5048',
         ], [
+            'kd_instansi.required'    => 'Kode Instansi harus diisi!',
             'nama_instansi.required'    => 'Nama Instansi harus diisi!',
             'alamat_lengkap.required'   => 'Alamat Lengkap harus diisi!',
             'tanggal_event.required'    => 'Tanggal Eevnt harus diisi!',
@@ -164,6 +169,7 @@ class C_PengajuanEvent extends Controller
 
             $data = [
                 'id_event'          => $id_event,
+                'kd_instansi'     => Request()->kd_instansi,
                 'nama_instansi'     => Request()->nama_instansi,
                 'alamat_lengkap'    => Request()->alamat_lengkap,
                 'tanggal_event'     => Request()->tanggal_event,
@@ -174,6 +180,7 @@ class C_PengajuanEvent extends Controller
         } else {
             $data = [
                 'id_event'          => $id_event,
+                'kd_instansi'     => Request()->kd_instansi,
                 'nama_instansi'     => Request()->nama_instansi,
                 'alamat_lengkap'    => Request()->alamat_lengkap,
                 'tanggal_event'     => Request()->tanggal_event,
@@ -345,6 +352,7 @@ class C_PengajuanEvent extends Controller
         }
 
         Request()->validate([
+            'kd_instansi'     => 'required',
             'nama_instansi'     => 'required',
             'alamat_lengkap'    => 'required',
             'tanggal_event'     => 'required',
@@ -352,6 +360,7 @@ class C_PengajuanEvent extends Controller
             'jumlah_orang'      => 'required',
             'upload_surat'      => 'required|mimes:pdf|max:5048',
         ], [
+            'kd_instansi.required'    => 'Kode Instansi harus diisi!',
             'nama_instansi.required'    => 'Nama Instansi harus diisi!',
             'alamat_lengkap.required'   => 'Alamat Lengkap harus diisi!',
             'tanggal_event.required'    => 'Tanggal Eevnt harus diisi!',
@@ -369,6 +378,7 @@ class C_PengajuanEvent extends Controller
 
         $data = [
             'id_user'           => Session()->get('id_user'),
+            'kd_instansi'     => Request()->kd_instansi,
             'nama_instansi'     => Request()->nama_instansi,
             'alamat_lengkap'    => Request()->alamat_lengkap,
             'tanggal_event'     => Request()->tanggal_event,
@@ -405,6 +415,7 @@ class C_PengajuanEvent extends Controller
     public function proses_edit_event($id_event)
     {
         Request()->validate([
+            'kd_instansi'     => 'required',
             'nama_instansi'     => 'required',
             'alamat_lengkap'    => 'required',
             'tanggal_event'     => 'required',
@@ -412,6 +423,7 @@ class C_PengajuanEvent extends Controller
             'jumlah_orang'      => 'required',
             'upload_surat'      => 'mimes:pdf|max:5048',
         ], [
+            'kd_instansi.required'    => 'Kode Instansi harus diisi!',
             'nama_instansi.required'    => 'Nama Instansi harus diisi!',
             'alamat_lengkap.required'   => 'Alamat Lengkap harus diisi!',
             'tanggal_event.required'    => 'Tanggal Eevnt harus diisi!',
@@ -434,6 +446,7 @@ class C_PengajuanEvent extends Controller
 
             $data = [
                 'id_event'          => $id_event,
+                'kd_instansi'     => Request()->kd_instansi,
                 'nama_instansi'     => Request()->nama_instansi,
                 'alamat_lengkap'    => Request()->alamat_lengkap,
                 'tanggal_event'     => Request()->tanggal_event,
@@ -444,6 +457,7 @@ class C_PengajuanEvent extends Controller
         } else {
             $data = [
                 'id_event'          => $id_event,
+                'kd_instansi'     => Request()->kd_instansi,
                 'nama_instansi'     => Request()->nama_instansi,
                 'alamat_lengkap'    => Request()->alamat_lengkap,
                 'tanggal_event'     => Request()->tanggal_event,

@@ -16,6 +16,7 @@
                             <th>Name Instansi</th>
                             <th>Waktu Event</th>
                             <th>Status Pengajuan</th>
+                            <th>Status Event</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -39,7 +40,15 @@
                                 @endif
                             </td>
                             <td>
-                                <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#approve{{$row->id_event}}">Approve</button>
+                              @if ($row->status_event === 'Aktif')
+                                  <span class="badge badge-success">{{$row->status_event}}</span>
+                              @elseif($row->status_event === 'Tidak Aktif')    
+                                  <span class="badge badge-danger">{{$row->status_event}}</span>
+                              @endif  
+                            </td>
+                            <td>
+                                <a href="/tidak_pengajuan_event/{{$row->id_event}}" class="btn btn-danger btn-sm ">Tolak</a>
+                                <a href="/ya_pengajuan_event/{{$row->id_event}}" class="btn btn-success btn-sm ">Terima</a>
                                 <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#detail{{$row->id_event}}">Detail</button>   
                             </td>
                           </tr>
@@ -98,6 +107,11 @@
                     <th>Email Pengaju</th>
                     <td>:</td>
                     <td>{{$row->email}}</td>
+                </tr>
+                <tr>
+                    <th>Kode Instansi</th>
+                    <td>:</td>
+                    <td>{{$row->kd_instansi}}</td>
                 </tr>
                 <tr>
                     <th>Nama Instansi</th>
