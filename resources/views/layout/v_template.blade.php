@@ -126,6 +126,30 @@
             $('#dataTableHover2').DataTable(); // ID From dataTable with Hover
         });
     </script>
+    <script>
+        $(document).ready(function() {
+            $('#dataTable').DataTable(); // ID From dataTable 
+            $('#dataTableHover3').DataTable(); // ID From dataTable with Hover
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#dataTable').DataTable(); // ID From dataTable 
+            $('#dataTableHover4').DataTable(); // ID From dataTable with Hover
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#dataTable').DataTable(); // ID From dataTable 
+            $('#dataTableHover5').DataTable(); // ID From dataTable with Hover
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#dataTable').DataTable(); // ID From dataTable 
+            $('#dataTableHover6').DataTable(); // ID From dataTable with Hover
+        });
+    </script>
 
     <script>
         $(document).ready(function() {

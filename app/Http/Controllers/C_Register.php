@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\M_Auth;
 use App\Models\M_User;
 use App\Models\M_Website;
+use DateTime;
 use Illuminate\Support\Facades\Mail;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -120,16 +121,28 @@ class C_Register extends Controller
 
         if (Request()->role === 'Donatur') {
             Request()->validate([
-                'nik'               => 'required|numeric',
+                'nik'               => 'required|min:16|max:16',
                 'tanggal_lahir'     => 'required|date',
                 'jk'                => 'required',
             ], [
                 'nik.required'              => 'NIK harus diisi!',
-                'nik.numeric'               => 'NIK harus angka!',
+                // 'nik.numeric'               => 'NIK harus angka!',
+                'nik.min'               => 'NIK harus 16 karakter!',
+                'nik.max'               => 'NIK harus 16 karakter!',
                 'tanggal_lahir.required'    => 'Tanggal lahir harus diisi!',
                 'tanggal_lahir.date'        => 'Tanggal lahir berupa tanggal!',
                 'jk.required'               => 'Jenis kelamin harus diisi!',
             ]);
+
+            $tanggal_lahir = new DateTime(Request()->tanggal_lahir);
+            $sekarang = new DateTime();
+            $selisih = $sekarang->diff($tanggal_lahir);
+            $umur = $selisih->y;
+
+            if ($umur < 17) {
+                Alert::error('Gagal', "Tidak bisa lanjut daftar. Umur Anda kurang dari 17 tahun!");
+                return redirect()->route('register_donatur');
+            }
         } elseif (Request()->role === 'Event') {
             Request()->validate([
                 'kode_instansi' => 'required',
@@ -181,7 +194,38 @@ class C_Register extends Controller
             $this->M_User->tambah_rumah_sakit($data_rs);
         }
 
-        Alert::success('Berhasil', "Register berhasil!");
+        $data_email = [
+            'subject'       => 'Verifikasi Akun',
+            'sender_name'   => 'purbateresia2@gmail.com',
+            'urlUtama'      => 'http://127.0.0.1:8000',
+            'tipe'          => 'Verifikasi',
+            'urlReset'      => 'http://127.0.0.1:8000/verifikasi/' . $data_terakhir->id_user,
+            'dataUser'      => $data_terakhir,
+            'biodata'       => $this->M_Website->detail(1),
+        ];
+
+        Mail::to($data_terakhir->email)->send(new kirimEmail($data_email));
+
+        Alert::success('Berhasil', "Register berhasil. Silahkan cek email untuk verifikasi!");
         return redirect()->route('login');
+    }
+
+    public function verifikasi($id_user)
+    {
+        if (Session()->get('email')) {
+            if (Session()->get('role')) {
+                return redirect()->route('dashboard');
+            }
+        }
+
+        $detail = $this->M_User->detail($id_user);
+
+        $data = [
+            'id_user'           => $id_user,
+            'status_verifikasi'  => 'Sudah'
+        ];
+
+        $this->M_User->edit($data);
+        return redirect()->route('login')->with('berhasil', 'Anda berhasil verifikasi akun. Silahkan login!');
     }
 }

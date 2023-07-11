@@ -48,8 +48,9 @@ Route::group(['middleware' => 'revalidate'], function () {
     Route::get('/register', [C_Register::class, 'index'])->name('register');
     Route::get('/register_event', [C_Register::class, 'register_event'])->name('register_event');
     Route::get('/register_donatur', [C_Register::class, 'register_donatur'])->name('register_donatur');
-    Route::get('/register_rumah_sakit', [C_Register::class, 'register_rumah_sakit'])->name('register_donatur');
+    Route::get('/register_rumah_sakit', [C_Register::class, 'register_rumah_sakit'])->name('register_rumah_sakit');
     Route::post('/register', [C_Register::class, 'register']);
+    Route::get('/verifikasi/{id}', [C_Register::class, 'verifikasi'])->name('verifikasi');
 
     // Logout
     Route::get('/logout', [C_Login::class, 'logout'])->name('logout');

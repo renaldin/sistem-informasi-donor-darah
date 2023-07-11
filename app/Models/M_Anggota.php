@@ -43,6 +43,6 @@ class M_Anggota extends Model
 
     public function jumlah()
     {
-        return DB::table($this->table)->count();
+        return DB::table($this->table)->where('status_anggota', 'Mandiri')->count();
     }
 }

@@ -70,26 +70,9 @@
                             <div class="col-12 col-lg-6">
                                 <div class="form-group">
                                     <label for="jenis_kelamin">Jenis Kelamin</label>
-                                    <div class="custom-control custom-radio ">
-                                        <input type="radio" id="laki-laki" name="jenis_kelamin"
-                                            class="custom-control-input" value="Laki-laki"
-                                            {{ $user ? ($user->jk == 'Laki-laki' ? 'checked' : '') : '' }}>
-                                        {{-- <input type="radio" id="laki-laki" name="jenis_kelamin"
-                                            class="custom-control-input" value="Laki-laki"
-                                            {{ $data ? ($data->jenis_kelamin == 'Laki-laki' ? 'checked' : '') : '' }}
-                                            {{ $data ? 'disabled' : '' }}> --}}
-                                        <label class="custom-control-label" for="laki-laki">Laki-laki</label>
-                                    </div>
-                                    <div class="custom-control custom-radio">
-                                        <input type="radio" id="perempuan" name="jenis_kelamin"
-                                            class="custom-control-input" value="Perempuan"
-                                            {{ $user ? ($user->jk == 'Perempuan' ? 'checked' : '') : '' }}>
-                                        {{-- <input type="radio" id="perempuan" name="jenis_kelamin"
-                                            class="custom-control-input" value="Perempuan"
-                                            {{ $data ? ($data->jenis_kelamin == 'Perempuan' ? 'checked' : '') : '' }}
-                                            {{ $data ? 'disabled' : '' }}> --}}
-                                        <label class="custom-control-label" for="perempuan">Perempuan</label>
-                                    </div>
+                                    <input type="text" class="form-control @error('jenis_kelamin') is-invalid @enderror"
+                                        id="jenis_kelamin" name="jenis_kelamin" placeholder="Masukan Jenis Kelamin"
+                                        value="{{ $data ? $data->jk : $user->jk }}" readonly>
                                     @error('jenis_kelamin')
                                         <small class="form-text text-danger">{{ $message }}</small>
                                     @enderror
