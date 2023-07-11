@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     {{-- aos js --}}
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="{{ asset('template/vendor/jquery/jquery.min.js') }}"></script>
     {{-- custon css topbar nav --}}
     <style>
         @media (max-width: 575px) {
@@ -107,7 +108,6 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <script src="{{ asset('template/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('template/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('template/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
     <script src="{{ asset('template/js/ruang-admin.min.js') }}"></script>

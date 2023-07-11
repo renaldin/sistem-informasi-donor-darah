@@ -144,7 +144,7 @@
                                                 <th>No</th>
                                                 <th>No Kantung</th>
                                                 <th>Golongan Darah</th>
-                                                <th>Resus</th>
+                                                <th>Rhesus</th>
                                                 <th>Umur</th>
                                                 <th>Tanggal Kedaluwarsa</th>
                                             </tr>

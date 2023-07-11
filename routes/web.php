@@ -33,6 +33,7 @@ Route::group(['middleware' => 'revalidate'], function () {
     // Route::group(['middleware' => 'landing_page'], function () {
     // lading page
     Route::get('/', [C_LandingPage::class, 'index'])->name('landingpage');
+    Route::get('/syarat_donor', [C_LandingPage::class, 'syarat_donor'])->name('syarat_donor');
     // });
 
     // login

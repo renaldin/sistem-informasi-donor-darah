@@ -173,7 +173,7 @@
                     <th>No</th>
                     <th>Nama Rs</th>
                     <th>Golongan Darah</th>
-                    <th>Resus</th>
+                    <th>Rhesus</th>
                     <th>Jumlah</th>
                     <th>Tanggal Keluar</th>
                 </tr>

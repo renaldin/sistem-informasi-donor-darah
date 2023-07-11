@@ -21,6 +21,7 @@ class C_LandingPage extends Controller
         $this->M_DarahMasuk = new M_DarahMasuk();
         $this->M_Event = new M_Event();
         $this->M_PermohonanDarah = new M_PermohonanDarah();
+        date_default_timezone_set('Asia/Jakarta');
     }
 
     public function index()
@@ -40,5 +41,17 @@ class C_LandingPage extends Controller
         // dd($data['permohonan_darah']);
 
         return view('landingpage.v_index', $data);
+    }
+
+    public function syarat_donor()
+    {
+        $data = [
+            'title'             => 'Syarat Donor',
+            'data_web'          => $this->M_Website->detail(1),
+            'user'              => $this->M_User->detail(Session()->get('id_user')),
+            'sub_title'         => 'Syarat Donor Darah',
+        ];
+
+        return view('landingpage.v_syarat_donor', $data);
     }
 }
