@@ -153,21 +153,36 @@
       <div class="row">
         <div class="col-lg-12">
             <table>
-                <tr>
-                    <th>Nama Pengaju</th>
-                    <td>:</td>
-                    <td>{{$row->nama}}</td>
-                </tr>
-                <tr>
-                    <th>Email Pengaju</th>
-                    <td>:</td>
-                    <td>{{$row->email}}</td>
-                </tr>
-                <tr>
-                    <th>Nama Instansi</th>
-                    <td>:</td>
-                    <td>{{$row->nama_instansi}}</td>
-                </tr>
+              <tr>
+                <th>Nomor Pengajuan</th>
+                <td>:</td>
+                <td>{{ $row->nomor_pengajuan }}</td>
+            </tr>
+            <tr>
+                <th>Nomor Koordinator</th>
+                <td>:</td>
+                <td>{{ $row->nomor_koordinator }}</td>
+            </tr>
+            <tr>
+                <th>Nama Koordinator</th>
+                <td>:</td>
+                <td>{{ $row->nama_koordinator }}</td>
+            </tr>
+            <tr>
+                <th>Email Pengaju</th>
+                <td>:</td>
+                <td>{{ $row->email }}</td>
+            </tr>
+            <tr>
+                <th>Nama Instansi</th>
+                <td>:</td>
+                <td>{{ $row->nama_instansi }}</td>
+            </tr>
+            <tr>
+                <th>Nama Kegiatan</th>
+                <td>:</td>
+                <td>{{ $row->nama_kegiatan }}</td>
+            </tr>
                 <tr>
                     <th>Waktu</th>
                     <td>:</td>

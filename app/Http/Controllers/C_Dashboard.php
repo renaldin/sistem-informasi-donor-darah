@@ -92,6 +92,9 @@ class C_Dashboard extends Controller
             $data = [
                 'title'                 => 'Dashboard',
                 'sub_title'              => 'Dashboard',
+                'total_event_aktif'                 => $this->M_Event->countEventUser('Aktif'),
+                'total_event_tidak_aktif'                 => $this->M_Event->countEventUser('Tidak Aktif'),
+                'data_event'                 => $this->M_Event->get_data(),
                 'user'                  => $this->M_User->detail_user_event(Session()->get('id_user')),
                 'data_web'               => $this->M_Website->detail(1),
                 'event'               => $this->M_Event->get_data(),

@@ -26,9 +26,19 @@
                         <div class="col-lg-12">
                             <table>
                                 <tr>
-                                    <th>Nama Pengaju</th>
+                                    <th>Nomor Pengajuan</th>
                                     <td>:</td>
-                                    <td>{{ $detail->nama }}</td>
+                                    <td>{{ $detail->nomor_pengajuan }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Nomor Koordinator</th>
+                                    <td>:</td>
+                                    <td>{{ $detail->nomor_koordinator }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Nama Koordinator</th>
+                                    <td>:</td>
+                                    <td>{{ $detail->nama_koordinator }}</td>
                                 </tr>
                                 <tr>
                                     <th>Email Pengaju</th>
@@ -39,6 +49,11 @@
                                     <th>Nama Instansi</th>
                                     <td>:</td>
                                     <td>{{ $detail->nama_instansi }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Nama Kegiatan</th>
+                                    <td>:</td>
+                                    <td>{{ $detail->nama_kegiatan }}</td>
                                 </tr>
                                 <tr>
                                     <th>Waktu</th>

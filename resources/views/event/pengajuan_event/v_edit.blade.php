@@ -13,6 +13,39 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
+                                    <label for="nomor_pengajuan">Nomor Pengajuan</label>
+                                    <input type="text" class="form-control @error('nomor_pengajuan') is-invalid @enderror"
+                                        name="nomor_pengajuan" id="nomor_pengajuan" value="{{ $detail->nomor_pengajuan }}"
+                                        placeholder="Masukkan Nomor Pengajuan" readonly>
+                                    @error('nomor_pengajuan')
+                                        <small class="form-text text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="nomor_koordinator">Nomor Koordinator</label>
+                                    <input type="text" class="form-control @error('nomor_koordinator') is-invalid @enderror"
+                                        name="nomor_koordinator" id="nomor_koordinator" value="{{ $detail->nomor_koordinator }}"
+                                        placeholder="Masukkan Nomor Koordinator" readonly>
+                                    @error('nomor_koordinator')
+                                        <small class="form-text text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="nama_koordinator">Nama Koordinator</label>
+                                    <input type="text" class="form-control @error('nama_koordinator') is-invalid @enderror"
+                                        name="nama_koordinator" id="nama_koordinator" value="{{ $detail->nama_koordinator }}"
+                                        placeholder="Masukkan Nama Koordinator">
+                                    @error('nama_koordinator')
+                                        <small class="form-text text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
                                     <label for="kd_instansi">Kode Instansi</label>
                                     <input type="text" class="form-control @error('kd_instansi') is-invalid @enderror"
                                         name="kd_instansi" id="kd_instansi" value="{{ $detail->kd_instansi }}"
@@ -35,7 +68,18 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label for="alamat_lengkap">Alamat Lengkap</label>
+                                    <label for="nama_kegiatan">Nama Kegiatan</label>
+                                    <input type="text" class="form-control @error('nama_kegiatan') is-invalid @enderror"
+                                        name="nama_kegiatan" id="nama_kegiatan" value="{{ $detail->nama_kegiatan }}"
+                                        placeholder="Masukkan Nama Kegiatan">
+                                    @error('nama_kegiatan')
+                                        <small class="form-text text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="alamat_lengkap">Lokasi Kegiatan Dilaksanakan</label>
                                     <input type="text" class="form-control @error('alamat_lengkap') is-invalid @enderror"
                                         name="alamat_lengkap" id="alamat_lengkap" value="{{ $detail->alamat_lengkap }}"
                                         placeholder="Masukkan Alamat Lengkap">
@@ -45,16 +89,11 @@
                                 </div>
                             </div>
                             <div class="col-lg-6">
-                                <div class="form-group" id="simple-date1">
+                                <div class="form-group">
                                     <label for="simpleDataInput">Tanggal Event</label>
-                                    <div class="input-group date">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fas fa-calendar"></i></span>
-                                        </div>
-                                        <input type="text"
+                                        <input type="date"
                                             class="form-control @error('tanggal_event') is-invalid @enderror"
-                                            name="tanggal_event" value="{{ $detail->tanggal_event }}" id="simpleDataInput">
-                                    </div>
+                                            name="tanggal_event" value="{{ $detail->tanggal_event }}" min="{{date("Y-m-d")}}">
                                     @error('tanggal_event')
                                         <small class="form-text text-danger">{{ $message }}</small>
                                     @enderror

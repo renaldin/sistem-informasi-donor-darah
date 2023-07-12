@@ -32,10 +32,13 @@
                         </tr>
                     </table>
                 </div>
+                <div class="card-header flex flex-row">
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#expired">Kedaluwarsa</button>
+                </div>
                 {{-- <div class="card-header flex flex-row">
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambah">Tambah Darah</button>
-              <a href="/riwayat_buang_darah" class="btn btn-danger">Darah Buang</a>
-            </div> --}}
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambah">Tambah Darah</button>
+                    <a href="/riwayat_buang_darah" class="btn btn-danger">Darah Buang</a>
+                </div> --}}
                 <div class="table-responsive p-3">
                     <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                         <thead class="thead-light">
@@ -124,4 +127,25 @@
             </div>
         </div>
     @endforeach
+
+    <div class="modal fade" id="expired" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Kedaluwarsa</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Apakah Anda yakin akan buang semua darah yang sudah kedaluwarsa?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Batal</button>
+                    <a href="/buang_darah_kedaluwarsa" class="btn btn-danger">Buang</a>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
