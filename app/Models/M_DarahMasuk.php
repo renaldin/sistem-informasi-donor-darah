@@ -111,4 +111,13 @@ class M_DarahMasuk extends Model
         ];
         return $data;
     }
+
+    public function kedaluwarsa()
+    {
+        return DB::table($this->table)
+            ->join('user', 'user.id_user', '=', 'darah_masuk.id_user', 'left')
+            ->join('darah', 'darah.id_darah', '=', 'darah_masuk.id_darah', 'left')
+            ->where('tanggal_kedaluwarsa', '<=', date('Y-m-d'))
+            ->orderBy('darah.tanggal_darah_masuk', 'ASC')->get();
+    }
 }

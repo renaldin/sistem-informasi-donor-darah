@@ -112,7 +112,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label for="volume_darah">Volume Darah</label>
+                                    <label for="volume_darah">Volume Darah (CC)</label>
                                     <input type="text" class="form-control @error('volume_darah') is-invalid @enderror"
                                         name="volume_darah" id="volume_darah" value="{{ old('volume_darah') }}"
                                         placeholder="Masukkan Golongan Darah">

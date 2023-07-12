@@ -47,7 +47,7 @@
                               @endif  
                             </td>
                             <td>
-                                <a href="/tidak_pengajuan_event/{{$row->id_event}}" class="btn btn-danger btn-sm ">Tolak</a>
+                                <button type="button" data-toggle="modal" data-target="#tolak{{$row->id_event}}" class="btn btn-danger btn-sm ">Tolak</button>
                                 <a href="/ya_pengajuan_event/{{$row->id_event}}" class="btn btn-success btn-sm ">Terima</a>
                                 <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#detail{{$row->id_event}}">Detail</button>   
                             </td>
@@ -84,6 +84,44 @@
 </div>
 @endforeach
 
+<!-- Modal -->
+@foreach ($data_event as $row)
+<div class="modal fade" id="tolak{{$row->id_event}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Tolak</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form action="/tidak_pengajuan_event/{{$row->id_event}}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label for="alasan">Alasan</label>
+                    <input type="text" class="form-control @error('alasan') is-invalid @enderror"
+                        name="alasan" id="alasan"
+                        placeholder="Masukkan Alasan Menolak" required>
+                    @error('alasan')
+                        <small class="form-text text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Kembali</button>
+      <button type="submit" class="btn btn-danger">Tolak</button>
+    </div>
+  </form>
+  </div>
+</div>
+</div>
+@endforeach
+
 @foreach ($data_event as $row)
 <div class="modal fade" id="detail{{$row->id_event}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -98,26 +136,36 @@
       <div class="row">
         <div class="col-lg-12">
             <table>
-                <tr>
-                    <th>Nama Pengaju</th>
-                    <td>:</td>
-                    <td>{{$row->nama}}</td>
-                </tr>
-                <tr>
-                    <th>Email Pengaju</th>
-                    <td>:</td>
-                    <td>{{$row->email}}</td>
-                </tr>
-                <tr>
-                    <th>Kode Instansi</th>
-                    <td>:</td>
-                    <td>{{$row->kd_instansi}}</td>
-                </tr>
-                <tr>
-                    <th>Nama Instansi</th>
-                    <td>:</td>
-                    <td>{{$row->nama_instansi}}</td>
-                </tr>
+              <tr>
+                <th>Nomor Pengajuan</th>
+                <td>:</td>
+                <td>{{ $row->nomor_pengajuan }}</td>
+            </tr>
+            <tr>
+                <th>Nomor Koordinator</th>
+                <td>:</td>
+                <td>{{ $row->nomor_koordinator }}</td>
+            </tr>
+            <tr>
+                <th>Nama Koordinator</th>
+                <td>:</td>
+                <td>{{ $row->nama_koordinator }}</td>
+            </tr>
+            <tr>
+                <th>Email Pengaju</th>
+                <td>:</td>
+                <td>{{ $row->email }}</td>
+            </tr>
+            <tr>
+                <th>Nama Instansi</th>
+                <td>:</td>
+                <td>{{ $row->nama_instansi }}</td>
+            </tr>
+            <tr>
+                <th>Nama Kegiatan</th>
+                <td>:</td>
+                <td>{{ $row->nama_kegiatan }}</td>
+            </tr>
                 <tr>
                     <th>Waktu</th>
                     <td>:</td>

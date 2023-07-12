@@ -12,6 +12,7 @@ use App\Models\M_Anggota;
 use App\Models\M_DarahMasuk;
 use Illuminate\Contracts\Session\Session;
 use RealRashid\SweetAlert\Facades\Alert;
+use Twilio\Rest\Client;
 
 class C_PengajuanEvent extends Controller
 {
@@ -61,10 +62,27 @@ class C_PengajuanEvent extends Controller
             return redirect()->route('login');
         }
 
+        $dataTerakhir = $this->M_Event->data_terakhir();
+
+        if ($dataTerakhir === null) {
+            $nomor_pengajuan = 'E1';
+            $nomor_koordinator = 'EK1';
+        } else {
+            $kata_nomor_pengajuan = $dataTerakhir->nomor_pengajuan;
+            $kata_koordinator = $dataTerakhir->nomor_koordinator;
+            // $kata = 'K1';
+            $angka = substr($kata_nomor_pengajuan, 1) + 1;
+            $angka2 = substr($kata_koordinator, 2) + 1;
+            $nomor_pengajuan = 'E' . $angka;
+            $nomor_koordinator = 'EK' . $angka2;
+        }
+
         $data = [
             'title'         => 'Pengajuan Event',
             'sub_title'     => 'Tambah Pengajuan Event',
             'data_web'      => $this->M_Website->detail(1),
+            'nomor_pengajuan' => $nomor_pengajuan,
+            'nomor_koordinator' => $nomor_koordinator,
             'user'          => $this->M_User->detail_user_event(Session()->get('id_user'))
         ];
 
@@ -79,7 +97,9 @@ class C_PengajuanEvent extends Controller
 
         Request()->validate([
             'kd_instansi'     => 'required',
+            'nama_koordinator'     => 'required',
             'nama_instansi'     => 'required',
+            'nama_kegiatan'     => 'required',
             'alamat_lengkap'    => 'required',
             'tanggal_event'     => 'required',
             'jam'               => 'required',
@@ -87,8 +107,10 @@ class C_PengajuanEvent extends Controller
             'upload_surat'      => 'required|mimes:pdf|max:5048',
         ], [
             'kd_instansi.required'    => 'Kode Instansi harus diisi!',
+            'nama_koordinator.required'    => 'Nama Koordnator harus diisi!',
             'nama_instansi.required'    => 'Nama Instansi harus diisi!',
-            'alamat_lengkap.required'   => 'Alamat Lengkap harus diisi!',
+            'nama_kegiatan.required'    => 'Nama Kegiatan harus diisi!',
+            'alamat_lengkap.required'   => 'Lokasi Kegiatan Dilaksanakan harus diisi!',
             'tanggal_event.required'    => 'Tanggal Eevnt harus diisi!',
             'jam.required'              => 'Jam Eevnt harus diisi!',
             'jumlah_orang.required'     => 'Jumlah Orang harus diisi!',
@@ -104,8 +126,12 @@ class C_PengajuanEvent extends Controller
 
         $data = [
             'id_user'           => Session()->get('id_user'),
+            'nomor_pengajuan'     => Request()->nomor_pengajuan,
+            'nomor_koordinator'     => Request()->nomor_koordinator,
+            'nama_koordinator'     => Request()->nama_koordinator,
             'kd_instansi'     => Request()->kd_instansi,
             'nama_instansi'     => Request()->nama_instansi,
+            'nama_kegiatan'     => Request()->nama_kegiatan,
             'alamat_lengkap'    => Request()->alamat_lengkap,
             'tanggal_event'     => Request()->tanggal_event,
             'jam'               => Request()->jam,
@@ -141,7 +167,9 @@ class C_PengajuanEvent extends Controller
     {
         Request()->validate([
             'kd_instansi'     => 'required',
+            'nama_koordinator'     => 'required',
             'nama_instansi'     => 'required',
+            'nama_kegiatan'     => 'required',
             'alamat_lengkap'    => 'required',
             'tanggal_event'     => 'required',
             'jam'               => 'required',
@@ -149,7 +177,9 @@ class C_PengajuanEvent extends Controller
             'upload_surat'      => 'mimes:pdf|max:5048',
         ], [
             'kd_instansi.required'    => 'Kode Instansi harus diisi!',
+            'nama_koordinator.required'    => 'Nama Koordinator harus diisi!',
             'nama_instansi.required'    => 'Nama Instansi harus diisi!',
+            'nama_kegiatan.required'    => 'Nama Kegiatan harus diisi!',
             'alamat_lengkap.required'   => 'Alamat Lengkap harus diisi!',
             'tanggal_event.required'    => 'Tanggal Eevnt harus diisi!',
             'jam.required'              => 'Jam Eevnt harus diisi!',
@@ -171,8 +201,10 @@ class C_PengajuanEvent extends Controller
 
             $data = [
                 'id_event'          => $id_event,
+                'nama_koordinator'     => Request()->nama_koordinator,
                 'kd_instansi'     => Request()->kd_instansi,
                 'nama_instansi'     => Request()->nama_instansi,
+                'nama_kegiatan'     => Request()->nama_kegiatan,
                 'alamat_lengkap'    => Request()->alamat_lengkap,
                 'tanggal_event'     => Request()->tanggal_event,
                 'jam'               => Request()->jam,
@@ -182,8 +214,10 @@ class C_PengajuanEvent extends Controller
         } else {
             $data = [
                 'id_event'          => $id_event,
+                'nama_koordinator'     => Request()->nama_koordinator,
                 'kd_instansi'     => Request()->kd_instansi,
                 'nama_instansi'     => Request()->nama_instansi,
+                'nama_kegiatan'     => Request()->nama_kegiatan,
                 'alamat_lengkap'    => Request()->alamat_lengkap,
                 'tanggal_event'     => Request()->tanggal_event,
                 'jam'               => Request()->jam,
@@ -270,8 +304,33 @@ class C_PengajuanEvent extends Controller
             return redirect()->route('login');
         }
 
+        $detail = $this->M_Event->detail($id_event);
+
+        // $sid    = "AC944f941fef8a459f011bb10c3236df78";
+        // $token  = "df97bc683bb53f68b7bb6e2dd0274dc4";
+
+        $sid = "AC3152032a13274daaa83569dad0c55b43";
+        $token = "ffd93e355ec798e02be02dfc06a9fb28";
+
+        // $sid    = "AC944f941fef8a459f011bb10c3236df78";
+        // $token  = "df97bc683bb53f68b7bb6e2dd0274dc4";
+        $client = new Client($sid, $token);
+
+        $noWa = substr($detail->nomor_telepon, 1);
+        $twilioNumber = "+14155238886";
+        $recipientNumber = "+62" . $noWa;
+
+        $message = $client->messages->create(
+            'whatsapp:' . $recipientNumber, // Replace with the recipient's WhatsApp number
+            [
+                'from' => 'whatsapp:' . $twilioNumber,
+                'body' => "Hallo {$detail->nama}!!!.\n\nPengajuan Event {$detail->nama_kegiatan} ditolak. Silahkan cek detailnya di website PMI Subang!", // Replace with your desired message
+            ]
+        );
+
         $data = [
             'id_event'          => $id_event,
+            'alasan'  => Request()->alasan,
             'status_pengajuan'  => "Tidak Disetujui",
             'status_event'      => "Tidak Aktif",
         ];
@@ -337,9 +396,26 @@ class C_PengajuanEvent extends Controller
             return redirect()->route('login');
         }
 
+        $dataTerakhir = $this->M_Event->data_terakhir();
+
+        if ($dataTerakhir === null) {
+            $nomor_pengajuan = 'E1';
+            $nomor_koordinator = 'EK1';
+        } else {
+            $kata_nomor_pengajuan = $dataTerakhir->nomor_pengajuan;
+            $kata_koordinator = $dataTerakhir->nomor_koordinator;
+            // $kata = 'K1';
+            $angka = substr($kata_nomor_pengajuan, 1) + 1;
+            $angka2 = substr($kata_koordinator, 2) + 1;
+            $nomor_pengajuan = 'E' . $angka;
+            $nomor_koordinator = 'EK' . $angka2;
+        }
+
         $data = [
             'title'         => 'Pengajuan Event',
             'sub_title'     => 'Tambah Event',
+            'nomor_pengajuan' => $nomor_pengajuan,
+            'nomor_koordinator' => $nomor_koordinator,
             'data_web'      => $this->M_Website->detail(1),
             'user'          => $this->M_User->detail(Session()->get('id_user'))
         ];
@@ -355,7 +431,9 @@ class C_PengajuanEvent extends Controller
 
         Request()->validate([
             'kd_instansi'     => 'required',
+            'nama_koordinator'     => 'required',
             'nama_instansi'     => 'required',
+            'nama_kegiatan'     => 'required',
             'alamat_lengkap'    => 'required',
             'tanggal_event'     => 'required',
             'jam'               => 'required',
@@ -363,7 +441,9 @@ class C_PengajuanEvent extends Controller
             'upload_surat'      => 'required|mimes:pdf|max:5048',
         ], [
             'kd_instansi.required'    => 'Kode Instansi harus diisi!',
+            'nama_koordinator.required'    => 'Nama Koordinator harus diisi!',
             'nama_instansi.required'    => 'Nama Instansi harus diisi!',
+            'nama_kegiatan.required'    => 'Nama Kegiatan harus diisi!',
             'alamat_lengkap.required'   => 'Alamat Lengkap harus diisi!',
             'tanggal_event.required'    => 'Tanggal Eevnt harus diisi!',
             'jam.required'              => 'Jam Eevnt harus diisi!',
@@ -381,7 +461,11 @@ class C_PengajuanEvent extends Controller
         $data = [
             'id_user'           => Session()->get('id_user'),
             'kd_instansi'     => Request()->kd_instansi,
+            'nomor_pengajuan'     => Request()->nomor_pengajuan,
+            'nomor_koordinator'     => Request()->nomor_koordinator,
+            'nama_koordinator'     => Request()->nama_koordinator,
             'nama_instansi'     => Request()->nama_instansi,
+            'nama_kegiatan'     => Request()->nama_kegiatan,
             'alamat_lengkap'    => Request()->alamat_lengkap,
             'tanggal_event'     => Request()->tanggal_event,
             'jam'               => Request()->jam,
@@ -418,7 +502,9 @@ class C_PengajuanEvent extends Controller
     {
         Request()->validate([
             'kd_instansi'     => 'required',
+            'nama_koordinator'     => 'required',
             'nama_instansi'     => 'required',
+            'nama_kegiatan'     => 'required',
             'alamat_lengkap'    => 'required',
             'tanggal_event'     => 'required',
             'jam'               => 'required',
@@ -426,7 +512,9 @@ class C_PengajuanEvent extends Controller
             'upload_surat'      => 'mimes:pdf|max:5048',
         ], [
             'kd_instansi.required'    => 'Kode Instansi harus diisi!',
+            'nama_koordinator.required'    => 'Nama Koordinator harus diisi!',
             'nama_instansi.required'    => 'Nama Instansi harus diisi!',
+            'nama_kegiatan.required'    => 'Nama Kegiatan harus diisi!',
             'alamat_lengkap.required'   => 'Alamat Lengkap harus diisi!',
             'tanggal_event.required'    => 'Tanggal Eevnt harus diisi!',
             'jam.required'              => 'Jam Eevnt harus diisi!',
@@ -449,7 +537,9 @@ class C_PengajuanEvent extends Controller
             $data = [
                 'id_event'          => $id_event,
                 'kd_instansi'     => Request()->kd_instansi,
+                'nama_koordinator'     => Request()->nama_koordinator,
                 'nama_instansi'     => Request()->nama_instansi,
+                'nama_kegiatan'     => Request()->nama_kegiatan,
                 'alamat_lengkap'    => Request()->alamat_lengkap,
                 'tanggal_event'     => Request()->tanggal_event,
                 'jam'               => Request()->jam,
@@ -460,7 +550,9 @@ class C_PengajuanEvent extends Controller
             $data = [
                 'id_event'          => $id_event,
                 'kd_instansi'     => Request()->kd_instansi,
+                'nama_koordinator'     => Request()->nama_koordinator,
                 'nama_instansi'     => Request()->nama_instansi,
+                'nama_kegiatan'     => Request()->nama_kegiatan,
                 'alamat_lengkap'    => Request()->alamat_lengkap,
                 'tanggal_event'     => Request()->tanggal_event,
                 'jam'               => Request()->jam,

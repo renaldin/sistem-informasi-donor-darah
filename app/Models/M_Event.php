@@ -102,4 +102,14 @@ class M_Event extends Model
     {
         return DB::table($this->table)->where('status_event', $status)->count();
     }
+
+    public function countEventUser($status)
+    {
+        return DB::table($this->table)->where('id_user', Session()->get('id_user'))->where('status_event', $status)->count();
+    }
+
+    public function data_terakhir()
+    {
+        return DB::table($this->table)->limit(1)->orderBy('id_event', 'DESC')->first();
+    }
 }

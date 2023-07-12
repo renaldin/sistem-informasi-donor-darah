@@ -416,4 +416,26 @@ class C_StokDarah extends Controller
 
         return view('admin.darah_masuk.v_index', $data);
     }
+
+    public function buang_darah_kedaluwarsa()
+    {
+        if (!Session()->get('email')) {
+            return redirect()->route('login');
+        }
+
+        $darah_masuk = $this->M_DarahMasuk->kedaluwarsa();
+
+        foreach ($darah_masuk as $row) {
+            $data_darah_buang = [
+                'id_darah'          => $row->id_darah,
+                'id_user'           => Session()->get('id_user'),
+                'tanggal_buang'     => date('Y-m-d H:i:s')
+            ];
+            $this->M_DarahBuang->tambah($data_darah_buang);
+            $this->M_DarahMasuk->hapus($row->id_darah_masuk);
+        }
+
+        Alert::success('Berhasil', 'Data darah berhasil dibuang.');
+        return redirect()->route('data_stok_darah');
+    }
 }
