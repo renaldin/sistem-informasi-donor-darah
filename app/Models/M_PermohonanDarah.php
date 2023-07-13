@@ -49,41 +49,43 @@ class M_PermohonanDarah extends Model
         DB::table($this->table)->where('id_permohonan_darah', $id_permohonan_darah)->delete();
     }
 
-    public function getPermohonanPerbulan()
+    public function getPermohonanPerbulan($tahun)
     {
+        $tahun == null ? $tahun = date('Y') : $tahun;
         $data = [
-            'januari'   => DB::table($this->table)->whereYear('tanggal_permohonan', date('Y'))->whereMonth('tanggal_permohonan', 1)->where('status_permohonan', 'Diterima')->count(),
-            'februari'  => DB::table($this->table)->whereYear('tanggal_permohonan', date('Y'))->whereMonth('tanggal_permohonan', 2)->where('status_permohonan', 'Diterima')->count(),
-            'maret'     => DB::table($this->table)->whereYear('tanggal_permohonan', date('Y'))->whereMonth('tanggal_permohonan', 3)->where('status_permohonan', 'Diterima')->count(),
-            'april'     => DB::table($this->table)->whereYear('tanggal_permohonan', date('Y'))->whereMonth('tanggal_permohonan', 4)->where('status_permohonan', 'Diterima')->count(),
-            'mei'       => DB::table($this->table)->whereYear('tanggal_permohonan', date('Y'))->whereMonth('tanggal_permohonan', 5)->where('status_permohonan', 'Diterima')->count(),
-            'juni'      => DB::table($this->table)->whereYear('tanggal_permohonan', date('Y'))->whereMonth('tanggal_permohonan', 6)->where('status_permohonan', 'Diterima')->count(),
-            'juli'      => DB::table($this->table)->whereYear('tanggal_permohonan', date('Y'))->whereMonth('tanggal_permohonan', 7)->where('status_permohonan', 'Diterima')->count(),
-            'agustus'   => DB::table($this->table)->whereYear('tanggal_permohonan', date('Y'))->whereMonth('tanggal_permohonan', 8)->where('status_permohonan', 'Diterima')->count(),
-            'september' => DB::table($this->table)->whereYear('tanggal_permohonan', date('Y'))->whereMonth('tanggal_permohonan', 9)->where('status_permohonan', 'Diterima')->count(),
-            'oktober'   => DB::table($this->table)->whereYear('tanggal_permohonan', date('Y'))->whereMonth('tanggal_permohonan', 10)->where('status_permohonan', 'Diterima')->count(),
-            'november'  => DB::table($this->table)->whereYear('tanggal_permohonan', date('Y'))->whereMonth('tanggal_permohonan', 11)->where('status_permohonan', 'Diterima')->count(),
-            'desember'  => DB::table($this->table)->whereYear('tanggal_permohonan', date('Y'))->whereMonth('tanggal_permohonan', 12)->where('status_permohonan', 'Diterima')->count(),
+            'januari'   => DB::table($this->table)->whereYear('tanggal_permohonan', $tahun)->whereMonth('tanggal_permohonan', 1)->where('status_permohonan', 'Diterima')->count(),
+            'februari'  => DB::table($this->table)->whereYear('tanggal_permohonan', $tahun)->whereMonth('tanggal_permohonan', 2)->where('status_permohonan', 'Diterima')->count(),
+            'maret'     => DB::table($this->table)->whereYear('tanggal_permohonan', $tahun)->whereMonth('tanggal_permohonan', 3)->where('status_permohonan', 'Diterima')->count(),
+            'april'     => DB::table($this->table)->whereYear('tanggal_permohonan', $tahun)->whereMonth('tanggal_permohonan', 4)->where('status_permohonan', 'Diterima')->count(),
+            'mei'       => DB::table($this->table)->whereYear('tanggal_permohonan', $tahun)->whereMonth('tanggal_permohonan', 5)->where('status_permohonan', 'Diterima')->count(),
+            'juni'      => DB::table($this->table)->whereYear('tanggal_permohonan', $tahun)->whereMonth('tanggal_permohonan', 6)->where('status_permohonan', 'Diterima')->count(),
+            'juli'      => DB::table($this->table)->whereYear('tanggal_permohonan', $tahun)->whereMonth('tanggal_permohonan', 7)->where('status_permohonan', 'Diterima')->count(),
+            'agustus'   => DB::table($this->table)->whereYear('tanggal_permohonan', $tahun)->whereMonth('tanggal_permohonan', 8)->where('status_permohonan', 'Diterima')->count(),
+            'september' => DB::table($this->table)->whereYear('tanggal_permohonan', $tahun)->whereMonth('tanggal_permohonan', 9)->where('status_permohonan', 'Diterima')->count(),
+            'oktober'   => DB::table($this->table)->whereYear('tanggal_permohonan', $tahun)->whereMonth('tanggal_permohonan', 10)->where('status_permohonan', 'Diterima')->count(),
+            'november'  => DB::table($this->table)->whereYear('tanggal_permohonan', $tahun)->whereMonth('tanggal_permohonan', 11)->where('status_permohonan', 'Diterima')->count(),
+            'desember'  => DB::table($this->table)->whereYear('tanggal_permohonan', $tahun)->whereMonth('tanggal_permohonan', 12)->where('status_permohonan', 'Diterima')->count(),
         ];
 
         return $data;
     }
 
-    public function getGoldaPerbulan()
+    public function getGoldaPerbulan($tahun)
     {
+        $tahun == null ? $tahun = date('Y') : $tahun;
         $data = [
-            'goldajan'  => DB::table($this->table)->whereYear('tanggal_permohonan', date('Y'))->whereMonth('tanggal_permohonan', 1)->where('status_permohonan', 'Diterima')->get(),
-            'goldafeb'  => DB::table($this->table)->whereYear('tanggal_permohonan', date('Y'))->whereMonth('tanggal_permohonan', 2)->where('status_permohonan', 'Diterima')->get(),
-            'goldamar'  => DB::table($this->table)->whereYear('tanggal_permohonan', date('Y'))->whereMonth('tanggal_permohonan', 3)->where('status_permohonan', 'Diterima')->get(),
-            'goldaapr'  => DB::table($this->table)->whereYear('tanggal_permohonan', date('Y'))->whereMonth('tanggal_permohonan', 4)->where('status_permohonan', 'Diterima')->get(),
-            'goldamei'  => DB::table($this->table)->whereYear('tanggal_permohonan', date('Y'))->whereMonth('tanggal_permohonan', 5)->where('status_permohonan', 'Diterima')->get(),
-            'goldajun'  => DB::table($this->table)->whereYear('tanggal_permohonan', date('Y'))->whereMonth('tanggal_permohonan', 6)->where('status_permohonan', 'Diterima')->get(),
-            'goldajul'  => DB::table($this->table)->whereYear('tanggal_permohonan', date('Y'))->whereMonth('tanggal_permohonan', 7)->where('status_permohonan', 'Diterima')->get(),
-            'goldaagu'  => DB::table($this->table)->whereYear('tanggal_permohonan', date('Y'))->whereMonth('tanggal_permohonan', 8)->where('status_permohonan', 'Diterima')->get(),
-            'goldasep'  => DB::table($this->table)->whereYear('tanggal_permohonan', date('Y'))->whereMonth('tanggal_permohonan', 9)->where('status_permohonan', 'Diterima')->get(),
-            'goldaokt'  => DB::table($this->table)->whereYear('tanggal_permohonan', date('Y'))->whereMonth('tanggal_permohonan', 10)->where('status_permohonan', 'Diterima')->get(),
-            'goldanov'  => DB::table($this->table)->whereYear('tanggal_permohonan', date('Y'))->whereMonth('tanggal_permohonan', 11)->where('status_permohonan', 'Diterima')->get(),
-            'goldades'  => DB::table($this->table)->whereYear('tanggal_permohonan', date('Y'))->whereMonth('tanggal_permohonan', 12)->where('status_permohonan', 'Diterima')->get(),
+            'goldajan'  => DB::table($this->table)->whereYear('tanggal_permohonan', $tahun)->whereMonth('tanggal_permohonan', 1)->where('status_permohonan', 'Diterima')->get(),
+            'goldafeb'  => DB::table($this->table)->whereYear('tanggal_permohonan', $tahun)->whereMonth('tanggal_permohonan', 2)->where('status_permohonan', 'Diterima')->get(),
+            'goldamar'  => DB::table($this->table)->whereYear('tanggal_permohonan', $tahun)->whereMonth('tanggal_permohonan', 3)->where('status_permohonan', 'Diterima')->get(),
+            'goldaapr'  => DB::table($this->table)->whereYear('tanggal_permohonan', $tahun)->whereMonth('tanggal_permohonan', 4)->where('status_permohonan', 'Diterima')->get(),
+            'goldamei'  => DB::table($this->table)->whereYear('tanggal_permohonan', $tahun)->whereMonth('tanggal_permohonan', 5)->where('status_permohonan', 'Diterima')->get(),
+            'goldajun'  => DB::table($this->table)->whereYear('tanggal_permohonan', $tahun)->whereMonth('tanggal_permohonan', 6)->where('status_permohonan', 'Diterima')->get(),
+            'goldajul'  => DB::table($this->table)->whereYear('tanggal_permohonan', $tahun)->whereMonth('tanggal_permohonan', 7)->where('status_permohonan', 'Diterima')->get(),
+            'goldaagu'  => DB::table($this->table)->whereYear('tanggal_permohonan', $tahun)->whereMonth('tanggal_permohonan', 8)->where('status_permohonan', 'Diterima')->get(),
+            'goldasep'  => DB::table($this->table)->whereYear('tanggal_permohonan', $tahun)->whereMonth('tanggal_permohonan', 9)->where('status_permohonan', 'Diterima')->get(),
+            'goldaokt'  => DB::table($this->table)->whereYear('tanggal_permohonan', $tahun)->whereMonth('tanggal_permohonan', 10)->where('status_permohonan', 'Diterima')->get(),
+            'goldanov'  => DB::table($this->table)->whereYear('tanggal_permohonan', $tahun)->whereMonth('tanggal_permohonan', 11)->where('status_permohonan', 'Diterima')->get(),
+            'goldades'  => DB::table($this->table)->whereYear('tanggal_permohonan', $tahun)->whereMonth('tanggal_permohonan', 12)->where('status_permohonan', 'Diterima')->get(),
         ];
         return $data;
     }

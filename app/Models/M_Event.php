@@ -18,12 +18,14 @@ class M_Event extends Model
             ->orderBy('id_event', 'DESC')->get();
     }
 
-    public function get_all_data()
+    public function get_all_data($bulan)
     {
+        $bulan == null ? $bulan = date('m') : $bulan;
         return DB::table($this->table)
             ->join('user', 'user.id_user', '=', 'event.id_user', 'left')
             ->where('tanggal_event', '>=', date('Y-m-d'))
-            ->orderBy('id_event', 'DESC')->paginate(3);
+            ->whereMonth('tanggal_event', $bulan)
+            ->orderBy('id_event', 'DESC')->get();
     }
 
     public function get_data_user($id_user)

@@ -26,15 +26,16 @@ class C_LandingPage extends Controller
 
     public function index()
     {
+        // dd(Request()->tahun);
         $data = [
             'title'             => 'Home',
             'sub_title'         => 'Landing Page',
             'data_web'          => $this->M_Website->detail(1),
             'user'              => $this->M_User->detail(Session()->get('id_user')),
-            'permohonan_darah'  => $this->M_PermohonanDarah->getPermohonanPerbulan(),
+            'permohonan_darah'  => $this->M_PermohonanDarah->getPermohonanPerbulan(Request()->tahun),
             'gol'               => $this->M_DarahMasuk->countGol('Sudah Masuk'),
-            'all_event'         => $this->M_Event->get_all_data(),
-            'golda_permohonan'  => $this->M_PermohonanDarah->getGoldaPerbulan(),
+            'all_event'         => $this->M_Event->get_all_data(Request()->bulan_kegiatan),
+            'golda_permohonan'  => $this->M_PermohonanDarah->getGoldaPerbulan(Request()->tahun),
             // 'event'             => $this->M_Event->getEventPerbulan(),
         ];
 
