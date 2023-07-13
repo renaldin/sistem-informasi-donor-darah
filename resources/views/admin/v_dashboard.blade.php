@@ -411,56 +411,56 @@ function hitungDurasiJadwalDonor($tanggal_donor_kembali) {
                                         <td>1</td>
                                         <td>A</td>
                                         <td>Positif</td>
-                                        <td><?= $gol_belum_masuk['a+'] == 0 ? '<span class="badge badge-danger">' . $gol_belum_masuk['a+'] . '</span>' : $gol_belum_masuk['a+'] ?>
+                                        <td><?= $gol_belum_masuk['a+'] ?>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>2</td>
                                         <td>B</td>
                                         <td>Positif</td>
-                                        <td><?= $gol_belum_masuk['b+'] == 0 ? '<span class="badge badge-danger">' . $gol_belum_masuk['b+'] . '</span>' : $gol_belum_masuk['b+'] ?>
+                                        <td><?= $gol_belum_masuk['b+'] ?>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>3</td>
                                         <td>AB</td>
                                         <td>Positif</td>
-                                        <td><?= $gol_belum_masuk['ab+'] == 0 ? '<span class="badge badge-danger">' . $gol_belum_masuk['ab+'] . '</span>' : $gol_belum_masuk['ab+'] ?>
+                                        <td><?= $gol_belum_masuk['ab+'] ?>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>4</td>
                                         <td>O</td>
                                         <td>Positif</td>
-                                        <td><?= $gol_belum_masuk['o+'] == 0 ? '<span class="badge badge-danger">' . $gol_belum_masuk['o+'] . '</span>' : $gol_belum_masuk['o+'] ?>
+                                        <td><?= $gol_belum_masuk['o+'] ?>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>5</td>
                                         <td>A</td>
                                         <td>Negatif</td>
-                                        <td><?= $gol_belum_masuk['a-'] == 0 ? '<span class="badge badge-danger">' . $gol_belum_masuk['a-'] . '</span>' : $gol_belum_masuk['a-'] ?>
+                                        <td><?= $gol_belum_masuk['a-']  ?>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>6</td>
                                         <td>B</td>
                                         <td>Negatif</td>
-                                        <td><?= $gol_belum_masuk['b-'] == 0 ? '<span class="badge badge-danger">' . $gol_belum_masuk['b-'] . '</span>' : $gol_belum_masuk['b-'] ?>
+                                        <td><?= $gol_belum_masuk['b-'] ?>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>7</td>
                                         <td>AB</td>
                                         <td>Negatif</td>
-                                        <td><?= $gol_belum_masuk['ab-'] == 0 ? '<span class="badge badge-danger">' . $gol_belum_masuk['ab-'] . '</span>' : $gol_belum_masuk['ab-'] ?>
+                                        <td><?= $gol_belum_masuk['ab-'] ?>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>8</td>
                                         <td>O</td>
                                         <td>Negatif</td>
-                                        <td><?= $gol_belum_masuk['o-'] == 0 ? '<span class="badge badge-danger">' . $gol_belum_masuk['o-'] . '</span>' : $gol_belum_masuk['o-'] ?>
+                                        <td><?= $gol_belum_masuk['o-']  ?>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -509,56 +509,56 @@ function hitungDurasiJadwalDonor($tanggal_donor_kembali) {
                                         <td>1</td>
                                         <td>A</td>
                                         <td>Positif</td>
-                                        <td><?= $gol_darah_keluar['a+'] == 0 ? '<span class="badge badge-danger">' . $gol_darah_keluar['a+'] . '</span>' : $gol_darah_keluar['a+'] ?>
+                                        <td><?= $gol_darah_keluar['a+'] ?>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>2</td>
                                         <td>B</td>
                                         <td>Positif</td>
-                                        <td><?= $gol_darah_keluar['b+'] == 0 ? '<span class="badge badge-danger">' . $gol_darah_keluar['b+'] . '</span>' : $gol_darah_keluar['b+'] ?>
+                                        <td><?= $gol_darah_keluar['b+'] ?>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>3</td>
                                         <td>AB</td>
                                         <td>Positif</td>
-                                        <td><?= $gol_darah_keluar['ab+'] == 0 ? '<span class="badge badge-danger">' . $gol_darah_keluar['ab+'] . '</span>' : $gol_darah_keluar['ab+'] ?>
+                                        <td><?= $gol_darah_keluar['ab+'] ?>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>4</td>
                                         <td>O</td>
                                         <td>Positif</td>
-                                        <td><?= $gol_darah_keluar['o+'] == 0 ? '<span class="badge badge-danger">' . $gol_darah_keluar['o+'] . '</span>' : $gol_darah_keluar['o+'] ?>
+                                        <td><?= $gol_darah_keluar['o+'] ?>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>5</td>
                                         <td>A</td>
                                         <td>Negatif</td>
-                                        <td><?= $gol_darah_keluar['a-'] == 0 ? '<span class="badge badge-danger">' . $gol_darah_keluar['a-'] . '</span>' : $gol_darah_keluar['a-'] ?>
+                                        <td><?= $gol_darah_keluar['a-'] ?>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>6</td>
                                         <td>B</td>
                                         <td>Negatif</td>
-                                        <td><?= $gol_darah_keluar['b-'] == 0 ? '<span class="badge badge-danger">' . $gol_darah_keluar['b-'] . '</span>' : $gol_darah_keluar['b-'] ?>
+                                        <td><?= $gol_darah_keluar['b-'] ?>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>7</td>
                                         <td>AB</td>
                                         <td>Negatif</td>
-                                        <td><?= $gol_darah_keluar['ab-'] == 0 ? '<span class="badge badge-danger">' . $gol_darah_keluar['ab-'] . '</span>' : $gol_darah_keluar['ab-'] ?>
+                                        <td><?= $gol_darah_keluar['ab-'] ?>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>8</td>
                                         <td>O</td>
                                         <td>Negatif</td>
-                                        <td><?= $gol_darah_keluar['o-'] == 0 ? '<span class="badge badge-danger">' . $gol_darah_keluar['o-'] . '</span>' : $gol_darah_keluar['o-'] ?>
+                                        <td><?= $gol_darah_keluar['o-'] ?>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -607,56 +607,56 @@ function hitungDurasiJadwalDonor($tanggal_donor_kembali) {
                                         <td>1</td>
                                         <td>A</td>
                                         <td>Positif</td>
-                                        <td><?= $gol_darah_buang['a+'] == 0 ? '<span class="badge badge-danger">' . $gol_darah_buang['a+'] . '</span>' : $gol_darah_buang['a+'] ?>
+                                        <td><?= $gol_darah_buang['a+'] ?>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>2</td>
                                         <td>B</td>
                                         <td>Positif</td>
-                                        <td><?= $gol_darah_buang['b+'] == 0 ? '<span class="badge badge-danger">' . $gol_darah_buang['b+'] . '</span>' : $gol_darah_buang['b+'] ?>
+                                        <td><?= $gol_darah_buang['b+'] ?>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>3</td>
                                         <td>AB</td>
                                         <td>Positif</td>
-                                        <td><?= $gol_darah_buang['ab+'] == 0 ? '<span class="badge badge-danger">' . $gol_darah_buang['ab+'] . '</span>' : $gol_darah_buang['ab+'] ?>
+                                        <td><?= $gol_darah_buang['ab+'] ?>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>4</td>
                                         <td>O</td>
                                         <td>Positif</td>
-                                        <td><?= $gol_darah_buang['o+'] == 0 ? '<span class="badge badge-danger">' . $gol_darah_buang['o+'] . '</span>' : $gol_darah_buang['o+'] ?>
+                                        <td><?= $gol_darah_buang['o+'] ?>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>5</td>
                                         <td>A</td>
                                         <td>Negatif</td>
-                                        <td><?= $gol_darah_buang['a-'] == 0 ? '<span class="badge badge-danger">' . $gol_darah_buang['a-'] . '</span>' : $gol_darah_buang['a-'] ?>
+                                        <td><?= $gol_darah_buang['a-'] ?>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>6</td>
                                         <td>B</td>
                                         <td>Negatif</td>
-                                        <td><?= $gol_darah_buang['b-'] == 0 ? '<span class="badge badge-danger">' . $gol_darah_buang['b-'] . '</span>' : $gol_darah_buang['b-'] ?>
+                                        <td><?= $gol_darah_buang['b-'] ?>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>7</td>
                                         <td>AB</td>
                                         <td>Negatif</td>
-                                        <td><?= $gol_darah_buang['ab-'] == 0 ? '<span class="badge badge-danger">' . $gol_darah_buang['ab-'] . '</span>' : $gol_darah_buang['ab-'] ?>
+                                        <td><?= $gol_darah_buang['ab-'] ?>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>8</td>
                                         <td>O</td>
                                         <td>Negatif</td>
-                                        <td><?= $gol_darah_buang['o-'] == 0 ? '<span class="badge badge-danger">' . $gol_darah_buang['o-'] . '</span>' : $gol_darah_buang['o-'] ?>
+                                        <td><?= $gol_darah_buang['o-'] ?>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -705,56 +705,56 @@ function hitungDurasiJadwalDonor($tanggal_donor_kembali) {
                                         <td>1</td>
                                         <td>A</td>
                                         <td>Positif</td>
-                                        <td><?= $gol_kedaluwarsa['a+'] == 0 ? '<span class="badge badge-danger">' . $gol_kedaluwarsa['a+'] . '</span>' : $gol_kedaluwarsa['a+'] ?>
+                                        <td><?= $gol_kedaluwarsa['a+'] ?>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>2</td>
                                         <td>B</td>
                                         <td>Positif</td>
-                                        <td><?= $gol_kedaluwarsa['b+'] == 0 ? '<span class="badge badge-danger">' . $gol_kedaluwarsa['b+'] . '</span>' : $gol_kedaluwarsa['b+'] ?>
+                                        <td><?= $gol_kedaluwarsa['b+'] ?>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>3</td>
                                         <td>AB</td>
                                         <td>Positif</td>
-                                        <td><?= $gol_kedaluwarsa['ab+'] == 0 ? '<span class="badge badge-danger">' . $gol_kedaluwarsa['ab+'] . '</span>' : $gol_kedaluwarsa['ab+'] ?>
+                                        <td><?= $gol_kedaluwarsa['ab+'] ?>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>4</td>
                                         <td>O</td>
                                         <td>Positif</td>
-                                        <td><?= $gol_kedaluwarsa['o+'] == 0 ? '<span class="badge badge-danger">' . $gol_kedaluwarsa['o+'] . '</span>' : $gol_kedaluwarsa['o+'] ?>
+                                        <td><?= $gol_kedaluwarsa['o+'] ?>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>5</td>
                                         <td>A</td>
                                         <td>Negatif</td>
-                                        <td><?= $gol_kedaluwarsa['a-'] == 0 ? '<span class="badge badge-danger">' . $gol_kedaluwarsa['a-'] . '</span>' : $gol_kedaluwarsa['a-'] ?>
+                                        <td><?= $gol_kedaluwarsa['a-'] ?>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>6</td>
                                         <td>B</td>
                                         <td>Negatif</td>
-                                        <td><?= $gol_kedaluwarsa['b-'] == 0 ? '<span class="badge badge-danger">' . $gol_kedaluwarsa['b-'] . '</span>' : $gol_kedaluwarsa['b-'] ?>
+                                        <td><?= $gol_kedaluwarsa['b-'] ?>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>7</td>
                                         <td>AB</td>
                                         <td>Negatif</td>
-                                        <td><?= $gol_kedaluwarsa['ab-'] == 0 ? '<span class="badge badge-danger">' . $gol_kedaluwarsa['ab-'] . '</span>' : $gol_kedaluwarsa['ab-'] ?>
+                                        <td><?= $gol_kedaluwarsa['ab-'] ?>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>8</td>
                                         <td>O</td>
                                         <td>Negatif</td>
-                                        <td><?= $gol_kedaluwarsa['o-'] == 0 ? '<span class="badge badge-danger">' . $gol_kedaluwarsa['o-'] . '</span>' : $gol_kedaluwarsa['o-'] ?>
+                                        <td><?= $gol_kedaluwarsa['o-'] ?>
                                         </td>
                                     </tr>
                                 </tbody>
