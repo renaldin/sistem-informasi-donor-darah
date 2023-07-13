@@ -69,28 +69,32 @@ class C_Antrian extends Controller
 
         Request()->validate([
             'hb'                        => 'required',
-            'tekanan_darah'             => 'required',
+            'tekanan_darah_sistole'     => 'required',
+            'tekanan_darah_diastole'    => 'required',
             'berat_badan'               => 'required',
             'tinggi_badan'              => 'required',
             'denyut_nadi'               => 'required',
             'keadaan_umum'              => 'required',
         ], [
-            'hb.required'               => 'HB harus diisi!',
-            'tekanan_darah.required'    => 'Tekanan Darah harus diisi!',
-            'berat_badan.required'      => 'Berat Badan harus diisi!',
-            'tinggi_badan.required'     => 'Tinggi Badan harus diisi!',
-            'denyut_nadi.required'      => 'Denyut Nadi harus diisi!',
-            'keadaan_umum.required'     => 'Keadaan Umum harus diisi!',
+            'hb.required'                       => 'HB harus diisi!',
+            'tekanan_darah_sistole.required'    => 'Tekanan Darah Sistole harus diisi!',
+            'tekanan_darah_diastole.required'   => 'Tekanan Darah Diastole harus diisi!',
+            'berat_badan.required'              => 'Berat Badan harus diisi!',
+            'tinggi_badan.required'             => 'Tinggi Badan harus diisi!',
+            'denyut_nadi.required'              => 'Denyut Nadi harus diisi!',
+            'keadaan_umum.required'             => 'Keadaan Umum harus diisi!',
         ]);
 
         $data = [
-            'id_donor' => $id,
-            'hb' => Request()->hb,
-            'tekanan_darah' => Request()->tekanan_darah,
-            'berat_badan' => Request()->berat_badan,
-            'tinggi_badan' => Request()->tinggi_badan,
-            'denyut_nadi' => Request()->denyut_nadi,
-            'keadaan_umum' => Request()->keadaan_umum,
+            'id_donor'          => $id,
+            'status_donor'      => Request()->catatan ? 'Gagal' : 'Ready',
+            'hb'                => Request()->hb,
+            'tekanan_darah'     => Request()->tekanan_darah_sistole . '/' . Request()->tekanan_darah_diastole,
+            'berat_badan'       => Request()->berat_badan,
+            'tinggi_badan'      => Request()->tinggi_badan,
+            'denyut_nadi'       => Request()->denyut_nadi,
+            'keadaan_umum'      => Request()->keadaan_umum,
+            'catatan_pendonor'  => Request()->catatan,
         ];
 
         $this->M_Donor->edit($data);

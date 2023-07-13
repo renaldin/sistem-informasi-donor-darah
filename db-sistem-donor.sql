@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 12, 2023 at 10:55 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.0.19
+-- Generation Time: Jul 13, 2023 at 10:38 AM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -36,7 +36,7 @@ CREATE TABLE `anggota` (
   `no_wa` varchar(30) DEFAULT NULL,
   `status_anggota` enum('Mandiri','Event') NOT NULL DEFAULT 'Mandiri',
   `tanggal_donor_kembali` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `anggota`
@@ -59,7 +59,8 @@ INSERT INTO `anggota` (`id_anggota`, `nik`, `nama_anggota`, `jenis_kelamin`, `al
 (15, '112233445566', 'Sumanto', 'Laki-laki', 'Subang', '0895336928026', 'Mandiri', '2023-08-22'),
 (16, '99999999999', 'Teresia 9', 'Perempuan', 'Subang', '0895336928026', 'Mandiri', '2023-08-29'),
 (17, '11111111111111', 'Event Donor 1', 'Perempuan', 'Subang', '0895336928026', 'Event', '2023-08-01'),
-(18, '22222222222222', 'Event 12 Donor 2', 'Perempuan', 'Subang', '089878672368', 'Event', '2023-08-01');
+(18, '22222222222222', 'Event 12 Donor 2', 'Perempuan', 'Subang', '089878672368', 'Event', '2023-08-01'),
+(19, '10101010101010', 'Teresia Purba', 'Perempuan', 'Subang', '08989784353', 'Mandiri', '2023-07-11');
 
 -- --------------------------------------------------------
 
@@ -74,7 +75,7 @@ CREATE TABLE `biodata_web` (
   `nomor_telepon` varchar(50) NOT NULL,
   `alamat` text NOT NULL,
   `logo` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `biodata_web`
@@ -98,7 +99,7 @@ CREATE TABLE `darah` (
   `volume_darah` varchar(50) DEFAULT NULL,
   `tanggal_kedaluwarsa` date DEFAULT NULL,
   `tanggal_darah_masuk` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `darah`
@@ -140,7 +141,7 @@ CREATE TABLE `darah_buang` (
   `id_darah` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `tanggal_buang` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `darah_buang`
@@ -169,7 +170,7 @@ CREATE TABLE `darah_keluar` (
   `id_darah` int(11) NOT NULL,
   `id_permohonan_darah` int(11) NOT NULL,
   `tanggal_keluar` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `darah_keluar`
@@ -197,7 +198,7 @@ CREATE TABLE `darah_masuk` (
   `id_user` int(11) NOT NULL,
   `status_darah_masuk` enum('Belum Masuk','Sudah Masuk') NOT NULL DEFAULT 'Belum Masuk',
   `tanggal_masuk` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `darah_masuk`
@@ -221,7 +222,7 @@ CREATE TABLE `donor` (
   `id_anggota` int(11) DEFAULT NULL,
   `id_event` int(11) DEFAULT NULL,
   `tanggal_donor` datetime DEFAULT NULL,
-  `status_donor` enum('Ready','Proses','Selesai') DEFAULT NULL,
+  `status_donor` enum('Ready','Proses','Selesai','Gagal') DEFAULT NULL,
   `hasil_kusioner` enum('Lolos','Tidak Lolos') DEFAULT NULL,
   `deskripsi_hasil_kusioner` varchar(255) DEFAULT NULL,
   `hb` varchar(10) DEFAULT NULL,
@@ -229,36 +230,40 @@ CREATE TABLE `donor` (
   `berat_badan` varchar(10) DEFAULT NULL,
   `denyut_nadi` varchar(10) DEFAULT NULL,
   `tinggi_badan` varchar(10) DEFAULT NULL,
-  `keadaan_umum` varchar(30) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `keadaan_umum` varchar(30) DEFAULT NULL,
+  `catatan_pendonor` text DEFAULT NULL,
+  `nomor_antrian` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `donor`
 --
 
-INSERT INTO `donor` (`id_donor`, `id_anggota`, `id_event`, `tanggal_donor`, `status_donor`, `hasil_kusioner`, `deskripsi_hasil_kusioner`, `hb`, `tekanan_darah`, `berat_badan`, `denyut_nadi`, `tinggi_badan`, `keadaan_umum`) VALUES
-(1, 1, NULL, '2023-05-25 09:18:04', 'Selesai', 'Lolos', 'Lolos kusioner', NULL, NULL, NULL, NULL, NULL, NULL),
-(2, 2, NULL, '2023-05-25 09:18:04', 'Selesai', 'Lolos', 'Lolos kusioner', NULL, NULL, NULL, NULL, NULL, NULL),
-(3, 3, NULL, '2023-05-25 09:18:04', 'Selesai', 'Lolos', 'Lolos kusioner', NULL, NULL, NULL, NULL, NULL, NULL),
-(4, 4, NULL, '2023-05-25 09:18:04', 'Selesai', 'Lolos', 'Lolos kusioner', NULL, NULL, NULL, NULL, NULL, NULL),
-(5, 5, NULL, '2023-05-25 09:18:04', 'Selesai', 'Lolos', 'Lolos kusioner', NULL, NULL, NULL, NULL, NULL, NULL),
-(6, 1, NULL, '2023-05-25 09:18:04', 'Selesai', 'Lolos', 'Lolos kusioner', NULL, NULL, NULL, NULL, NULL, NULL),
-(7, 6, NULL, '2023-05-25 14:02:20', 'Selesai', 'Lolos', 'Lolos kusioner', NULL, NULL, NULL, NULL, NULL, NULL),
-(8, 7, NULL, '2023-05-25 14:41:16', 'Selesai', 'Lolos', 'Deskripsi hasil kusioner teresia 8', NULL, NULL, NULL, NULL, NULL, NULL),
-(9, 1, NULL, '2023-05-25 14:44:43', 'Selesai', 'Lolos', 'Deskripsi hasil kusioner teresia 1', NULL, NULL, NULL, NULL, NULL, NULL),
-(10, 9, 6, '2023-05-26 09:54:25', 'Selesai', 'Lolos', 'Donor darah dari event', NULL, NULL, NULL, NULL, NULL, NULL),
-(11, 10, 6, '2023-05-26 10:01:04', 'Selesai', 'Lolos', 'Donor darah dari event', NULL, NULL, NULL, NULL, NULL, NULL),
-(12, 11, 6, '2023-05-26 10:01:34', 'Selesai', 'Lolos', 'Donor darah dari event', NULL, NULL, NULL, NULL, NULL, NULL),
-(13, 12, 6, '2023-05-26 10:02:02', 'Selesai', 'Lolos', 'Donor darah dari event', NULL, NULL, NULL, NULL, NULL, NULL),
-(14, 13, 6, '2023-05-26 10:02:27', 'Selesai', 'Lolos', 'Donor darah dari event', NULL, NULL, NULL, NULL, NULL, NULL),
-(15, 14, 6, '2023-05-26 10:41:00', 'Selesai', 'Lolos', 'Donor darah dari event', NULL, NULL, NULL, NULL, NULL, NULL),
-(16, 14, NULL, '2023-06-03 01:36:07', 'Selesai', 'Lolos', 'Lolos kusioner', '22', '90', '50', '22', '165', 'Sehat'),
-(17, 14, NULL, '2023-06-03 08:40:05', 'Selesai', 'Lolos', 'Lolos kusioner', '40', '50', '50', '180', '170', 'Sehat'),
-(18, 15, NULL, '2023-06-03 08:42:14', 'Proses', 'Lolos', 'Lolos kusioner', NULL, NULL, NULL, NULL, NULL, NULL),
-(19, 15, NULL, '2023-06-23 04:02:26', 'Selesai', 'Lolos', 'Deskripsi', NULL, NULL, NULL, NULL, NULL, NULL),
-(20, 16, NULL, '2023-06-30 10:26:28', 'Selesai', 'Lolos', 'Lulus Kusioner', NULL, NULL, NULL, NULL, NULL, NULL),
-(21, 17, 12, '2023-07-02 08:59:49', 'Selesai', 'Lolos', 'Donor darah dari event', NULL, NULL, NULL, NULL, NULL, NULL),
-(22, 18, 12, '2023-07-02 09:12:15', 'Selesai', 'Lolos', 'Donor darah dari event', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `donor` (`id_donor`, `id_anggota`, `id_event`, `tanggal_donor`, `status_donor`, `hasil_kusioner`, `deskripsi_hasil_kusioner`, `hb`, `tekanan_darah`, `berat_badan`, `denyut_nadi`, `tinggi_badan`, `keadaan_umum`, `catatan_pendonor`, `nomor_antrian`) VALUES
+(1, 1, NULL, '2023-05-25 09:18:04', 'Selesai', 'Lolos', 'Lolos kusioner', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1),
+(2, 2, NULL, '2023-05-25 09:18:04', 'Selesai', 'Lolos', 'Lolos kusioner', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2),
+(3, 3, NULL, '2023-05-25 09:18:04', 'Selesai', 'Lolos', 'Lolos kusioner', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3),
+(4, 4, NULL, '2023-05-25 09:18:04', 'Selesai', 'Lolos', 'Lolos kusioner', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4),
+(5, 5, NULL, '2023-05-25 09:18:04', 'Selesai', 'Lolos', 'Lolos kusioner', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5),
+(6, 1, NULL, '2023-05-25 09:18:04', 'Selesai', 'Lolos', 'Lolos kusioner', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 6),
+(7, 6, NULL, '2023-05-25 14:02:20', 'Selesai', 'Lolos', 'Lolos kusioner', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 7),
+(8, 7, NULL, '2023-05-25 14:41:16', 'Selesai', 'Lolos', 'Deskripsi hasil kusioner teresia 8', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 8),
+(9, 1, NULL, '2023-05-25 14:44:43', 'Selesai', 'Lolos', 'Deskripsi hasil kusioner teresia 1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 9),
+(10, 9, 6, '2023-05-26 09:54:25', 'Selesai', 'Lolos', 'Donor darah dari event', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 10),
+(11, 10, 6, '2023-05-26 10:01:04', 'Selesai', 'Lolos', 'Donor darah dari event', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 11),
+(12, 11, 6, '2023-05-26 10:01:34', 'Selesai', 'Lolos', 'Donor darah dari event', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 12),
+(13, 12, 6, '2023-05-26 10:02:02', 'Selesai', 'Lolos', 'Donor darah dari event', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 13),
+(14, 13, 6, '2023-05-26 10:02:27', 'Selesai', 'Lolos', 'Donor darah dari event', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 14),
+(15, 14, 6, '2023-05-26 10:41:00', 'Selesai', 'Lolos', 'Donor darah dari event', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 15),
+(16, 14, NULL, '2023-06-03 01:36:07', 'Selesai', 'Lolos', 'Lolos kusioner', '22', '90', '50', '22', '165', 'Sehat', NULL, 16),
+(17, 14, NULL, '2023-06-03 08:40:05', 'Selesai', 'Lolos', 'Lolos kusioner', '40', '50', '50', '180', '170', 'Sehat', NULL, 17),
+(18, 15, NULL, '2023-06-03 08:42:14', 'Proses', 'Lolos', 'Lolos kusioner', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 18),
+(19, 15, NULL, '2023-06-23 04:02:26', 'Selesai', 'Lolos', 'Deskripsi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 19),
+(20, 16, NULL, '2023-06-30 10:26:28', 'Selesai', 'Lolos', 'Lulus Kusioner', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 20),
+(21, 17, 12, '2023-07-02 08:59:49', 'Selesai', 'Lolos', 'Donor darah dari event', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 21),
+(22, 18, 12, '2023-07-02 09:12:15', 'Selesai', 'Lolos', 'Donor darah dari event', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 22),
+(23, 19, NULL, '2023-07-13 09:54:13', 'Gagal', 'Lolos', 'Lolos kusioner', '70', '100/20', '60', '80', '180', 'Kurang Fit', 'Banyakin Makan Dan Minum yang bergizi', 23),
+(27, 19, NULL, '2023-07-13 14:28:08', 'Proses', 'Lolos', 'Lolos kusioner', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 24);
 
 -- --------------------------------------------------------
 
@@ -285,7 +290,7 @@ CREATE TABLE `event` (
   `status_event` enum('Aktif','Tidak Aktif') NOT NULL DEFAULT 'Tidak Aktif',
   `alasan` varchar(255) DEFAULT NULL,
   `gambar` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `event`
@@ -315,7 +320,7 @@ CREATE TABLE `permohonan_darah` (
   `upload_surat` text DEFAULT NULL,
   `status_permohonan` enum('Belum Dikirim','Menunggu Proses','Dikirim','Diterima') DEFAULT NULL,
   `tanggal_permohonan` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `permohonan_darah`
@@ -343,7 +348,7 @@ CREATE TABLE `user` (
   `role` enum('Admin','Donatur','Rumah Sakit','Event','Petugas Kesehatan') NOT NULL,
   `status_verifikasi` enum('Belum','Sudah') NOT NULL DEFAULT 'Belum',
   `foto` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user`
@@ -379,7 +384,7 @@ CREATE TABLE `user_donatur` (
   `tanggal_lahir` date DEFAULT NULL,
   `jk` enum('Laki-laki','Perempuan') DEFAULT NULL,
   `gol_darah` varchar(10) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user_donatur`
@@ -403,7 +408,7 @@ CREATE TABLE `user_event` (
   `id_user_event` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `kode_instansi` varchar(30) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user_event`
@@ -423,7 +428,7 @@ CREATE TABLE `user_rs` (
   `id_user_rs` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `kode_rs` varchar(30) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user_rs`
@@ -522,7 +527,7 @@ ALTER TABLE `user_rs`
 -- AUTO_INCREMENT for table `anggota`
 --
 ALTER TABLE `anggota`
-  MODIFY `id_anggota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_anggota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `biodata_web`
@@ -558,7 +563,7 @@ ALTER TABLE `darah_masuk`
 -- AUTO_INCREMENT for table `donor`
 --
 ALTER TABLE `donor`
-  MODIFY `id_donor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_donor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `event`

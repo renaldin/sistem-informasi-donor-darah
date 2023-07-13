@@ -72,7 +72,7 @@
                                     <label for="jenis_kelamin">Jenis Kelamin</label>
                                     <input type="text" class="form-control @error('jenis_kelamin') is-invalid @enderror"
                                         id="jenis_kelamin" name="jenis_kelamin" placeholder="Masukan Jenis Kelamin"
-                                        value="{{ $data ? $data->jk : $user->jk }}" readonly>
+                                        value="{{ $data ? '' : $user->jk }}" readonly>
                                     @error('jenis_kelamin')
                                         <small class="form-text text-danger">{{ $message }}</small>
                                     @enderror

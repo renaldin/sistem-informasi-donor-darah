@@ -40,6 +40,8 @@
                                 <th>No</th>
                                 <th>Tanggal</th>
                                 <th>Status</th>
+                                <th>Nomor Antrian</th>
+                                <th>Detail</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -49,15 +51,24 @@
                                     <td>{{ $no++ }}</td>
                                     <td>{{ $row->tanggal_donor }}</td>
                                     <td>
-                                    @if ($row->status_donor  === 'Ready')
-                                        Proses Input Darah
-                                    @elseif ($row->status_donor  === 'Proses')
-                                        Proses Cek Kesehatan
-                                    @elseif ($row->status_donor  === 'Selesai')
-                                        Selesai
-                                    @endif
+                                        @if ($row->status_donor === 'Ready')
+                                            Proses Input Darah
+                                        @elseif ($row->status_donor === 'Proses')
+                                            Proses Cek Kesehatan
+                                        @elseif ($row->status_donor === 'Selesai')
+                                            Selesai
+                                        @elseif ($row->status_donor === 'Gagal')
+                                            Gagal
+                                        @endif
                                     </td>
-                                </tr>
+                                    <td>A0{{ $row->nomor_antrian }}</td>
+                                    <td>
+                                        @if ($row->status_donor === 'Gagal')
+                                            <button class="btn btn-danger" data-toggle="modal"
+                                                data-target="#detail-{{ $row->id_donor }}">Detail</button>
+                                    </td>
+                            @endif
+                            </tr>
                             @endforeach
                         </tbody>
                     </table>
@@ -65,4 +76,34 @@
             </div>
         </div>
     </div>
+    {{-- modal detail --}}
+    @foreach ($data as $item)
+        <div class="modal fade" id="detail-{{ $item->id_donor }}" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Catatan Alasan</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label for="keadaan_umum">Alasan Anda Tidak Bisa Melakukan Donor : </label>
+                            <input type="text" class="form-control @error('keadaan_umum') is-invalid @enderror"
+                                name="catatan" id="catatan" value="{{ $item->catatan_pendonor }}"
+                                placeholder="Masukan Catatan Alasan" readonly>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary"
+                            onclick="document.getElementById('input-catatan').value=document.getElementById('catatan').value;document.getElementById('form-cek').submit();">Simpan</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
 @endsection

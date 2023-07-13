@@ -38,24 +38,37 @@
                         <h3 class="m-0 font-weight-bold text-white text-center">Informasi PMI Subang</h3>
                     </div>
                     <div class="card-body p-3">
-                        <h6 class="bg-danger mr-5 ml-5 pt-3 pb-3 text-white mb-4" style="border-radius: 15px">Informasi
-                            Stok
-                            Darah</h6>
-                        <h6 class="bg-danger mr-5 ml-5 pt-3 pb-3 text-white mb-4" style="border-radius: 15px">Informasi
-                            Informasi Kebutuhan Darah</h6>
-                        <h6 class="bg-danger mr-5 ml-5 pt-3 pb-3 text-white mb-4" style="border-radius: 15px">Informasi
-                            Informasi Permohonan Darah</h6>
-                        <h6 class="bg-danger mr-5 ml-5 pt-3 pb-3 text-white mb-4" style="border-radius: 15px">Informasi
-                            Agenda (Event)</h6>
-                        <h6 class="bg-danger mr-5 ml-5 pt-3 pb-3 text-white mb-4" style="border-radius: 15px">Informasi
-                            Prosedur Donor Darah</h6>
-                        <h6 class="bg-danger mr-5 ml-5 pt-3 pb-3 text-white mb-4" style="border-radius: 15px">Informasi
-                            Prosedur Permohonan Darah</h6>
+                        <h6 class="bg-danger mr-5 ml-5 pt-3 pb-3 text-white mb-4" style="border-radius: 15px"><a
+                                href="#informasi-stok-darah" class="text-white text-decoration-none">Informasi
+                                Stok
+                                Darah</a></h6>
+                        <h6 class="bg-danger mr-5 ml-5 pt-3 pb-3 text-white mb-4" style="border-radius: 15px"><a
+                                href="#informasi-stok-darah" class="text-white text-decoration-none">Informasi
+                                Kebutuhan Darah</a>
+                        </h6>
+                        <h6 class="bg-danger mr-5 ml-5 pt-3 pb-3 text-white mb-4" style="border-radius: 15px"><a
+                                href="#informasi-permohonan-darah" class="text-white text-decoration-none">Informasi
+                                Informasi Permohonan Darah</a></h6>
+                        <h6 class="bg-danger mr-5 ml-5 pt-3 pb-3 text-white mb-4" style="border-radius: 15px"><a
+                                href="#informasi-agenda-event" class="text-white text-decoration-none">Informasi
+                                Agenda (Event)</a></h6>
+                        <h6 class="bg-danger mr-5 ml-5 pt-3 pb-3 text-white mb-4" style="border-radius: 15px"
+                            id="manfaat"><a href="#informasi" class="text-white text-decoration-none">Informasi
+                                Manfaat Donor</a></h6>
+                        <h6 class="bg-danger mr-5 ml-5 pt-3 pb-3 text-white mb-4" style="border-radius: 15px"
+                            id="prosedur"><a href="#informasi" class="text-white text-decoration-none">Informasi
+                                Prosedur Donor Darah</a></h6>
+                        <h6 class="bg-danger mr-5 ml-5 pt-3 pb-3 text-white mb-4" style="border-radius: 15px"
+                            id="permohonan"><a href="#informasi" class="text-white text-decoration-none">Informasi
+                                Prosedur Permohonan Darah</a></h6>
+                        <h6 class="bg-danger mr-5 ml-5 pt-3 pb-3 text-white mb-4" style="border-radius: 15px"
+                            id="urgent"><a href="#informasi" class="text-white text-decoration-none">Informasi
+                                Informasi Darah</a></h6>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row mt-5 justify-content-center">
+        <div class="row mt-5 justify-content-center" id="informasi-stok-darah">
             <div class="col-xl-6 col-lg-6 col-12" data-aos="fade-up">
                 <h3 class="text-center">Informasi Stok Darah</h3>
                 <div class="card mb-4">
@@ -134,7 +147,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-6 col-lg-6 col-12" data-aos="fade-up">
+            <div class="col-xl-6 col-lg-6 col-12" data-aos="fade-up" id="informasi-kebutuhan-darah">
                 <h3 class="text-center">Informasi Kebutuhan Darah</h3>
                 <div class="row">
                     <div class="col-12">
@@ -155,7 +168,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-12 col-lg-12 col-12" data-aos="fade-up">
+            <div class="col-xl-12 col-lg-12 col-12" data-aos="fade-up" id="informasi-permohonan-darah">
                 <div class="row">
                     <div class="col-12">
                         <div class="card shadow mb-4">
@@ -327,7 +340,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-sm-10 col-md-8 col-lg-8 text-center m-1" data-aos="fade-up">
+            <div class="col-12 col-sm-10 col-md-8 col-lg-8 text-center m-1" data-aos="fade-up"
+                id="informasi-agenda-event">
                 <h4>AGENDA (EVENT)</h4>
             </div>
             <div class="col-lg-12 col-12" data-aos="fade-up">
@@ -402,6 +416,7 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        <div id="informasi"></div>
                     </div>
                     {{-- <div class="d-flex justify-content-center">
                         {{ $all_event->links('pagination::bootstrap-4') }}
@@ -415,40 +430,7 @@
                 <div class="card mb-4">
                     <div class="card-header py-3 ">
                         <div class="row">
-                            <div class="col-lg-4">
-                                <style>
-                                    a.side-info:hover {
-                                        color: red !important;
-                                        cursor: pointer;
-                                    }
-                                </style>
-                                <hr class="sidebar-divider">
-                                <div class="sidebar-heading">
-                                    <a class="nav-link side-info" id="manfaat">
-                                        <span>Informasi Manfaat Donor</span>
-                                    </a>
-                                </div>
-                                <hr class="sidebar-divider">
-                                <div class="sidebar-heading">
-                                    <a class="nav-link side-info" id="prosedur">
-                                        <span>Informasi Prosedur Donor</span>
-                                    </a>
-                                </div>
-                                <hr class="sidebar-divider">
-                                <div class="sidebar-heading">
-                                    <a class="nav-link side-info" id="permohonan">
-                                        <span>Informasi Prosedur Permohonan Darah</span>
-                                    </a>
-                                </div>
-                                <hr class="sidebar-divider">
-                                <div class="sidebar-heading">
-                                    <a class="nav-link side-info" id="urgent">
-                                        <span>Informasi Darah Urgent</span>
-                                    </a>
-                                </div>
-                                <hr class="sidebar-divider">
-                            </div>
-                            <div class="col-lg-8">
+                            <div class="col-lg-12">
                                 <div class="manfaat">
                                     <h4><b>Informasi Manfaat Donor</b></h4>
                                     <p class="text-danger">Manfaat Donor Darah</p>
@@ -616,26 +598,26 @@
                     </div>
                 </div>
             </div> --}}
-            <div class="col-12 col-sm-10 col-md-8 col-lg-8 text-center mt-5" data-aos="fade-up">
+            <div class="col-12 col-sm-10 col-md-8 col-lg-8 text-center mt-5">
                 <p>Sistem Informasi Donor Darah memberikan informasi dan kemudahan kepada masyarakat yang ingin
                     mendonorkan darah</p>
             </div>
             <div class="col-12">
                 <div class="row justify-content-center">
-                    <div class="col-12 col-sm-6 col-lg-4 col-xl-4 text-center" data-aos="zoom-in-right"><i
-                            class="bi bi-postcard-heart" style="font-size: 100px;"></i>
+                    <div class="col-12 col-sm-6 col-lg-4 col-xl-4 text-center"><i class="bi bi-postcard-heart"
+                            style="font-size: 100px;"></i>
                         <p class="text-uppercase text-dark font-weight-bold text-center"
                             style="margin-top: -25px; font-size: large">
                             Layanan Permohonan Darah</p>
                     </div>
-                    <div class="col-12 col-sm-6 col-lg-4 col-xl-4 text-center" data-aos="zoom-in-up"><i
-                            class="bi bi-calendar-event" style="font-size: 100px;"></i>
+                    <div class="col-12 col-sm-6 col-lg-4 col-xl-4 text-center"><i class="bi bi-calendar-event"
+                            style="font-size: 100px;"></i>
                         <p class="text-uppercase text-dark font-weight-bold text-center"
                             style="margin-top: -25px; font-size: large">
                             Layanan Pengajuan Event</p>
                     </div>
-                    <div class="col-12 col-sm-6 col-lg-4 col-xl-4 text-center" data-aos="zoom-in-right"><i
-                            class="bi bi-calendar-heart" style="font-size: 100px;"></i>
+                    <div class="col-12 col-sm-6 col-lg-4 col-xl-4 text-center"><i class="bi bi-calendar-heart"
+                            style="font-size: 100px;"></i>
                         <p class="text-uppercase text-dark font-weight-bold text-center"
                             style="margin-top: -25px; font-size: large">
                             Layanan Pendonoran Darah</p>
@@ -643,7 +625,7 @@
                 </div>
             </div>
             <div class="col-12 mt-5 mb-5 text-center">
-                <a href="/register" class="btn btn-danger btn-lg" data-aos="zoom-in-up">Daftar</a>
+                <a href="/register" class="btn btn-danger btn-lg">Daftar</a>
             </div>
         </div>
     </div>
@@ -655,40 +637,40 @@
             $('.permohonan').addClass('d-none')
             $('.urgent').addClass('d-none')
             $('.prosedur').removeClass('d-none')
-            $('#manfaat').removeClass('text-danger')
-            $('#permohonan').removeClass('text-danger')
-            $('#urgent').removeClass('text-danger')
-            $(this).addClass('text-danger')
+            // $('#manfaat').removeClass('text-danger')
+            // $('#permohonan').removeClass('text-danger')
+            // $('#urgent').removeClass('text-danger')
+            // $(this).addClass('text-danger')
         })
         $('#manfaat').on('click', function() {
             $('.prosedur').addClass('d-none')
             $('.permohonan').addClass('d-none')
             $('.urgent').addClass('d-none')
             $('.manfaat').removeClass('d-none')
-            $('#prosedur').removeClass('text-danger')
-            $('#permohonan').removeClass('text-danger')
-            $('#urgent').removeClass('text-danger')
-            $(this).addClass('text-danger')
+            // $('#prosedur').removeClass('text-danger')
+            // $('#permohonan').removeClass('text-danger')
+            // $('#urgent').removeClass('text-danger')
+            // $(this).addClass('text-danger')
         })
         $('#permohonan').on('click', function() {
             $('.prosedur').addClass('d-none')
             $('.manfaat').addClass('d-none')
             $('.urgent').addClass('d-none')
             $('.permohonan').removeClass('d-none')
-            $('#prosedur').removeClass('text-danger')
-            $('#manfaat').removeClass('text-danger')
-            $('#urgent').removeClass('text-danger')
-            $(this).addClass('text-danger')
+            // $('#prosedur').removeClass('text-danger')
+            // $('#manfaat').removeClass('text-danger')
+            // $('#urgent').removeClass('text-danger')
+            // $(this).addClass('text-danger')
         })
         $('#urgent').on('click', function() {
             $('.prosedur').addClass('d-none')
             $('.manfaat').addClass('d-none')
             $('.permohonan').addClass('d-none')
             $('.urgent').removeClass('d-none')
-            $('#prosedur').removeClass('text-danger')
-            $('#manfaat').removeClass('text-danger')
-            $('#permohonan').removeClass('text-danger')
-            $(this).addClass('text-danger')
+            // $('#prosedur').removeClass('text-danger')
+            // $('#manfaat').removeClass('text-danger')
+            // $('#permohonan').removeClass('text-danger')
+            // $(this).addClass('text-danger')
         })
     </script>
 @endsection
