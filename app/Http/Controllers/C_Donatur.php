@@ -52,6 +52,12 @@ class C_Donatur extends Controller
     public function submit_kuisioner()
     {
 
+        $anggota = $this->M_Anggota->cek_nik(Request()->nik);
+        // dd($anggota->tanggal_donor_kembali);
+        if (date('Y-m-d') < $anggota->tanggal_donor_kembali) {
+            return redirect()->route('daftar_donor')->with('gagal', 'Anda belum waktunya untuk daftar donor kembali. Daftar kembali pada tanggal ' . date('d m Y', strtotime($anggota->tanggal_donor_kembali)));
+        }
+
         // dd(Request());
         Request()->validate([
             'nik'                       => 'required',
@@ -86,12 +92,14 @@ class C_Donatur extends Controller
                 $this->M_Anggota->tambah($data);
                 $data_terakhir = $this->M_Anggota->data_terakhir();
             }
+            $nomor_antrian = $this->M_Donor->get_nomor_antrian();
             $data_donor = [
                 'id_anggota'                => $data_terakhir->id_anggota,
                 'tanggal_donor'             => date('Y-m-d H:i:s'),
                 'status_donor'              => 'Proses',
                 'hasil_kusioner'            => 'Lolos',
-                'deskripsi_hasil_kusioner'  => 'Lolos kusioner'
+                'deskripsi_hasil_kusioner'  => 'Lolos kusioner',
+                'nomor_antrian'             => $nomor_antrian
             ];
             $this->M_Donor->tambah($data_donor);
             return redirect()->to('hasil_donor/' . Request()->nik)->with('berhasil', 'Hasil Kuisioner Donor Berhasil. Silahkan Tunggu Informasi Selanjutnya!');

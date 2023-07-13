@@ -66,6 +66,14 @@
                                     placeholder="Masukan Keadaan Umum" value="{{ $data_donor->keadaan_umum }}" readonly>
                             </div>
                         </div>
+                        <div class="col-12 col-md-6 col-lg-6">
+                            <div class="form-group">
+                                <label for="keadaan_umum">Catatan Pendonor</label>
+                                <input type="text" class="form-control " name="keadaan_umum" id="keadaan_umum"
+                                    placeholder="Masukan Keadaan Umum" value="{{ $data_donor->catatan_pendonor }}"
+                                    readonly>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

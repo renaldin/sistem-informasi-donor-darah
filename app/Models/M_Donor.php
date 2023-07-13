@@ -59,4 +59,13 @@ class M_Donor extends Model
             ->join('anggota', 'anggota.id_anggota', '=', 'donor.id_anggota', 'left')
             ->where('donor.id_anggota', $id_anggota)->get();
     }
+
+    public function get_nomor_antrian()
+    {
+        $data_terakhir = DB::table($this->table)->orderBy('id_donor', 'DESC')->first();
+        if ($data_terakhir) {
+            return $data_terakhir->nomor_antrian + 1;
+        }
+        return 1;
+    }
 }

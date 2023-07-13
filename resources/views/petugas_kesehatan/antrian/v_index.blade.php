@@ -16,6 +16,7 @@
                                 <th>Jenis Kelamin</th>
                                 <th>Alamat</th>
                                 <th>Tanggal</th>
+                                <th>Nomor Antrian</th>
                                 <th>Status</th>
                                 <th>Opsi</th>
                             </tr>
@@ -29,11 +30,12 @@
                                     <td>{{ $row->jenis_kelamin }}</td>
                                     <td>{{ $row->alamat }}</td>
                                     <td>{{ $row->tanggal_donor }}</td>
+                                    <td>A0{{ $row->nomor_antrian }}</td>
                                     <td><span
-                                            class="badge badge-{{ $row->status_donor == 'Proses' ? 'warning' : '' }}{{ $row->status_donor == 'Ready' ? 'info' : '' }}{{ $row->status_donor == 'Selesai' ? 'success' : '' }}">{{ $row->status_donor }}</span>
+                                            class="badge badge-{{ $row->status_donor == 'Proses' ? 'warning' : '' }}{{ $row->status_donor == 'Ready' ? 'info' : '' }}{{ $row->status_donor == 'Selesai' ? 'success' : '' }}{{ $row->status_donor == 'Gagal' ? 'danger' : '' }}">{{ $row->status_donor }}</span>
                                     </td>
                                     <td class="text-center">
-                                        @if ($row->status_donor == 'Selesai' || $row->status_donor == 'Ready')
+                                        @if ($row->status_donor == 'Selesai' || $row->status_donor == 'Ready' || $row->status_donor == 'Gagal')
                                         @elseif($row->status_donor == 'Proses' && $row->hb != null)
                                             <a href="/cek_kesehatan/{{ $row->id_donor }}/show"
                                                 class="btn btn-primary btn-sm">Lihat</a>
