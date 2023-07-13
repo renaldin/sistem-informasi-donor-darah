@@ -23,32 +23,41 @@
                 <img src="/gambar/donor.jpg" alt="donor darah" class="w-100">
             </div>
         </div>
+        <div class="row">
+            <div class="col-12 col-xs-12 col-sm-12 col-md-6 col-lg-6 pt-5 mt-3" data-aos="fade-right">
+                <h1 class="text-uppercase text-danger font-weight-bold" style="font-weight: bolder;">Profil PMI Subang</h1>
+                <p align="justify">Satu Hati, Satu Panggilan. Kami adalah komunitas sukarelawan yang berdedikasi dalam
+                    memberikan pertolongan bagi mereka yang membutuhkan. Bersama-sama, kita menjalankan misi mulia ini
+                    dengan cinta dan kepedulian.</p>
+            </div>
+            <div class="col-12 col-xs-12 col-sm-12 col-md-6 col-lg-6 text-center" data-aos="fade-left"
+                style="border-radius: 30px 30px 0 0">
+                <div class="card" style="margin-top: 5rem; border-radius: 30px 30px 0 0">
+                    <div class="card-header bg-danger py-3 d-flex flex-row align-items-center justify-content-center"
+                        style="border-radius: 30px 30px 0 0">
+                        <h3 class="m-0 font-weight-bold text-white text-center">Informasi PMI Subang</h3>
+                    </div>
+                    <div class="card-body p-3">
+                        <h6 class="bg-danger mr-5 ml-5 pt-3 pb-3 text-white mb-4" style="border-radius: 15px">Informasi
+                            Stok
+                            Darah</h6>
+                        <h6 class="bg-danger mr-5 ml-5 pt-3 pb-3 text-white mb-4" style="border-radius: 15px">Informasi
+                            Informasi Kebutuhan Darah</h6>
+                        <h6 class="bg-danger mr-5 ml-5 pt-3 pb-3 text-white mb-4" style="border-radius: 15px">Informasi
+                            Informasi Permohonan Darah</h6>
+                        <h6 class="bg-danger mr-5 ml-5 pt-3 pb-3 text-white mb-4" style="border-radius: 15px">Informasi
+                            Agenda (Event)</h6>
+                        <h6 class="bg-danger mr-5 ml-5 pt-3 pb-3 text-white mb-4" style="border-radius: 15px">Informasi
+                            Prosedur Donor Darah</h6>
+                        <h6 class="bg-danger mr-5 ml-5 pt-3 pb-3 text-white mb-4" style="border-radius: 15px">Informasi
+                            Prosedur Permohonan Darah</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row mt-5 justify-content-center">
             <div class="col-xl-6 col-lg-6 col-12" data-aos="fade-up">
-                {{-- <div class="card mb-4">
-                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-danger">Grafik Darah Masuk</h6>
-                        <div class="dropdown no-arrow">
-                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                aria-labelledby="dropdownMenuLink">
-                                <div class="dropdown-header">Dropdown Header:</div>
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="chart-area">
-                            <canvas id="myAreaChart"></canvas>
-                        </div>
-                    </div>
-                </div> --}}
+                <h3 class="text-center">Informasi Stok Darah</h3>
                 <div class="card mb-4">
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                         <h6 class="m-0 font-weight-bold text-danger">Stok Darah</h6>
@@ -126,11 +135,59 @@
                 </div>
             </div>
             <div class="col-xl-6 col-lg-6 col-12" data-aos="fade-up">
+                <h3 class="text-center">Informasi Kebutuhan Darah</h3>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card shadow mb-4" style="padding-bottom: 320px">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-danger">Saat ini stok darah menipis</h6>
+                            </div>
+                            <div class="table-responsive p-3">
+                                <p>Dibutuhkan darah <b><?= $gol['a+'] == 0 ? 'A+,' : '' ?>
+                                        <?= $gol['b+'] == 0 ? 'B+,' : '' ?> <?= $gol['ab+'] == 0 ? 'AB+,' : '' ?>
+                                        <?= $gol['o+'] == 0 ? 'O+,' : '' ?> <?= $gol['a-'] == 0 ? 'A-,' : '' ?>
+                                        <?= $gol['b-'] == 0 ? 'B-,' : '' ?> <?= $gol['ab-'] == 0 ? 'AB-,' : '' ?>
+                                        <?= $gol['o-'] == 0 ? 'O-' : '' ?></b></p>
+                                <p>Ayo donorkan darah anda sekarang!</p>
+                                <p>Karena darah anda sangat bermanfaat untuk banyak orang</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-12 col-lg-12 col-12" data-aos="fade-up">
                 <div class="row">
                     <div class="col-12">
                         <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-danger">Permohonan Darah</h6>
+                            <div class="card-header py-3 d-flex justify-content-between">
+                                <h6 class="m-0 font-weight-bold text-danger">Permohonan Darah
+                                </h6>
+                                <form action="" method="get" id="form-permohonan">
+                                    <select name="tahun" id="tahun"
+                                        onchange="document.getElementById('form-permohonan').submit();">
+                                        <option value="2020"
+                                            {{ isset($_GET['tahun']) ? ($_GET['tahun'] == '2020' ? 'selected' : '') : (date('Y') == '2020' ? 'selected' : '') }}>
+                                            2020</option>
+                                        <option value="2021"
+                                            {{ isset($_GET['tahun']) ? ($_GET['tahun'] == '2021' ? 'selected' : '') : (date('Y') == '2021' ? 'selected' : '') }}>
+                                            2021</option>
+                                        <option value="2022"
+                                            {{ isset($_GET['tahun']) ? ($_GET['tahun'] == '2022' ? 'selected' : '') : (date('Y') == '2022' ? 'selected' : '') }}>
+                                            2022</option>
+                                        <option value="2023"
+                                            {{ isset($_GET['tahun']) ? ($_GET['tahun'] == '2023' ? 'selected' : '') : (date('Y') == '2023' ? 'selected' : '') }}>
+                                            2023</option>
+                                        <option value="2024"
+                                            {{ isset($_GET['tahun']) ? ($_GET['tahun'] == '2024' ? 'selected' : '') : (date('Y') == '2024' ? 'selected' : '') }}>
+                                            2024</option>
+                                        <option value="2025"
+                                            {{ isset($_GET['tahun']) ? ($_GET['tahun'] == '2025' ? 'selected' : '') : (date('Y') == '2025' ? 'selected' : '') }}>
+                                            2025</option>
+                                        <option value="2026"
+                                            {{ isset($_GET['tahun']) ? ($_GET['tahun'] == '2026' ? 'selected' : '') : (date('Y') == '2026' ? 'selected' : '') }}>
+                                            2026</option>
+                                    </select>
+                                </form>
                             </div>
                             <div class="table-responsive p-3">
                                 <table class="table align-items-center table-flush table-hover">
@@ -273,31 +330,82 @@
             <div class="col-12 col-sm-10 col-md-8 col-lg-8 text-center m-1" data-aos="fade-up">
                 <h4>AGENDA (EVENT)</h4>
             </div>
-            <div class="col-lg-10 col-10" data-aos="fade-up">
+            <div class="col-lg-12 col-12" data-aos="fade-up">
                 <div class="card mb-4">
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                         <h6 class="m-0 font-weight-bold text-danger">Agenda Kegiatan</h6>
-                        {{-- input --}}
+                        <form action="" method="get" id="form-kegiatan">
+                            <select name="bulan_kegiatan" id="bln"
+                                onchange="document.getElementById('form-kegiatan').submit();">
+                                <option value="01"
+                                    {{ isset($_GET['bulan_kegiatan']) ? ($_GET['bulan_kegiatan'] == '01' ? 'selected' : '') : (date('m') == '01' ? 'selected' : '') }}>
+                                    Jan</option>
+                                <option value="02"
+                                    {{ isset($_GET['bulan_kegiatan']) ? ($_GET['bulan_kegiatan'] == '02' ? 'selected' : '') : (date('m') == '02' ? 'selected' : '') }}>
+                                    Feb</option>
+                                <option value="03"
+                                    {{ isset($_GET['bulan_kegiatan']) ? ($_GET['bulan_kegiatan'] == '03' ? 'selected' : '') : (date('m') == '03' ? 'selected' : '') }}>
+                                    Mar</option>
+                                <option value="04"
+                                    {{ isset($_GET['bulan_kegiatan']) ? ($_GET['bulan_kegiatan'] == '04' ? 'selected' : '') : (date('m') == '04' ? 'selected' : '') }}>
+                                    Apr</option>
+                                <option value="05"
+                                    {{ isset($_GET['bulan_kegiatan']) ? ($_GET['bulan_kegiatan'] == '05' ? 'selected' : '') : (date('m') == '05' ? 'selected' : '') }}>
+                                    Mei</option>
+                                <option value="06"
+                                    {{ isset($_GET['bulan_kegiatan']) ? ($_GET['bulan_kegiatan'] == '06' ? 'selected' : '') : (date('m') == '06' ? 'selected' : '') }}>
+                                    Jun</option>
+                                <option value="07"
+                                    {{ isset($_GET['bulan_kegiatan']) ? ($_GET['bulan_kegiatan'] == '07' ? 'selected' : '') : (date('m') == '07' ? 'selected' : '') }}>
+                                    Jul</option>
+                                <option value="08"
+                                    {{ isset($_GET['bulan_kegiatan']) ? ($_GET['bulan_kegiatan'] == '08' ? 'selected' : '') : (date('m') == '08' ? 'selected' : '') }}>
+                                    Agu</option>
+                                <option value="09"
+                                    {{ isset($_GET['bulan_kegiatan']) ? ($_GET['bulan_kegiatan'] == '09' ? 'selected' : '') : (date('m') == '09' ? 'selected' : '') }}>
+                                    Sep</option>
+                                <option value="10"
+                                    {{ isset($_GET['bulan_kegiatan']) ? ($_GET['bulan_kegiatan'] == '10' ? 'selected' : '') : (date('m') == '10' ? 'selected' : '') }}>
+                                    Okt</option>
+                                <option value="11"
+                                    {{ isset($_GET['bulan_kegiatan']) ? ($_GET['bulan_kegiatan'] == '11' ? 'selected' : '') : (date('m') == '11' ? 'selected' : '') }}>
+                                    Nov</option>
+                                <option value="12"
+                                    {{ isset($_GET['bulan_kegiatan']) ? ($_GET['bulan_kegiatan'] == '12' ? 'selected' : '') : (date('m') == '12' ? 'selected' : '') }}>
+                                    Des</option>
+                            </select>
+                        </form>
                     </div>
                     <div class="card-body">
-                        <div class="row">
-                            @foreach ($all_event as $row)
-                                <div class="col-4">
-                                    <div class="card"
-                                        style="background-image: url('/foto_biodata/logo-pmi.png'); width: 100%; height: 200px; background-size: cover">
-                                        <span class="mt-auto pl-2 text-black">{{ $row->nama_instansi }}</span>
-                                        <span class=" pl-2 text-black">Alamat : {{ $row->alamat_lengkap }}</span>
-                                        <span class=" pl-2 text-black">Tanggal :
-                                            {{ date('l, d m Y', strtotime($row->tanggal_pengajuan)) }}</span>
-                                        <span class=" pl-2 text-black">Jam : {{ $row->jam }}</span>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
+                        <table class="table align-items-center table-flush table-hover" id="dataTable">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama Kegiatan</th>
+                                    <th>Lokasi Kegiatan</th>
+                                    <th>Jam Mulai</th>
+                                    <th>Target Pendonor</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @php
+                                    $no = 1;
+                                @endphp
+                                @foreach ($all_event as $row)
+                                    <tr>
+                                        <td>{{ $no++ }}</td>
+                                        <td>{{ $row->nama_kegiatan }}</td>
+                                        <td>{{ $row->alamat_lengkap }}</td>
+                                        <td>{{ $row->jam }}</td>
+                                        <td>{{ $row->jumlah_orang }} orang</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="d-flex justify-content-center">
+                    {{-- <div class="d-flex justify-content-center">
                         {{ $all_event->links('pagination::bootstrap-4') }}
-                    </div>
+                    </div> --}}
                 </div>
             </div>
             <div class="col-12 col-sm-10 col-md-8 col-lg-8 text-center m-1" data-aos="fade-up">
@@ -420,6 +528,7 @@
                                                 sajikan
                                         </ul>
                                     </ol>
+                                    <img src="{{ asset('gambar/prosedur-donor.png') }}" alt="" class="w-100">
                                     <p><b>Persyaratan donor darah dapat kamu lihat disini : <a href="/syarat_donor"
                                                 class="text-decoration-none">syarat
                                                 donor</a></b></p>
@@ -507,26 +616,26 @@
                     </div>
                 </div>
             </div> --}}
-            <div class="col-12 col-sm-10 col-md-8 col-lg-8 text-center mt-5">
+            <div class="col-12 col-sm-10 col-md-8 col-lg-8 text-center mt-5" data-aos="fade-up">
                 <p>Sistem Informasi Donor Darah memberikan informasi dan kemudahan kepada masyarakat yang ingin
                     mendonorkan darah</p>
             </div>
             <div class="col-12">
                 <div class="row justify-content-center">
-                    <div class="col-12 col-sm-6 col-lg-4 col-xl-4 text-center"><i class="bi bi-postcard-heart"
-                            style="font-size: 100px;"></i>
+                    <div class="col-12 col-sm-6 col-lg-4 col-xl-4 text-center" data-aos="zoom-in-right"><i
+                            class="bi bi-postcard-heart" style="font-size: 100px;"></i>
                         <p class="text-uppercase text-dark font-weight-bold text-center"
                             style="margin-top: -25px; font-size: large">
                             Layanan Permohonan Darah</p>
                     </div>
-                    <div class="col-12 col-sm-6 col-lg-4 col-xl-4 text-center"><i class="bi bi-calendar-event"
-                            style="font-size: 100px;"></i>
+                    <div class="col-12 col-sm-6 col-lg-4 col-xl-4 text-center" data-aos="zoom-in-up"><i
+                            class="bi bi-calendar-event" style="font-size: 100px;"></i>
                         <p class="text-uppercase text-dark font-weight-bold text-center"
                             style="margin-top: -25px; font-size: large">
                             Layanan Pengajuan Event</p>
                     </div>
-                    <div class="col-12 col-sm-6 col-lg-4 col-xl-4 text-center"><i class="bi bi-calendar-heart"
-                            style="font-size: 100px;"></i>
+                    <div class="col-12 col-sm-6 col-lg-4 col-xl-4 text-center" data-aos="zoom-in-right"><i
+                            class="bi bi-calendar-heart" style="font-size: 100px;"></i>
                         <p class="text-uppercase text-dark font-weight-bold text-center"
                             style="margin-top: -25px; font-size: large">
                             Layanan Pendonoran Darah</p>
@@ -534,7 +643,7 @@
                 </div>
             </div>
             <div class="col-12 mt-5 mb-5 text-center">
-                <a href="/register" class="btn btn-danger btn-lg">Daftar</a>
+                <a href="/register" class="btn btn-danger btn-lg" data-aos="zoom-in-up">Daftar</a>
             </div>
         </div>
     </div>
