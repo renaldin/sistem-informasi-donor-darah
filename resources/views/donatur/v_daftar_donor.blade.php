@@ -1,6 +1,20 @@
 @extends('layout.v_template_front')
 
 @section('content')
+
+{{-- <script>
+    function toggleInputVisibility() {
+        var radioInput = document.getElementById("radioInput");
+        var textInput = document.getElementById("textInput");
+
+        if (radioInput.checked && radioInput.value === "0") {
+            textInput.style.display = "none";
+        } else {
+            textInput.style.display = "block";
+        }
+    }
+</script> --}}
+
     <h1>Daftar Donor</h1>
     <div class="row">
         <div class="col-xl-12 col-lg-12" data-aos="fade-up">
@@ -81,7 +95,7 @@
                             <div class="col-12 col-lg-6">
                                 <div class="form-group">
                                     <label for="no_wa">Nomor Whatsapp</label>
-                                    <input type="number" class="form-control @error('no_wa') is-invalid @enderror"
+                                    <input type="text" onkeydown="return hanyaAngka(event)" class="form-control @error('no_wa') is-invalid @enderror"
                                         id="no_wa" name="no_wa" placeholder="Masukan Nomor Whatsapp"
                                         value="{{ $user->nomor_telepon }}" required>
                                     @error('no_wa')
@@ -184,25 +198,24 @@
                             </div>
                             <div class="row border-bottom mb-2 pb-2">
                                 <div class="col-12 col-lg-8">
-                                    <li>Untuk donor darah wanita? Apakah anda saat ini sedang hamil? Jika Ya, kehamilan
-                                        keberapa?
+                                    <li>Untuk donor darah wanita? Apakah anda saat ini sedang hamil? Jika Ya, kehamilan dibulan ke berapa?
                                     </li>
                                 </div>
                                 <div class="col-12 col-lg-4 d-flex">
                                     <div class="custom-control custom-radio mr-3">
-                                        <input type="radio" id="Ya6" name="p[6]" class="custom-control-input"
+                                        <input type="radio" onclick="showKehamilan()" id="Ya6" name="p[6]" class="custom-control-input"
                                             value="1">
                                         <label class="custom-control-label" for="Ya6">Ya</label>
                                     </div>
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="tidak6" name="p[6]" class="custom-control-input"
+                                        <input type="radio" onclick="hideKehamilan()" id="tidak6" name="p[6]" class="custom-control-input"
                                             value="0">
                                         <label class="custom-control-label" for="tidak6">Tidak</label>
                                     </div>
                                 </div>
                                 <div class="col-12 col-lg-4 d-flex">
-                                    <input type="text" class="form-control" id="nama" name="nama_anggota"
-                                        placeholder="Masukan jumlah kehamilan">
+                                    <input type="text" class="form-control" id="bulanKehamilan" name="nama_anggota"
+                                        placeholder="Masukan jumlah bulan kehamilan">
                                 </div>
                             </div>
                             <b class="mb-2 pb-2">Dalam waktu 8 minggu terakhir</b>

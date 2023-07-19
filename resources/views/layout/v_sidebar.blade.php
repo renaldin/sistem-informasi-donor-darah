@@ -127,7 +127,7 @@
             </a>
         </li>
         <li class="nav-item @if ($title === 'Pengajuan Event') active @endif">
-            <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal" id="#myBtn">
+            <a class="nav-link" href="/riwayat_donor" id="#myBtn">
                 <i class="fas fa-fw fa-palette"></i>
                 <span>Riwayat Donor</span>
             </a>

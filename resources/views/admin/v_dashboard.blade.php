@@ -27,6 +27,22 @@ function hitungDurasiJadwalDonor($tanggal_donor_kembali) {
 
   return $durasi;
 }
+
+function tanggal_indonesia($tanggal) {
+    $bulan = array(
+        'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+        'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+    );
+    
+    $tanggal_array = explode('-', $tanggal);
+    $tahun = $tanggal_array[0];
+    $bulan_angka = intval($tanggal_array[1]);
+    $tanggal_angka = intval($tanggal_array[2]);
+    
+    $tanggal_indonesia = $tanggal_angka . ' ' . $bulan[$bulan_angka - 1] . ' ' . $tahun;
+    
+    return $tanggal_indonesia;
+}
 @endphp
 
     <div class="row mb-3">
@@ -810,11 +826,11 @@ function hitungDurasiJadwalDonor($tanggal_donor_kembali) {
                                         <td>{{$row->alamat}}</td>
                                         <td>
                                           @if (hitungDurasiJadwalDonor($row->tanggal_donor_kembali) > 5)
-                                            <span class="badge badge-success">{{date('d F Y', strtotime($row->tanggal_donor_kembali))}}</span>
+                                            <span class="badge badge-success">{{ tanggal_indonesia($row->tanggal_donor_kembali) }}</span>
                                           @elseif(hitungDurasiJadwalDonor($row->tanggal_donor_kembali) > 0)
-                                            <span class="badge badge-warning">{{date('d F Y', strtotime($row->tanggal_donor_kembali))}}</span>
+                                            <span class="badge badge-warning">{{ tanggal_indonesia($row->tanggal_donor_kembali) }}</span>
                                           @elseif(hitungDurasiJadwalDonor($row->tanggal_donor_kembali) <= 0)
-                                            <span class="badge badge-danger">{{date('d F Y', strtotime($row->tanggal_donor_kembali))}}</span>
+                                            <span class="badge badge-danger">{{ tanggal_indonesia($row->tanggal_donor_kembali) }}</span>
                                           @endif
                                         </td>
                                         {{-- <td class="text-center">
@@ -840,7 +856,7 @@ function hitungDurasiJadwalDonor($tanggal_donor_kembali) {
 
     {{-- permohonan darah --}}
     <div class="modal fade" id="permohonan_darah" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-xl" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">Data Permohonan Darah (Proses)</h5>
@@ -860,8 +876,8 @@ function hitungDurasiJadwalDonor($tanggal_donor_kembali) {
                                 <thead class="thead-light">
                                     <tr>
                                         <th>No</th>
-                                        <th>Nama RS</th>
-                                        <th>Tanggal</th>
+                                        <th>Nama Rumah Sakit</th>
+                                        <th>Tanggal Permohonan</th>
                                         <th>Golda</th>
                                         <th>Rhesus</th>
                                         <th>Jumlah</th>
@@ -874,7 +890,7 @@ function hitungDurasiJadwalDonor($tanggal_donor_kembali) {
                                       <tr>
                                           <td>{{$no++}}</td>
                                           <td>{{$row->nama_rs}}</td>
-                                          <td>{{$row->tanggal_permohonan}}</td>
+                                          <td>{{ tanggal_indonesia($row->tanggal_permohonan) }}</td>
                                           <td>{{$row->golda}}</td>
                                           <td>{{$row->rhesus}}</td>
                                           <td>{{$row->jumlah}}</td>
@@ -972,7 +988,7 @@ function hitungDurasiJadwalDonor($tanggal_donor_kembali) {
 
     {{-- event --}}
     <div class="modal fade" id="event" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-xl" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">Data Event</h5>
@@ -1007,7 +1023,7 @@ function hitungDurasiJadwalDonor($tanggal_donor_kembali) {
                                         <td>{{$no++}}</td>
                                         <td>{{$row->nama_instansi}}</td>
                                         <td>Nama Kegiatan</td>
-                                        <td>{{$row->tanggal_event}}</td>
+                                        <td>{{ tanggal_indonesia($row->tanggal_event) }}</td>
                                         <td>{{$row->jam}}</td>
                                         <td>{{$row->jumlah_orang}}</td>
                                       </tr>

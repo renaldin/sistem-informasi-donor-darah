@@ -20,6 +20,16 @@
         rel="stylesheet">
 </head>
 
+<script>
+    function hanyaAngka(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        }
+        return true;
+    }
+  </script>
+
 <body id="page-top">
     @include('sweetalert::alert')
     <div id="wrapper">
@@ -36,13 +46,26 @@
 
                 <!-- Container Fluid-->
                 <div class="container-fluid" id="container-wrapper">
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">{{ $title }}</h1>
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="./">{{ $title }}</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">{{ $sub_title }}</li>
-                        </ol>
-                    </div>
+                    @if($title=== 'Data Stok Darah')
+                        <div class="d-sm-flex align-items-center">
+                            <h1 class="h3 mb-0 text-gray-800">{{ $title }}</h1>
+                        </div>
+                        <div class="d-sm-flex align-items-center justify-content-between mb-4" style="margin-top: -17px">
+                            <small style="margin-left: 5px;" class="text-danger">* Darah tersimpan di kulkas karantina</small>
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="./">{{ $title }}</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">{{ $sub_title }}</li>
+                            </ol>
+                        </div>
+                    @else
+                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                            <h1 class="h3 mb-0 text-gray-800">{{ $title }}</h1>
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="./">{{ $title }}</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">{{ $sub_title }}</li>
+                            </ol>
+                        </div>
+                    @endif
 
                     {{-- Content --}}
                     @yield('content')
@@ -184,6 +207,8 @@
 
         });
     </script>
+
+    
 </body>
 
 </html>

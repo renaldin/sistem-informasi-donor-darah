@@ -91,6 +91,7 @@ Route::group(['middleware' => 'revalidate'], function () {
         Route::get('/riwayat_buang_darah', [C_StokDarah::class, 'riwayat_buang_darah'])->name('riwayat_buang_darah');
         Route::get('/masuk_darah/{id}', [C_StokDarah::class, 'masuk_darah'])->name('masuk_darah');
         Route::get('/buang_darah_kedaluwarsa', [C_StokDarah::class, 'buang_darah_kedaluwarsa']);
+        Route::get('/cetak_invoice_darah/{id}', [C_StokDarah::class, 'cetak_invoice_darah'])->name('cetak_invoice_darah');
 
         // darah masuk
         Route::get('/data_darah_masuk', [C_StokDarah::class, 'data_darah_masuk'])->name('data_darah_masuk');

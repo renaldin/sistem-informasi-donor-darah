@@ -17,6 +17,22 @@
             $data_umur = $umur['bulan'] . ' bulan, ' . $umur['hari'] . ' hari.';
             return $data_umur;
         }
+
+        function tanggal_indonesia($tanggal) {
+            $bulan = array(
+                'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+                'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+            );
+            
+            $tanggal_array = explode('-', $tanggal);
+            $tahun = $tanggal_array[0];
+            $bulan_angka = intval($tanggal_array[1]);
+            $tanggal_angka = intval($tanggal_array[2]);
+            
+            $tanggal_indonesia = $tanggal_angka . ' ' . $bulan[$bulan_angka - 1] . ' ' . $tahun;
+            
+            return $tanggal_indonesia;
+        }
     @endphp
 
     <div class="row">
@@ -48,7 +64,7 @@
                                     <td>{{ $row->no_kantong }}</td>
                                     <td>{{ $row->golongan_darah }}</td>
                                     <td>{{ $row->resus }}</td>
-                                    <td>{{ date('d F Y', strtotime($row->tanggal_buang)) }}</td>
+                                    <td>{{ tanggal_indonesia($row->tanggal_buang) }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

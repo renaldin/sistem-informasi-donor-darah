@@ -145,9 +145,9 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            {{-- <div class="col-lg-6">
                                 <img src="/foto_event/{{ $detail->gambar }}" alt="gambar" class="w-50">
-                            </div>
+                            </div> --}}
                             <div class="col-lg-12 mt-3">
                                 <button type="submit" class="btn btn-primary">Simpan</button>
                             </div>

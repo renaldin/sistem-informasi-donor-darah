@@ -76,6 +76,13 @@ class M_User extends Model
             ->where('user_donatur.id_user', $id_user)->first();
     }
 
+    public function detail_user_donatur_nik($nik)
+    {
+        return DB::table('user_donatur')
+            ->join('user', 'user.id_user', '=', 'user_donatur.id_user')
+            ->where('user_donatur.nik', $nik)->first();
+    }
+
     public function hapus_user_donatur($id_user)
     {
         DB::table('user_donatur')->where('id_user', $id_user)->delete();

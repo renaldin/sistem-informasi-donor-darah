@@ -39,31 +39,31 @@
                     </div>
                     <div class="card-body p-3">
                         <h6 class="bg-danger mr-5 ml-5 pt-3 pb-3 text-white mb-4" style="border-radius: 15px"><a
-                                href="#informasi-stok-darah" class="text-white text-decoration-none">Informasi
+                                href="#informasi-stok-darah" class="text-white text-decoration-none">
                                 Stok
                                 Darah</a></h6>
                         <h6 class="bg-danger mr-5 ml-5 pt-3 pb-3 text-white mb-4" style="border-radius: 15px"><a
-                                href="#informasi-stok-darah" class="text-white text-decoration-none">Informasi
+                                href="#informasi-stok-darah" class="text-white text-decoration-none">
                                 Kebutuhan Darah</a>
                         </h6>
                         <h6 class="bg-danger mr-5 ml-5 pt-3 pb-3 text-white mb-4" style="border-radius: 15px"><a
-                                href="#informasi-permohonan-darah" class="text-white text-decoration-none">Informasi
-                                Informasi Permohonan Darah</a></h6>
+                                href="#informasi-permohonan-darah" class="text-white text-decoration-none">
+                                Permohonan Darah</a></h6>
                         <h6 class="bg-danger mr-5 ml-5 pt-3 pb-3 text-white mb-4" style="border-radius: 15px"><a
-                                href="#informasi-agenda-event" class="text-white text-decoration-none">Informasi
+                                href="#informasi-agenda-event" class="text-white text-decoration-none">
                                 Agenda (Event)</a></h6>
                         <h6 class="bg-danger mr-5 ml-5 pt-3 pb-3 text-white mb-4" style="border-radius: 15px"
-                            id="manfaat"><a href="#informasi" class="text-white text-decoration-none">Informasi
+                            id="manfaat"><a href="#informasi" class="text-white text-decoration-none">
                                 Manfaat Donor</a></h6>
                         <h6 class="bg-danger mr-5 ml-5 pt-3 pb-3 text-white mb-4" style="border-radius: 15px"
-                            id="prosedur"><a href="#informasi" class="text-white text-decoration-none">Informasi
+                            id="prosedur"><a href="#informasi" class="text-white text-decoration-none">
                                 Prosedur Donor Darah</a></h6>
                         <h6 class="bg-danger mr-5 ml-5 pt-3 pb-3 text-white mb-4" style="border-radius: 15px"
-                            id="permohonan"><a href="#informasi" class="text-white text-decoration-none">Informasi
+                            id="permohonan"><a href="#informasi" class="text-white text-decoration-none">
                                 Prosedur Permohonan Darah</a></h6>
-                        <h6 class="bg-danger mr-5 ml-5 pt-3 pb-3 text-white mb-4" style="border-radius: 15px"
-                            id="urgent"><a href="#informasi" class="text-white text-decoration-none">Informasi
-                                Informasi Darah</a></h6>
+                        {{-- <h6 class="bg-danger mr-5 ml-5 pt-3 pb-3 text-white mb-4" style="border-radius: 15px"
+                            id="urgent"><a href="#informasi" class="text-white text-decoration-none">
+                                 Darah</a></h6> --}}
                     </div>
                 </div>
             </div>

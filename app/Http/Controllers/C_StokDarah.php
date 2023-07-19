@@ -10,6 +10,7 @@ use App\Models\M_DarahBuang;
 use App\Models\M_Anggota;
 use App\Models\M_Donor;
 use RealRashid\SweetAlert\Facades\Alert;
+use PDF;
 
 class C_StokDarah extends Controller
 {
@@ -184,6 +185,16 @@ class C_StokDarah extends Controller
             ];
             $this->M_Anggota->edit($data_anggota);
 
+            $anggota = $this->M_Anggota->detail($detail_donor->id_anggota);
+            $user_donatur = $this->M_User->detail_user_donatur_nik($anggota->nik);
+            if ($user_donatur) {
+                $data_user_donatur = [
+                    'id_user_donatur'   => $user_donatur->id_user_donatur,
+                    'gol_darah'         => Request()->golongan_darah
+                ];
+                $this->M_User->edit_donatur($data_user_donatur);
+            }
+
             Alert::success('Berhasil', 'Data darah berhasil ditambah.');
             return redirect()->route('tambah_darah_online');
         } elseif (Request()->form_darah == 'Offline') {
@@ -218,6 +229,8 @@ class C_StokDarah extends Controller
                     'tanggal_donor_kembali' => date('Y-m-d', strtotime('+60 days', strtotime(date('Y-m-d')))),
                 ];
                 $this->M_Anggota->edit($data_anggota);
+
+                $id_anggota = Request()->id_anggota;
             } elseif (Request()->form_anggota == 'Non Anggota') {
                 Request()->validate([
                     'nama_anggota'          => 'required',
@@ -262,6 +275,8 @@ class C_StokDarah extends Controller
                     'deskripsi_hasil_kusioner'  => Request()->deskripsi_hasil_kusioner,
                 ];
                 $this->M_Donor->tambah($data_donor);
+
+                $id_anggota = $data_terakhir_anggota->id_anggota;
             }
 
             $data_terakhir_donor = $this->M_Donor->data_terakhir();
@@ -286,6 +301,16 @@ class C_StokDarah extends Controller
             ];
             $this->M_DarahMasuk->tambah($data_darah_masuk);
 
+            $anggota = $this->M_Anggota->detail($id_anggota);
+            $user_donatur = $this->M_User->detail_user_donatur_nik($anggota->nik);
+            if ($user_donatur) {
+                $data_user_donatur = [
+                    'id_user_donatur'   => $user_donatur->id_user_donatur,
+                    'gol_darah'         => Request()->golongan_darah
+                ];
+                $this->M_User->edit_donatur($data_user_donatur);
+            }
+
             Alert::success('Berhasil', 'Data darah berhasil ditambah.');
             return redirect()->route('tambah_darah_offline');
         }
@@ -298,7 +323,7 @@ class C_StokDarah extends Controller
         }
 
         $data = [
-            'title'         => 'Data Stok Darah',
+            'title'         => 'Data Darah Masuk',
             'sub_title'     => 'Edit Darah',
             'data_web'      => $this->M_Website->detail(1),
             'detail'        => $this->M_DarahMasuk->detail($id_darah_masuk),
@@ -344,7 +369,7 @@ class C_StokDarah extends Controller
         $this->M_DarahMasuk->edit($data_darah_masuk);
 
         Alert::success('Berhasil', 'Data darah berhasil diedit.');
-        return redirect()->route('data_stok_darah');
+        return redirect()->route('data_darah_masuk');
     }
 
     public function buang_darah($id_darah_masuk)
@@ -437,5 +462,21 @@ class C_StokDarah extends Controller
 
         Alert::success('Berhasil', 'Data darah berhasil dibuang.');
         return redirect()->route('data_stok_darah');
+    }
+
+    public function cetak_invoice_darah($id_darah_masuk)
+    {
+        if (!Session()->get('email')) {
+            return redirect()->route('login');
+        }
+
+        $data = [
+            'title'         => 'Invoice Stok Darah',
+            'data_web'      => $this->M_Website->detail(1),
+            'data_darah'    => $this->M_DarahMasuk->detail($id_darah_masuk)
+        ];
+
+        $pdf = PDF::loadview('cetak/v_cetak_invoice_darah', $data);
+        return $pdf->download($data['title'] . ' ' . date('d F Y') . '.pdf');
     }
 }

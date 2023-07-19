@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Hash;
 use App\Models\M_User;
 use App\Models\M_Website;
+use DateTime;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class C_User extends Controller
@@ -254,14 +255,15 @@ class C_User extends Controller
         Request()->validate([
             'nama'              => 'required',
             'alamat_user'       => 'required',
-            'nomor_telepon'     => 'required|numeric',
+            'nomor_telepon'     => 'required|min:12|max:13',
             'email'             => 'required|email',
             'foto'              => 'mimes:jpeg,png,jpg|max:2048',
         ], [
             'nama.required'             => 'Nama lengkap harus diisi!',
             'alamat_user.required'      => 'Alamat harus diisi!',
             'nomor_telepon.required'    => 'Nomor telepon harus diisi!',
-            'nomor_telepon.numeric'     => 'Nomor telepon harus angka!',
+            'nomor_telepon.min'         => 'Nomor telepon minimal 12 digit!',
+            'nomor_telepon.max'         => 'Nomor telepon maksimal 13 digit!',
             'email.required'            => 'Email harus diisi!',
             'email.email'               => 'Email harus sesuai format! Contoh: contoh@gmail.com',
             'foto.mimes'                => 'Format Foto Anda harus jpg/jpeg/png!',
@@ -269,6 +271,30 @@ class C_User extends Controller
         ]);
 
         if (Session()->get('role') === 'Donatur') {
+            Request()->validate([
+                'nik'               => 'required|min:16|max:16',
+                'tanggal_lahir'     => 'required|date',
+                'jk'                => 'required',
+            ], [
+                'nik.required'              => 'NIK harus diisi!',
+                // 'nik.numeric'               => 'NIK harus angka!',
+                'nik.min'               => 'NIK harus 16 karakter!',
+                'nik.max'               => 'NIK harus 16 karakter!',
+                'tanggal_lahir.required'    => 'Tanggal lahir harus diisi!',
+                'tanggal_lahir.date'        => 'Tanggal lahir berupa tanggal!',
+                'jk.required'               => 'Jenis kelamin harus diisi!',
+            ]);
+
+            $tanggal_lahir = new DateTime(Request()->tanggal_lahir);
+            $sekarang = new DateTime();
+            $selisih = $sekarang->diff($tanggal_lahir);
+            $umur = $selisih->y;
+
+            if ($umur < 17) {
+                Alert::error('Gagal', "Umur Anda kurang dari 17 tahun!");
+                return redirect()->route('profil');
+            }
+
             $user = $this->M_User->detail_user_donatur(Session()->get('id_user'));
 
             $data_donatur = [

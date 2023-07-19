@@ -2,6 +2,24 @@
 
 @section('content')
 
+@php
+    function tanggal_indonesia($tanggal) {
+    $bulan = array(
+        'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+        'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+    );
+    
+    $tanggal_array = explode('-', $tanggal);
+    $tahun = $tanggal_array[0];
+    $bulan_angka = intval($tanggal_array[1]);
+    $tanggal_angka = intval($tanggal_array[2]);
+    
+    $tanggal_indonesia = $tanggal_angka . ' ' . $bulan[$bulan_angka - 1] . ' ' . $tahun;
+    
+    return $tanggal_indonesia;
+}
+@endphp
+
 <div class="row">
     <div class="col-lg-6">
         <div class="card mb-4">
@@ -29,13 +47,17 @@
                 @endif
                 @if ($user->role === 'Donatur')
                 <div class="form-group">
-                    <label>NIK : {{$user->nik}}</label>
+                    @if ($user->kartu === 'KTP')
+                        <label>NIK : {{$user->nik}}</label>
+                    @else
+                        <label>No. SIM : {{$user->nik}}</label>
+                    @endif
                 </div>
                 <div class="form-group">
                     <label>Jenis Kelamin : {{$user->jk}}</label>
                 </div>
                 <div class="form-group">
-                    <label>Tanggal Lahir : {{date('d F Y', strtotime($user->tanggal_lahir))}}</label>
+                    <label>Tanggal Lahir : {{ tanggal_indonesia($user->tanggal_lahir) }}</label>
                 </div>
                 <div class="form-group">
                     <label>Golongan Darah : {{$user->gol_darah ? $user->gol_darah : '-'}}</label>
@@ -113,8 +135,12 @@
                 @if ($user->role === 'Donatur')
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <label for="nik">NIK</label>
-                            <input type="number" class="form-control @error('nik') is-invalid @enderror" name="nik" id="nik" value="{{$user->nik}}" placeholder="Masukkan NIK" required>
+                            @if ($user->kartu === 'KTP')
+                                <label for="nik">NIK</label>
+                            @else
+                                <label for="nik">No. SIM</label>
+                            @endif
+                            <input type="number" class="form-control @error('nik') is-invalid @enderror" onkeydown="return hanyaAngka(event)" name="nik" id="nik" value="{{$user->nik}}" placeholder="Masukkan No. Identitas" required>
                             @error('nik')
                                 <small class="form-text text-danger">{{$message}}</small>
                             @enderror
@@ -170,7 +196,7 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label for="nomor_telepon">Nomor Telepon</label>
-                        <input type="text" class="form-control @error('nomor_telepon') is-invalid @enderror" name="nomor_telepon" id="nomor_telepon" value="{{$user->nomor_telepon}}" placeholder="Masukkan Nomor Telepon">
+                        <input type="text" class="form-control @error('nomor_telepon') is-invalid @enderror" onkeydown="return hanyaAngka(event)" name="nomor_telepon" id="nomor_telepon" value="{{$user->nomor_telepon}}" placeholder="Masukkan Nomor Telepon">
                         @error('nomor_telepon')
                             <small class="form-text text-danger">{{$message}}</small>
                         @enderror

@@ -1,3 +1,21 @@
+@php
+    function tanggal_indonesia($tanggal) {
+            $bulan = array(
+                'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+                'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+            );
+            
+            $tanggal_array = explode('-', $tanggal);
+            $tahun = $tanggal_array[0];
+            $bulan_angka = intval($tanggal_array[1]);
+            $tanggal_angka = intval($tanggal_array[2]);
+            
+            $tanggal_indonesia = $tanggal_angka . ' ' . $bulan[$bulan_angka - 1] . ' ' . $tahun;
+            
+            return $tanggal_indonesia;
+        }
+@endphp
+
 <!DOCTYPE html>
 <html>
 
@@ -187,7 +205,7 @@
                         <td>{{ $item->golda }}</td>
                         <td>{{ $item->resus }}</td>
                         <td>{{ $item->jumlah }}</td>
-                        <td>{{ date('d F Y', strtotime($item->tanggal_keluar)) }}</td>
+                        <td>{{ tanggal_indonesia($item->tanggal_keluar) }}</td>
                     </tr>
                 @endforeach
 

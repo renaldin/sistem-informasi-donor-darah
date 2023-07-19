@@ -28,6 +28,22 @@
         
             return $durasi;
         }
+
+        function tanggal_indonesia($tanggal) {
+            $bulan = array(
+                'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+                'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+            );
+            
+            $tanggal_array = explode('-', $tanggal);
+            $tahun = $tanggal_array[0];
+            $bulan_angka = intval($tanggal_array[1]);
+            $tanggal_angka = intval($tanggal_array[2]);
+            
+            $tanggal_indonesia = $tanggal_angka . ' ' . $bulan[$bulan_angka - 1] . ' ' . $tahun;
+            
+            return $tanggal_indonesia;
+        }
     @endphp
 
     <div class="row">
@@ -59,13 +75,13 @@
                                         <td>
                                             @if (hitungDurasiJadwalDonor($row->tanggal_donor_kembali) > 5)
                                                 <span
-                                                    class="badge badge-success">{{ date('d F Y', strtotime($row->tanggal_donor_kembali)) }}</span>
+                                                    class="badge badge-success">{{ tanggal_indonesia($row->tanggal_donor_kembali) }}</span>
                                             @elseif(hitungDurasiJadwalDonor($row->tanggal_donor_kembali) > 0)
                                                 <span
-                                                    class="badge badge-warning">{{ date('d F Y', strtotime($row->tanggal_donor_kembali)) }}</span>
+                                                    class="badge badge-warning">{{ tanggal_indonesia($row->tanggal_donor_kembali) }}</span>
                                             @elseif(hitungDurasiJadwalDonor($row->tanggal_donor_kembali) <= 0)
                                                 <span
-                                                    class="badge badge-danger">{{ date('d F Y', strtotime($row->tanggal_donor_kembali)) }}</span>
+                                                    class="badge badge-danger">{{ tanggal_indonesia($row->tanggal_donor_kembali) }}</span>
                                             @endif
                                         </td>
                                         <td class="text-center">
@@ -122,7 +138,7 @@
                                     <tr>
                                         <th>Jadwal Donor Kembali</th>
                                         <td>:</td>
-                                        <td>{{ date('d F Y', strtotime($row->tanggal_donor_kembali)) }}</td>
+                                        <td>{{ tanggal_indonesia($row->tanggal_donor_kembali) }}</td>
                                     </tr>
                                 </table>
                             </div>
@@ -148,7 +164,7 @@
                                                             <td>{{ $item->no_kantong }}</td>
                                                             <td>{{ $item->golongan_darah }}</td>
                                                             <td>{{ $item->resus }}</td>
-                                                            <td>{{ date('d F Y', strtotime($item->tanggal_donor)) }}</td>
+                                                            <td>{{ tanggal_indonesia($item->tanggal_donor) }}</td>
                                                         </tr>
                                                     @endif
                                                 @endif

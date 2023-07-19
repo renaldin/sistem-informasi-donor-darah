@@ -471,7 +471,7 @@ class C_PengajuanEvent extends Controller
             'jam'               => Request()->jam,
             'jumlah_orang'      => Request()->jumlah_orang,
             'upload_surat'      => $file_surat,
-            'status_pengajuan'  => "Dibuat Admin",
+            'status_pengajuan'  => "Disetujui",
             'status_event'      => "Aktif",
             'tanggal_pengajuan' => date('Y-m-d H:i:s')
         ];

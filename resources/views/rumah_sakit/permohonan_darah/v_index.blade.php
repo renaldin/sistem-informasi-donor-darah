@@ -12,6 +12,22 @@ function hitungUmur($tanggal_darah_masuk) {
   $data_umur = $umur.' hari.';
   return $data_umur;
 }
+
+function tanggal_indonesia($tanggal) {
+    $bulan = array(
+        'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+        'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+    );
+    
+    $tanggal_array = explode('-', $tanggal);
+    $tahun = $tanggal_array[0];
+    $bulan_angka = intval($tanggal_array[1]);
+    $tanggal_angka = intval($tanggal_array[2]);
+    
+    $tanggal_indonesia = $tanggal_angka . ' ' . $bulan[$bulan_angka - 1] . ' ' . $tahun;
+    
+    return $tanggal_indonesia;
+}
 @endphp
 
 <div class="row">
@@ -29,7 +45,7 @@ function hitungUmur($tanggal_darah_masuk) {
                         <tr>
                             <th>No</th>
                             <th>Nama RS</th>
-                            <th>Tanggal</th>
+                            <th>Tanggal Permohonan</th>
                             <th>Golda</th>
                             <th>Jumlah</th>
                             <th>Aksi</th>
@@ -42,7 +58,7 @@ function hitungUmur($tanggal_darah_masuk) {
                           <tr>
                               <td>{{$no++}}</td>
                               <td>{{$row->nama_rs}}</td>
-                              <td>{{$row->tanggal_permohonan}}</td>
+                              <td>{{tanggal_indonesia($row->tanggal_permohonan)}}</td>
                               <td>{{$row->golda}}</td>
                               <td>{{$row->jumlah}}</td>
                               <td>
@@ -51,10 +67,10 @@ function hitungUmur($tanggal_darah_masuk) {
                                       <a href="/edit_permohonan_darah/{{$row->id_permohonan_darah}}" class="btn btn-sm btn-success">Edit</a>
                                       <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#batal{{$row->id_permohonan_darah}}">Batal</button>
                                   @elseif($row->status_permohonan === 'Dikirim')
-                                      <button type="button" class="btn btn-xm btn-success" data-toggle="modal" data-target="#terima{{$row->id_permohonan_darah}}">Terima</button>   
-                                      <button type="button" class="btn btn-xm btn-info" data-toggle="modal" data-target="#detail{{$row->id_permohonan_darah}}">Detail</button> 
+                                      <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#terima{{$row->id_permohonan_darah}}">Terima</button>   
+                                      <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#detail{{$row->id_permohonan_darah}}">Detail</button> 
                                   @else
-                                      <button type="button" class="btn btn-xm btn-info" data-toggle="modal" data-target="#detail{{$row->id_permohonan_darah}}">Detail</button>   
+                                      <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#detail{{$row->id_permohonan_darah}}">Detail</button>   
                                   @endif
                               </td>
                           </tr>
@@ -166,12 +182,17 @@ function hitungUmur($tanggal_darah_masuk) {
                 <tr>
                     <th>Tanggal Permohonan</th>
                     <td>:</td>
-                    <td>{{$row->tanggal_permohonan}}</td>
+                    <td>{{tanggal_indonesia($row->tanggal_permohonan)}}</td>
                 </tr>
                 <tr>
                   <th>Golongan Darah</th>
                   <td>:</td>
                   <td>{{$row->golda}}</td>
+              </tr>
+                <tr>
+                  <th>Jenis Darah</th>
+                  <td>:</td>
+                  <td>{{$row->jenis_darah}}</td>
               </tr>
                 <tr>
                     <th>Jumlah {Kantong}</th>
@@ -218,7 +239,7 @@ function hitungUmur($tanggal_darah_masuk) {
                           <td>{{$item->golongan_darah}}</td>
                           <td>{{$item->resus}}</td>
                           <td>{{ hitungUmur($item->tanggal_darah_masuk) }}</td>
-                          <td>{{$item->tanggal_kedaluwarsa}}</td>
+                          <td>{{tanggal_indonesia($item->tanggal_kedaluwarsa)}}</td>
                         </tr>
                       @endif
                       @endforeach
