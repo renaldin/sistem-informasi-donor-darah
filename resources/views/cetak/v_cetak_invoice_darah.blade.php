@@ -193,22 +193,12 @@
 
         <table cellpadding="5">
             <tr>
-                <td style="font-weight: bold">Nama PMI</td>
+                <td style="font-weight: bold">No Kantung</td>
                 <td>:</td>
-                <td>PMI</td>
+                <td>{{ $data_darah->no_kantong }}</td>
             </tr>
             <tr>
-                <td style="font-weight: bold">Nama Rumah Sakit Tujuan</td>
-                <td>:</td>
-                <td>{{ $data_darah->nama_rs }}</td>
-            </tr>
-            <tr>
-                <td style="font-weight: bold">Nama Pasien</td>
-                <td>:</td>
-                <td>{{ $data_darah->nama_pasien }}</td>
-            </tr>
-            <tr>
-                <td style="font-weight: bold">Golda</td>
+                <td style="font-weight: bold">Golongan Darah</td>
                 <td>:</td>
                 <td>{{ $data_darah->golongan_darah }}</td>
             </tr>
@@ -218,14 +208,14 @@
                 <td>{{ $data_darah->resus }}</td>
             </tr>
             <tr>
-                <td style="font-weight: bold">Jumlah</td>
-                <td>:</td>
-                <td>{{ $data_darah->jumlah }}</td>
-            </tr>
-            <tr>
                 <td style="font-weight: bold">Umur Darah</td>
                 <td>:</td>
                 <td>{{ hitungUmur($data_darah->tanggal_darah_masuk) }}</td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold">Tanggal Masuk</td>
+                <td>:</td>
+                <td>{{ tanggal_indonesia($data_darah->tanggal_masuk) }}</td>
             </tr>
             <tr>
                 <td style="font-weight: bold">Tanggal Kedaluwarsa</td>

@@ -77,6 +77,23 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group">
+                        <label for="jenis_darah">Jenis Darah</label>
+                        <select name="jenis_darah" class="form-control @error('jenis_darah') is-invalid @enderror" id="jenis_darah">
+                            @if ($detail->jenis_darah)
+                                <option value="{{$detail->jenis_darah}}">{{$detail->jenis_darah}}</option>
+                            @else
+                                <option value="">Pilih</option>
+                            @endif
+                            <option value="Darah Segar">Darah Segar</option>
+                            <option value="Darah Simpan">Darah Simpan</option>
+                        </select>
+                        @error('jenis_darah')
+                            <small class="form-text text-danger">{{$message}}</small>
+                        @enderror
+                    </div>       
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
                         <label for="touchSpin1">Jumlah (Kantong)</label>
                         <input id="touchSpin1" type="text" name="jumlah" class="form-control @error('jumlah') is-invalid @enderror" value="{{$detail->jumlah}}">
                         @error('jumlah')

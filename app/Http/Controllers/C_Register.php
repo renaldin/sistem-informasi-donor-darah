@@ -103,15 +103,15 @@ class C_Register extends Controller
 
         Request()->validate([
             'nama'              => 'required',
-            'alamat_user'       => 'required',
-            'nomor_telepon'     => 'required|numeric',
+            // 'alamat_user'       => 'required',
+            // 'nomor_telepon'     => 'required|numeric',
             'email'             => 'required|unique:user,email|email',
             'password'          => 'min:6|required',
         ], [
             'nama.required'             => 'Nama lengkap harus diisi!',
-            'alamat_user.required'      => 'Alamat harus diisi!',
-            'nomor_telepon.required'    => 'Nomor telepon harus diisi!',
-            'nomor_telepon.numeric'     => 'Nomor telepon harus angka!',
+            // 'alamat_user.required'      => 'Alamat harus diisi!',
+            // 'nomor_telepon.required'    => 'Nomor telepon harus diisi!',
+            // 'nomor_telepon.numeric'     => 'Nomor telepon harus angka!',
             'email.required'            => 'Email harus diisi!',
             'email.unique'              => 'Email sudah digunakan!',
             'email.email'               => 'Email harus sesuai format! Contoh: contoh@gmail.com',
@@ -120,15 +120,25 @@ class C_Register extends Controller
         ]);
 
         if (Request()->role === 'Donatur') {
+
+            if (Request()->kartu === 'KTP') {
+                $rules = 'required|min:16|max:16|unique:user,nik';
+                $pesanRules = 'NIK harus 16 karakter';
+            } else {
+                $rules = 'required|min:12|max:12|unique:user,nik';
+                $pesanRules = 'No. SIM harus 12 karakter';
+            }
+
             Request()->validate([
-                'nik'               => 'required|min:16|max:16',
+                'nik'               => $rules,
                 'tanggal_lahir'     => 'required|date',
                 'jk'                => 'required',
             ], [
                 'nik.required'              => 'NIK harus diisi!',
                 // 'nik.numeric'               => 'NIK harus angka!',
-                'nik.min'               => 'NIK harus 16 karakter!',
-                'nik.max'               => 'NIK harus 16 karakter!',
+                'nik.min'               => $pesanRules,
+                'nik.max'               => $pesanRules,
+                'nik.unique'               => 'NIK sudah terdaftar!',
                 'tanggal_lahir.required'    => 'Tanggal lahir harus diisi!',
                 'tanggal_lahir.date'        => 'Tanggal lahir berupa tanggal!',
                 'jk.required'               => 'Jenis kelamin harus diisi!',
@@ -159,8 +169,8 @@ class C_Register extends Controller
 
         $data = [
             'nama'              => Request()->nama,
-            'alamat_user'       => Request()->alamat_user,
-            'nomor_telepon'     => Request()->nomor_telepon,
+            // 'alamat_user'       => Request()->alamat_user,
+            // 'nomor_telepon'     => Request()->nomor_telepon,
             'email'             => Request()->email,
             'role'              => Request()->role,
             'password'          => Hash::make(Request()->password),
@@ -171,6 +181,7 @@ class C_Register extends Controller
         if (Request()->role === 'Donatur') {
             $data_donatur = [
                 'id_user'       => $data_terakhir->id_user,
+                'kartu'           => Request()->kartu,
                 'nik'           => Request()->nik,
                 'tanggal_lahir' => Request()->tanggal_lahir,
                 'jk'            => Request()->jk,

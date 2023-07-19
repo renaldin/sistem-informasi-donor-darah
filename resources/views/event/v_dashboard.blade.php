@@ -1,6 +1,25 @@
 @extends('layout.v_template')
 
 @section('content')
+
+@php
+    function tanggal_indonesia($tanggal) {
+        $bulan = array(
+            'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+            'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+        );
+        
+        $tanggal_array = explode('-', $tanggal);
+        $tahun = $tanggal_array[0];
+        $bulan_angka = intval($tanggal_array[1]);
+        $tanggal_angka = intval($tanggal_array[2]);
+        
+        $tanggal_indonesia = $tanggal_angka . ' ' . $bulan[$bulan_angka - 1] . ' ' . $tahun;
+        
+        return $tanggal_indonesia;
+    }
+@endphp
+
 <div class="row mb-3">
     <!-- Earnings (Monthly) Card Example -->
     <div class="col-xl-4 col-md-6 mb-4">
@@ -30,7 +49,7 @@
                 <div class="card-body">
                     <div class="row align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-uppercase mb-1">Rumah Sakit Yang Bergabung</div>
+                            <div class="text-xs font-weight-bold text-uppercase mb-1">Event Tidak Aktif</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $total_event_tidak_aktif }}</div>
                             <div class="mt-2 mb-0 text-muted text-xs">
                                 <span class="text-success mr-2"></span>
@@ -83,7 +102,7 @@
                                     <td>{{$no++}}</td>
                                     <td>{{$row->nama_instansi}}</td>
                                     <td>Nama Kegiatan</td>
-                                    <td>{{$row->tanggal_event}}</td>
+                                    <td>{{tanggal_indonesia($row->tanggal_event)}}</td>
                                     <td>{{$row->jam}}</td>
                                     <td>{{$row->jumlah_orang}}</td>
                                   </tr>
@@ -139,7 +158,7 @@
                                     <td>{{$no++}}</td>
                                     <td>{{$row->nama_instansi}}</td>
                                     <td>Nama Kegiatan</td>
-                                    <td>{{$row->tanggal_event}}</td>
+                                    <td>{{tanggal_indonesia($row->tanggal_event)}}</td>
                                     <td>{{$row->jam}}</td>
                                     <td>{{$row->jumlah_orang}}</td>
                                   </tr>

@@ -12,6 +12,22 @@
             $data_umur = $umur . ' hari.';
             return $data_umur;
         }
+
+        function tanggal_indonesia($tanggal) {
+            $bulan = array(
+                'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+                'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+            );
+            
+            $tanggal_array = explode('-', $tanggal);
+            $tahun = $tanggal_array[0];
+            $bulan_angka = intval($tanggal_array[1]);
+            $tanggal_angka = intval($tanggal_array[2]);
+            
+            $tanggal_indonesia = $tanggal_angka . ' ' . $bulan[$bulan_angka - 1] . ' ' . $tahun;
+            
+            return $tanggal_indonesia;
+        }
     @endphp
 
     <div class="row">
@@ -33,7 +49,7 @@
                     </table>
                 </div>
                 <div class="card-header flex flex-row">
-                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#expired">Kedaluwarsa</button>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#expired">Buang Darah</button>
                 </div>
                 {{-- <div class="card-header flex flex-row">
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambah">Tambah Darah</button>
@@ -64,14 +80,16 @@
                                         <td>{{ hitungUmur($row->tanggal_darah_masuk) }}</td>
                                         <td>
                                             @if ($row->tanggal_kedaluwarsa < date('Y-m-d'))
-                                                <span class="badge badge-danger">{{ $row->tanggal_kedaluwarsa }}</span>
+                                                <span class="badge badge-danger">{{ tanggal_indonesia($row->tanggal_kedaluwarsa) }}</span>
                                             @else
-                                                <span class="badge badge-success">{{ $row->tanggal_kedaluwarsa }}</span>
+                                                <span class="badge badge-success">{{ tanggal_indonesia($row->tanggal_kedaluwarsa) }}</span>
                                             @endif
                                         </td>
                                         <td class="text-center">
-                                            <a href="/edit_darah/{{ $row->id_darah_masuk }}"
-                                                class="btn btn-sm btn-success mb-1">Edit</a>
+                                            {{-- <a href="/edit_darah/{{ $row->id_darah_masuk }}"
+                                                class="btn btn-sm btn-success mb-1">Edit</a> --}}
+                                            <a href="/cetak_invoice_darah/{{ $row->id_darah_masuk }}"
+                                                    class="btn btn-success btn-sm">Cetak</a>
                                             <button type="button" class="btn btn-sm btn-danger mb-1" data-toggle="modal"
                                                 data-target="#buang{{ $row->id_darah_masuk }}">Buang</button>
                                         </td>
@@ -117,7 +135,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p>Apakah Anda yakin akan buang darah ini ini?</p>
+                        <p>Apakah anda yakin akan membuang darah dengan <strong>no kantung {{$row->no_kantong}}</strong>?</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Batal</button>

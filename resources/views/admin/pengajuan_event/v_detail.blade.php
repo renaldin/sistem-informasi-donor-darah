@@ -12,6 +12,22 @@
             $data_umur = $umur . ' hari.';
             return $data_umur;
         }
+
+        function tanggal_indonesia($tanggal) {
+            $bulan = array(
+                'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+                'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+            );
+            
+            $tanggal_array = explode('-', $tanggal);
+            $tahun = $tanggal_array[0];
+            $bulan_angka = intval($tanggal_array[1]);
+            $tanggal_angka = intval($tanggal_array[2]);
+            
+            $tanggal_indonesia = $tanggal_angka . ' ' . $bulan[$bulan_angka - 1] . ' ' . $tahun;
+            
+            return $tanggal_indonesia;
+        }
     @endphp
 
 
@@ -58,7 +74,7 @@
                                 <tr>
                                     <th>Waktu</th>
                                     <td>:</td>
-                                    <td>{{ $detail->tanggal_event }} {{ $detail->jam }}</td>
+                                    <td>{{ tanggal_indonesia($detail->tanggal_event) }} {{ $detail->jam }}</td>
                                 </tr>
                                 <tr>
                                     <th>Target Pendonor</th>
@@ -73,7 +89,7 @@
                                 <tr>
                                     <th>Tanggal Pengajuan</th>
                                     <td>:</td>
-                                    <td>{{ $detail->tanggal_pengajuan }}</td>
+                                    <td>{{ tanggal_indonesia($detail->tanggal_pengajuan) }}</td>
                                 </tr>
                                 <tr>
                                     <th>Status Pengajuan</th>
@@ -108,102 +124,6 @@
                                         {{ $jumlah_donor }}
                                     </td>
                                 </tr>
-=======
-@php
-function hitungUmur($tanggal_darah_masuk) {
-  $tgl_lahir = new DateTime($tanggal_darah_masuk);
-  $sekarang = new DateTime();
-  $diff = $tgl_lahir->diff($sekarang);
-  $umur = $diff->days;
-
-  $data_umur = $umur.' hari.';
-  return $data_umur;
-}
-@endphp
-
-<div class="row">
-    <div class="col-lg-12">
-        <div class="card mb-4">
-            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold">{{$sub_title}}</h6>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <table>
-                            <tr>
-                                <th>Nama Pengaju</th>
-                                <td>:</td>
-                                <td>{{$detail->nama}}</td>
-                            </tr>
-                            <tr>
-                                <th>Email Pengaju</th>
-                                <td>:</td>
-                                <td>{{$detail->email}}</td>
-                            </tr>
-                            <tr>
-                                <th>Kode Instansi</th>
-                                <td>:</td>
-                                <td>{{$detail->kd_instansi}}</td>
-                            </tr>
-                            <tr>
-                                <th>Nama Instansi</th>
-                                <td>:</td>
-                                <td>{{$detail->nama_instansi}}</td>
-                            </tr>
-                            <tr>
-                                <th>Waktu</th>
-                                <td>:</td>
-                                <td>{{$detail->tanggal_event}} {{$detail->jam}}</td>
-                            </tr>
-                            <tr>
-                                <th>Target Pendonor</th>
-                                <td>:</td>
-                                <td>{{$detail->jumlah_orang}}</td>
-                            </tr>
-                            <tr>
-                                <th>Alamat Lengkap</th>
-                                <td>:</td>
-                                <td>{{$detail->alamat_lengkap}}</td>
-                            </tr>
-                            <tr>
-                                <th>Tanggal Pengajuan</th>
-                                <td>:</td>
-                                <td>{{$detail->tanggal_pengajuan}}</td>
-                            </tr>
-                            <tr>
-                                <th>Status Pengajuan</th>
-                                <td>:</td>
-                                <td>
-                                    @if ($detail->status_pengajuan === 'Tidak Disetujui')
-                                        <span class="badge badge-danger">{{$detail->status_pengajuan}}</span>
-                                        @elseif($detail->status_pengajuan === 'Menunggu Persetujuan')    
-                                        <span class="badge badge-primary">{{$detail->status_pengajuan}}</span>
-                                        @elseif($detail->status_pengajuan === 'Disetujui')    
-                                        <span class="badge badge-success">{{$detail->status_pengajuan}}</span>
-                                        @elseif($detail->status_pengajuan === 'Belum Dikirim')    
-                                        <span class="badge badge-warning">{{$detail->status_pengajuan}}</span>
-                                    @endif    
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Status Event</th>
-                                <td>:</td>
-                                <td>
-                                    @if ($detail->status_event === 'Aktif')
-                                        <span class="badge badge-success">{{$detail->status_event}}</span>
-                                        @elseif($detail->status_event === 'Tidak Aktif')    
-                                        <span class="badge badge-danger">{{$detail->status_event}}</span>
-                                    @endif    
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Jumlah Donor</th>
-                                <td>:</td>
-                                <td>
-                                    {{$jumlah_donor}}
-                                </td>
-                            </tr>
                         </table>
                     </div>
                     <div class="col-lg-12 mt-2">
@@ -229,7 +149,7 @@ function hitungUmur($tanggal_darah_masuk) {
                                         <td>{{$item->golongan_darah}}</td>
                                         <td>{{$item->resus}}</td>
                                         <td>{{ hitungUmur($item->tanggal_darah_masuk) }}</td>
-                                        <td>{{$item->tanggal_kedaluwarsa}}</td>
+                                        <td>{{tanggal_indonesia($item->tanggal_kedaluwarsa)}}</td>
                                       </tr>
                                     @endif
                                     @endforeach
@@ -260,7 +180,7 @@ function hitungUmur($tanggal_darah_masuk) {
                                                     <td>{{ $item->golongan_darah }}</td>
                                                     <td>{{ $item->resus }}</td>
                                                     <td>{{ hitungUmur($item->tanggal_darah_masuk) }}</td>
-                                                    <td>{{ $item->tanggal_kedaluwarsa }}</td>
+                                                    <td>{{ tanggal_indonesia($item->tanggal_kedaluwarsa) }}</td>
                                                 </tr>
                                             @endif
                                         @endforeach

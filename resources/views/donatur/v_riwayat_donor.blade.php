@@ -1,6 +1,25 @@
 @extends('layout.v_template')
 
 @section('content')
+
+@php
+    function tanggal_indonesia($tanggal) {
+            $bulan = array(
+                'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+                'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+            );
+            
+            $tanggal_array = explode('-', $tanggal);
+            $tahun = $tanggal_array[0];
+            $bulan_angka = intval($tanggal_array[1]);
+            $tanggal_angka = intval($tanggal_array[2]);
+            
+            $tanggal_indonesia = $tanggal_angka . ' ' . $bulan[$bulan_angka - 1] . ' ' . $tahun;
+            
+            return $tanggal_indonesia;
+        }
+@endphp
+
     <div class="row">
         <div class="col-xl-12 col-lg-12" data-aos="fade-up">
             <div class="card mb-4">
@@ -38,7 +57,7 @@
                         <thead class="thead-light">
                             <tr>
                                 <th>No</th>
-                                <th>Tanggal</th>
+                                <th>Tanggal Donor</th>
                                 <th>Status</th>
                                 <th>Nomor Antrian</th>
                                 <th>Detail</th>
@@ -49,7 +68,7 @@
                             @foreach ($data as $row)
                                 <tr>
                                     <td>{{ $no++ }}</td>
-                                    <td>{{ $row->tanggal_donor }}</td>
+                                    <td>{{ tanggal_indonesia($row->tanggal_donor) }}</td>
                                     <td>
                                         @if ($row->status_donor === 'Ready')
                                             Proses Input Darah

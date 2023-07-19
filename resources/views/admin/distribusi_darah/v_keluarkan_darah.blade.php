@@ -12,6 +12,22 @@
             $data_umur = $umur . ' hari.';
             return $data_umur;
         }
+
+        function tanggal_indonesia($tanggal) {
+            $bulan = array(
+                'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+                'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+            );
+            
+            $tanggal_array = explode('-', $tanggal);
+            $tahun = $tanggal_array[0];
+            $bulan_angka = intval($tanggal_array[1]);
+            $tanggal_angka = intval($tanggal_array[2]);
+            
+            $tanggal_indonesia = $tanggal_angka . ' ' . $bulan[$bulan_angka - 1] . ' ' . $tahun;
+            
+            return $tanggal_indonesia;
+        }
     @endphp
 
 <div class="row">
@@ -32,7 +48,7 @@
                             <tr>
                                 <th>Tanggal Permohonan</th>
                                 <td>:</td>
-                                <td>{{$detail->tanggal_permohonan}}</td>
+                                <td>{{ tanggal_indonesia($detail->tanggal_permohonan) }}</td>
                             </tr>
                             <tr>
                                 <th>Golongan Darah</th>
@@ -43,6 +59,11 @@
                                 <th>Rhesus</th>
                                 <td>:</td>
                                 <td>{{$detail->rhesus}}</td>
+                            </tr>
+                            <tr>
+                                <th>Jenis Darah</th>
+                                <td>:</td>
+                                <td>{{$detail->jenis_darah}}</td>
                             </tr>
                             <tr>
                                 <th>Jumlah {Kantong}</th>
@@ -123,7 +144,7 @@
                                     <td>{{ $row->golongan_darah }}</td>
                                     <td>{{ $row->resus }}</td>
                                     <td>{{ hitungUmur($row->tanggal_darah_masuk) }}</td>
-                                    <td>{{ $row->tanggal_kedaluwarsa }}</td>
+                                    <td>{{ tanggal_indonesia($row->tanggal_kedaluwarsa) }}</td>
                                     <td>
                                         <a href="/hapus_darah_keluar/{{ $row->id_darah_keluar }}"
                                             class="btn btn-sm btn-danger">Hapus</a>

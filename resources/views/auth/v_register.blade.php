@@ -35,6 +35,20 @@
       return true;
   }
 </script>
+
+<script>
+  function handleChange(event) {
+      var selectedValue = event.target.value;
+      var nik = document.getElementById("nik");
+      if(selectedValue === 'KTP'){
+        nik.placeholder = "Masukkan NIK";
+      } else {
+        nik.placeholder = "Masukkan No. SIM";
+      }
+      
+      // Tambahkan logika atau tindakan lain yang ingin Anda lakukan
+    }
+</script>
 </head>
 
 <body class="bg-gradient-login">
@@ -69,39 +83,51 @@
                               @enderror
                             </div>
                           </div>
-                          <div class="col-lg-6">
+                          {{-- <div class="col-lg-6">
                             <div class="form-group">
                               <input type="text" name="alamat_user" class="form-control @error('alamat_user') is-invalid @enderror" value="{{old('alamat_user')}}" placeholder="Masukkan Alamat Lengkap" required>
                               @error('alamat_user')
                                 <small class="form-text text-danger">{{ $message }}</small>
                               @enderror
                             </div>
-                          </div>
+                          </div> --}}
                           <div class="col-lg-6">
                             <div class="form-group">
-                              <input type="text" name="nik" onkeydown="return hanyaAngka(event)" class="form-control @error('nik') is-invalid @enderror" value="{{old('nik')}}" placeholder="Masukkan NIK" required>
-                              @error('nik')
+                              <select name="kartu" class="form-control @error('kartu') is-invalid @enderror" onchange="handleChange(event)" id="kartu" required>
+                                <option value="">-- Jenis Kartu --</option>
+                                <option value="KTP">KTP</option>
+                                <option value="SIM">SIM</option>
+                              </select>
+                              @error('kartu')
                                 <small class="form-text text-danger">{{ $message }}</small>
                               @enderror
                             </div>
                           </div>
                           <div class="col-lg-6">
+                            <div class="form-group">
+                              <input type="text" id="nik" name="nik" onkeydown="return hanyaAngka(event)" class="form-control @error('nik') is-invalid @enderror" value="{{old('nik')}}" placeholder="Masukkan NIK" required>
+                              @error('nik')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                              @enderror
+                            </div>
+                          </div>
+                          {{-- <div class="col-lg-6">
                             <div class="form-group">
                               <input type="text" name="nomor_telepon" onkeydown="return hanyaAngka(event)" class="form-control @error('nomor_telepon') is-invalid @enderror" value="{{old('nomor_telepon')}}" placeholder="Nomor Telepon" required>
                               @error('nomor_telepon')
                                 <small class="form-text text-danger">{{ $message }}</small>
                               @enderror
                             </div>
-                          </div>
-                          <div class="col-lg-4">
+                          </div> --}}
+                          <div class="col-lg-6">
                             <div class="form-group">
-                              <input type="date" name="tanggal_lahir" class="form-control @error('tanggal_lahir') is-invalid @enderror" value="{{old('tanggal_lahir')}}" placeholder="Masukkan Tanggal Lahir" required>
+                              <input type="text" name="tanggal_lahir" class="form-control @error('tanggal_lahir') is-invalid @enderror" value="{{old('tanggal_lahir')}}" placeholder="Tanggal Lahir" onfocus="(this.type='date')" required>
                               @error('tanggal_lahir')
                                 <small class="form-text text-danger">{{ $message }}</small>
                               @enderror
                             </div>
                           </div>
-                          <div class="col-lg-4">
+                          <div class="col-lg-6">
                             <div class="form-group">
                               <select name="jk" class="form-control @error('jk') is-invalid @enderror" required>
                                 <option value="">-- Jenis Kelamin --</option>
@@ -113,7 +139,7 @@
                               @enderror
                             </div>
                           </div>
-                          <div class="col-lg-4">
+                          <div class="col-lg-6">
                             <div class="form-group">
                               <select name="gol_darah" class="form-control @error('gol_darah') is-invalid @enderror">
                                 <option value="">-- Gol Darah --</option>
@@ -170,22 +196,22 @@
                               @enderror
                             </div>
                           </div>
-                          <div class="col-lg-6">
+                          {{-- <div class="col-lg-6">
                             <div class="form-group">
                               <input type="text" name="nomor_telepon" onkeydown="return hanyaAngka(event)" class="form-control @error('nomor_telepon') is-invalid @enderror" value="{{old('nomor_telepon')}}" placeholder="Masukkan Nomor Telepon" required>
                               @error('nomor_telepon')
                                 <small class="form-text text-danger">{{ $message }}</small>
                               @enderror
                             </div>
-                          </div>
-                          <div class="col-lg-6">
+                          </div> --}}
+                          {{-- <div class="col-lg-6">
                             <div class="form-group">
                               <input type="text" name="alamat_user" class="form-control @error('alamat_user') is-invalid @enderror" value="{{old('alamat_user')}}" placeholder="Masukkan Alamat Lengkap" required>
                               @error('alamat_user')
                                 <small class="form-text text-danger">{{ $message }}</small>
                               @enderror
                             </div>
-                          </div>
+                          </div> --}}
                           <div class="col-lg-6">
                             <div class="form-group">
                               <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{old('email')}}" placeholder="Masukkan Alamat Email" required>
@@ -229,22 +255,22 @@
                               @enderror
                             </div>
                           </div>
-                          <div class="col-lg-6">
+                          {{-- <div class="col-lg-6">
                             <div class="form-group">
                               <input type="text" name="nomor_telepon" onkeydown="return hanyaAngka(event)" class="form-control @error('nomor_telepon') is-invalid @enderror" value="{{old('nomor_telepon')}}" placeholder="Masukkan Nomor Telepon" required>
                               @error('nomor_telepon')
                                 <small class="form-text text-danger">{{ $message }}</small>
                               @enderror
                             </div>
-                          </div>
-                          <div class="col-lg-6">
+                          </div> --}}
+                          {{-- <div class="col-lg-6">
                             <div class="form-group">
                               <input type="text" name="alamat_user" class="form-control @error('alamat_user') is-invalid @enderror" value="{{old('alamat_user')}}" placeholder="Masukkan Alamat Lengkap" required>
                               @error('alamat_user')
                                 <small class="form-text text-danger">{{ $message }}</small>
                               @enderror
                             </div>
-                          </div>
+                          </div> --}}
                           <div class="col-lg-6">
                             <div class="form-group">
                               <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{old('email')}}" placeholder="Masukkan Alamat Email" required>
@@ -301,6 +327,8 @@
   <script src="{{ asset('template/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
   <script src="{{ asset('template/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
   <script src="{{ asset('template/js/ruang-admin.min.js') }}"></script>
+
+  
 </body>
 
 </html>

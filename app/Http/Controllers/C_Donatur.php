@@ -108,14 +108,11 @@ class C_Donatur extends Controller
         return redirect()->route('daftar_donor')->with('gagal', 'Maaf Donor Darah Gagal. Anda Kurang Memenuhi Persyaratan!');
     }
 
-    public function riwayat_donor($nik = null)
+    public function riwayat_donor()
     {
-        if (!Request()->nik && $nik == null) {
-            return redirect()->route('landingpage')->with('error', 'NIK wajib diisi.');
-        }
+        $user_donatur = $this->M_User->detail_user_donatur(Session()->get('id_user'));
 
-
-        $cek_nik = $this->M_Anggota->cek_nik(Request()->nik ? Request()->nik : $nik);
+        $cek_nik = $this->M_Anggota->cek_nik($user_donatur->nik);
 
         if ($cek_nik) {
             $data = [

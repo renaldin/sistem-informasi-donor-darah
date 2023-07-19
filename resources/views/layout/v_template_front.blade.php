@@ -35,6 +35,16 @@
             }
         }
     </style>
+
+<script>
+    function hanyaAngka(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        }
+        return true;
+    }
+  </script>
 </head>
 
 <body id="page-top">
@@ -168,6 +178,20 @@
     </script>
     <script>
         AOS.init();
+    </script>
+
+    <script>
+        function hideKehamilan() {
+            var inputKehamilan = document.getElementById("bulanKehamilan");
+            
+            inputKehamilan.style.display = "none";
+        }
+
+        function showKehamilan() {
+            var inputKehamilan = document.getElementById("bulanKehamilan");
+            
+            inputKehamilan.style.display = "block";
+        }
     </script>
 </body>
 

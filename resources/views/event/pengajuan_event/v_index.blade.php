@@ -2,6 +2,24 @@
 
 @section('content')
 
+@php
+  function tanggal_indonesia($tanggal) {
+    $bulan = array(
+        'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+        'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+    );
+    
+    $tanggal_array = explode('-', $tanggal);
+    $tahun = $tanggal_array[0];
+    $bulan_angka = intval($tanggal_array[1]);
+    $tanggal_angka = intval($tanggal_array[2]);
+    
+    $tanggal_indonesia = $tanggal_angka . ' ' . $bulan[$bulan_angka - 1] . ' ' . $tahun;
+    
+    return $tanggal_indonesia;
+}
+@endphp
+
 <div class="row">
     <div class="col-lg-12">
         <div class="card mb-4">
@@ -28,7 +46,7 @@
                             <tr>
                                 <td>{{$no++}}</td>
                                 <td>{{$row->nama_instansi}}</td>
-                                <td>{{$row->tanggal_event}} {{$row->jam}}</td>
+                                <td>{{tanggal_indonesia($row->tanggal_event)}} {{$row->jam}}</td>
                                 <td>
                                     @if ($row->status_pengajuan === 'Tidak Disetujui')
                                         <span class="badge badge-danger">{{$row->status_pengajuan}}</span>
@@ -150,7 +168,7 @@
                 <tr>
                     <th>Waktu</th>
                     <td>:</td>
-                    <td>{{$row->tanggal_event}} {{$row->jam}}</td>
+                    <td>{{tanggal_indonesia($row->tanggal_event)}} {{$row->jam}}</td>
                 </tr>
                 <tr>
                     <th>Target Pendonor</th>
@@ -165,7 +183,7 @@
                 <tr>
                     <th>Tanggal Pengajuan</th>
                     <td>:</td>
-                    <td>{{$row->tanggal_pengajuan}}</td>
+                    <td>{{tanggal_indonesia($row->tanggal_pengajuan)}}</td>
                 </tr>
                 <tr>
                     <th>Status Pengajuan</th>
