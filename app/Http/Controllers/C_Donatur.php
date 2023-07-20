@@ -88,10 +88,17 @@ class C_Donatur extends Controller
             ];
             $cek_nik = $this->M_Anggota->cek_nik(Request()->nik);
             $data_terakhir = $cek_nik;
+
             if (!$cek_nik) {
                 $this->M_Anggota->tambah($data);
                 $data_terakhir = $this->M_Anggota->data_terakhir();
             }
+
+            $cek_status_donor = $this->M_Donor->cek_status_donor($data_terakhir->id_anggota);
+            if ($cek_status_donor->status_donor == 'Proses') {
+                return redirect()->route('riwayat_donor')->with('gagal', 'Maaf Pendaftaran Donor Anda Sebelumnya Belum Di Proses. Silahkan Tunggu Sampai Di Proses Terlebih Dahulu!.');
+            }
+
             $nomor_antrian = $this->M_Donor->get_nomor_antrian();
             $data_donor = [
                 'id_anggota'                => $data_terakhir->id_anggota,
