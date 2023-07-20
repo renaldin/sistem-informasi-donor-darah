@@ -1,24 +1,21 @@
 @extends('layout.v_template')
 
 @section('content')
-
-@php
-    function tanggal_indonesia($tanggal) {
-            $bulan = array(
-                'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
-                'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
-            );
-            
+    @php
+        function tanggal_indonesia($tanggal)
+        {
+            $bulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+        
             $tanggal_array = explode('-', $tanggal);
             $tahun = $tanggal_array[0];
             $bulan_angka = intval($tanggal_array[1]);
             $tanggal_angka = intval($tanggal_array[2]);
-            
+        
             $tanggal_indonesia = $tanggal_angka . ' ' . $bulan[$bulan_angka - 1] . ' ' . $tahun;
-            
+        
             return $tanggal_indonesia;
         }
-@endphp
+    @endphp
 
     <div class="row">
         <div class="col-xl-12 col-lg-12" data-aos="fade-up">
@@ -32,6 +29,14 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                         {{ session('berhasil') }}
+                    </div>
+                @endif
+                @if (session('gagal'))
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        {{ session('gagal') }}
                     </div>
                 @endif
                 <div class="table-responsive p-3">
@@ -118,8 +123,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary"
-                            onclick="document.getElementById('input-catatan').value=document.getElementById('catatan').value;document.getElementById('form-cek').submit();">Simpan</button>
+                        {{-- <button type="button" class="btn btn-primary"
+                            onclick="document.getElementById('input-catatan').value=document.getElementById('catatan').value;document.getElementById('form-cek').submit();">Simpan</button> --}}
                     </div>
                 </div>
             </div>

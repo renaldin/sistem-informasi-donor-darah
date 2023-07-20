@@ -68,4 +68,12 @@ class M_Donor extends Model
         }
         return 1;
     }
+
+    public function cek_status_donor($id_anggota)
+    {
+        return DB::table($this->table)
+            ->orderBy('id_donor', 'DESC')
+            ->where('id_anggota', $id_anggota)
+            ->first();
+    }
 }
