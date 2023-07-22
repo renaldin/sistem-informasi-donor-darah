@@ -75,7 +75,7 @@
                 aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Sub Menu</h6>
-                    <a class="collapse-item @if ($sub_title === 'Data Distribusi Darah' || $sub_title === 'Form Keluarkan Darah') active @endif"
+                    <a class="collapse-item @if ($sub_title === 'Data Distribusi Darah' || $sub_title === 'Tambah Distribusi Darah' || $sub_title === 'Form Keluarkan Darah') active @endif"
                         href="/distribusi_darah">Data Distribusi Darah</a>
                     <a class="collapse-item  @if ($sub_title === 'Riwayat Distribusi Darah') active @endif"
                         href="/riwayat_distribusi_darah">Riwayat Distribusi Darah</a>

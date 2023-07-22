@@ -40,10 +40,13 @@
   function handleChange(event) {
       var selectedValue = event.target.value;
       var nik = document.getElementById("nik");
+      var div_nik = document.getElementById("div_nik");
       if(selectedValue === 'KTP'){
         nik.placeholder = "Masukkan NIK";
+        div_nik.style.display = "block";
       } else {
         nik.placeholder = "Masukkan No. SIM";
+        div_nik.style.display = "block";
       }
       
       // Tambahkan logika atau tindakan lain yang ingin Anda lakukan
@@ -103,9 +106,9 @@
                               @enderror
                             </div>
                           </div>
-                          <div class="col-lg-6">
+                          <div class="col-lg-6" id="div_nik" style="display: none;">
                             <div class="form-group">
-                              <input type="text" id="nik" name="nik" onkeydown="return hanyaAngka(event)" class="form-control @error('nik') is-invalid @enderror" value="{{old('nik')}}" placeholder="Masukkan NIK" required>
+                              <input type="text" id="nik" name="nik" onkeydown="return hanyaAngka(event)" class="form-control @error('nik') is-invalid @enderror" value="{{old('nik')}}" placeholder="Masukkan No. Identitas" required>
                               @error('nik')
                                 <small class="form-text text-danger">{{ $message }}</small>
                               @enderror

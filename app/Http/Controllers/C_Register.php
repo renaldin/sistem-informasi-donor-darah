@@ -95,6 +95,7 @@ class C_Register extends Controller
 
     public function register()
     {
+
         if (Session()->get('email')) {
             if (Session()->get('role')) {
                 return redirect()->route('dashboard');
@@ -122,10 +123,10 @@ class C_Register extends Controller
         if (Request()->role === 'Donatur') {
 
             if (Request()->kartu === 'KTP') {
-                $rules = 'required|min:16|max:16|unique:user,nik';
+                $rules = 'required|min:16|max:16|unique:user_donatur,nik';
                 $pesanRules = 'NIK harus 16 karakter';
             } else {
-                $rules = 'required|min:12|max:12|unique:user,nik';
+                $rules = 'required|min:12|max:12|unique:user_donatur,nik';
                 $pesanRules = 'No. SIM harus 12 karakter';
             }
 

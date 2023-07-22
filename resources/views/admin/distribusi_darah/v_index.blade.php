@@ -26,6 +26,9 @@
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold">{{$sub_title}}</h6>
             </div>
+            <div class="card-header flex flex-row">
+                <a href="/tambah_distribusi_darah" class="btn btn-primary">Tambah Distribusi Darah</a>
+              </div>
             <div class="table-responsive p-3">
                 <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                     <thead class="thead-light">
