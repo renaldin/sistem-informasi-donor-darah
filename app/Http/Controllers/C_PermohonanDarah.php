@@ -339,6 +339,123 @@ class C_PermohonanDarah extends Controller
         return view('admin.distribusi_darah.v_index', $data);
     }
 
+    public function tambah_distribusi_darah()
+    {
+        if (!Session()->get('email')) {
+            return redirect()->route('login');
+        }
+
+        $data = [
+            'title'                 => 'Distribusi Darah',
+            'sub_title'             => 'Tambah Distribusi Darah',
+            'data_web'              => $this->M_Website->detail(1),
+            'gol'                   => $this->M_DarahMasuk->countGol('Sudah Masuk'),
+            'user'                  => $this->M_User->detail(Session()->get('id_user'))
+        ];
+
+        return view('admin.distribusi_darah.v_tambah', $data);
+    }
+
+    public function proses_tambah_distribusi_darah()
+    {
+        if (!Session()->get('email')) {
+            return redirect()->route('login');
+        }
+
+        Request()->validate([
+            'nama_rs'           => 'required',
+            'nama_dokter'       => 'required',
+            'nama_pasien'       => 'required',
+            'golda'             => 'required',
+            'rhesus'            => 'required',
+            'jenis_darah'       => 'required',
+            'jumlah'            => 'required|numeric',
+            'upload_surat'      => 'required|mimes:pdf|max:5048',
+        ], [
+            'nama_rs.required'          => 'Nama Rumah Sakit harus diisi!',
+            'nama_dokter.required'      => 'Nama Dokter harus diisi!',
+            'nama_pasien.required'      => 'Nama Pasien harus diisi!',
+            'golda.required'            => 'Golongan Darah harus diisi!',
+            'rhesus.required'           => 'Rhesus harus diisi!',
+            'jenis_darah.required'      => 'Jenis Darah harus diisi!',
+            'jumlah.required'           => 'Jumlah (Kantong) harus diisi!',
+            'jumlah.numeric'            => 'Jumlah (Kantong) harus diisi!',
+            'upload_surat.required'     => 'Surat harus diisi!',
+            'upload_surat.mimes'        => 'Format Surat harus PDF!',
+            'upload_surat.max'          => 'Ukuran Surat maksimal 5 mb',
+        ]);
+
+        $stok = $this->M_DarahMasuk->countGol('Sudah Masuk');
+        $golda = Request()->golda;
+        $rhesus = Request()->rhesus;
+        $jumlah = Request()->jumlah;
+
+        if ($golda == 'A' && $rhesus == 'Positif') {
+            if ($jumlah > $stok['a+']) {
+                // ->autoClose(30000)
+                Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah A dengan Rhesus Positif stok tersisa ' . $stok['a+'] . ' kantong.');
+                return redirect()->back();
+            }
+        } elseif ($golda == 'B' && $rhesus == 'Positif') {
+            if ($jumlah > $stok['b+']) {
+                Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah B dengan Rhesus Positif stok tersisa ' . $stok['b+'] . ' kantong.');
+                return redirect()->back();
+            }
+        } elseif ($golda == 'AB' && $rhesus == 'Positif') {
+            if ($jumlah > $stok['ab+']) {
+                Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah AB dengan Rhesus Positif stok tersisa ' . $stok['ab+'] . ' kantong.');
+                return redirect()->back();
+            }
+        } elseif ($golda == 'O' && $rhesus == 'Positif') {
+            if ($jumlah > $stok['o+']) {
+                Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah O dengan Rhesus Positif stok tersisa ' . $stok['o+'] . ' kantong.');
+                return redirect()->back();
+            }
+        } elseif ($golda == 'A' && $rhesus == 'Negatif') {
+            if ($jumlah > $stok['a-']) {
+                Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah A dengan Rhesus Negatif stok tersisa ' . $stok['a-'] . ' kantong.');
+                return redirect()->back();
+            }
+        } elseif ($golda == 'B' && $rhesus == 'Negatif') {
+            if ($jumlah > $stok['b-']) {
+                Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah B dengan Rhesus Negatif stok tersisa ' . $stok['b-'] . ' kantong.');
+                return redirect()->back();
+            }
+        } elseif ($golda == 'AB' && $rhesus == 'Negatif') {
+            if ($jumlah > $stok['ab-']) {
+                Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah AB dengan Rhesus Negatif stok tersisa ' . $stok['ab-'] . ' kantong.');
+                return redirect()->back();
+            }
+        } elseif ($golda == 'O' && $rhesus == 'Negatif') {
+            if ($jumlah > $stok['o-']) {
+                Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah O dengan Rhesus Negatif stok tersisa ' . $stok['o-'] . ' kantong.');
+                return redirect()->back();
+            }
+        }
+
+        $file = Request()->upload_surat;
+        $file_surat = date('mdYHis') . ' ' . Request()->nama_rs . '.' . $file->extension();
+        $file->move(public_path($this->public_path), $file_surat);
+
+        $data = [
+            'id_user'               => Session()->get('id_user'),
+            'nama_rs'               => Request()->nama_rs,
+            'nama_dokter'           => Request()->nama_dokter,
+            'nama_pasien'           => Request()->nama_pasien,
+            'golda'                 => Request()->golda,
+            'rhesus'                => Request()->rhesus,
+            'jenis_darah'           => Request()->jenis_darah,
+            'jumlah'                => Request()->jumlah,
+            'upload_surat'          => $file_surat,
+            'status_permohonan'     => "Menunggu Proses",
+            'tanggal_permohonan'    => date('Y-m-d H:i:s')
+        ];
+
+        $this->M_PermohonanDarah->tambah($data);
+        Alert::success('Berhasil', 'Data permohonan darah berhasil ditambah.');
+        return redirect()->route('distribusi_darah');
+    }
+
     public function riwayat_distribusi_darah()
     {
         if (!Session()->get('email')) {

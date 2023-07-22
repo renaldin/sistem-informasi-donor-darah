@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 19, 2023 at 08:10 PM
+-- Generation Time: Jul 22, 2023 at 01:34 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.0.19
 
@@ -190,7 +190,8 @@ INSERT INTO `darah_keluar` (`id_darah_keluar`, `id_darah`, `id_permohonan_darah`
 (9, 10, 6, '2023-06-18 02:39:45'),
 (11, 15, 7, '2023-07-02 09:32:47'),
 (12, 16, 7, '2023-07-02 09:33:01'),
-(13, 19, 8, '2023-07-19 15:30:24');
+(13, 19, 8, '2023-07-19 15:30:24'),
+(14, 21, 12, '2023-07-22 18:33:07');
 
 -- --------------------------------------------------------
 
@@ -211,7 +212,6 @@ CREATE TABLE `darah_masuk` (
 --
 
 INSERT INTO `darah_masuk` (`id_darah_masuk`, `id_darah`, `id_user`, `status_darah_masuk`, `tanggal_masuk`) VALUES
-(23, 21, 2, 'Sudah Masuk', '2023-07-01 13:27:48'),
 (24, 22, 2, 'Sudah Masuk', '2023-07-01 13:47:46'),
 (25, 23, 2, 'Sudah Masuk', NULL),
 (26, 24, 2, 'Sudah Masuk', NULL),
@@ -344,7 +344,8 @@ INSERT INTO `permohonan_darah` (`id_permohonan_darah`, `id_user`, `nama_rs`, `na
 (8, 19, 'Rumah Sakit 10', 'Nama Dokter', 'Nama Pasien', 'A', 'Positif', 'Darah Segar', 3, '07102023205910 Rumah Sakit 10.pdf', 'Menunggu Proses', '2023-07-10 20:59:42'),
 (9, 19, 'Rumah Sakit 10', 'Dokrer', 'Nama Pasien', 'A', 'Positif', 'Darah Segar', 2, '07182023155516 Rumah Sakit 10.pdf', 'Belum Dikirim', '2023-07-18 15:55:16'),
 (10, 19, 'Rumah Sakit 10', 'Nama Dokter', 'Nama Pasien', 'A', 'Positif', 'Darah Segar', 1, '07192023125829 Rumah Sakit 10.pdf', 'Belum Dikirim', '2023-07-19 12:58:29'),
-(11, 19, 'Rumah Sakit 10', 'Nama Dokter', 'Nama Pasien', 'A', 'Positif', 'Darah Simpan', 1, '07192023232440 Rumah Sakit 10.pdf', 'Belum Dikirim', '2023-07-19 23:24:40');
+(11, 19, 'Rumah Sakit 10', 'Nama Dokter', 'Nama Pasien', 'A', 'Positif', 'Darah Simpan', 1, '07192023232440 Rumah Sakit 10.pdf', 'Belum Dikirim', '2023-07-19 23:24:40'),
+(12, 2, 'Rumah Sakit Update', 'Nama Dokter', 'Nama Pasien', 'A', 'Positif', 'Darah Segar', 1, '07222023183237 Rumah Sakit Update.pdf', 'Dikirim', '2023-07-22 18:32:37');
 
 -- --------------------------------------------------------
 
@@ -569,7 +570,7 @@ ALTER TABLE `darah_buang`
 -- AUTO_INCREMENT for table `darah_keluar`
 --
 ALTER TABLE `darah_keluar`
-  MODIFY `id_darah_keluar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_darah_keluar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `darah_masuk`
@@ -593,7 +594,7 @@ ALTER TABLE `event`
 -- AUTO_INCREMENT for table `permohonan_darah`
 --
 ALTER TABLE `permohonan_darah`
-  MODIFY `id_permohonan_darah` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_permohonan_darah` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `user`
