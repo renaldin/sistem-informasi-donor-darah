@@ -54,7 +54,7 @@ class C_Donatur extends Controller
 
         $anggota = $this->M_Anggota->cek_nik(Request()->nik);
         // dd($anggota->tanggal_donor_kembali);
-        if ($anggota->tanggal_donor_kembali) {
+        if ($anggota) {
             if (date('Y-m-d') < $anggota->tanggal_donor_kembali) {
                 return redirect()->route('daftar_donor')->with('gagal', 'Anda belum waktunya untuk daftar donor kembali. Daftar kembali pada tanggal ' . date('d m Y', strtotime($anggota->tanggal_donor_kembali)));
             }
@@ -100,14 +100,28 @@ class C_Donatur extends Controller
             $cek_nik = $this->M_Anggota->cek_nik(Request()->nik);
             $data_terakhir = $cek_nik;
 
+            // jika nik tidak ditemukan maka tambah data sebagai anggota baru
             if (!$cek_nik) {
                 $this->M_Anggota->tambah($data);
                 $data_terakhir = $this->M_Anggota->data_terakhir();
-            }
-
-            $cek_status_donor = $this->M_Donor->cek_status_donor($data_terakhir->id_anggota);
-            if ($cek_status_donor->status_donor == 'Proses') {
-                return redirect()->route('riwayat_donor')->with('gagal', 'Maaf Pendaftaran Donor Anda Sebelumnya Belum Di Proses. Silahkan Tunggu Sampai Di Proses Terlebih Dahulu!.');
+            } else {
+                // jika nik ditemukan maka update data anggota tersebut
+                // kemudian cek apakah pendonoran sebelumnya sudah di proses
+                $cek_status_donor = $this->M_Donor->cek_status_donor($data_terakhir->id_anggota);
+                if ($cek_status_donor->status_donor == 'Proses') {
+                    return redirect()->route('riwayat_donor')->with('gagal', 'Maaf Pendaftaran Donor Anda Sebelumnya Belum Di Proses. Silahkan Tunggu Sampai Di Proses Terlebih Dahulu!.');
+                }
+                $data2 = [
+                    'id_anggota'            => $data_terakhir->id_anggota,
+                    'nik'                   => Request()->nik,
+                    'nama_anggota'          => Request()->nama,
+                    'jenis_kelamin'         => Request()->jenis_kelamin,
+                    'no_wa'                 => Request()->no_wa,
+                    'alamat'                => Request()->alamat,
+                    'status_anggota'        => 'Mandiri',
+                    'tanggal_donor_kembali' => date('Y-m-d', strtotime('+60 days', strtotime(date('Y-m-d')))),
+                ];
+                $this->M_Anggota->edit($data2);
             }
 
             $nomor_antrian = $this->M_Donor->get_nomor_antrian();
