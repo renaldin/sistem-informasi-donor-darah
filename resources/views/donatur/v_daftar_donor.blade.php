@@ -74,7 +74,7 @@
                                     <label for="alamat">Alamat</label>
                                     <input type="text" class="form-control @error('alamat') is-invalid @enderror"
                                         id="alamat" name="alamat" placeholder="Masukan Alamat"
-                                        value="{{ $data ? $data->alamat : $user->alamat_user }}" readonly>
+                                        value="{{ $data ? $data->alamat : $user->alamat_user }}" >
                                     @error('alamat')
                                         <small class="form-text text-danger">{{ $message }}</small>
                                     @enderror

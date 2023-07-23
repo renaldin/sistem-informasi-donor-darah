@@ -54,8 +54,10 @@ class C_Donatur extends Controller
 
         $anggota = $this->M_Anggota->cek_nik(Request()->nik);
         // dd($anggota->tanggal_donor_kembali);
-        if (date('Y-m-d') < $anggota->tanggal_donor_kembali) {
-            return redirect()->route('daftar_donor')->with('gagal', 'Anda belum waktunya untuk daftar donor kembali. Daftar kembali pada tanggal ' . date('d m Y', strtotime($anggota->tanggal_donor_kembali)));
+        if ($anggota->tanggal_donor_kembali) {
+            if (date('Y-m-d') < $anggota->tanggal_donor_kembali) {
+                return redirect()->route('daftar_donor')->with('gagal', 'Anda belum waktunya untuk daftar donor kembali. Daftar kembali pada tanggal ' . date('d m Y', strtotime($anggota->tanggal_donor_kembali)));
+            }
         }
 
         // dd(Request());
@@ -86,6 +88,15 @@ class C_Donatur extends Controller
                 'status_anggota'        => 'Mandiri',
                 'tanggal_donor_kembali' => date('Y-m-d', strtotime('+60 days', strtotime(date('Y-m-d')))),
             ];
+
+            $data_user = [
+                'id_user'       => Session()->get('id_user'),
+                'alamat_user'   => Request()->alamat,
+                'nomor_telepon' => Request()->no_wa
+            ];
+
+            $this->M_User->edit($data_user);
+
             $cek_nik = $this->M_Anggota->cek_nik(Request()->nik);
             $data_terakhir = $cek_nik;
 
