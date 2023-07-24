@@ -72,11 +72,15 @@ Route::group(['middleware' => 'revalidate'], function () {
 
         // Kelola User
         Route::get('/data_user', [C_User::class, 'index'])->name('data_user');
-        Route::get('/tambah_user', [C_User::class, 'tambah_user']);
         Route::post('/tambah_user', [C_User::class, 'proses_tambah_user']);
         Route::get('/edit_user/{id}', [C_User::class, 'edit_user'])->name('edit_user');
         Route::post('/edit_user/{id}', [C_User::class, 'proses_edit_user']);
         Route::get('/hapus_user/{id}', [C_User::class, 'hapus_user']);
+
+        Route::get('/tambah_petugas_kesehatan', [C_User::class, 'tambah_petugas_kesehatan']);
+        Route::get('/tambah_user_event', [C_User::class, 'tambah_event']);
+        Route::get('/tambah_donatur', [C_User::class, 'tambah_donatur']);
+        Route::get('/tambah_rumah_sakit', [C_User::class, 'tambah_rumah_sakit']);
 
         // Kelola darah
         Route::get('/data_stok_darah', [C_StokDarah::class, 'index'])->name('data_stok_darah');

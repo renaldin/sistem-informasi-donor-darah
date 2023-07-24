@@ -33,6 +33,28 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
+                                <label for="kartu">Jenis Kartu</label>
+                                <select name="kartu" class="form-control @error('kartu') is-invalid @enderror" required onchange="handleChange(event)" id="kartu">
+                                    <option value="">-- Jenis Kartu --</option>
+                                    <option value="KTP">KTP</option>
+                                    <option value="SIM">SIM</option>
+                                </select>
+                                @error('kartu')
+                                    <small class="form-text text-danger">{{ $message }}</small>
+                                @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-6" id="div_nik" style="display: none;">
+                                <div class="form-group">
+                                <label for="nik">NIK/No. SIM</label>
+                                <input type="text" id="nik_sim" name="nik" onkeydown="return hanyaAngka(event)" class="form-control @error('nik') is-invalid @enderror" value="{{old('nik')}}">
+                                @error('nik')
+                                    <small class="form-text text-danger">{{ $message }}</small>
+                                @enderror
+                                </div>
+                            </div>
+                            {{-- <div class="col-lg-6">
+                                <div class="form-group">
                                     <label for="nik">NIK</label>
                                     <input type="number" class="form-control @error('nik') is-invalid @enderror"
                                         name="nik" id="nik" value="{{ old('nik') }}"
@@ -41,12 +63,12 @@
                                         <small class="form-text text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="no_wa">No. Whatsapp</label>
                                     <input type="number" class="form-control @error('no_wa') is-invalid @enderror"
-                                        name="no_wa" id="no_wa" value="{{ old('no_wa') }}"
+                                        name="no_wa" onkeydown="return hanyaAngka(event)" id="no_wa" value="{{ old('no_wa') }}"
                                         placeholder="Masukkan Nomor Whatsapp">
                                     @error('no_wa')
                                         <small class="form-text text-danger">{{ $message }}</small>
@@ -185,4 +207,31 @@
         </div>
     </div>
     </div>
+
+    <script>
+        function hanyaAngka(evt) {
+            var charCode = (evt.which) ? evt.which : event.keyCode;
+            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                return false;
+            }
+            return true;
+        }
+      </script>
+      
+      <script>
+        function handleChange(event) {
+            var selectedValue = event.target.value;
+            var nik = document.getElementById("nik_sim");
+            var div_nik = document.getElementById("div_nik");
+            if(selectedValue === 'KTP'){
+                nik.placeholder = "Masukkan NIK";
+                div_nik.style.display = "block";
+            } else {
+              nik.placeholder = "Masukkan No. SIM";
+              div_nik.style.display = "block";
+            }
+            
+            // Tambahkan logika atau tindakan lain yang ingin Anda lakukan
+          }
+        </script>
 @endsection

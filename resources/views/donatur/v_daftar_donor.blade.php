@@ -46,7 +46,21 @@
                         <div class="row border-bottom mb-3">
                             <div class="col-12 col-lg-6">
                                 <div class="form-group">
-                                    <label for="nik">NIK</label>
+                                    <label for="nik">Kartu</label>
+                                    <input type="text" class="form-control @error('kartu') is-invalid @enderror"
+                                        id="kartu" name="kartu" placeholder="Masukan Kartu Anda"
+                                        value="{{ $data ? $data->kartu : $user->kartu }}" readonly>
+                                    {{-- <input type="text" class="form-control @error('nik') is-invalid @enderror"
+                                        id="nik" name="nik" placeholder="Masukan NIK Anda"
+                                        value="{{ $data ? $data->nik : '' }}" {{ $data ? 'readonly' : '' }}> --}}
+                                    @error('kartu')
+                                        <small class="form-text text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <div class="form-group">
+                                    <label for="nik">NIK / No. SIM</label>
                                     <input type="text" class="form-control @error('nik') is-invalid @enderror"
                                         id="nik" name="nik" placeholder="Masukan NIK Anda"
                                         value="{{ $data ? $data->nik : $user->nik }}" readonly>

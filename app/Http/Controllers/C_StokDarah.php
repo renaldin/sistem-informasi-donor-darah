@@ -232,10 +232,19 @@ class C_StokDarah extends Controller
 
                 $id_anggota = Request()->id_anggota;
             } elseif (Request()->form_anggota == 'Non Anggota') {
+                if (Request()->kartu === 'KTP') {
+                    $rules = 'required|min:16|max:16|unique:anggota,nik';
+                    $pesanRules = 'NIK harus 16 karakter';
+                } else {
+                    $rules = 'required|min:12|max:12|unique:anggota,nik';
+                    $pesanRules = 'No. SIM harus 12 karakter';
+                }
+
                 Request()->validate([
                     'nama_anggota'          => 'required',
                     'alamat'                => 'required',
-                    'no_wa'                => 'required',
+                    'nik'                => $rules,
+                    'no_wa'                => 'required|min:12|max:13',
                     'jenis_kelamin'         => 'required',
                     'hasil_kusioner'        => 'required',
                     'deskripsi_hasil_kusioner'        => 'required',
@@ -245,7 +254,13 @@ class C_StokDarah extends Controller
                 ], [
                     'nama_anggota.required'         => 'Nama anggota harus diisi!',
                     'alamat.required'               => 'Alamat harus diisi!',
-                    'no_wa.required'               => 'Nomor whatsapp harus diisi!',
+                    'nik.required'              => 'NIK harus diisi!',
+                    'nik.min'               => $pesanRules,
+                    'nik.max'               => $pesanRules,
+                    'nik.unique'               => 'NIK sudah terdaftar!',
+                    'no_wa.required'    => 'Nomor WA harus diisi!',
+                    'no_wa.min'         => 'Nomor WA minimal 12 digit!',
+                    'no_wa.max'         => 'Nomor WA maksimal 13 digit!',
                     'jenis_kelamin.required'        => 'Jenis kelamin harus diisi!',
                     'hasil_kusioner.required'           => 'Hasil kusioner harus diisi!',
                     'deskripsi_hasil_kusioner.required' => 'Deskripsi hasil kusioner harus diisi!',
