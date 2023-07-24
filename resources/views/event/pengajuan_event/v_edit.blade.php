@@ -27,7 +27,7 @@
                                     <label for="nomor_koordinator">Nomor Koordinator</label>
                                     <input type="text" class="form-control @error('nomor_koordinator') is-invalid @enderror"
                                         name="nomor_koordinator" id="nomor_koordinator" value="{{ $detail->nomor_koordinator }}"
-                                        placeholder="Masukkan Nomor Koordinator" readonly>
+                                        placeholder="Masukkan Nomor Koordinator">
                                     @error('nomor_koordinator')
                                         <small class="form-text text-danger">{{ $message }}</small>
                                     @enderror

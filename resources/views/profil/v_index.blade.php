@@ -133,19 +133,29 @@
                 </div>
 
                 @if ($user->role === 'Donatur')
+
                     <div class="col-lg-6">
-                        <div class="form-group">
-                            @if ($user->kartu === 'KTP')
-                                <label for="nik">NIK</label>
-                            @else
-                                <label for="nik">No. SIM</label>
-                            @endif
-                            <input type="number" class="form-control @error('nik') is-invalid @enderror" onkeydown="return hanyaAngka(event)" name="nik" id="nik" value="{{$user->nik}}" placeholder="Masukkan No. Identitas" required>
-                            @error('nik')
-                                <small class="form-text text-danger">{{$message}}</small>
-                            @enderror
-                        </div>       
-                    </div>
+                                <div class="form-group">
+                                <label for="kartu">Jenis Kartu</label>
+                                <select name="kartu" class="form-control @error('kartu') is-invalid @enderror" required onchange="handleChange(event)" id="kartu">
+                                    <option value="{{$user->kartu}}">{{$user->kartu}}</option>
+                                    <option value="KTP">KTP</option>
+                                    <option value="SIM">SIM</option>
+                                </select>
+                                @error('kartu')
+                                    <small class="form-text text-danger">{{ $message }}</small>
+                                @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-6" id="div_nik" style="display: none;">
+                                <div class="form-group">
+                                <label for="nik">NIK/No. SIM</label>
+                                <input type="text" id="nik_sim" name="nik" onkeydown="return hanyaAngka(event)" class="form-control @error('nik') is-invalid @enderror" value="{{$user->nik}}">
+                                @error('nik')
+                                    <small class="form-text text-danger">{{ $message }}</small>
+                                @enderror
+                                </div>
+                            </div>
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label for="tanggal_lahir">Tanggal Lahir</label>
@@ -230,4 +240,20 @@
     </div>
 </div>
 
+<script>
+    function handleChange(event) {
+        var selectedValue = event.target.value;
+        var nik = document.getElementById("nik_sim");
+        var div_nik = document.getElementById("div_nik");
+        if(selectedValue === 'KTP'){
+            nik.placeholder = "Masukkan NIK";
+            div_nik.style.display = "block";
+        } else {
+          nik.placeholder = "Masukkan No. SIM";
+          div_nik.style.display = "block";
+        }
+        
+        // Tambahkan logika atau tindakan lain yang ingin Anda lakukan
+      }
+</script>
 @endsection

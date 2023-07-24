@@ -39,7 +39,7 @@ class C_User extends Controller
         return view('admin.user.v_index', $data);
     }
 
-    public function tambah_user()
+    public function tambah_petugas_kesehatan()
     {
         if (!Session()->get('email')) {
             return redirect()->route('login');
@@ -49,6 +49,58 @@ class C_User extends Controller
             'title'     => 'Data User',
             'sub_title' => 'Tambah User',
             'data_web'  => $this->M_Website->detail(1),
+            'role'      => 'Petugas Kesehatan',
+            'user'      => $this->M_User->detail(Session()->get('id_user'))
+        ];
+
+        return view('admin.user.v_tambah', $data);
+    }
+
+    public function tambah_event()
+    {
+        if (!Session()->get('email')) {
+            return redirect()->route('login');
+        }
+
+        $data = [
+            'title'     => 'Data User',
+            'sub_title' => 'Tambah User',
+            'data_web'  => $this->M_Website->detail(1),
+            'role'      => 'Event',
+            'user'      => $this->M_User->detail(Session()->get('id_user'))
+        ];
+
+        return view('admin.user.v_tambah', $data);
+    }
+
+    public function tambah_donatur()
+    {
+        if (!Session()->get('email')) {
+            return redirect()->route('login');
+        }
+
+        $data = [
+            'title'     => 'Data User',
+            'sub_title' => 'Tambah User',
+            'data_web'  => $this->M_Website->detail(1),
+            'role'      => 'Donatur',
+            'user'      => $this->M_User->detail(Session()->get('id_user'))
+        ];
+
+        return view('admin.user.v_tambah', $data);
+    }
+
+    public function tambah_rumah_sakit()
+    {
+        if (!Session()->get('email')) {
+            return redirect()->route('login');
+        }
+
+        $data = [
+            'title'     => 'Data User',
+            'sub_title' => 'Tambah User',
+            'data_web'  => $this->M_Website->detail(1),
+            'role'      => 'Rumah Sakit',
             'user'      => $this->M_User->detail(Session()->get('id_user'))
         ];
 
@@ -60,7 +112,7 @@ class C_User extends Controller
         Request()->validate([
             'nama'              => 'required',
             'alamat_user'       => 'required',
-            'nomor_telepon'     => 'required|numeric',
+            'nomor_telepon'     => 'required|min:12|max:13',
             'email'             => 'required|unique:user,email|email',
             'password'          => 'min:6|required',
             'role'              => 'required',
@@ -69,7 +121,8 @@ class C_User extends Controller
             'nama.required'             => 'Nama lengkap harus diisi!',
             'alamat_user.required'      => 'Alamat harus diisi!',
             'nomor_telepon.required'    => 'Nomor telepon harus diisi!',
-            'nomor_telepon.numeric'     => 'Nomor telepon harus angka!',
+            'nomor_telepon.min'         => 'Nomor telepon minimal 12 digit!',
+            'nomor_telepon.max'         => 'Nomor telepon maksimal 13 digit!',
             'email.required'            => 'Email harus diisi!',
             'email.unique'              => 'Email sudah digunakan!',
             'email.email'               => 'Email harus sesuai format! Contoh: contoh@gmail.com',
@@ -80,6 +133,56 @@ class C_User extends Controller
             'foto.mimes'                => 'Format Foto Anda harus jpg/jpeg/png!',
             'foto.max'                  => 'Ukuran Foto Anda maksimal 2 mb',
         ]);
+
+        if (Request()->role === 'Donatur') {
+
+            if (Request()->kartu === 'KTP') {
+                $rules = 'required|min:16|max:16|unique:user_donatur,nik';
+                $pesanRules = 'NIK harus 16 karakter';
+            } else {
+                $rules = 'required|min:12|max:12|unique:user_donatur,nik';
+                $pesanRules = 'No. SIM harus 12 karakter';
+            }
+
+            Request()->validate([
+                'nik'               => $rules,
+                'tanggal_lahir'     => 'required|date',
+                'jk'                => 'required',
+                'kartu'                => 'required',
+            ], [
+                'nik.required'              => 'NIK harus diisi!',
+                // 'nik.numeric'               => 'NIK harus angka!',
+                'nik.min'               => $pesanRules,
+                'nik.max'               => $pesanRules,
+                'nik.unique'               => 'NIK sudah terdaftar!',
+                'tanggal_lahir.required'    => 'Tanggal lahir harus diisi!',
+                'tanggal_lahir.date'        => 'Tanggal lahir berupa tanggal!',
+                'jk.required'               => 'Jenis kelamin harus diisi!',
+                'kartu.required'               => 'Kartu harus diisi!',
+            ]);
+
+            $tanggal_lahir = new DateTime(Request()->tanggal_lahir);
+            $sekarang = new DateTime();
+            $selisih = $sekarang->diff($tanggal_lahir);
+            $umur = $selisih->y;
+
+            if ($umur < 17) {
+                Alert::error('Gagal', "Tidak bisa lanjut daftar. Umur Anda kurang dari 17 tahun!");
+                return redirect()->route('register_donatur');
+            }
+        } elseif (Request()->role === 'Event') {
+            Request()->validate([
+                'kode_instansi' => 'required',
+            ], [
+                'kode_instansi.required'    => 'Kode instansi harus diisi!',
+            ]);
+        } elseif (Request()->role === 'Rumah Sakit') {
+            Request()->validate([
+                'kode_rs' => 'required',
+            ], [
+                'kode_rs.required'    => 'Kode rumah sakit harus diisi!',
+            ]);
+        }
 
         $file1 = Request()->foto;
         $fileUser = date('mdYHis') . Request()->nama . '.' . $file1->extension();
@@ -92,10 +195,40 @@ class C_User extends Controller
             'email'             => Request()->email,
             'password'          => Hash::make(Request()->password),
             'role'              => Request()->role,
+            'status_verifikasi'              => 'Sudah',
             'foto'              => $fileUser,
         ];
 
         $this->M_User->tambah($data);
+        $data_terakhir = $this->M_User->last_data();
+
+        if (Request()->role === 'Donatur') {
+            $data_donatur = [
+                'id_user'       => $data_terakhir->id_user,
+                'kartu'           => Request()->kartu,
+                'nik'           => Request()->nik,
+                'tanggal_lahir' => Request()->tanggal_lahir,
+                'jk'            => Request()->jk,
+                'gol_darah'     => Request()->gol_darah,
+            ];
+
+            $this->M_User->tambah_donatur($data_donatur);
+        } elseif (Request()->role === 'Event') {
+            $data_event = [
+                'id_user'       => $data_terakhir->id_user,
+                'kode_instansi' => Request()->kode_instansi,
+            ];
+
+            $this->M_User->tambah_event($data_event);
+        } elseif (Request()->role === 'Rumah Sakit') {
+            $data_rs = [
+                'id_user'       => $data_terakhir->id_user,
+                'kode_rs'       => Request()->kode_rs,
+            ];
+
+            $this->M_User->tambah_rumah_sakit($data_rs);
+        }
+
         Alert::success('Berhasil', 'Data user berhasil ditambah.');
         return redirect()->route('data_user');
     }
@@ -106,11 +239,23 @@ class C_User extends Controller
             return redirect()->route('login');
         }
 
+        $user = $this->M_User->detail($id_user);
+
+        if ($user->role === 'Donatur') {
+            $detail = $this->M_User->detail_user_donatur($id_user);
+        } elseif ($user->role === 'Event') {
+            $detail = $this->M_User->detail_user_event($id_user);
+        } elseif ($user->role === 'Rumah Sakit') {
+            $detail = $this->M_User->detail_user_rs($id_user);
+        } else {
+            $detail = $user;
+        }
+
         $data = [
             'title'     => 'Data User',
             'sub_title' => 'Edit User',
             'data_web'  => $this->M_Website->detail(1),
-            'detail'    => $this->M_User->detail($id_user),
+            'detail'    => $detail,
             'user'      => $this->M_User->detail(Session()->get('id_user'))
         ];
 
@@ -122,18 +267,68 @@ class C_User extends Controller
         Request()->validate([
             'nama'              => 'required',
             'alamat_user'       => 'required',
-            'nomor_telepon'     => 'required|numeric',
+            'nomor_telepon'     => 'required|min:12|max:13',
             'email'             => 'required|email',
             'foto'              => 'mimes:jpeg,png,jpg|max:2048',
         ], [
             'nama.required'             => 'Nama lengkap harus diisi!',
             'nomor_telepon.required'    => 'Nomor telepon harus diisi!',
-            'nomor_telepon.numeric'     => 'Nomor telepon harus angka!',
+            'nomor_telepon.min'         => 'Nomor telepon minimal 12 digit!',
+            'nomor_telepon.max'         => 'Nomor telepon maksimal 13 digit!',
             'email.required'            => 'Email harus diisi!',
             'email.email'               => 'Email harus sesuai format! Contoh: contoh@gmail.com',
             'foto.mimes'                => 'Format Foto Anda harus jpg/jpeg/png!',
             'foto.max'                  => 'Ukuran Foto Anda maksimal 2 mb',
         ]);
+
+        if (Request()->role === 'Donatur') {
+
+            if (Request()->kartu === 'KTP') {
+                $rules = 'required|min:16|max:16';
+                $pesanRules = 'NIK harus 16 karakter';
+            } else {
+                $rules = 'required|min:12|max:12';
+                $pesanRules = 'No. SIM harus 12 karakter';
+            }
+
+            Request()->validate([
+                'nik'               => $rules,
+                'tanggal_lahir'     => 'required|date',
+                'jk'                => 'required',
+                'kartu'                => 'required',
+            ], [
+                'nik.required'              => 'NIK harus diisi!',
+                // 'nik.numeric'               => 'NIK harus angka!',
+                'nik.min'               => $pesanRules,
+                'nik.max'               => $pesanRules,
+                'tanggal_lahir.required'    => 'Tanggal lahir harus diisi!',
+                'tanggal_lahir.date'        => 'Tanggal lahir berupa tanggal!',
+                'jk.required'               => 'Jenis kelamin harus diisi!',
+                'kartu.required'               => 'Kartu harus diisi!',
+            ]);
+
+            $tanggal_lahir = new DateTime(Request()->tanggal_lahir);
+            $sekarang = new DateTime();
+            $selisih = $sekarang->diff($tanggal_lahir);
+            $umur = $selisih->y;
+
+            if ($umur < 17) {
+                Alert::error('Gagal', "Tidak bisa lanjut daftar. Umur Anda kurang dari 17 tahun!");
+                return redirect()->route('register_donatur');
+            }
+        } elseif (Request()->role === 'Event') {
+            Request()->validate([
+                'kode_instansi' => 'required',
+            ], [
+                'kode_instansi.required'    => 'Kode instansi harus diisi!',
+            ]);
+        } elseif (Request()->role === 'Rumah Sakit') {
+            Request()->validate([
+                'kode_rs' => 'required',
+            ], [
+                'kode_rs.required'    => 'Kode rumah sakit harus diisi!',
+            ]);
+        }
 
         if (Request()->password) {
 
@@ -199,6 +394,34 @@ class C_User extends Controller
         }
 
         $this->M_User->edit($data);
+
+        if (Request()->role === 'Donatur') {
+            $data_donatur = [
+                'id_user'       => $id_user,
+                'kartu'           => Request()->kartu,
+                'nik'           => Request()->nik,
+                'tanggal_lahir' => Request()->tanggal_lahir,
+                'jk'            => Request()->jk,
+                'gol_darah'     => Request()->gol_darah,
+            ];
+
+            $this->M_User->edit_user_donatur($data_donatur);
+        } elseif (Request()->role === 'Event') {
+            $data_event = [
+                'id_user'       => $id_user,
+                'kode_instansi' => Request()->kode_instansi,
+            ];
+
+            $this->M_User->edit_user_event($data_event);
+        } elseif (Request()->role === 'Rumah Sakit') {
+            $data_rs = [
+                'id_user'       => $id_user,
+                'kode_rs'       => Request()->kode_rs,
+            ];
+
+            $this->M_User->edit_user_rumah_sakit($data_rs);
+        }
+
         Alert::success('Berhasil', 'Data stok darah berhasil diedit.');
         return redirect()->route('data_user');
     }
@@ -271,15 +494,23 @@ class C_User extends Controller
         ]);
 
         if (Session()->get('role') === 'Donatur') {
+            if (Request()->kartu === 'KTP') {
+                $rules = 'required|min:16|max:16';
+                $pesanRules = 'NIK harus 16 karakter';
+            } else {
+                $rules = 'required|min:12|max:12';
+                $pesanRules = 'No. SIM harus 12 karakter';
+            }
+
             Request()->validate([
-                'nik'               => 'required|min:16|max:16',
+                'nik'               => $rules,
                 'tanggal_lahir'     => 'required|date',
                 'jk'                => 'required',
             ], [
                 'nik.required'              => 'NIK harus diisi!',
                 // 'nik.numeric'               => 'NIK harus angka!',
-                'nik.min'               => 'NIK harus 16 karakter!',
-                'nik.max'               => 'NIK harus 16 karakter!',
+                'nik.min'               => $pesanRules,
+                'nik.max'               => $pesanRules,
                 'tanggal_lahir.required'    => 'Tanggal lahir harus diisi!',
                 'tanggal_lahir.date'        => 'Tanggal lahir berupa tanggal!',
                 'jk.required'               => 'Jenis kelamin harus diisi!',
@@ -300,6 +531,7 @@ class C_User extends Controller
             $data_donatur = [
                 'id_user_donatur' => $user->id_user_donatur,
                 'id_user'         => $id_user,
+                'kartu'             => Request()->kartu,
                 'nik'             => Request()->nik,
                 'tanggal_lahir'   => Request()->tanggal_lahir,
                 'jk'              => Request()->jk,

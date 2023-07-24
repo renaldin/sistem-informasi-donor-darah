@@ -266,7 +266,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Apakah Anda yakin akan kirim distribusi darah ini?</p>
+                    <p>Apakah Anda yakin akan distribusikan darah ini?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Batal</button>

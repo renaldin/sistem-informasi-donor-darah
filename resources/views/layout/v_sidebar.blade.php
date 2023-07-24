@@ -165,7 +165,7 @@
         <li class="nav-item @if ($title === 'Riwayat Permohonan Darah') active @endif">
             <a class="nav-link" href="/riwayat_permohonan_darah">
                 <i class="fas fa-fw fa-palette"></i>
-                <span>Rwiayat</span>
+                <span>Riwayat</span>
             </a>
         </li>
     @endif

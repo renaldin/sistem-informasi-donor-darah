@@ -69,6 +69,11 @@ class M_User extends Model
         DB::table('user_donatur')->where('id_user_donatur', $data['id_user_donatur'])->update($data);
     }
 
+    public function edit_user_donatur($data)
+    {
+        DB::table('user_donatur')->where('id_user', $data['id_user'])->update($data);
+    }
+
     public function detail_user_donatur($id_user)
     {
         return DB::table('user_donatur')
@@ -98,6 +103,11 @@ class M_User extends Model
         DB::table('user_event')->where('id_user_event', $data['id_user_event'])->update($data);
     }
 
+    public function edit_user_event($data)
+    {
+        DB::table('user_event')->where('id_user', $data['id_user'])->update($data);
+    }
+
     public function detail_user_event($id_user)
     {
         return DB::table('user_event')
@@ -118,6 +128,11 @@ class M_User extends Model
     public function edit_rs($data)
     {
         DB::table('user_rs')->where('id_user_rs', $data['id_user_rs'])->update($data);
+    }
+
+    public function edit_user_rumah_sakit($data)
+    {
+        DB::table('user_rs')->where('id_user', $data['id_user'])->update($data);
     }
 
     public function detail_user_rs($id_user)

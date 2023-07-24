@@ -9,7 +9,8 @@
                 <h6 class="m-0 font-weight-bold">{{$sub_title}}</h6>
             </div>
             <div class="card-header flex flex-row">
-                <a href="/tambah_user" class="btn btn-primary">Tambah</a>
+                <a href="#" data-toggle="modal" data-target="#tambah" class="btn btn-primary">Tambah</a>
+                {{-- <a href="/tambah_user" class="btn btn-primary">Tambah</a> --}}
             </div>
             <div class="table-responsive p-3">
                 {{-- @if (session('berhasil'))
@@ -101,4 +102,36 @@
 </div>
 </div>
 @endforeach
+
+<div class="modal fade" id="tambah" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Hapus</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-3">
+                <a href="/tambah_petugas_kesehatan" class="btn btn-primary btn-block">Petugas Kesehatan</a>
+            </div>
+            <div class="col-md-3">
+                <a href="/tambah_donatur" class="btn btn-primary btn-block">Donatur</a>
+            </div>
+            <div class="col-md-3">
+                <a href="/tambah_user_event" class="btn btn-primary btn-block">Event</a>
+            </div>
+            <div class="col-md-3">
+                <a href="/tambah_rumah_sakit" class="btn btn-primary btn-block">Rumah Sakit</a>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Kembali</button>
+        </div>
+      </div>
+    </div>
+</div>
 @endsection
