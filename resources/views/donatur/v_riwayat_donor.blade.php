@@ -107,7 +107,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Catatan Alasan</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Detail</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -115,6 +115,38 @@
                     <div class="modal-body">
 
                         <div class="form-group">
+                            <table cellpadding="5" class="mb-2">
+                                <tr>
+                                    <th>Hemoglobin</th>
+                                    <td>:</td>
+                                    <td>{{ $item->hb }} (gram/dL)</td>
+                                </tr>
+                                <tr>
+                                    <th>Tekanan Darah</th>
+                                    <td>:</td>
+                                    <td>{{ $item->tekanan_darah }} (mmHg)</td>
+                                </tr>
+                                <tr>
+                                    <th>Berat Badan</th>
+                                    <td>:</td>
+                                    <td>{{ $item->berat_badan }} (kg)</td>
+                                </tr>
+                                <tr>
+                                    <th>Tinggi Badan</th>
+                                    <td>:</td>
+                                    <td>{{ $item->tinggi_badan }} (cm)</td>
+                                </tr>
+                                <tr>
+                                    <th>Denyut Nadi</th>
+                                    <td>:</td>
+                                    <td>{{ $item->denyut_nadi }} (kali per menit)</td>
+                                </tr>
+                                <tr>
+                                    <th>Keadaan Umum</th>
+                                    <td>:</td>
+                                    <td>{{ $item->keadaan_umum }}</td>
+                                </tr>
+                            </table>
                             <label for="keadaan_umum">Alasan Anda Tidak Bisa Melakukan Donor : </label>
                             <input type="text" class="form-control @error('keadaan_umum') is-invalid @enderror"
                                 name="catatan" id="catatan" value="{{ $item->catatan_pendonor }}"
