@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Hash;
 use App\Models\M_User;
 use App\Models\M_Website;
+use App\Models\M_Anggota;
 use DateTime;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -13,12 +14,14 @@ class C_User extends Controller
 
     private $M_User;
     private $M_Website;
+    private $M_Anggota;
     private $public_path;
 
     public function __construct()
     {
         $this->M_User = new M_User();
         $this->M_Website = new M_Website();
+        $this->M_Anggota = new M_Anggota();
         $this->public_path = 'foto_user';
     }
 
@@ -406,6 +409,15 @@ class C_User extends Controller
             ];
 
             $this->M_User->edit_user_donatur($data_donatur);
+
+            $detail_anggota = $this->M_Anggota->cek_nik(Request()->nik);
+            if ($detail_anggota !== null) {
+                $data_anggota = [
+                    'id_anggota' => $detail_anggota->id_anggota,
+                    'no_wa' => Request()->nomor_telepon,
+                ];
+                $this->M_Anggota->edit($data_anggota);
+            }
         } elseif (Request()->role === 'Event') {
             $data_event = [
                 'id_user'       => $id_user,
@@ -538,6 +550,15 @@ class C_User extends Controller
                 'gol_darah'       => Request()->gol_darah,
             ];
             $this->M_User->edit_donatur($data_donatur);
+
+            $detail_anggota = $this->M_Anggota->cek_nik(Request()->nik);
+            if ($detail_anggota !== null) {
+                $data_anggota = [
+                    'id_anggota' => $detail_anggota->id_anggota,
+                    'no_wa' => Request()->nomor_telepon,
+                ];
+                $this->M_Anggota->edit($data_anggota);
+            }
         } elseif (Session()->get('role') === 'Event') {
             $user = $this->M_User->detail_user_event(Session()->get('id_user'));
 
