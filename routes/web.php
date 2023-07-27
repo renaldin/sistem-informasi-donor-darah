@@ -132,6 +132,10 @@ Route::group(['middleware' => 'revalidate'], function () {
         Route::get('/anggota', [C_Anggota::class, 'index'])->name('anggota');
         Route::get('/kirim_jadwal/{id}', [C_Anggota::class, 'kirim_jadwal']);
 
+        // Data Antrian Donatur
+        Route::get('/antrian_donatur', [C_Antrian::class, 'antrian_donatur'])->name('antrian_donatur');
+        Route::get('/detail_antrian/{id}', [C_Antrian::class, 'detail_antrian'])->name('detail_antrian');
+
         // laporan
         Route::get('/laporan_darah_masuk', [C_Laporan::class, 'index'])->name('laporan_darah_masuk');
         Route::get('/laporan_stok_darah', [C_Laporan::class, 'stok_darah'])->name('laporan_stok_darah');
@@ -152,6 +156,7 @@ Route::group(['middleware' => 'revalidate'], function () {
         Route::post('/submit_kuisioner', [C_Donatur::class, 'submit_kuisioner'])->name('submit_kuisioner');
         Route::get('/hasil_donor/{id}', [C_Donatur::class, 'riwayat_donor'])->name('hasil_donor');
         Route::get('/riwayat_donor', [C_Donatur::class, 'riwayat_donor'])->name('riwayat_donor');
+        Route::get('/lihat_kuesioner/{id}', [C_Donatur::class, 'lihat_kuesioner'])->name('lihat_kuesioner');
     });
 
 
@@ -175,6 +180,9 @@ Route::group(['middleware' => 'revalidate'], function () {
         Route::post('/tambah_data_kesehatan/{id}', [C_Antrian::class, 'tamabah_data_kesehatan']);
         Route::get('/cek_kesehatan/{id}/show', [C_Antrian::class, 'lihat_data_kesehatan'])->name('lihat_data_kesehatan');
         Route::get('/validasi/{id}', [C_Antrian::class, 'validasi_anggota'])->name('validasi_anggota');
+        Route::get('/detail_kuesioner_donor/{id}', [C_Antrian::class, 'detail_kuesioner_donor'])->name('detail_kuesioner_donor');
+        Route::get('/validasi_kuesioner/{id}', [C_Antrian::class, 'validasi_kuesioner'])->name('validasi_kuesioner');
+        Route::post('/kuesioner_tidak_valid/{id}', [C_Antrian::class, 'kuesioner_tidak_valid']);
     });
 
 

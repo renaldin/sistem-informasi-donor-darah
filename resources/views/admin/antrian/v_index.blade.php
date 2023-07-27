@@ -56,20 +56,8 @@
                                         @endif
                                     </td>
                                     <td class="text-center">
-                                        @if ($row->status_donor == 'Selesai' || $row->status_donor == 'Ready' || $row->status_donor == 'Gagal')
-                                            <a href="/cek_kesehatan/{{ $row->id_donor }}/show"
-                                                class="btn btn-primary btn-sm">Detail</a>
-                                            {{-- <button class="btn btn-primary btn-sm" data-toggle="modal"
-                                                data-target="#detail{{ $row->id_donor }}">Detail</button> --}}
-                                        @elseif($row->status_donor == 'Proses' && $row->hb != null)
-                                            <a href="/cek_kesehatan/{{ $row->id_donor }}/show"
-                                                class="btn btn-primary btn-sm">Lihat</a>
-                                            <button class="btn btn-danger btn-sm" data-toggle="modal"
-                                                data-target="#validasi{{ $row->id_donor }}">Validasi</button>
-                                        @else
-                                            <a href="/detail_kuesioner_donor/{{ $row->id_donor }}"
-                                                class="btn btn-info btn-sm">Detail Kuesioner</a>
-                                        @endif
+                                        <a href="/detail_antrian/{{ $row->id_donor }}"
+                                            class="btn btn-primary btn-sm">Detail</a>
                                     </td>
                                 </tr>
                             @endforeach

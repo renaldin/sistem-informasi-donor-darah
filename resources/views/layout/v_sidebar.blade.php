@@ -9,11 +9,11 @@
     </a>
     <hr class="sidebar-divider my-0">
     @if ($user->role !== 'Petugas Kesehatan')
-    <li class="nav-item @if ($title === 'Dashboard') active @endif">
-        <a class="nav-link" href="/dashboard">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard</span></a>
-    </li>
+        <li class="nav-item @if ($title === 'Dashboard') active @endif">
+            <a class="nav-link" href="/dashboard">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Dashboard</span></a>
+        </li>
     @endif
     <hr class="sidebar-divider">
     @if ($user->role === 'Admin')
@@ -75,7 +75,10 @@
                 aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Sub Menu</h6>
-                    <a class="collapse-item @if ($sub_title === 'Data Distribusi Darah' || $sub_title === 'Tambah Distribusi Darah' || $sub_title === 'Form Keluarkan Darah') active @endif"
+                    <a class="collapse-item @if (
+                        $sub_title === 'Data Distribusi Darah' ||
+                            $sub_title === 'Tambah Distribusi Darah' ||
+                            $sub_title === 'Form Keluarkan Darah') active @endif"
                         href="/distribusi_darah">Data Distribusi Darah</a>
                     <a class="collapse-item  @if ($sub_title === 'Riwayat Distribusi Darah') active @endif"
                         href="/riwayat_distribusi_darah">Riwayat Distribusi Darah</a>
@@ -86,6 +89,12 @@
             <a class="nav-link" href="/anggota">
                 <i class="fas fa-fw fa-palette"></i>
                 <span>Anggota</span>
+            </a>
+        </li>
+        <li class="nav-item @if ($title === 'Antrian' || $title == 'Detail') active @endif">
+            <a class="nav-link" href="/antrian_donatur">
+                <i class="fas fa-fw fa-users"></i>
+                <span>Antrian</span>
             </a>
         </li>
         <hr class="sidebar-divider">

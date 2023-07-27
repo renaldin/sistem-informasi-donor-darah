@@ -22,7 +22,8 @@
             <div class="card mb-4">
                 <div class="card-header d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold">{{ $sub_title }}</h6>
-                    <a href="/antrian" class="btn text-dark"><i class="fa fa-arrow-left" aria-hidden="true"></i> Kembali</a>
+                    <a href="/antrian_donatur" class="btn text-dark"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+                        Kembali</a>
                 </div>
                 <hr>
                 <div class="card-body">
@@ -35,7 +36,7 @@
                                     value="{{ $data_donor->kartu }}" readonly>
                                 {{-- <input type="text" class="form-control @error('nik') is-invalid @enderror"
                                         id="nik" name="nik" placeholder="Masukan NIK Anda"
-                                        value="{{ $data ? $data->nik : '' }}" {{ $data ? 'readonly' : '' }}> --}}
+                                        value="{{ $data ? $data_donor->nik : '' }}" {{ $data ? 'readonly' : '' }}> --}}
                                 @error('kartu')
                                     <small class="form-text text-danger">{{ $message }}</small>
                                 @enderror
@@ -48,7 +49,7 @@
                                     name="nik" placeholder="Masukan NIK Anda" value="{{ $data_donor->nik }}" readonly>
                                 {{-- <input type="text" class="form-control @error('nik') is-invalid @enderror"
                                         id="nik" name="nik" placeholder="Masukan NIK Anda"
-                                        value="{{ $data ? $data->nik : '' }}" {{ $data ? 'readonly' : '' }}> --}}
+                                        value="{{ $data ? $data_donor->nik : '' }}" {{ $data ? 'readonly' : '' }}> --}}
                                 @error('nik')
                                     <small class="form-text text-danger">{{ $message }}</small>
                                 @enderror
@@ -112,12 +113,15 @@
                         </div>
                         <div class="col-12 col-md-6 col-lg-4">
                             <p><b>Status Donor :
-                                    {{ $data_donor->status_donor }}</b>
+                                    {{ $data_donor->hasil_kusioner == 'Tidak Lolos' ? 'Gagal' : $data_donor->status_donor }}</b>
                             </p>
                         </div>
                     </div>
                     <hr>
                     <h4>Data Kuesioner</h4>
+                    @if ($data_donor->id_petugas_kuesioner)
+                        <p class="ml-4">Nama Petugas Kuesioner : {{ $data_kuesioner->nama }}</p>
+                    @endif
                     <ol>
                         <div class="row border-bottom mb-2 pb-2">
                             <div class="col-12 col-lg-8">
@@ -880,59 +884,82 @@
                         </div>
                     </ol>
                     <hr>
-                    <h4>Data Kesehatan </h4>
-                    <div class="row">
-                        <div class="col-12 col-md-6 col-lg-6">
-                            <div class="form-group">
-                                <label for="hb">HB <small>(gram/dL)</small></label>
-                                <input type="number" class="form-control " name="hb" id="hb"
-                                    placeholder="Masukan Hemoglobin" value="{{ $data_donor->hb }}" readonly>
+                    @if ($data_donor->hasil_kusioner == 'Tidak Lolos')
+                        <div class="row">
+                            <div class="col-12 col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <label for="hb">Alasan Tidak Lolos Kuesioner</label>
+                                    <input type="text" class="form-control " name="hb"
+                                        value="{{ $data_donor->deskripsi_hasil_kusioner }}" readonly>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-12 col-md-6 col-lg-6">
-                            <div class="form-group">
-                                <label for="tekanan_darah">Tekanan Darah <small>(mmHg)</small></label>
-                                <input type="text" class="form-control " name="tekanan_darah" id="tekanan_darah"
-                                    placeholder="Masukan Tekanan Darah" value="{{ $data_donor->tekanan_darah }}"
-                                    readonly>
+                    @else
+                        <h4>Hasil Cek Kesehatan</h4>
+                        @if ($data_donor->id_petugas_kesehatan)
+                            <p class="">Nama Petugas Kesehatan : {{ $data_petugas->nama }}</p>
+                        @endif
+                        @if ($data_donor->id_petugas_kesehatan)
+                            <div class="row">
+                                <div class="col-12 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label for="hb">HB <small>(gram/dL)</small></label>
+                                        <input type="number" class="form-control " name="hb" id="hb"
+                                            placeholder="Masukan Hemoglobin" value="{{ $data_donor->hb }}" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label for="tekanan_darah">Tekanan Darah <small>(mmHg)</small></label>
+                                        <input type="text" class="form-control " name="tekanan_darah"
+                                            id="tekanan_darah" placeholder="Masukan Tekanan Darah"
+                                            value="{{ $data_donor->tekanan_darah }}" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label for="berat_badan">Berat Badan <small>(kg)</small></label>
+                                        <input type="number" class="form-control " name="berat_badan" id="berat_badan"
+                                            placeholder="Masukan Berat Badan" value="{{ $data_donor->berat_badan }}"
+                                            readonly>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label for="tinggi_badan">Tinggi Badan <small>(cm)</small></label>
+                                        <input type="number" class="form-control " name="tinggi_badan"
+                                            id="tinggi_badan" placeholder="Masukan Tinggi Badan"
+                                            value="{{ $data_donor->tinggi_badan }}" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label for="denyut_nadi">Denyut Nadi <small>(kali per menit)</small></label>
+                                        <input type="text" class="form-control " name="denyut_nadi" id="denyut_nadi"
+                                            placeholder="Masukan Denyut Nadi" value="{{ $data_donor->denyut_nadi }}"
+                                            readonly>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label for="keadaan_umum">Keadaan Umum</label>
+                                        <input type="text" class="form-control " name="keadaan_umum"
+                                            id="keadaan_umum" placeholder="Masukan Keadaan Umum"
+                                            value="{{ $data_donor->keadaan_umum }}" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label for="keadaan_umum">Catatan Pendonor</label>
+                                        <input type="text" class="form-control " name="keadaan_umum"
+                                            id="keadaan_umum" value="{{ $data_donor->catatan_pendonor }}" readonly>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-6">
-                            <div class="form-group">
-                                <label for="berat_badan">Berat Badan <small>(kg)</small></label>
-                                <input type="number" class="form-control " name="berat_badan" id="berat_badan"
-                                    placeholder="Masukan Berat Badan" value="{{ $data_donor->berat_badan }}" readonly>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-6">
-                            <div class="form-group">
-                                <label for="tinggi_badan">Tinggi Badan <small>(cm)</small></label>
-                                <input type="number" class="form-control " name="tinggi_badan" id="tinggi_badan"
-                                    placeholder="Masukan Tinggi Badan" value="{{ $data_donor->tinggi_badan }}" readonly>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-6">
-                            <div class="form-group">
-                                <label for="denyut_nadi">Denyut Nadi <small>(kali per menit)</small></label>
-                                <input type="text" class="form-control " name="denyut_nadi" id="denyut_nadi"
-                                    placeholder="Masukan Denyut Nadi" value="{{ $data_donor->denyut_nadi }}" readonly>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-6">
-                            <div class="form-group">
-                                <label for="keadaan_umum">Keadaan Umum</label>
-                                <input type="text" class="form-control " name="keadaan_umum" id="keadaan_umum"
-                                    placeholder="Masukan Keadaan Umum" value="{{ $data_donor->keadaan_umum }}" readonly>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-6">
-                            <div class="form-group">
-                                <label for="keadaan_umum">Catatan Pendonor</label>
-                                <input type="text" class="form-control " name="keadaan_umum" id="keadaan_umum"
-                                    value="{{ $data_donor->catatan_pendonor }}" readonly>
-                            </div>
-                        </div>
-                    </div>
+                        @else
+                            <p>Petugas Kesehatan Belum Mengecek Kesehatan</p>
+                        @endif
+                    @endif
                 </div>
             </div>
         </div>

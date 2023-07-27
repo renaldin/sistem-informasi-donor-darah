@@ -88,7 +88,7 @@
                                     <label for="alamat">Alamat</label>
                                     <input type="text" class="form-control @error('alamat') is-invalid @enderror"
                                         id="alamat" name="alamat" placeholder="Masukan Alamat"
-                                        value="{{ $data ? $data->alamat : $user->alamat_user }}" >
+                                        value="{{ $data ? $data->alamat : $user->alamat_user }}">
                                     @error('alamat')
                                         <small class="form-text text-danger">{{ $message }}</small>
                                     @enderror
@@ -127,12 +127,12 @@
                                 <div class="col-12 col-lg-4 d-flex">
                                     <div class="custom-control custom-radio mr-3">
                                         <input type="radio" id="Ya1" name="p[1]" class="custom-control-input"
-                                            value="0">
+                                            value="1">
                                         <label class="custom-control-label" for="Ya1">Ya</label>
                                     </div>
                                     <div class="custom-control custom-radio">
                                         <input type="radio" id="tidak1" name="p[1]" class="custom-control-input"
-                                            value="1">
+                                            value="0">
                                         <label class="custom-control-label" for="tidak1">Tidak</label>
                                     </div>
                                 </div>
@@ -229,8 +229,8 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-lg-4 d-flex">
-                                    <input type="text" class="form-control" id="bulanKehamilan" name="nama_anggota"
-                                        placeholder="Masukan jumlah bulan kehamilan">
+                                    <input type="number" class="form-control" id="bulanKehamilan"
+                                        name="bulan_kehamilan" placeholder="Masukan jumlah bulan kehamilan">
                                 </div>
                             </div>
                             <b class="mb-2 pb-2">Dalam waktu 8 minggu terakhir</b>
@@ -576,6 +576,300 @@
                                         <input type="radio" id="tidak25" name="p[25]" class="custom-control-input"
                                             value="0">
                                         <label class="custom-control-label" for="tidak25">Tidak</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <b class="mb-2 pb-2">Dalam waktu 3 Tahun</b>
+                            <div class="row border-bottom mb-2 pb-2">
+                                <div class="col-12 col-lg-8">
+                                    <li>Apakah anda pernah berada di luar wilayah Indonesia?
+                                    </li>
+                                </div>
+                                <div class="col-12 col-lg-4 d-flex">
+                                    <div class="custom-control custom-radio mr-3">
+                                        <input type="radio" id="Ya26" name="p[26]" class="custom-control-input"
+                                            value="1">
+                                        <label class="custom-control-label" for="Ya26">Ya</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="tidak26" name="p[26]" class="custom-control-input"
+                                            value="0">
+                                        <label class="custom-control-label" for="tidak26">Tidak</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <b class="mb-2 pb-2">Tahun 1977 hingga sekarang</b>
+                            <div class="row border-bottom mb-2 pb-2">
+                                <div class="col-12 col-lg-8">
+                                    <li>Apakah anda menerima uang, obat atau pembayaran lainnya untuk seks?
+                                    </li>
+                                </div>
+                                <div class="col-12 col-lg-4 d-flex">
+                                    <div class="custom-control custom-radio mr-3">
+                                        <input type="radio" id="Ya27" name="p[27]" class="custom-control-input"
+                                            value="1">
+                                        <label class="custom-control-label" for="Ya27">Ya</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="tidak27" name="p[27]" class="custom-control-input"
+                                            value="0">
+                                        <label class="custom-control-label" for="tidak27">Tidak</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row border-bottom mb-2 pb-2">
+                                <div class="col-12 col-lg-8">
+                                    <li>Laki-laki : Apakah anda pernah berhubungan seksual dengan laki-laki walaupun sekali
+                                        ?
+                                    </li>
+                                </div>
+                                <div class="col-12 col-lg-4 d-flex">
+                                    <div class="custom-control custom-radio mr-3">
+                                        <input type="radio" id="Ya28" name="p[28]" class="custom-control-input"
+                                            value="1">
+                                        <label class="custom-control-label" for="Ya28">Ya</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="tidak28" name="p[28]" class="custom-control-input"
+                                            value="0">
+                                        <label class="custom-control-label" for="tidak28">Tidak</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <b class="mb-2 pb-2">Tahun 1980 hingga sekarang</b>
+                            <div class="row border-bottom mb-2 pb-2">
+                                <div class="col-12 col-lg-8">
+                                    <li>Apakah anda tinggal selama 5 tahun atau lebih di Eropa ?
+                                    </li>
+                                </div>
+                                <div class="col-12 col-lg-4 d-flex">
+                                    <div class="custom-control custom-radio mr-3">
+                                        <input type="radio" id="Ya29" name="p[29]" class="custom-control-input"
+                                            value="1">
+                                        <label class="custom-control-label" for="Ya29">Ya</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="tidak29" name="p[29]" class="custom-control-input"
+                                            value="0">
+                                        <label class="custom-control-label" for="tidak29">Tidak</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row border-bottom mb-2 pb-2">
+                                <div class="col-12 col-lg-8">
+                                    <li>Apakah anda menerima transfuse darah di Inggris ?
+                                    </li>
+                                </div>
+                                <div class="col-12 col-lg-4 d-flex">
+                                    <div class="custom-control custom-radio mr-3">
+                                        <input type="radio" id="Ya30" name="p[30]" class="custom-control-input"
+                                            value="1">
+                                        <label class="custom-control-label" for="Ya30">Ya</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="tidak30" name="p[30]" class="custom-control-input"
+                                            value="0">
+                                        <label class="custom-control-label" for="tidak30">Tidak</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <b class="mb-2 pb-2">Tahun 1980 hingga 1996</b>
+                            <div class="row border-bottom mb-2 pb-2">
+                                <div class="col-12 col-lg-8">
+                                    <li>Apakah anda tinggal selama 3 tahun atau lebih di Inggris ?
+                                    </li>
+                                </div>
+                                <div class="col-12 col-lg-4 d-flex">
+                                    <div class="custom-control custom-radio mr-3">
+                                        <input type="radio" id="Ya31" name="p[31]" class="custom-control-input"
+                                            value="1">
+                                        <label class="custom-control-label" for="Ya31">Ya</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="tidak31" name="p[31]" class="custom-control-input"
+                                            value="0">
+                                        <label class="custom-control-label" for="tidak31">Tidak</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <b class="mb-2 pb-2">Apakah anda pernah</b>
+                            <div class="row border-bottom mb-2 pb-2">
+                                <div class="col-12 col-lg-8">
+                                    <li>Mendapatkan hasil positif untuk tes HIV/AIDS ?
+                                    </li>
+                                </div>
+                                <div class="col-12 col-lg-4 d-flex">
+                                    <div class="custom-control custom-radio mr-3">
+                                        <input type="radio" id="Ya32" name="p[32]" class="custom-control-input"
+                                            value="1">
+                                        <label class="custom-control-label" for="Ya32">Ya</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="tidak32" name="p[32]" class="custom-control-input"
+                                            value="0">
+                                        <label class="custom-control-label" for="tidak32">Tidak</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row border-bottom mb-2 pb-2">
+                                <div class="col-12 col-lg-8">
+                                    <li>Menggunakan jarum suntik untuk obat-obatan, Steroid yang tidak diresepkan dokter ?
+                                    </li>
+                                </div>
+                                <div class="col-12 col-lg-4 d-flex">
+                                    <div class="custom-control custom-radio mr-3">
+                                        <input type="radio" id="Ya33" name="p[33]" class="custom-control-input"
+                                            value="1">
+                                        <label class="custom-control-label" for="Ya33">Ya</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="tidak33" name="p[33]" class="custom-control-input"
+                                            value="0">
+                                        <label class="custom-control-label" for="tidak33">Tidak</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row border-bottom mb-2 pb-2">
+                                <div class="col-12 col-lg-8">
+                                    <li>Menggunakan konsentrat factor pembekuan ?
+                                    </li>
+                                </div>
+                                <div class="col-12 col-lg-4 d-flex">
+                                    <div class="custom-control custom-radio mr-3">
+                                        <input type="radio" id="Ya34" name="p[34]" class="custom-control-input"
+                                            value="1">
+                                        <label class="custom-control-label" for="Ya34">Ya</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="tidak34" name="p[34]" class="custom-control-input"
+                                            value="0">
+                                        <label class="custom-control-label" for="tidak34">Tidak</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row border-bottom mb-2 pb-2">
+                                <div class="col-12 col-lg-8">
+                                    <li>Menderita hepatitis ?
+                                    </li>
+                                </div>
+                                <div class="col-12 col-lg-4 d-flex">
+                                    <div class="custom-control custom-radio mr-3">
+                                        <input type="radio" id="Ya35" name="p[35]" class="custom-control-input"
+                                            value="1">
+                                        <label class="custom-control-label" for="Ya35">Ya</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="tidak35" name="p[35]" class="custom-control-input"
+                                            value="0">
+                                        <label class="custom-control-label" for="tidak35">Tidak</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row border-bottom mb-2 pb-2">
+                                <div class="col-12 col-lg-8">
+                                    <li>Menderita malaria ?
+                                    </li>
+                                </div>
+                                <div class="col-12 col-lg-4 d-flex">
+                                    <div class="custom-control custom-radio mr-3">
+                                        <input type="radio" id="Ya36" name="p[36]" class="custom-control-input"
+                                            value="1">
+                                        <label class="custom-control-label" for="Ya36">Ya</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="tidak36" name="p[36]" class="custom-control-input"
+                                            value="0">
+                                        <label class="custom-control-label" for="tidak36">Tidak</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row border-bottom mb-2 pb-2">
+                                <div class="col-12 col-lg-8">
+                                    <li>Menderita kanker termasuk leukimia ?
+                                    </li>
+                                </div>
+                                <div class="col-12 col-lg-4 d-flex">
+                                    <div class="custom-control custom-radio mr-3">
+                                        <input type="radio" id="Ya37" name="p[37]" class="custom-control-input"
+                                            value="1">
+                                        <label class="custom-control-label" for="Ya37">Ya</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="tidak37" name="p[37]" class="custom-control-input"
+                                            value="0">
+                                        <label class="custom-control-label" for="tidak37">Tidak</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row border-bottom mb-2 pb-2">
+                                <div class="col-12 col-lg-8">
+                                    <li>Bermasalah dengan jantung dan pru-paru ?
+                                    </li>
+                                </div>
+                                <div class="col-12 col-lg-4 d-flex">
+                                    <div class="custom-control custom-radio mr-3">
+                                        <input type="radio" id="Ya38" name="p[38]" class="custom-control-input"
+                                            value="1">
+                                        <label class="custom-control-label" for="Ya38">Ya</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="tidak38" name="p[38]" class="custom-control-input"
+                                            value="0">
+                                        <label class="custom-control-label" for="tidak38">Tidak</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row border-bottom mb-2 pb-2">
+                                <div class="col-12 col-lg-8">
+                                    <li>Menderita pendarahan atau penyakit berhubungan dengan darah ?
+                                    </li>
+                                </div>
+                                <div class="col-12 col-lg-4 d-flex">
+                                    <div class="custom-control custom-radio mr-3">
+                                        <input type="radio" id="Ya39" name="p[39]" class="custom-control-input"
+                                            value="1">
+                                        <label class="custom-control-label" for="Ya39">Ya</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="tidak39" name="p[39]" class="custom-control-input"
+                                            value="0">
+                                        <label class="custom-control-label" for="tidak39">Tidak</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row border-bottom mb-2 pb-2">
+                                <div class="col-12 col-lg-8">
+                                    <li>Berhubungan seksual dengan orang yang tinggal di afrika ?
+                                    </li>
+                                </div>
+                                <div class="col-12 col-lg-4 d-flex">
+                                    <div class="custom-control custom-radio mr-3">
+                                        <input type="radio" id="Ya40" name="p[40]" class="custom-control-input"
+                                            value="1">
+                                        <label class="custom-control-label" for="Ya40">Ya</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="tidak40" name="p[40]" class="custom-control-input"
+                                            value="0">
+                                        <label class="custom-control-label" for="tidak40">Tidak</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row border-bottom mb-2 pb-2">
+                                <div class="col-12 col-lg-8">
+                                    <li>Tinggal di Afrika ?
+                                    </li>
+                                </div>
+                                <div class="col-12 col-lg-4 d-flex">
+                                    <div class="custom-control custom-radio mr-3">
+                                        <input type="radio" id="Ya41" name="p[41]" class="custom-control-input"
+                                            value="1">
+                                        <label class="custom-control-label" for="Ya41">Ya</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="tidak41" name="p[41]" class="custom-control-input"
+                                            value="0">
+                                        <label class="custom-control-label" for="tidak41">Tidak</label>
                                     </div>
                                 </div>
                             </div>
