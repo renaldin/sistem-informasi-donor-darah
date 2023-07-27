@@ -53,6 +53,7 @@ class C_Dashboard extends Controller
                 'user'                  => $this->M_User->detail(Session()->get('id_user')),
                 'jumlahUser'            => $this->M_User->jumlah_user(),
                 'gol'                   => $this->M_DarahMasuk->countGol('Sudah Masuk'),
+                'stok'                  => $this->M_DarahMasuk->countGolJenisDarah('Sudah Masuk'),
                 'gol_belum_masuk'       => $this->M_DarahMasuk->countGol('Belum Masuk'),
                 'gol_kedaluwarsa'       => $this->M_DarahMasuk->countGolExpired(),
                 'gol_darah_buang'       => $this->M_DarahBuang->countGol(),
@@ -83,6 +84,7 @@ class C_Dashboard extends Controller
                 'user'                  => $user,
                 'data_web'               => $this->M_Website->detail(1),
                 'gol'                   => $this->M_DarahMasuk->countGol('Sudah Masuk'),
+                'stok'                  => $this->M_DarahMasuk->countGolJenisDarah('Sudah Masuk'),
                 'anggota'                   => $this->M_Anggota->cek_nik($user->nik),
             ];
             return view('donatur.v_dashboard', $data);
@@ -116,6 +118,7 @@ class C_Dashboard extends Controller
                 'user'                  => $this->M_User->detail_user_rs(Session()->get('id_user')),
                 'data_web'               => $this->M_Website->detail(1),
                 'gol'                   => $this->M_DarahMasuk->countGol('Sudah Masuk'),
+                'stok'                  => $this->M_DarahMasuk->countGolJenisDarah('Sudah Masuk'),
                 'data_permohonan_darah' => $this->M_PermohonanDarah->get_data_user(Session()->get('id_user')),
             ];
             return view('rumah_sakit.v_dashboard', $data);

@@ -56,6 +56,15 @@
 
 <body class="bg-gradient-login">
   @include('sweetalert::alert')
+
+  @php
+    function kurangiTahun($tanggal, $tahun_to_kurangi)
+    {
+        $tgl = new DateTime($tanggal);
+        $tgl->modify('-' . $tahun_to_kurangi . ' year');
+        return $tgl->format('Y-m-d');
+    }
+  @endphp
   <!-- Login Content -->
   <main class="main-img">
     <div class="container-login">
@@ -124,7 +133,7 @@
                           </div> --}}
                           <div class="col-lg-6">
                             <div class="form-group">
-                              <input type="text" name="tanggal_lahir" class="form-control @error('tanggal_lahir') is-invalid @enderror" value="{{old('tanggal_lahir')}}" placeholder="Tanggal Lahir" onfocus="(this.type='date')" required>
+                              <input type="text" name="tanggal_lahir" max="{{kurangiTahun(date('Y-m-d'), 16)}}" class="form-control @error('tanggal_lahir') is-invalid @enderror" value="{{old('tanggal_lahir')}}" placeholder="Tanggal Lahir" onfocus="(this.type='date')" required>
                               @error('tanggal_lahir')
                                 <small class="form-text text-danger">{{ $message }}</small>
                               @enderror
@@ -167,6 +176,7 @@
                           <div class="col-lg-6">
                             <div class="form-group">
                               <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Masukkan Password" required>
+                              <small class="form-text text-danger">Password minimal 6 karakter</small>
                               @error('password')
                                 <small class="form-text text-danger">{{ $message }}</small>
                               @enderror
@@ -226,6 +236,7 @@
                           <div class="col-lg-6">
                             <div class="form-group">
                               <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Masukkan Password" required>
+                              <small class="form-text text-danger">Password minimal 6 karakter</small>
                               @error('password')
                                 <small class="form-text text-danger">{{ $message }}</small>
                               @enderror
@@ -285,6 +296,7 @@
                           <div class="col-lg-6">
                             <div class="form-group">
                               <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Masukkan Password" required>
+                              <small class="form-text text-danger">Password minimal 6 karakter</small>
                               @error('password')
                                 <small class="form-text text-danger">{{ $message }}</small>
                               @enderror

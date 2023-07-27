@@ -106,6 +106,7 @@ class C_Laporan extends Controller
         $data = [
             'title'         => 'Rekap Darah Masuk',
             'data_web'      => $this->M_Website->detail(1),
+            'user'          => $this->M_User->detail(Session()->get('id_user')),
             'data_darah'    => $this->M_DarahMasuk->get_data_tanggal(Request()->tanggal_mulai, Request()->tanggal_akhir)
         ];
 
@@ -122,6 +123,7 @@ class C_Laporan extends Controller
         $data = [
             'title'         => 'Rekap Stok Darah',
             'data_web'      => $this->M_Website->detail(1),
+            'user'          => $this->M_User->detail(Session()->get('id_user')),
             'data_darah'    => $this->M_DarahMasuk->get_data_tanggal(Request()->tanggal_mulai, Request()->tanggal_akhir)
         ];
 
@@ -138,6 +140,7 @@ class C_Laporan extends Controller
         $data = [
             'title'         => 'Rekap Darah Keluar',
             'data_web'      => $this->M_Website->detail(1),
+            'user'          => $this->M_User->detail(Session()->get('id_user')),
             'data_darah'    => $this->M_DarahKeluar->get_data_tanggal(Request()->tanggal_mulai, Request()->tanggal_akhir)
         ];
 
@@ -154,6 +157,7 @@ class C_Laporan extends Controller
         $data = [
             'title'         => 'Rekap Darah Buang',
             'data_web'      => $this->M_Website->detail(1),
+            'user'          => $this->M_User->detail(Session()->get('id_user')),
             'data_darah'    => $this->M_DarahBuang->get_data_tanggal(Request()->tanggal_mulai, Request()->tanggal_akhir)
         ];
 

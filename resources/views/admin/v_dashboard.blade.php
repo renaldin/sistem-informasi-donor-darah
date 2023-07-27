@@ -3,20 +3,17 @@
 @section('content')
 
 @php
-function hitungUmur($tanggal_darah) {
-  $tanggal_darah_masuk = date('Y-m-d', strtotime($tanggal_darah));
-  $tgl_lahir = new DateTime($tanggal_darah_masuk);
-  $sekarang = new DateTime();
-  $perbedaan = $sekarang->diff($tgl_lahir);
+function hitungUmur($tanggal_darah_masuk)
+{
+    $tgl_lahir = new DateTime($tanggal_darah_masuk);
+    $sekarang = new DateTime();
+    $diff = $tgl_lahir->diff($sekarang);
+    $umur_hari = $diff->days;
+    $umur_jam = $diff->h;
+    $umur_detik = $diff->s;
 
-  $umur = array(
-    'tahun' => $perbedaan->y,
-    'bulan' => $perbedaan->m,
-    'hari' => $perbedaan->d
-  );
-
-  $data_umur = $umur['bulan'].' bulan, '.$umur['hari'].' hari.';
-  return $data_umur;
+    $data_umur = $umur_hari . ' hari, ' . $umur_jam . ' jam, ' . $umur_detik . ' detik.';
+    return $data_umur;
 }
 
 function hitungDurasiJadwalDonor($tanggal_donor_kembali) {
@@ -322,6 +319,7 @@ function tanggal_indonesia($tanggal) {
                                         <th>Golongan Darah</th>
                                         <th>Rhesus</th>
                                         <th>Stok</th>
+                                        <th>Jenis Darah</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -331,12 +329,22 @@ function tanggal_indonesia($tanggal) {
                                         <td>Positif</td>
                                         <td><?= $gol['a+'] == 0 ? '<span class="badge badge-danger">' . $gol['a+'] . '</span>' : $gol['a+'] ?>
                                         </td>
+                                        <td>
+                                            Darah Segar : <strong>{{$stok['a+segar']}}</strong><br>
+                                            Darah Baru : <strong>{{$stok['a+baru']}}</strong><br>
+                                            Darah Simpan : <strong>{{$stok['a+simpan']}}</strong><br>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>2</td>
                                         <td>B</td>
                                         <td>Positif</td>
                                         <td><?= $gol['b+'] == 0 ? '<span class="badge badge-danger">' . $gol['b+'] . '</span>' : $gol['b+'] ?>
+                                        </td>
+                                        <td>
+                                            Darah Segar : <strong>{{$stok['b+segar']}}</strong><br>
+                                            Darah Baru : <strong>{{$stok['b+baru']}}</strong><br>
+                                            Darah Simpan : <strong>{{$stok['b+simpan']}}</strong><br>
                                         </td>
                                     </tr>
                                     <tr>
@@ -345,12 +353,22 @@ function tanggal_indonesia($tanggal) {
                                         <td>Positif</td>
                                         <td><?= $gol['ab+'] == 0 ? '<span class="badge badge-danger">' . $gol['ab+'] . '</span>' : $gol['ab+'] ?>
                                         </td>
+                                        <td>
+                                            Darah Segar : <strong>{{$stok['ab+segar']}}</strong><br>
+                                            Darah Baru : <strong>{{$stok['ab+baru']}}</strong><br>
+                                            Darah Simpan : <strong>{{$stok['ab+simpan']}}</strong><br>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>4</td>
                                         <td>O</td>
                                         <td>Positif</td>
                                         <td><?= $gol['o+'] == 0 ? '<span class="badge badge-danger">' . $gol['o+'] . '</span>' : $gol['o+'] ?>
+                                        </td>
+                                        <td>
+                                            Darah Segar : <strong>{{$stok['o+segar']}}</strong><br>
+                                            Darah Baru : <strong>{{$stok['o+baru']}}</strong><br>
+                                            Darah Simpan : <strong>{{$stok['o+simpan']}}</strong><br>
                                         </td>
                                     </tr>
                                     <tr>
@@ -359,12 +377,22 @@ function tanggal_indonesia($tanggal) {
                                         <td>Negatif</td>
                                         <td><?= $gol['a-'] == 0 ? '<span class="badge badge-danger">' . $gol['a-'] . '</span>' : $gol['a-'] ?>
                                         </td>
+                                        <td>
+                                            Darah Segar : <strong>{{$stok['a-segar']}}</strong><br>
+                                            Darah Baru : <strong>{{$stok['a-baru']}}</strong><br>
+                                            Darah Simpan : <strong>{{$stok['a-simpan']}}</strong><br>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>6</td>
                                         <td>B</td>
                                         <td>Negatif</td>
                                         <td><?= $gol['b-'] == 0 ? '<span class="badge badge-danger">' . $gol['b-'] . '</span>' : $gol['b-'] ?>
+                                        </td>
+                                        <td>
+                                            Darah Segar : <strong>{{$stok['b-segar']}}</strong><br>
+                                            Darah Baru : <strong>{{$stok['b-baru']}}</strong><br>
+                                            Darah Simpan : <strong>{{$stok['b-simpan']}}</strong><br>
                                         </td>
                                     </tr>
                                     <tr>
@@ -373,12 +401,22 @@ function tanggal_indonesia($tanggal) {
                                         <td>Negatif</td>
                                         <td><?= $gol['ab-'] == 0 ? '<span class="badge badge-danger">' . $gol['ab-'] . '</span>' : $gol['ab-'] ?>
                                         </td>
+                                        <td>
+                                            Darah Segar : <strong>{{$stok['ab-segar']}}</strong><br>
+                                            Darah Baru : <strong>{{$stok['ab-baru']}}</strong><br>
+                                            Darah Simpan : <strong>{{$stok['ab-simpan']}}</strong><br>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>8</td>
                                         <td>O</td>
                                         <td>Negatif</td>
                                         <td><?= $gol['o-'] == 0 ? '<span class="badge badge-danger">' . $gol['o-'] . '</span>' : $gol['o-'] ?>
+                                        </td>
+                                        <td>
+                                            Darah Segar : <strong>{{$stok['o-segar']}}</strong><br>
+                                            Darah Baru : <strong>{{$stok['o-baru']}}</strong><br>
+                                            Darah Simpan : <strong>{{$stok['o-simpan']}}</strong><br>
                                         </td>
                                     </tr>
                                 </tbody>

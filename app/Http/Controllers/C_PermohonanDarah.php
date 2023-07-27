@@ -62,6 +62,7 @@ class C_PermohonanDarah extends Controller
             'sub_title'             => 'Tambah Permohonan Darah',
             'data_web'              => $this->M_Website->detail(1),
             'gol'                   => $this->M_DarahMasuk->countGol('Sudah Masuk'),
+            'stok'                  => $this->M_DarahMasuk->countGolJenisDarah('Sudah Masuk'),
             'user'                  => $this->M_User->detail(Session()->get('id_user'))
         ];
 
@@ -97,51 +98,174 @@ class C_PermohonanDarah extends Controller
             'upload_surat.max'          => 'Ukuran Surat maksimal 5 mb',
         ]);
 
-        $stok = $this->M_DarahMasuk->countGol('Sudah Masuk');
+        $stok = $this->M_DarahMasuk->countGolJenisDarah('Sudah Masuk');
         $golda = Request()->golda;
         $rhesus = Request()->rhesus;
         $jumlah = Request()->jumlah;
+        $jenisDarah = Request()->jenis_darah;
 
         if ($golda == 'A' && $rhesus == 'Positif') {
-            if ($jumlah > $stok['a+']) {
-                // ->autoClose(30000)
-                Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah A dengan Rhesus Positif stok tersisa ' . $stok['a+'] . ' kantong.');
-                return redirect()->back();
+
+            if ($jenisDarah === 'Darah Segar') {
+                if ($jumlah > $stok['a+segar']) {
+                    // ->autoClose(30000)
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah A dengan Rhesus Positif dan Jenis Darah Segar stok tersisa ' . $stok['a+segar'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
+            }
+            if ($jenisDarah === 'Darah Baru') {
+                if ($jumlah > $stok['a+baru']) {
+                    // ->autoClose(30000)
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah A dengan Rhesus Positif dan Jenis Darah Baru stok tersisa ' . $stok['a+baru'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
+            }
+            if ($jenisDarah === 'Darah Simpan') {
+                if ($jumlah > $stok['a+simpan']) {
+                    // ->autoClose(30000)
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah A dengan Rhesus Positif dan Jenis Darah Simpan stok tersisa ' . $stok['a+simpan'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
             }
         } elseif ($golda == 'B' && $rhesus == 'Positif') {
-            if ($jumlah > $stok['b+']) {
-                Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah B dengan Rhesus Positif stok tersisa ' . $stok['b+'] . ' kantong.');
-                return redirect()->back();
+
+            if ($jenisDarah === 'Darah Segar') {
+                if ($jumlah > $stok['b+segar']) {
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah B dengan Rhesus Positif dan Jenis Darah Segar stok tersisa ' . $stok['b+segar'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
+            }
+            if ($jenisDarah === 'Darah Baru') {
+                if ($jumlah > $stok['b+baru']) {
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah B dengan Rhesus Positif dan Jenis Darah Baru stok tersisa ' . $stok['b+baru'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
+            }
+            if ($jenisDarah === 'Darah Simpan') {
+                if ($jumlah > $stok['b+simpan']) {
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah B dengan Rhesus Positif dan Jenis Darah Simpan stok tersisa ' . $stok['b+simpan'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
             }
         } elseif ($golda == 'AB' && $rhesus == 'Positif') {
-            if ($jumlah > $stok['ab+']) {
-                Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah AB dengan Rhesus Positif stok tersisa ' . $stok['ab+'] . ' kantong.');
-                return redirect()->back();
+
+            if ($jenisDarah === 'Darah Segar') {
+                if ($jumlah > $stok['ab+segar']) {
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah AB dengan Rhesus Positif dan Jenis Darah Segar stok tersisa ' . $stok['ab+segar'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
+            }
+            if ($jenisDarah === 'Darah Baru') {
+                if ($jumlah > $stok['ab+baru']) {
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah AB dengan Rhesus Positif dan Jenis Darah Baru stok tersisa ' . $stok['ab+baru'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
+            }
+            if ($jenisDarah === 'Darah Simpan') {
+                if ($jumlah > $stok['ab+simpan']) {
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah AB dengan Rhesus Positif dan Jenis Darah Simpan stok tersisa ' . $stok['ab+simpan'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
             }
         } elseif ($golda == 'O' && $rhesus == 'Positif') {
-            if ($jumlah > $stok['o+']) {
-                Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah O dengan Rhesus Positif stok tersisa ' . $stok['o+'] . ' kantong.');
-                return redirect()->back();
+
+            if ($jenisDarah === 'Darah Segar') {
+                if ($jumlah > $stok['o+segar']) {
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah O dengan Rhesus Positif dan Jenis Darah Segar stok tersisa ' . $stok['o+segar'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
+            }
+            if ($jenisDarah === 'Darah Baru') {
+                if ($jumlah > $stok['o+baru']) {
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah O dengan Rhesus Positif dan Jenis Darah Baru stok tersisa ' . $stok['o+baru'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
+            }
+            if ($jenisDarah === 'Darah Simpan') {
+                if ($jumlah > $stok['o+simpan']) {
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah O dengan Rhesus Positif dan Jenis Darah Simpan stok tersisa ' . $stok['o+simpan'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
             }
         } elseif ($golda == 'A' && $rhesus == 'Negatif') {
-            if ($jumlah > $stok['a-']) {
-                Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah A dengan Rhesus Negatif stok tersisa ' . $stok['a-'] . ' kantong.');
-                return redirect()->back();
+
+            if ($jenisDarah === 'Darah Segar') {
+                if ($jumlah > $stok['a-segar']) {
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah A dengan Rhesus Negatif dan Jenis Darah Segar stok tersisa ' . $stok['a-segar'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
+            }
+            if ($jenisDarah === 'Darah Baru') {
+                if ($jumlah > $stok['a-baru']) {
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah A dengan Rhesus Negatif dan Jenis Darah Baru stok tersisa ' . $stok['a-baru'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
+            }
+            if ($jenisDarah === 'Darah Simpan') {
+                if ($jumlah > $stok['a-simpan']) {
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah A dengan Rhesus Negatif dan Jenis Darah Simpan stok tersisa ' . $stok['a-simpan'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
             }
         } elseif ($golda == 'B' && $rhesus == 'Negatif') {
-            if ($jumlah > $stok['b-']) {
-                Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah B dengan Rhesus Negatif stok tersisa ' . $stok['b-'] . ' kantong.');
-                return redirect()->back();
+
+            if ($jenisDarah === 'Darah Segar') {
+                if ($jumlah > $stok['b-segar']) {
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah B dengan Rhesus Negatif dan Jenis Darah Segar stok tersisa ' . $stok['b-segar'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
+            }
+            if ($jenisDarah === 'Darah Baru') {
+                if ($jumlah > $stok['b-baru']) {
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah B dengan Rhesus Negatif dan Jenis Darah Baru stok tersisa ' . $stok['b-baru'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
+            }
+            if ($jenisDarah === 'Darah Simpan') {
+                if ($jumlah > $stok['b-simpan']) {
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah B dengan Rhesus Negatif dan Jenis Darah Simpan stok tersisa ' . $stok['b-simpan'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
             }
         } elseif ($golda == 'AB' && $rhesus == 'Negatif') {
-            if ($jumlah > $stok['ab-']) {
-                Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah AB dengan Rhesus Negatif stok tersisa ' . $stok['ab-'] . ' kantong.');
-                return redirect()->back();
+
+            if ($jenisDarah === 'Darah Segar') {
+                if ($jumlah > $stok['ab-segar']) {
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah AB dengan Rhesus Negatif dan Jenis Darah Segar stok tersisa ' . $stok['ab-segar'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
+            }
+            if ($jenisDarah === 'Darah Baru') {
+                if ($jumlah > $stok['ab-baru']) {
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah AB dengan Rhesus Negatif dan Jenis Darah Baru stok tersisa ' . $stok['ab-baru'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
+            }
+            if ($jenisDarah === 'Darah Simpan') {
+                if ($jumlah > $stok['ab-simpan']) {
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah AB dengan Rhesus Negatif dan Jenis Darah Simpan stok tersisa ' . $stok['ab-simpan'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
             }
         } elseif ($golda == 'O' && $rhesus == 'Negatif') {
-            if ($jumlah > $stok['o-']) {
-                Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah O dengan Rhesus Negatif stok tersisa ' . $stok['o-'] . ' kantong.');
-                return redirect()->back();
+
+            if ($jenisDarah === 'Darah Segar') {
+                if ($jumlah > $stok['o-segar']) {
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah O dengan Rhesus Negatif dan Jenis Darah Segar stok tersisa ' . $stok['o-segar'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
+            }
+            if ($jenisDarah === 'Darah Baru') {
+                if ($jumlah > $stok['o-baru']) {
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah O dengan Rhesus Negatif dan Jenis Darah Baru stok tersisa ' . $stok['o-baru'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
+            }
+            if ($jenisDarah === 'Darah Simpan') {
+                if ($jumlah > $stok['o-simpan']) {
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah O dengan Rhesus Negatif dan Jenis Darah Simpan stok tersisa ' . $stok['o-simpan'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
             }
         }
 
@@ -178,6 +302,8 @@ class C_PermohonanDarah extends Controller
             'title'                 => 'Permohonan Darah',
             'sub_title'             => 'Edit Permohonan Darah',
             'data_web'              => $this->M_Website->detail(1),
+            'gol'                   => $this->M_DarahMasuk->countGol('Sudah Masuk'),
+            'stok'                  => $this->M_DarahMasuk->countGolJenisDarah('Sudah Masuk'),
             'user'                  => $this->M_User->detail(Session()->get('id_user')),
             'detail'                => $this->M_PermohonanDarah->detail($id_permohonan_darah)
         ];
@@ -350,6 +476,7 @@ class C_PermohonanDarah extends Controller
             'sub_title'             => 'Tambah Distribusi Darah',
             'data_web'              => $this->M_Website->detail(1),
             'gol'                   => $this->M_DarahMasuk->countGol('Sudah Masuk'),
+            'stok'                  => $this->M_DarahMasuk->countGolJenisDarah('Sudah Masuk'),
             'user'                  => $this->M_User->detail(Session()->get('id_user'))
         ];
 
@@ -385,51 +512,174 @@ class C_PermohonanDarah extends Controller
             'upload_surat.max'          => 'Ukuran Surat maksimal 5 mb',
         ]);
 
-        $stok = $this->M_DarahMasuk->countGol('Sudah Masuk');
+        $stok = $this->M_DarahMasuk->countGolJenisDarah('Sudah Masuk');
         $golda = Request()->golda;
         $rhesus = Request()->rhesus;
         $jumlah = Request()->jumlah;
+        $jenisDarah = Request()->jenis_darah;
 
         if ($golda == 'A' && $rhesus == 'Positif') {
-            if ($jumlah > $stok['a+']) {
-                // ->autoClose(30000)
-                Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah A dengan Rhesus Positif stok tersisa ' . $stok['a+'] . ' kantong.');
-                return redirect()->back();
+
+            if ($jenisDarah === 'Darah Segar') {
+                if ($jumlah > $stok['a+segar']) {
+                    // ->autoClose(30000)
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah A dengan Rhesus Positif dan Jenis Darah Segar stok tersisa ' . $stok['a+segar'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
+            }
+            if ($jenisDarah === 'Darah Baru') {
+                if ($jumlah > $stok['a+baru']) {
+                    // ->autoClose(30000)
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah A dengan Rhesus Positif dan Jenis Darah Baru stok tersisa ' . $stok['a+baru'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
+            }
+            if ($jenisDarah === 'Darah Simpan') {
+                if ($jumlah > $stok['a+simpan']) {
+                    // ->autoClose(30000)
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah A dengan Rhesus Positif dan Jenis Darah Simpan stok tersisa ' . $stok['a+simpan'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
             }
         } elseif ($golda == 'B' && $rhesus == 'Positif') {
-            if ($jumlah > $stok['b+']) {
-                Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah B dengan Rhesus Positif stok tersisa ' . $stok['b+'] . ' kantong.');
-                return redirect()->back();
+
+            if ($jenisDarah === 'Darah Segar') {
+                if ($jumlah > $stok['b+segar']) {
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah B dengan Rhesus Positif dan Jenis Darah Segar stok tersisa ' . $stok['b+segar'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
+            }
+            if ($jenisDarah === 'Darah Baru') {
+                if ($jumlah > $stok['b+baru']) {
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah B dengan Rhesus Positif dan Jenis Darah Baru stok tersisa ' . $stok['b+baru'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
+            }
+            if ($jenisDarah === 'Darah Simpan') {
+                if ($jumlah > $stok['b+simpan']) {
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah B dengan Rhesus Positif dan Jenis Darah Simpan stok tersisa ' . $stok['b+simpan'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
             }
         } elseif ($golda == 'AB' && $rhesus == 'Positif') {
-            if ($jumlah > $stok['ab+']) {
-                Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah AB dengan Rhesus Positif stok tersisa ' . $stok['ab+'] . ' kantong.');
-                return redirect()->back();
+
+            if ($jenisDarah === 'Darah Segar') {
+                if ($jumlah > $stok['ab+segar']) {
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah AB dengan Rhesus Positif dan Jenis Darah Segar stok tersisa ' . $stok['ab+segar'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
+            }
+            if ($jenisDarah === 'Darah Baru') {
+                if ($jumlah > $stok['ab+baru']) {
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah AB dengan Rhesus Positif dan Jenis Darah Baru stok tersisa ' . $stok['ab+baru'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
+            }
+            if ($jenisDarah === 'Darah Simpan') {
+                if ($jumlah > $stok['ab+simpan']) {
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah AB dengan Rhesus Positif dan Jenis Darah Simpan stok tersisa ' . $stok['ab+simpan'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
             }
         } elseif ($golda == 'O' && $rhesus == 'Positif') {
-            if ($jumlah > $stok['o+']) {
-                Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah O dengan Rhesus Positif stok tersisa ' . $stok['o+'] . ' kantong.');
-                return redirect()->back();
+
+            if ($jenisDarah === 'Darah Segar') {
+                if ($jumlah > $stok['o+segar']) {
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah O dengan Rhesus Positif dan Jenis Darah Segar stok tersisa ' . $stok['o+segar'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
+            }
+            if ($jenisDarah === 'Darah Baru') {
+                if ($jumlah > $stok['o+baru']) {
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah O dengan Rhesus Positif dan Jenis Darah Baru stok tersisa ' . $stok['o+baru'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
+            }
+            if ($jenisDarah === 'Darah Simpan') {
+                if ($jumlah > $stok['o+simpan']) {
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah O dengan Rhesus Positif dan Jenis Darah Simpan stok tersisa ' . $stok['o+simpan'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
             }
         } elseif ($golda == 'A' && $rhesus == 'Negatif') {
-            if ($jumlah > $stok['a-']) {
-                Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah A dengan Rhesus Negatif stok tersisa ' . $stok['a-'] . ' kantong.');
-                return redirect()->back();
+
+            if ($jenisDarah === 'Darah Segar') {
+                if ($jumlah > $stok['a-segar']) {
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah A dengan Rhesus Negatif dan Jenis Darah Segar stok tersisa ' . $stok['a-segar'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
+            }
+            if ($jenisDarah === 'Darah Baru') {
+                if ($jumlah > $stok['a-baru']) {
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah A dengan Rhesus Negatif dan Jenis Darah Baru stok tersisa ' . $stok['a-baru'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
+            }
+            if ($jenisDarah === 'Darah Simpan') {
+                if ($jumlah > $stok['a-simpan']) {
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah A dengan Rhesus Negatif dan Jenis Darah Simpan stok tersisa ' . $stok['a-simpan'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
             }
         } elseif ($golda == 'B' && $rhesus == 'Negatif') {
-            if ($jumlah > $stok['b-']) {
-                Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah B dengan Rhesus Negatif stok tersisa ' . $stok['b-'] . ' kantong.');
-                return redirect()->back();
+
+            if ($jenisDarah === 'Darah Segar') {
+                if ($jumlah > $stok['b-segar']) {
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah B dengan Rhesus Negatif dan Jenis Darah Segar stok tersisa ' . $stok['b-segar'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
+            }
+            if ($jenisDarah === 'Darah Baru') {
+                if ($jumlah > $stok['b-baru']) {
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah B dengan Rhesus Negatif dan Jenis Darah Baru stok tersisa ' . $stok['b-baru'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
+            }
+            if ($jenisDarah === 'Darah Simpan') {
+                if ($jumlah > $stok['b-simpan']) {
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah B dengan Rhesus Negatif dan Jenis Darah Simpan stok tersisa ' . $stok['b-simpan'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
             }
         } elseif ($golda == 'AB' && $rhesus == 'Negatif') {
-            if ($jumlah > $stok['ab-']) {
-                Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah AB dengan Rhesus Negatif stok tersisa ' . $stok['ab-'] . ' kantong.');
-                return redirect()->back();
+
+            if ($jenisDarah === 'Darah Segar') {
+                if ($jumlah > $stok['ab-segar']) {
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah AB dengan Rhesus Negatif dan Jenis Darah Segar stok tersisa ' . $stok['ab-segar'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
+            }
+            if ($jenisDarah === 'Darah Baru') {
+                if ($jumlah > $stok['ab-baru']) {
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah AB dengan Rhesus Negatif dan Jenis Darah Baru stok tersisa ' . $stok['ab-baru'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
+            }
+            if ($jenisDarah === 'Darah Simpan') {
+                if ($jumlah > $stok['ab-simpan']) {
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah AB dengan Rhesus Negatif dan Jenis Darah Simpan stok tersisa ' . $stok['ab-simpan'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
             }
         } elseif ($golda == 'O' && $rhesus == 'Negatif') {
-            if ($jumlah > $stok['o-']) {
-                Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah O dengan Rhesus Negatif stok tersisa ' . $stok['o-'] . ' kantong.');
-                return redirect()->back();
+
+            if ($jenisDarah === 'Darah Segar') {
+                if ($jumlah > $stok['o-segar']) {
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah O dengan Rhesus Negatif dan Jenis Darah Segar stok tersisa ' . $stok['o-segar'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
+            }
+            if ($jenisDarah === 'Darah Baru') {
+                if ($jumlah > $stok['o-baru']) {
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah O dengan Rhesus Negatif dan Jenis Darah Baru stok tersisa ' . $stok['o-baru'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
+            }
+            if ($jenisDarah === 'Darah Simpan') {
+                if ($jumlah > $stok['o-simpan']) {
+                    Alert::error('Gagal', 'Anda menginput jumlah ' . $jumlah . ' kantong sedangkan Golongan darah O dengan Rhesus Negatif dan Jenis Darah Simpan stok tersisa ' . $stok['o-simpan'] . ' kantong.')->autoClose(30000);
+                    return redirect()->back();
+                }
             }
         }
 

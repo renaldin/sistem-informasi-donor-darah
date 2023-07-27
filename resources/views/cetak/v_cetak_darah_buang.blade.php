@@ -209,6 +209,30 @@
 
             </tbody>
         </table>
+        <br>
+        <br>
+        <br>
+        <table>
+            <tr>
+                <td width="500px"></td>
+                <td style="text-align: left;">
+                    Subang,
+                </td>
+            </tr>
+            <tr>
+                <td width="500px"></td>
+                <td style="text-align: left;">
+                    Mengetahui,
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    {{$user->nama}} <br>
+                    Admin
+                </td>
+            </tr>
+        </table>
     </section>
 </body>
 
