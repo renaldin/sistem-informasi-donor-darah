@@ -55,9 +55,10 @@
                                 <thead class="thead-light">
                                     <tr>
                                         <th>No</th>
-                                        <th>Golongan Darah</th>
+                                        <th width="100px">Golongan Darah</th>
                                         <th>Rhesus</th>
                                         <th>Stok</th>
+                                        <th>Jenis Darah</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -67,12 +68,22 @@
                                         <td>Positif</td>
                                         <td><?= $gol['a+'] == 0 ? '<span class="badge badge-danger">' . $gol['a+'] . '</span>' : $gol['a+'] ?>
                                         </td>
+                                        <td>
+                                            Segar : <strong>{{$stok['a+segar']}}</strong><br>
+                                            Baru : <strong>{{$stok['a+baru']}}</strong><br>
+                                            Simpan : <strong>{{$stok['a+simpan']}}</strong><br>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>2</td>
                                         <td>B</td>
                                         <td>Positif</td>
                                         <td><?= $gol['b+'] == 0 ? '<span class="badge badge-danger">' . $gol['b+'] . '</span>' : $gol['b+'] ?>
+                                        </td>
+                                        <td>
+                                            Segar : <strong>{{$stok['b+segar']}}</strong><br>
+                                            Baru : <strong>{{$stok['b+baru']}}</strong><br>
+                                            Simpan : <strong>{{$stok['b+simpan']}}</strong><br>
                                         </td>
                                     </tr>
                                     <tr>
@@ -81,12 +92,22 @@
                                         <td>Positif</td>
                                         <td><?= $gol['ab+'] == 0 ? '<span class="badge badge-danger">' . $gol['ab+'] . '</span>' : $gol['ab+'] ?>
                                         </td>
+                                        <td>
+                                            Segar : <strong>{{$stok['ab+segar']}}</strong><br>
+                                            Baru : <strong>{{$stok['ab+baru']}}</strong><br>
+                                            Simpan : <strong>{{$stok['ab+simpan']}}</strong><br>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>4</td>
                                         <td>O</td>
                                         <td>Positif</td>
                                         <td><?= $gol['o+'] == 0 ? '<span class="badge badge-danger">' . $gol['o+'] . '</span>' : $gol['o+'] ?>
+                                        </td>
+                                        <td>
+                                            Segar : <strong>{{$stok['o+segar']}}</strong><br>
+                                            Baru : <strong>{{$stok['o+baru']}}</strong><br>
+                                            Simpan : <strong>{{$stok['o+simpan']}}</strong><br>
                                         </td>
                                     </tr>
                                     <tr>
@@ -95,12 +116,22 @@
                                         <td>Negatif</td>
                                         <td><?= $gol['a-'] == 0 ? '<span class="badge badge-danger">' . $gol['a-'] . '</span>' : $gol['a-'] ?>
                                         </td>
+                                        <td>
+                                            Segar : <strong>{{$stok['a-segar']}}</strong><br>
+                                            Baru : <strong>{{$stok['a-baru']}}</strong><br>
+                                            Simpan : <strong>{{$stok['a-simpan']}}</strong><br>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>6</td>
                                         <td>B</td>
                                         <td>Negatif</td>
                                         <td><?= $gol['b-'] == 0 ? '<span class="badge badge-danger">' . $gol['b-'] . '</span>' : $gol['b-'] ?>
+                                        </td>
+                                        <td>
+                                            Segar : <strong>{{$stok['b-segar']}}</strong><br>
+                                            Baru : <strong>{{$stok['b-baru']}}</strong><br>
+                                            Simpan : <strong>{{$stok['b-simpan']}}</strong><br>
                                         </td>
                                     </tr>
                                     <tr>
@@ -109,12 +140,22 @@
                                         <td>Negatif</td>
                                         <td><?= $gol['ab-'] == 0 ? '<span class="badge badge-danger">' . $gol['ab-'] . '</span>' : $gol['ab-'] ?>
                                         </td>
+                                        <td>
+                                            Segar : <strong>{{$stok['ab-segar']}}</strong><br>
+                                            Baru : <strong>{{$stok['ab-baru']}}</strong><br>
+                                            Simpan : <strong>{{$stok['ab-simpan']}}</strong><br>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>8</td>
                                         <td>O</td>
                                         <td>Negatif</td>
                                         <td><?= $gol['o-'] == 0 ? '<span class="badge badge-danger">' . $gol['o-'] . '</span>' : $gol['o-'] ?>
+                                        </td>
+                                        <td>
+                                            Segar : <strong>{{$stok['o-segar']}}</strong><br>
+                                            Baru : <strong>{{$stok['o-baru']}}</strong><br>
+                                            Simpan : <strong>{{$stok['o-simpan']}}</strong><br>
                                         </td>
                                     </tr>
                                 </tbody>

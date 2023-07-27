@@ -82,7 +82,8 @@
                                                 <label for="password">Password</label>
                                                 <input type="password" class="form-control @error('password') is-invalid @enderror"
                                                     name="password" id="password" placeholder="Masukkan Password">
-                                                @error('password')
+                                                    <small class="form-text text-danger">Password minimal 6 karakter</small>
+                                                    @error('password')
                                                     <small class="form-text text-danger">{{ $message }}</small>
                                                 @enderror
                                             </div>
@@ -163,7 +164,8 @@
                                                 <label for="password">Password</label>
                                                 <input type="password" class="form-control @error('password') is-invalid @enderror"
                                                     name="password" id="password" placeholder="Masukkan Password">
-                                                @error('password')
+                                                    <small class="form-text text-danger">Password minimal 6 karakter</small>
+                                                    @error('password')
                                                     <small class="form-text text-danger">{{ $message }}</small>
                                                 @enderror
                                             </div>
@@ -294,7 +296,8 @@
                                                 <label for="password">Password</label>
                                                 <input type="password" class="form-control @error('password') is-invalid @enderror"
                                                     name="password" id="password" placeholder="Masukkan Password">
-                                                @error('password')
+                                                    <small class="form-text text-danger">Password minimal 6 karakter</small>
+                                                    @error('password')
                                                     <small class="form-text text-danger">{{ $message }}</small>
                                                 @enderror
                                             </div>
@@ -375,7 +378,8 @@
                                                 <label for="password">Password</label>
                                                 <input type="password" class="form-control @error('password') is-invalid @enderror"
                                                     name="password" id="password" placeholder="Masukkan Password">
-                                                @error('password')
+                                                    <small class="form-text text-danger">Password minimal 6 karakter</small>
+                                                    @error('password')
                                                     <small class="form-text text-danger">{{ $message }}</small>
                                                 @enderror
                                             </div>
