@@ -57,6 +57,19 @@ class M_User extends Model
         return DB::table($this->table)->orderBy('id_user', 'DESC')->limit(1)->first();
     }
 
+    public function getPetugasByDonor($id_kuesioner)
+    {
+        $donor = DB::table('kuesioner_donor')->where('id_kuesioner', $id_kuesioner)->first();
+        $paskes = DB::table('donor')->where('id_donor', $donor->id_donor)->first();
+        return DB::table($this->table)->where('id_user', $paskes->id_petugas_kesehatan)->first();
+    }
+
+    public function getPetugasKuesionerByDonor($id_kuesioner)
+    {
+        $donor = DB::table('kuesioner_donor')->where('id_kuesioner', $id_kuesioner)->first();
+        $paskes = DB::table('donor')->where('id_donor', $donor->id_donor)->first();
+        return DB::table($this->table)->where('id_user', $paskes->id_petugas_kuesioner)->first();
+    }
 
     // Beda Tabel
     public function tambah_donatur($data)

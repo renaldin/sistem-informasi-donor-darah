@@ -20,6 +20,14 @@
     <div class="row">
         <div class="col-xl-12 col-lg-12" data-aos="fade-up">
             <div class="card mb-4">
+                @if (session('gagal'))
+                    <div class="alert alert-warning alert-dismissible m-2" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        {{ session('gagal') }}
+                    </div>
+                @endif
                 <div class="card-header d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold">{{ $sub_title }}</h6>
                     <a href="/antrian" class="btn text-dark"><i class="fa fa-arrow-left" aria-hidden="true"></i> Kembali</a>
@@ -101,23 +109,17 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-12 col-md-6 col-lg-4">
+                        <div class="col-12 col-md-6 col-lg-6">
                             <p>Tanggal Donor : {{ tanggal_indonesia($data_donor->tanggal_donor) }}
                                 {{ date('H:i:s', strtotime($data_donor->tanggal_donor)) }}</p>
                         </div>
-                        <div class="col-12 col-md-6 col-lg-4">
+                        <div class="col-12 col-md-6 col-lg-6">
                             <p><b>Status Kuesioner :
                                     {{ $data_donor->hasil_kusioner == 'Proses' ? 'Belum Divalidasi' : $data_donor->hasil_kusioner }}</b>
                             </p>
                         </div>
-                        <div class="col-12 col-md-6 col-lg-4">
-                            <p><b>Status Donor :
-                                    {{ $data_donor->status_donor }}</b>
-                            </p>
-                        </div>
                     </div>
                     <hr>
-                    <h4>Data Kuesioner</h4>
                     <ol>
                         <div class="row border-bottom mb-2 pb-2">
                             <div class="col-12 col-lg-8">
@@ -879,61 +881,67 @@
                             </div>
                         </div>
                     </ol>
-                    <hr>
-                    <h4>Data Kesehatan </h4>
-                    <div class="row">
-                        <div class="col-12 col-md-6 col-lg-6">
-                            <div class="form-group">
-                                <label for="hb">HB <small>(gram/dL)</small></label>
-                                <input type="number" class="form-control " name="hb" id="hb"
-                                    placeholder="Masukan Hemoglobin" value="{{ $data_donor->hb }}" readonly>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-6">
-                            <div class="form-group">
-                                <label for="tekanan_darah">Tekanan Darah <small>(mmHg)</small></label>
-                                <input type="text" class="form-control " name="tekanan_darah" id="tekanan_darah"
-                                    placeholder="Masukan Tekanan Darah" value="{{ $data_donor->tekanan_darah }}"
-                                    readonly>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-6">
-                            <div class="form-group">
-                                <label for="berat_badan">Berat Badan <small>(kg)</small></label>
-                                <input type="number" class="form-control " name="berat_badan" id="berat_badan"
-                                    placeholder="Masukan Berat Badan" value="{{ $data_donor->berat_badan }}" readonly>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-6">
-                            <div class="form-group">
-                                <label for="tinggi_badan">Tinggi Badan <small>(cm)</small></label>
-                                <input type="number" class="form-control " name="tinggi_badan" id="tinggi_badan"
-                                    placeholder="Masukan Tinggi Badan" value="{{ $data_donor->tinggi_badan }}" readonly>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-6">
-                            <div class="form-group">
-                                <label for="denyut_nadi">Denyut Nadi <small>(kali per menit)</small></label>
-                                <input type="text" class="form-control " name="denyut_nadi" id="denyut_nadi"
-                                    placeholder="Masukan Denyut Nadi" value="{{ $data_donor->denyut_nadi }}" readonly>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-6">
-                            <div class="form-group">
-                                <label for="keadaan_umum">Keadaan Umum</label>
-                                <input type="text" class="form-control " name="keadaan_umum" id="keadaan_umum"
-                                    placeholder="Masukan Keadaan Umum" value="{{ $data_donor->keadaan_umum }}" readonly>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-6">
-                            <div class="form-group">
-                                <label for="keadaan_umum">Catatan Pendonor</label>
-                                <input type="text" class="form-control " name="keadaan_umum" id="keadaan_umum"
-                                    value="{{ $data_donor->catatan_pendonor }}" readonly>
-                            </div>
-                        </div>
+                    <div class="d-flex justify-content-end">
+                        @if ($data_donor->hasil_kusioner == 'Proses')
+                            <button class="btn btn-danger" data-toggle="modal" data-target="#btn-valid">Validasi Hasil
+                                Kuesioner</button>
+                        @endif
+                        @if ($data_donor->hasil_kusioner != 'Tidak Lolos')
+                            <a href="/cek_kesehatan/{{ $data_donor->id_donor }}" class="btn btn-danger ml-2">Cek
+                                Kesehatan</a>
+                        @endif
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- modal cek syarat --}}
+    <div class="modal fade" id="btn-valid" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Validasi Kuesioner</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Apakah hasil Kuesioner telah memenuhi persyaratan untuk lanjut pemeriksaan kesehatan ?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal" data-toggle="modal"
+                        data-target="#btn-catatan">Tidak</button>
+                    <a href="/validasi_kuesioner/{{ $data_donor->id_donor }}" class="btn btn-primary">Memenuhi</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="btn-catatan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Keterangan Validasi Kuesioner</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="/kuesioner_tidak_valid/{{ $data_donor->id_donor }}" method="POST">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="keadaan_umum">Masukan Catatan Mengapa Kuesioner Tidak Valid</label>
+                            <input type="text" class="form-control @error('keadaan_umum') is-invalid @enderror"
+                                name="deskripsi_hasil_kusioner" id="catatan" placeholder="Masukan Catatan" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

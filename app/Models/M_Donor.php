@@ -30,7 +30,10 @@ class M_Donor extends Model
     {
         return DB::table($this->table)
             ->join('anggota', 'anggota.id_anggota', '=', 'donor.id_anggota', 'left')
-            ->where('id_donor', $id)->first();
+            ->join('kuesioner_donor', 'kuesioner_donor.id_donor', '=', 'donor.id_donor', 'left')
+            ->join('user_donatur', 'user_donatur.nik', '=', 'anggota.nik', 'left')
+            ->join('user', 'user.id_user', '=', 'user_donatur.id_user', 'left')
+            ->where('donor.id_donor', $id)->first();
     }
 
     public function tambah($data)
@@ -57,6 +60,7 @@ class M_Donor extends Model
     {
         return DB::table($this->table)
             ->join('anggota', 'anggota.id_anggota', '=', 'donor.id_anggota', 'left')
+            ->join('kuesioner_donor', 'kuesioner_donor.id_donor', '=', 'donor.id_donor', 'left')
             ->where('donor.id_anggota', $id_anggota)->get();
     }
 

@@ -63,9 +63,10 @@
                             <tr>
                                 <th>No</th>
                                 <th>Tanggal Donor</th>
-                                <th>Status</th>
+                                <th>Status Kuesioner</th>
+                                <th>Status Donor</th>
                                 <th>Nomor Antrian</th>
-                                <th>Detail</th>
+                                <th>Opsi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -74,25 +75,37 @@
                                 <tr>
                                     <td>{{ $no++ }}</td>
                                     <td>{{ tanggal_indonesia($row->tanggal_donor) }}</td>
+                                    <td>{{ $row->hasil_kusioner == 'Proses' ? 'Sedang Diproses' : $row->hasil_kusioner . ' Kuesioner' }}
+                                    </td>
                                     <td>
-                                        @if ($row->status_donor === 'Ready')
-                                            Proses Input Darah
-                                        @elseif ($row->status_donor === 'Proses')
-                                            Proses Cek Kesehatan
-                                        @elseif ($row->status_donor === 'Selesai')
-                                            Selesai
-                                        @elseif ($row->status_donor === 'Gagal')
+                                        @if ($row->hasil_kusioner == 'Tidak Lolos')
                                             Gagal
+                                        @else
+                                            @if ($row->status_donor === 'Ready')
+                                                Proses Input Darah
+                                            @elseif ($row->status_donor === 'Proses')
+                                                @if ($row->hasil_kusioner == 'Proses')
+                                                    Proses
+                                                @else
+                                                    Proses Cek Kesehatan
+                                                @endif
+                                            @elseif ($row->status_donor === 'Selesai')
+                                                Selesai
+                                            @elseif ($row->status_donor === 'Gagal')
+                                                Gagal
+                                            @endif
                                         @endif
                                     </td>
                                     <td>A0{{ $row->nomor_antrian }}</td>
                                     <td>
-                                        @if ($row->status_donor === 'Gagal')
+                                        {{-- @if ($row->status_donor === 'Gagal')
                                             <button class="btn btn-danger" data-toggle="modal"
                                                 data-target="#detail-{{ $row->id_donor }}">Detail</button>
+                                        @endif --}}
+                                        <a href="/lihat_kuesioner/{{ $row->id_kuesioner }}"
+                                            class="btn btn-danger">Detail</a>
                                     </td>
-                            @endif
-                            </tr>
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>
