@@ -18,6 +18,7 @@
     <link href="{{ asset('template/vendor/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
     <link href="{{ asset('template/vendor/bootstrap-touchspin/css/jquery.bootstrap-touchspin.css') }}"
         rel="stylesheet">
+    <script src="{{ asset('template/vendor/jquery/jquery.min.js') }}"></script>
 </head>
 
 <script>
@@ -28,7 +29,7 @@
         }
         return true;
     }
-  </script>
+</script>
 
 <body id="page-top">
     @include('sweetalert::alert')
@@ -46,12 +47,14 @@
 
                 <!-- Container Fluid-->
                 <div class="container-fluid" id="container-wrapper">
-                    @if($title=== 'Data Stok Darah')
+                    @if ($title === 'Data Stok Darah')
                         <div class="d-sm-flex align-items-center">
                             <h1 class="h3 mb-0 text-gray-800">{{ $title }}</h1>
                         </div>
-                        <div class="d-sm-flex align-items-center justify-content-between mb-4" style="margin-top: -17px">
-                            <small style="margin-left: 5px;" class="text-danger">* Darah tersimpan di kulkas karantina</small>
+                        <div class="d-sm-flex align-items-center justify-content-between mb-4"
+                            style="margin-top: -17px">
+                            <small style="margin-left: 5px;" class="text-danger">* Darah tersimpan di kulkas
+                                karantina</small>
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="./">{{ $title }}</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">{{ $sub_title }}</li>
@@ -121,7 +124,6 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <script src="{{ asset('template/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('template/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('template/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
     <script src="{{ asset('template/js/ruang-admin.min.js') }}"></script>
@@ -208,7 +210,7 @@
         });
     </script>
 
-    
+
 </body>
 
 </html>

@@ -113,7 +113,15 @@ class C_Antrian extends Controller
             $this->M_Anggota->edit($data_anggota);
         }
 
+        $get_anggota = $this->M_Anggota->detail($anggota->id_anggota);
+        $update_golda = [
+            'nik'       => $get_anggota->nik,
+            'gol_darah' => Request()->golda
+        ];
+        $this->M_User->edit_golda($update_golda);
+
         $this->M_Donor->edit($data);
+
         Alert::success('Berhasil', 'Data Kesehatan Berhasil ditambah.');
         return redirect()->route('antrian');
     }
@@ -183,9 +191,10 @@ class C_Antrian extends Controller
     {
         $data = [
             'id_donor'                  => $id,
+            'status_donor'              => 'Gagal',
             'hasil_kusioner'            => 'Tidak Lolos',
             'deskripsi_hasil_kusioner'  => Request()->deskripsi_hasil_kusioner,
-            'id_petugas_kuesioner'  => Session()->get('id_user')
+            'id_petugas_kuesioner'      => Session()->get('id_user')
         ];
         $this->M_Donor->edit($data);
         Alert::success('Berhasil', 'Berhasil Melakukan Validasi Kuesioner.');

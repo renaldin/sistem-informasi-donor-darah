@@ -87,6 +87,11 @@ class M_User extends Model
         DB::table('user_donatur')->where('id_user', $data['id_user'])->update($data);
     }
 
+    public function edit_golda($data)
+    {
+        DB::table('user_donatur')->where('nik', $data['nik'])->update($data);
+    }
+
     public function detail_user_donatur($id_user)
     {
         return DB::table('user_donatur')

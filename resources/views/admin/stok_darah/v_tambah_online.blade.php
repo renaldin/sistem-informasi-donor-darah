@@ -29,7 +29,7 @@
                                     <label for="id_donor">Pendonor <span class="text-danger">*</span></label>
                                     <select
                                         class="select2-single-placeholder form-control @error('id_donor') is-invalid @enderror"
-                                        name="id_donor" autofocus id="select2SinglePlaceholder">
+                                        name="id_donor" autofocus id="select2SinglePlaceholder" onchange="getGolda()">
                                         <option value="">Pilih</option>
                                         @foreach ($donor as $row)
                                             @if ($row->status_donor == 'Ready')
@@ -45,16 +45,10 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label for="golongan_darah">Golongan Darah <span class="text-danger">*</span></label>
-                                    <select name="golongan_darah"
+                                    <label for="golongan_darah">Golongan Darah</label>
+                                    <input type="text" name="golongan_darah"
                                         class="form-control @error('golongan_darah') is-invalid @enderror"
-                                        id="golongan_darah">
-                                        <option value="">Pilih</option>
-                                        <option value="A">A</option>
-                                        <option value="B">B</option>
-                                        <option value="AB">AB</option>
-                                        <option value="O">O</option>
-                                    </select>
+                                        id="golongan_darah" readonly>
                                     @error('golongan_darah')
                                         <small class="form-text text-danger">{{ $message }}</small>
                                     @enderror
@@ -108,4 +102,22 @@
         </div>
     </div>
     </div>
+
+    <script>
+        function getGolda() {
+            var id_donor = $('#select2SinglePlaceholder').val();
+            // alert(id_donor);
+            if (id_donor != '') {
+                $.ajax({
+                    url: "/get_nik_by_donor/" + id_donor,
+                    success: function(result) {
+                        $("#golongan_darah").val(result);
+                        // alert(result)
+                    }
+                });
+            } else {
+                $("#golongan_darah").val("");
+            }
+        }
+    </script>
 @endsection
