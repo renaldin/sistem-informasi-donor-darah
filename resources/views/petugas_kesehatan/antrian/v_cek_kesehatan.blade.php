@@ -48,7 +48,7 @@
                         <div class="row">
                             <div class="col-12 col-md-6 col-lg-6">
                                 <div class="form-group">
-                                    <label for="hb">HB <small>(gram/dL)</small></label>
+                                    <label for="hb">HB <small>(gram/dL)</small> <span class="text-danger">*</span></label>
                                     <input type="number" class="form-control @error('hb') is-invalid @enderror"
                                         name="hb" id="hb" placeholder="Masukan Hemoglobin">
                                     @error('hb')
@@ -58,7 +58,7 @@
                             </div>
                             <div class="col-12 col-md-6 col-lg-6">
                                 <div class="form-group">
-                                    <label for="tekanan_darah">Tekanan Darah <small>(mmHg)</small></label>
+                                    <label for="tekanan_darah">Tekanan Darah <small>(mmHg)</small> <span class="text-danger">*</span></label>
                                     <div class="row">
                                         <div class="col-5">
                                             <input type="number"
@@ -86,7 +86,7 @@
                             </div>
                             <div class="col-12 col-md-6 col-lg-6">
                                 <div class="form-group">
-                                    <label for="berat_badan">Berat Badan <small>(kg)</small></label>
+                                    <label for="berat_badan">Berat Badan <small>(kg)</small> <span class="text-danger">*</span></label>
                                     <input type="number" class="form-control @error('berat_badan') is-invalid @enderror"
                                         name="berat_badan" id="berat_badan" placeholder="Masukan Berat Badan">
                                     @error('berat_badan')
@@ -96,7 +96,7 @@
                             </div>
                             <div class="col-12 col-md-6 col-lg-6">
                                 <div class="form-group">
-                                    <label for="tinggi_badan">Tinggi Badan <small>(cm)</small></label>
+                                    <label for="tinggi_badan">Tinggi Badan <small>(cm)</small> <span class="text-danger">*</span></label>
                                     <input type="number" class="form-control @error('tinggi_badan') is-invalid @enderror"
                                         name="tinggi_badan" id="tinggi_badan" placeholder="Masukan Tinggi Badan">
                                     @error('tinggi_badan')
@@ -106,7 +106,7 @@
                             </div>
                             <div class="col-12 col-md-6 col-lg-6">
                                 <div class="form-group">
-                                    <label for="denyut_nadi">Denyut Nadi <small>(kali per menit)</small></label>
+                                    <label for="denyut_nadi">Denyut Nadi <small>(kali per menit)</small> <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control @error('denyut_nadi') is-invalid @enderror"
                                         name="denyut_nadi" id="denyut_nadi" placeholder="Masukan Denyut Nadi">
                                     @error('denyut_nadi')
@@ -116,7 +116,7 @@
                             </div>
                             <div class="col-12 col-md-6 col-lg-6">
                                 <div class="form-group">
-                                    <label for="keadaan_umum">Keadaan Umum</label>
+                                    <label for="keadaan_umum">Keadaan Umum <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control @error('keadaan_umum') is-invalid @enderror"
                                         name="keadaan_umum" id="keadaan_umum" placeholder="Masukan Keadaan Umum">
                                     @error('keadaan_umum')
@@ -169,7 +169,7 @@
                 <div class="modal-body">
 
                     <div class="form-group">
-                        <label for="keadaan_umum">Masukan Catatan Alasan Tidak Boleh Donor</label>
+                        <label for="keadaan_umum">Masukan Catatan Alasan Tidak Boleh Donor <span class="text-danger">*</span></label>
                         <input type="text" class="form-control @error('keadaan_umum') is-invalid @enderror"
                             name="catatan" id="catatan" placeholder="Masukan Catatan Alasan" required>
                     </div>

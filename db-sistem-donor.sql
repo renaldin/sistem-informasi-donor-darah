@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 27, 2023 at 05:23 PM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.1.12
+-- Generation Time: Jul 27, 2023 at 09:03 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.0.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -36,7 +36,7 @@ CREATE TABLE `anggota` (
   `no_wa` varchar(30) DEFAULT NULL,
   `status_anggota` enum('Mandiri','Event') NOT NULL DEFAULT 'Mandiri',
   `tanggal_donor_kembali` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `anggota`
@@ -58,7 +58,7 @@ CREATE TABLE `biodata_web` (
   `nomor_telepon` varchar(50) NOT NULL,
   `alamat` text NOT NULL,
   `logo` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `biodata_web`
@@ -79,10 +79,11 @@ CREATE TABLE `darah` (
   `no_kantong` varchar(50) DEFAULT NULL,
   `golongan_darah` varchar(10) DEFAULT NULL,
   `resus` varchar(50) DEFAULT NULL,
+  `jenis_darah` enum('Darah Segar','Darah Simpan','Darah Baru') DEFAULT NULL,
   `volume_darah` varchar(50) DEFAULT NULL,
   `tanggal_kedaluwarsa` date DEFAULT NULL,
   `tanggal_darah_masuk` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -95,7 +96,7 @@ CREATE TABLE `darah_buang` (
   `id_darah` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `tanggal_buang` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -108,7 +109,7 @@ CREATE TABLE `darah_keluar` (
   `id_darah` int(11) NOT NULL,
   `id_permohonan_darah` int(11) NOT NULL,
   `tanggal_keluar` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -122,7 +123,7 @@ CREATE TABLE `darah_masuk` (
   `id_user` int(11) NOT NULL,
   `status_darah_masuk` enum('Belum Masuk','Sudah Masuk') NOT NULL DEFAULT 'Belum Masuk',
   `tanggal_masuk` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -148,7 +149,7 @@ CREATE TABLE `donor` (
   `keadaan_umum` varchar(30) DEFAULT NULL,
   `catatan_pendonor` text DEFAULT NULL,
   `nomor_antrian` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `donor`
@@ -183,7 +184,7 @@ CREATE TABLE `event` (
   `status_event` enum('Aktif','Tidak Aktif') NOT NULL DEFAULT 'Tidak Aktif',
   `alasan` varchar(255) DEFAULT NULL,
   `gambar` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -236,7 +237,7 @@ CREATE TABLE `kuesioner_donor` (
   `pertanyaan_40` int(11) NOT NULL,
   `pertanyaan_41` int(11) NOT NULL,
   `bulan_kehamilan` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `kuesioner_donor`
@@ -260,12 +261,12 @@ CREATE TABLE `permohonan_darah` (
   `nama_pasien` varchar(255) DEFAULT NULL,
   `golda` varchar(10) DEFAULT NULL,
   `rhesus` enum('Positif','Negatif') NOT NULL,
-  `jenis_darah` enum('Darah Segar','Darah Simpan') NOT NULL,
+  `jenis_darah` enum('Darah Segar','Darah Simpan','Darah Baru') NOT NULL,
   `jumlah` int(11) DEFAULT NULL,
   `upload_surat` text DEFAULT NULL,
   `status_permohonan` enum('Belum Dikirim','Menunggu Proses','Dikirim','Diterima') DEFAULT NULL,
   `tanggal_permohonan` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -283,7 +284,7 @@ CREATE TABLE `user` (
   `role` enum('Admin','Donatur','Rumah Sakit','Event','Petugas Kesehatan') NOT NULL,
   `status_verifikasi` enum('Belum','Sudah') NOT NULL DEFAULT 'Belum',
   `foto` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `user`
@@ -313,7 +314,7 @@ CREATE TABLE `user_donatur` (
   `tanggal_lahir` date DEFAULT NULL,
   `jk` enum('Laki-laki','Perempuan') DEFAULT NULL,
   `gol_darah` varchar(10) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `user_donatur`
@@ -335,7 +336,7 @@ CREATE TABLE `user_event` (
   `id_user_event` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `kode_instansi` varchar(30) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `user_event`
@@ -355,7 +356,7 @@ CREATE TABLE `user_rs` (
   `id_user_rs` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `kode_rs` varchar(30) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `user_rs`

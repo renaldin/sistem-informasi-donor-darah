@@ -15,7 +15,7 @@ class M_Event extends Model
     {
         return DB::table($this->table)
             ->join('user', 'user.id_user', '=', 'event.id_user', 'left')
-            ->orderBy('id_event', 'DESC')->get();
+            ->orderBy('tanggal_event', 'DESC')->get();
     }
 
     public function get_all_data($bulan)
@@ -25,14 +25,14 @@ class M_Event extends Model
             ->join('user', 'user.id_user', '=', 'event.id_user', 'left')
             ->where('tanggal_event', '>=', date('Y-m-d'))
             ->whereMonth('tanggal_event', $bulan)
-            ->orderBy('id_event', 'DESC')->get();
+            ->orderBy('tanggal_event', 'DESC')->get();
     }
 
     public function get_data_user($id_user)
     {
         return DB::table($this->table)
             ->join('user', 'user.id_user', '=', 'event.id_user', 'left')
-            ->where('event.id_user', $id_user)->orderBy('id_event', 'DESC')->get();
+            ->where('event.id_user', $id_user)->orderBy('tanggal_event', 'DESC')->get();
     }
 
     public function detail($id_event)
