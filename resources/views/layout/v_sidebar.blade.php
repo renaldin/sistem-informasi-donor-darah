@@ -153,7 +153,7 @@
         </li>
     @elseif ($user->role === 'Petugas Kesehatan')
         <div class="sidebar-heading">
-            Petuags Kesehatan
+            Petugas Kesehatan
         </div>
         <li class="nav-item @if ($title === 'Antrian') active @endif">
             <a class="nav-link" href="/antrian">

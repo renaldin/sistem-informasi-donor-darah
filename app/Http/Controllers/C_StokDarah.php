@@ -494,4 +494,12 @@ class C_StokDarah extends Controller
         $pdf = PDF::loadview('cetak/v_cetak_invoice_darah', $data);
         return $pdf->download($data['title'] . ' ' . date('d F Y') . '.pdf');
     }
+
+    public function get_nik_by_donor($id)
+    {
+        $donor = $this->M_Donor->detail($id);
+        $anggota = $this->M_Anggota->detail($donor->id_anggota);
+        $user_donatur = $this->M_User->detail_user_donatur_nik($anggota->nik);
+        echo $user_donatur->gol_darah;
+    }
 }

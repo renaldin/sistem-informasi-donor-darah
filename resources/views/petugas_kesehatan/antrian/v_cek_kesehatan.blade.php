@@ -1,24 +1,21 @@
 @extends('layout.v_template')
 
 @section('content')
-
-@php
-    function tanggal_indonesia($tanggal) {
-    $bulan = array(
-        'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
-        'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
-    );
-    
-    $tanggal_array = explode('-', $tanggal);
-    $tahun = $tanggal_array[0];
-    $bulan_angka = intval($tanggal_array[1]);
-    $tanggal_angka = intval($tanggal_array[2]);
-    
-    $tanggal_indonesia = $tanggal_angka . ' ' . $bulan[$bulan_angka - 1] . ' ' . $tahun;
-    
-    return $tanggal_indonesia;
-}
-@endphp
+    @php
+        function tanggal_indonesia($tanggal)
+        {
+            $bulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+        
+            $tanggal_array = explode('-', $tanggal);
+            $tahun = $tanggal_array[0];
+            $bulan_angka = intval($tanggal_array[1]);
+            $tanggal_angka = intval($tanggal_array[2]);
+        
+            $tanggal_indonesia = $tanggal_angka . ' ' . $bulan[$bulan_angka - 1] . ' ' . $tahun;
+        
+            return $tanggal_indonesia;
+        }
+    @endphp
 
     <div class="row">
         <div class="col-xl-12 col-lg-12" data-aos="fade-up">
@@ -45,6 +42,29 @@
                     <form action="/tambah_data_kesehatan/{{ $data_donor->id_donor }}" method="POST" id="form-cek">
                         @csrf
                         <input type="hidden" name="catatan" value="" id="input-catatan">
+                        <div class="row">
+                            <div class="col-12 col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <label for="golda">Edit Golongan Darah</label>
+                                    <select name="golda" class="form-control" id="golda">
+                                        @if ($data_donor->gol_darah == null)
+                                            <option value="">-- Pilih Golda --</option>
+                                        @endif
+                                        <option value="A" {{ $data_donor->gol_darah == 'A' ? 'selected' : '' }}>A
+                                        </option>
+                                        <option value="B" {{ $data_donor->gol_darah == 'B' ? 'selected' : '' }}>B
+                                        </option>
+                                        <option value="AB" {{ $data_donor->gol_darah == 'AB' ? 'selected' : '' }}>AB
+                                        </option>
+                                        <option value="O" {{ $data_donor->gol_darah == 'O' ? 'selected' : '' }}>O
+                                        </option>
+                                    </select>
+                                    @error('hb')
+                                        <small class="form-text text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-12 col-md-6 col-lg-6">
                                 <div class="form-group">

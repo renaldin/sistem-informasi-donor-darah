@@ -16,7 +16,7 @@ class M_Donor extends Model
     {
         return DB::table($this->table)
             ->join('anggota', 'anggota.id_anggota', '=', 'donor.id_anggota', 'left')
-            ->orderBy('tanggal_donor', 'DESC')->get();
+            ->orderBy('tanggal_donor', 'ASC')->get();
     }
 
     public function detail($id_donor)
