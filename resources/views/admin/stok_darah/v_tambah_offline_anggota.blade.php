@@ -19,7 +19,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label for="id_anggota">Nama Anggota</label>
+                                    <label for="id_anggota">Nama Anggota <span class="text-danger">*</span></label>
                                     <input type="hidden" class="form-control @error('form_anggota') is-invalid @enderror"
                                         name="form_anggota" id="form_anggota" value="Anggota">
                                     <select
@@ -40,7 +40,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label for="hasil_kusioner">Hasil Kusioner</label>
+                                    <label for="hasil_kusioner">Hasil Kusioner <span class="text-danger">*</span></label>
                                     <select name="hasil_kusioner"
                                         class="form-control @error('hasil_kusioner') is-invalid @enderror"
                                         id="hasil_kusioner">
@@ -55,7 +55,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label for="deskripsi_hasil_kusioner">Deskripsi Hasil Kusioner</label>
+                                    <label for="deskripsi_hasil_kusioner">Deskripsi Hasil Kusioner <span class="text-danger">*</span></label>
                                     <textarea name="deskripsi_hasil_kusioner" class="form-control @error('deskripsi_hasil_kusioner') is-invalid @enderror"
                                         cols="10" rows="3" placeholder="Masukkan Deskripsi Hasil Kusioner"></textarea>
                                     @error('deskripsi_hasil_kusioner')
@@ -68,7 +68,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label for="no_kantong">No. Kantong</label>
+                                    <label for="no_kantong">No. Kantong <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control @error('no_kantong') is-invalid @enderror"
                                         name="no_kantong" id="no_kantong" value="{{ $no_kantong }}" readonly
                                         placeholder="Masukkan No. Kantong">
@@ -81,7 +81,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label for="golongan_darah">Golongan Darah</label>
+                                    <label for="golongan_darah">Golongan Darah <span class="text-danger">*</span></label>
                                     <select name="golongan_darah"
                                         class="form-control @error('golongan_darah') is-invalid @enderror"
                                         id="golongan_darah">
@@ -98,7 +98,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label for="resus">Rhesus</label>
+                                    <label for="resus">Rhesus <span class="text-danger">*</span></label>
                                     <select name="resus" class="form-control @error('resus') is-invalid @enderror"
                                         id="resus">
                                         <option value="">Pilih</option>
@@ -112,7 +112,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label for="volume_darah">Volume Darah (CC)</label>
+                                    <label for="volume_darah">Volume Darah (CC) <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control @error('volume_darah') is-invalid @enderror"
                                         name="volume_darah" id="volume_darah" value="{{ old('volume_darah') }}"
                                         placeholder="Masukkan Golongan Darah">

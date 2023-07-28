@@ -56,12 +56,21 @@
 
 <body class="bg-gradient-login">
   @include('sweetalert::alert')
+
+  @php
+    function kurangiTahun($tanggal, $tahun_to_kurangi)
+    {
+        $tgl = new DateTime($tanggal);
+        $tgl->modify('-' . $tahun_to_kurangi . ' year');
+        return $tgl->format('Y-m-d');
+    }
+  @endphp
   <!-- Login Content -->
   <main class="main-img">
     <div class="container-login">
       <div class="row justify-content-center">
         <div class="col-xl-6 col-lg-12 col-md-9">
-          <div class="card shadow-sm" style="@if($register === 'Pilihan') margin-top: 170px @else margin-top: 90px @endif">
+          <div class="card shadow-sm" style="@if($register === 'Pilihan') margin-top: 170px @elseif($register === 'Donatur') margin-top: 7px @else margin-top: 90px @endif">
             <div class="card-body p-0">
               <div class="row">
                 <div class="col-lg-12">
@@ -79,6 +88,7 @@
                         <div class="row">
                           <div class="col-lg-6">
                             <div class="form-group">
+                              <small class="text-danger">* required</small>
                               <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror" value="{{old('nama')}}" placeholder="Masukkan Nama Lengkap" required>
                               <input type="hidden" name="role" class="form-control" value="Donatur">
                               @error('nama')
@@ -96,6 +106,7 @@
                           </div> --}}
                           <div class="col-lg-6">
                             <div class="form-group">
+                              <small class="text-danger">* required</small>
                               <select name="kartu" class="form-control @error('kartu') is-invalid @enderror" onchange="handleChange(event)" id="kartu" required>
                                 <option value="">-- Jenis Kartu --</option>
                                 <option value="KTP">KTP</option>
@@ -108,6 +119,7 @@
                           </div>
                           <div class="col-lg-6" id="div_nik" style="display: none;">
                             <div class="form-group">
+                              <small class="text-danger">* required</small>
                               <input type="text" id="nik" name="nik" onkeydown="return hanyaAngka(event)" class="form-control @error('nik') is-invalid @enderror" value="{{old('nik')}}" placeholder="Masukkan No. Identitas" required>
                               @error('nik')
                                 <small class="form-text text-danger">{{ $message }}</small>
@@ -124,7 +136,8 @@
                           </div> --}}
                           <div class="col-lg-6">
                             <div class="form-group">
-                              <input type="text" name="tanggal_lahir" class="form-control @error('tanggal_lahir') is-invalid @enderror" value="{{old('tanggal_lahir')}}" placeholder="Tanggal Lahir" onfocus="(this.type='date')" required>
+                              <small class="text-danger">* required</small>
+                              <input type="text" name="tanggal_lahir" max="{{kurangiTahun(date('Y-m-d'), 16)}}" class="form-control @error('tanggal_lahir') is-invalid @enderror" value="{{old('tanggal_lahir')}}" placeholder="Tanggal Lahir" onfocus="(this.type='date')" required>
                               @error('tanggal_lahir')
                                 <small class="form-text text-danger">{{ $message }}</small>
                               @enderror
@@ -132,6 +145,7 @@
                           </div>
                           <div class="col-lg-6">
                             <div class="form-group">
+                              <small class="text-danger">* required</small>
                               <select name="jk" class="form-control @error('jk') is-invalid @enderror" required>
                                 <option value="">-- Jenis Kelamin --</option>
                                 <option value="Laki-laki">Laki-laki</option>
@@ -144,6 +158,7 @@
                           </div>
                           <div class="col-lg-6">
                             <div class="form-group">
+                              <small>Opsional</small>
                               <select name="gol_darah" class="form-control @error('gol_darah') is-invalid @enderror">
                                 <option value="">-- Gol Darah --</option>
                                 <option value="A">A</option>
@@ -158,6 +173,7 @@
                           </div>
                           <div class="col-lg-6">
                             <div class="form-group">
+                              <small class="text-danger">* required</small>
                               <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{old('email')}}" placeholder="Masukkan Alamat Email" required>
                               @error('email')
                                 <small class="form-text text-danger">{{ $message }}</small>
@@ -166,7 +182,9 @@
                           </div>
                           <div class="col-lg-6">
                             <div class="form-group">
+                              <small class="text-danger">* required</small>
                               <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Masukkan Password" required>
+                              <small class="form-text text-danger">Password minimal 6 karakter</small>
                               @error('password')
                                 <small class="form-text text-danger">{{ $message }}</small>
                               @enderror
@@ -184,6 +202,7 @@
                         <div class="row">
                           <div class="col-lg-6">
                             <div class="form-group">
+                              <small class="text-danger">* required</small>
                               <input type="text" name="kode_instansi" class="form-control @error('kode_instansi') is-invalid @enderror" value="{{old('kode_instansi')}}" placeholder="Masukkan Kode Instansi" required>
                               <input type="hidden" name="role" class="form-control" value="Event">
                               @error('kode_instansi')
@@ -193,6 +212,7 @@
                           </div>
                           <div class="col-lg-6">
                             <div class="form-group">
+                              <small class="text-danger">* required</small>
                               <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror" value="{{old('nama')}}" placeholder="Masukkan Nama Instansi" required>
                               @error('nama')
                                 <small class="form-text text-danger">{{ $message }}</small>
@@ -217,6 +237,7 @@
                           </div> --}}
                           <div class="col-lg-6">
                             <div class="form-group">
+                              <small class="text-danger">* required</small>
                               <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{old('email')}}" placeholder="Masukkan Alamat Email" required>
                               @error('email')
                                 <small class="form-text text-danger">{{ $message }}</small>
@@ -225,7 +246,9 @@
                           </div>
                           <div class="col-lg-6">
                             <div class="form-group">
+                              <small class="text-danger">* required</small>
                               <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Masukkan Password" required>
+                              <small class="form-text text-danger">Password minimal 6 karakter</small>
                               @error('password')
                                 <small class="form-text text-danger">{{ $message }}</small>
                               @enderror
@@ -243,6 +266,7 @@
                         <div class="row">
                           <div class="col-lg-6">
                             <div class="form-group">
+                              <small class="text-danger">* required</small>
                               <input type="text" name="kode_rs" class="form-control @error('kode_rs') is-invalid @enderror" value="{{old('kode_rs')}}" placeholder="Masukkan Kode Rumah Sakit" required>
                               <input type="hidden" name="role" class="form-control" value="Rumah Sakit">
                               @error('kode_rs')
@@ -252,6 +276,7 @@
                           </div>
                           <div class="col-lg-6">
                             <div class="form-group">
+                              <small class="text-danger">* required</small>
                               <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror" value="{{old('nama')}}" placeholder="Masukkan Nama Rumah Sakit" required>
                               @error('nama')
                                 <small class="form-text text-danger">{{ $message }}</small>
@@ -276,6 +301,7 @@
                           </div> --}}
                           <div class="col-lg-6">
                             <div class="form-group">
+                              <small class="text-danger">* required</small>
                               <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{old('email')}}" placeholder="Masukkan Alamat Email" required>
                               @error('email')
                                 <small class="form-text text-danger">{{ $message }}</small>
@@ -284,7 +310,9 @@
                           </div>
                           <div class="col-lg-6">
                             <div class="form-group">
+                              <small class="text-danger">* required</small>
                               <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Masukkan Password" required>
+                              <small class="form-text text-danger">Password minimal 6 karakter</small>
                               @error('password')
                                 <small class="form-text text-danger">{{ $message }}</small>
                               @enderror

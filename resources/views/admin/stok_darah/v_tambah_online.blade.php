@@ -13,7 +13,7 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label for="no_kantong">No. Kantong</label>
+                                    <label for="no_kantong">No. Kantong <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control @error('no_kantong') is-invalid @enderror"
                                         name="no_kantong" id="no_kantong" value="{{ $no_kantong }}" readonly
                                         placeholder="Masukkan No. Kantong">
@@ -26,7 +26,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label for="id_donor">Pendonor</label>
+                                    <label for="id_donor">Pendonor <span class="text-danger">*</span></label>
                                     <select
                                         class="select2-single-placeholder form-control @error('id_donor') is-invalid @enderror"
                                         name="id_donor" autofocus id="select2SinglePlaceholder" onchange="getGolda()">
@@ -56,7 +56,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label for="resus">Rhesus</label>
+                                    <label for="resus">Rhesus <span class="text-danger">*</span></label>
                                     <select name="resus" class="form-control @error('resus') is-invalid @enderror"
                                         id="resus">
                                         <option value="">Pilih</option>
@@ -70,7 +70,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label for="volume_darah">Volume Darah (CC)</label>
+                                    <label for="volume_darah">Volume Darah (CC) <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control @error('volume_darah') is-invalid @enderror"
                                         name="volume_darah" id="volume_darah" value="{{ old('volume_darah') }}"
                                         placeholder="Masukkan Golongan Darah">

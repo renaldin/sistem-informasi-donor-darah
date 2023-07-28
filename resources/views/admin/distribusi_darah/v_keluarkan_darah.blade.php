@@ -7,9 +7,11 @@
             $tgl_lahir = new DateTime($tanggal_darah_masuk);
             $sekarang = new DateTime();
             $diff = $tgl_lahir->diff($sekarang);
-            $umur = $diff->days;
+            $umur_hari = $diff->days;
+            $umur_jam = $diff->h;
+            $umur_detik = $diff->s;
         
-            $data_umur = $umur . ' hari.';
+            $data_umur = $umur_hari . ' hari, ' . $umur_jam . ' jam, ' . $umur_detik . ' detik.';
             return $data_umur;
         }
 
@@ -98,8 +100,8 @@
                                             <option value="">Pilih</option>
                                             @foreach ($data_darah as $row)
                                                 @if ($row->status_darah_masuk == 'Sudah Masuk' && $row->tanggal_kedaluwarsa >= date('Y-m-d') ) 
-                                                    @if ($row->golongan_darah === $detail->golda && $row->resus === $detail->rhesus)
-                                                        <option value="{{$row->id_darah_masuk}}">{{$row->no_kantong}} | {{$row->golongan_darah}} | {{$row->resus}} | {{ hitungUmur($row->tanggal_darah_masuk) }}</option>
+                                                    @if ($row->golongan_darah === $detail->golda && $row->resus === $detail->rhesus && $row->jenis_darah === $detail->jenis_darah) 
+                                                        <option value="{{$row->id_darah_masuk}}">{{$row->no_kantong}} | {{$row->golongan_darah}} | {{$row->resus}} | {{$row->jenis_darah}} | {{ hitungUmur($row->tanggal_darah_masuk) }}</option>
                                                     @endif    
                                                 @endif
                                             @endforeach                                                         

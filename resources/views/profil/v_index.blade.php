@@ -206,7 +206,7 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label for="nomor_telepon">Nomor Telepon</label>
-                        <input type="text" class="form-control @error('nomor_telepon') is-invalid @enderror" onkeydown="return hanyaAngka(event)" name="nomor_telepon" id="nomor_telepon" value="{{$user->nomor_telepon}}" placeholder="Masukkan Nomor Telepon">
+                        <input type="text" class="form-control @error('nomor_telepon') is-invalid @enderror" onkeydown="return hanyaAngka(event)" name="nomor_telepon" id="nomor_telepon" value="{{$user->nomor_telepon}}" placeholder="Contoh: 089876567654">
                         @error('nomor_telepon')
                             <small class="form-text text-danger">{{$message}}</small>
                         @enderror

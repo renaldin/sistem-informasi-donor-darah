@@ -1,15 +1,16 @@
 @php
     function hitungUmur($tanggal_darah_masuk)
-    {
-        $tgl_lahir = new DateTime($tanggal_darah_masuk);
-        $tgl_lahir = new DateTime($tanggal_darah_masuk);
-        $sekarang = new DateTime();
-        $diff = $tgl_lahir->diff($sekarang);
-        $umur = $diff->days;
-    
-        $data_umur = $umur . ' hari.';
-        return $data_umur;
-    }
+        {
+            $tgl_lahir = new DateTime($tanggal_darah_masuk);
+            $sekarang = new DateTime();
+            $diff = $tgl_lahir->diff($sekarang);
+            $umur_hari = $diff->days;
+            $umur_jam = $diff->h;
+            $umur_detik = $diff->s;
+        
+            $data_umur = $umur_hari . ' hari, ' . $umur_jam . ' jam, ' . $umur_detik . ' detik.';
+            return $data_umur;
+        }
 
     function tanggal_indonesia($tanggal) {
             $bulan = array(
