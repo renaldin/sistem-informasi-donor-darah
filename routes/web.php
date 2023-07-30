@@ -136,6 +136,7 @@ Route::group(['middleware' => 'revalidate'], function () {
         // Data Antrian Donatur
         Route::get('/antrian_donatur', [C_Antrian::class, 'antrian_donatur'])->name('antrian_donatur');
         Route::get('/detail_antrian/{id}', [C_Antrian::class, 'detail_antrian'])->name('detail_antrian');
+        Route::get('/cetak_antrian/{id}', [C_Antrian::class, 'cetak_antrian'])->name('cetak_antrian');
 
         // laporan
         Route::get('/laporan_darah_masuk', [C_Laporan::class, 'index'])->name('laporan_darah_masuk');
