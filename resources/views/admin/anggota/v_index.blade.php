@@ -2,20 +2,17 @@
 
 @section('content')
     @php
-        function hitungUmur($tanggal_darah)
+        function hitungUmur($tanggal_darah_masuk)
         {
-            $tanggal_darah_masuk = date('Y-m-d', strtotime($tanggal_darah));
             $tgl_lahir = new DateTime($tanggal_darah_masuk);
             $sekarang = new DateTime();
-            $perbedaan = $sekarang->diff($tgl_lahir);
+            $diff = $tgl_lahir->diff($sekarang);
+            $umur_hari = $diff->days;
+            $umur_jam = $diff->h;
+            $umur_menit = $diff->i;
+            $umur_detik = $diff->s;
         
-            $umur = [
-                'tahun' => $perbedaan->y,
-                'bulan' => $perbedaan->m,
-                'hari' => $perbedaan->d,
-            ];
-        
-            $data_umur = $umur['bulan'] . ' bulan, ' . $umur['hari'] . ' hari.';
+            $data_umur = $umur_hari . ' hari, ' . $umur_jam . ' jam, '. $umur_menit . ' menit, '. $umur_detik . ' detik.';
             return $data_umur;
         }
         

@@ -730,13 +730,15 @@ class C_PermohonanDarah extends Controller
             return redirect()->route('login');
         }
 
+        $detail = $this->M_PermohonanDarah->detail($id_permohonan_darah);
+
         $data = [
             'title'                 => 'Distribusi Darah',
             'sub_title'             => 'Form Keluarkan Darah',
             'data_web'              => $this->M_Website->detail(1),
             'user'                  => $this->M_User->detail(Session()->get('id_user')),
-            'detail'                => $this->M_PermohonanDarah->detail($id_permohonan_darah),
-            'data_darah'            => $this->M_DarahMasuk->get_data(),
+            'detail'                => $detail,
+            'data_darah'            => $this->M_DarahMasuk->get_data_limit($detail->jumlah),
             'data_darah_keluar'     => $this->M_DarahKeluar->get_data_permohonan($id_permohonan_darah)
         ];
 

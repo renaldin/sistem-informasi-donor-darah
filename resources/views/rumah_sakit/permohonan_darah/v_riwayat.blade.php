@@ -9,9 +9,10 @@
             $diff = $tgl_lahir->diff($sekarang);
             $umur_hari = $diff->days;
             $umur_jam = $diff->h;
+            $umur_menit = $diff->i;
             $umur_detik = $diff->s;
         
-            $data_umur = $umur_hari . ' hari, ' . $umur_jam . ' jam, ' . $umur_detik . ' detik.';
+            $data_umur = $umur_hari . ' hari, ' . $umur_jam . ' jam, '. $umur_menit . ' menit, '. $umur_detik . ' detik.';
             return $data_umur;
         }
 

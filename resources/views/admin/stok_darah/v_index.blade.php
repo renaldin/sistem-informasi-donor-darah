@@ -9,9 +9,10 @@
             $diff = $tgl_lahir->diff($sekarang);
             $umur_hari = $diff->days;
             $umur_jam = $diff->h;
+            $umur_menit = $diff->i;
             $umur_detik = $diff->s;
         
-            $data_umur = $umur_hari . ' hari, ' . $umur_jam . ' jam, ' . $umur_detik . ' detik.';
+            $data_umur = $umur_hari . ' hari, ' . $umur_jam . ' jam, '. $umur_menit . ' menit, '. $umur_detik . ' detik.';
             return $data_umur;
         }
 
@@ -80,14 +81,13 @@
                                         <td>{{ $row->golongan_darah }}</td>
                                         <td>{{ $row->resus }}</td>
                                         <td>{{ hitungUmur($row->tanggal_darah_masuk) }}</td>
-                                        <td>{{$row->jenis_darah}}</td>
-                                        {{-- <td>
+                                        <td>
                                             @if ($row->tanggal_kedaluwarsa < date('Y-m-d'))
                                                 <span class="badge badge-danger">{{ tanggal_indonesia($row->tanggal_kedaluwarsa) }}</span>
                                             @else
                                                 <span class="badge badge-success">{{ tanggal_indonesia($row->tanggal_kedaluwarsa) }}</span>
                                             @endif
-                                        </td> --}}
+                                        </td>
                                         <td class="text-center">
                                             {{-- <a href="/edit_darah/{{ $row->id_darah_masuk }}"
                                                 class="btn btn-sm btn-success mb-1">Edit</a> --}}
