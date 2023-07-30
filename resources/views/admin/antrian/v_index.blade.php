@@ -58,6 +58,8 @@
                                     <td class="text-center">
                                         <a href="/detail_antrian/{{ $row->id_donor }}"
                                             class="btn btn-primary btn-sm">Detail</a>
+                                        <a href="/cetak_antrian/{{ $row->id_donor }}"
+                                            class="btn btn-danger btn-sm">Cetak</a>
                                     </td>
                                 </tr>
                             @endforeach

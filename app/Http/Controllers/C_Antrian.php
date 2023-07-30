@@ -9,6 +9,8 @@ use App\Models\M_Darah;
 use App\Models\M_Donor;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Http\Request;
+use PDF;
+
 
 class C_Antrian extends Controller
 {
@@ -233,5 +235,21 @@ class C_Antrian extends Controller
             'data_donor'    => $this->M_Donor->get_donor_by_id($id)
         ];
         return view('admin.antrian.v_detail_antrian', $data);
+    }
+
+    public function cetak_antrian($id)
+    {
+        $data = [
+            'title'         => 'Detail',
+            'sub_title'     => 'Detail Kuesioner dan Kesehatan Donatur',
+            'data_web'      => $this->M_Website->detail(1),
+            'user'          => $this->M_User->detail(Session()->get('id_user')),
+            'data_petugas'  => $this->M_User->getPetugasByDonor($id),
+            'data_kuesioner'  => $this->M_User->getPetugasKuesionerByDonor($id),
+            'data_donor'    => $this->M_Donor->get_donor_by_id($id)
+        ];
+
+        $pdf = PDF::loadview('cetak/v_cetak_antrian', $data);
+        return $pdf->download($data['title'] . ' ' . date('d F Y') . '.pdf');
     }
 }
