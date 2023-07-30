@@ -19,6 +19,14 @@ class M_DarahMasuk extends Model
             ->orderBy('darah.tanggal_darah_masuk', 'ASC')->get();
     }
 
+    public function get_data_limit($limit)
+    {
+        return DB::table($this->table)
+            ->join('user', 'user.id_user', '=', 'darah_masuk.id_user', 'left')
+            ->join('darah', 'darah.id_darah', '=', 'darah_masuk.id_darah', 'left')
+            ->orderBy('darah.tanggal_darah_masuk', 'ASC')->limit($limit)->get();
+    }
+
     public function get_data_tanggal($tanggal_mulai, $tanggal_akhir)
     {
         return DB::table($this->table)

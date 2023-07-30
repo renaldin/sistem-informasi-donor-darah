@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 27, 2023 at 09:03 PM
+-- Generation Time: Jul 30, 2023 at 06:35 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.0.19
 
@@ -43,7 +43,7 @@ CREATE TABLE `anggota` (
 --
 
 INSERT INTO `anggota` (`id_anggota`, `nik`, `nama_anggota`, `jenis_kelamin`, `alamat`, `no_wa`, `status_anggota`, `tanggal_donor_kembali`) VALUES
-(1, '3333333333333333', 'Donatur 1', 'Laki-laki', 'Subang', '08986782321', 'Mandiri', '2023-07-27');
+(1, '3333333333333333', 'Donatur 1', 'Laki-laki', 'Subang', '08986782321', 'Mandiri', '2023-09-28');
 
 -- --------------------------------------------------------
 
@@ -79,11 +79,18 @@ CREATE TABLE `darah` (
   `no_kantong` varchar(50) DEFAULT NULL,
   `golongan_darah` varchar(10) DEFAULT NULL,
   `resus` varchar(50) DEFAULT NULL,
-  `jenis_darah` enum('Darah Segar','Darah Simpan','Darah Baru') DEFAULT NULL,
+  `jenis_darah` enum('Darah Segar','Darah Simpan','Darah Baru') DEFAULT 'Darah Segar',
   `volume_darah` varchar(50) DEFAULT NULL,
   `tanggal_kedaluwarsa` date DEFAULT NULL,
   `tanggal_darah_masuk` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `darah`
+--
+
+INSERT INTO `darah` (`id_darah`, `id_donor`, `no_kantong`, `golongan_darah`, `resus`, `jenis_darah`, `volume_darah`, `tanggal_kedaluwarsa`, `tanggal_darah_masuk`) VALUES
+(1, 5, 'K1', 'A', 'Positif', 'Darah Segar', 'A', '2023-09-03', '2023-07-30 11:15:33');
 
 -- --------------------------------------------------------
 
@@ -110,6 +117,13 @@ CREATE TABLE `darah_keluar` (
   `id_permohonan_darah` int(11) NOT NULL,
   `tanggal_keluar` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `darah_keluar`
+--
+
+INSERT INTO `darah_keluar` (`id_darah_keluar`, `id_darah`, `id_permohonan_darah`, `tanggal_keluar`) VALUES
+(1, 1, 1, '2023-07-30 11:34:58');
 
 -- --------------------------------------------------------
 
@@ -157,7 +171,8 @@ CREATE TABLE `donor` (
 
 INSERT INTO `donor` (`id_donor`, `id_anggota`, `id_event`, `id_petugas_kuesioner`, `id_petugas_kesehatan`, `tanggal_donor`, `status_donor`, `hasil_kusioner`, `deskripsi_hasil_kusioner`, `hb`, `tekanan_darah`, `berat_badan`, `denyut_nadi`, `tinggi_badan`, `keadaan_umum`, `catatan_pendonor`, `nomor_antrian`) VALUES
 (1, 1, NULL, 34, 34, '2023-05-27 20:13:31', 'Ready', 'Lolos', NULL, '100', '100/80', '70', '100', '170', 'Sehat', NULL, 1),
-(3, 1, NULL, 34, NULL, '2023-07-27 20:37:14', 'Proses', 'Tidak Lolos', 'Anda sedang minum antibiotik, jadi tidak bisa', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2);
+(3, 1, NULL, 34, NULL, '2023-07-27 20:37:14', 'Proses', 'Tidak Lolos', 'Anda sedang minum antibiotik, jadi tidak bisa', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2),
+(5, 1, NULL, NULL, NULL, '2023-07-30 11:15:33', 'Selesai', 'Lolos', 'Lolos', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -267,6 +282,13 @@ CREATE TABLE `permohonan_darah` (
   `status_permohonan` enum('Belum Dikirim','Menunggu Proses','Dikirim','Diterima') DEFAULT NULL,
   `tanggal_permohonan` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `permohonan_darah`
+--
+
+INSERT INTO `permohonan_darah` (`id_permohonan_darah`, `id_user`, `nama_rs`, `nama_dokter`, `nama_pasien`, `golda`, `rhesus`, `jenis_darah`, `jumlah`, `upload_surat`, `status_permohonan`, `tanggal_permohonan`) VALUES
+(1, 2, 'Rumah Sakit', 'Nama Dokter', 'Nama Pasien', 'A', 'Positif', 'Darah Segar', 1, '07302023113358 Rumah Sakit.pdf', 'Menunggu Proses', '2023-07-30 11:33:58');
 
 -- --------------------------------------------------------
 
@@ -473,7 +495,7 @@ ALTER TABLE `biodata_web`
 -- AUTO_INCREMENT for table `darah`
 --
 ALTER TABLE `darah`
-  MODIFY `id_darah` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_darah` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `darah_buang`
@@ -485,19 +507,19 @@ ALTER TABLE `darah_buang`
 -- AUTO_INCREMENT for table `darah_keluar`
 --
 ALTER TABLE `darah_keluar`
-  MODIFY `id_darah_keluar` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_darah_keluar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `darah_masuk`
 --
 ALTER TABLE `darah_masuk`
-  MODIFY `id_darah_masuk` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_darah_masuk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `donor`
 --
 ALTER TABLE `donor`
-  MODIFY `id_donor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_donor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `event`
@@ -515,7 +537,7 @@ ALTER TABLE `kuesioner_donor`
 -- AUTO_INCREMENT for table `permohonan_darah`
 --
 ALTER TABLE `permohonan_darah`
-  MODIFY `id_permohonan_darah` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_permohonan_darah` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user`
