@@ -12,7 +12,7 @@
             $umur_menit = $diff->i;
             $umur_detik = $diff->s;
         
-            $data_umur = $umur_hari . ' hari, ' . $umur_jam . ' jam, '. $umur_menit . ' menit, '. $umur_detik . ' detik.';
+            $data_umur = $umur_hari . ' hari, ' . $umur_jam . ' jam, ' . $umur_menit . ' menit, ' . $umur_detik . ' detik.';
             return $data_umur;
         }
         
@@ -25,20 +25,18 @@
         
             return $durasi;
         }
-
-        function tanggal_indonesia($tanggal) {
-            $bulan = array(
-                'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
-                'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
-            );
-            
+        
+        function tanggal_indonesia($tanggal)
+        {
+            $bulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+        
             $tanggal_array = explode('-', $tanggal);
             $tahun = $tanggal_array[0];
             $bulan_angka = intval($tanggal_array[1]);
             $tanggal_angka = intval($tanggal_array[2]);
-            
+        
             $tanggal_indonesia = $tanggal_angka . ' ' . $bulan[$bulan_angka - 1] . ' ' . $tahun;
-            
+        
             return $tanggal_indonesia;
         }
     @endphp
@@ -68,7 +66,8 @@
                                     <tr>
                                         <td>{{ $no++ }}</td>
                                         <td>{{ $row->nama_anggota }}</td>
-                                        <td>{{ $row->alamat }}</td>
+                                        <td>{{ $row->alamat . ', Kec. ' . $row->kecamatan . ', Kab. ' . $row->kabupaten }}
+                                        </td>
                                         <td>
                                             @if (hitungDurasiJadwalDonor($row->tanggal_donor_kembali) > 5)
                                                 <span
@@ -130,7 +129,8 @@
                                     <tr>
                                         <th>Alamat</th>
                                         <td>:</td>
-                                        <td>{{ $row->alamat }}</td>
+                                        <td>{{ $row->alamat . ', Kec. ' . $row->kecamatan . ', Kab. ' . $row->kabupaten }}
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th>Jadwal Donor Kembali</th>

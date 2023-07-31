@@ -32,8 +32,9 @@
                                 <div class="form-group">
                                     <label for="alamat">Alamat</label>
                                     <input type="text" class="form-control @error('alamat') is-invalid @enderror"
-                                        name="alamat" id="alamat" value="{{ $detail->alamat }}" readonly
-                                        placeholder="Masukkan Nama Anggota">
+                                        name="alamat" id="alamat"
+                                        value="{{ $detail->alamat . ', Kec. ' . $detail->kecamatan . ', Kab. ' . $detail->kabupaten }}"
+                                        readonly placeholder="Masukkan Nama Anggota">
                                     @error('alamat')
                                         <small class="form-text text-danger">{{ $message }}</small>
                                     @enderror

@@ -251,5 +251,6 @@ class C_Antrian extends Controller
 
         $pdf = PDF::loadview('cetak/v_cetak_antrian', $data);
         return $pdf->download($data['title'] . ' ' . date('d F Y') . '.pdf');
+        // return view('cetak/v_cetak_antrian', $data);
     }
 }

@@ -55,7 +55,7 @@
                             <td>{{ $detail->nama_anggota }}</td>
                             <td>Alamat</td>
                             <td>:</td>
-                            <td>{{ $detail->alamat }}</td>
+                            <td>{{ $detail->alamat . ', Kec. ' . $detail->kecamatan . ', Kab. ' . $detail->kabupaten }}</td>
                         </tr>
                     </table>
                     <table class="table align-items-center table-flush table-hover" id="dataTableHover">

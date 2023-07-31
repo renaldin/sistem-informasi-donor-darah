@@ -69,11 +69,15 @@ class C_Donatur extends Controller
             'nama'                      => 'required',
             // 'jenis_kelamin'             => 'required',
             'alamat'                    => 'required',
+            'kecamatan'                 => 'required',
+            'kabupaten'                 => 'required',
         ], [
             'nik.required'              => 'NIK Anggota harus diisi!',
             'nama.required'             => 'Nama Anggota harus diisi!',
             // 'jenis_kelamin.required'    => 'Jenis Kelamin harus diisi!',
             'alamat.required'           => 'Alamat harus diisi!',
+            'kecamatan.required'        => 'Kecamatan harus diisi!',
+            'kabupaten.required'        => 'Kabupaten harus diisi!',
         ]);
         // dd(Request()->all());
         // $count = 0;
@@ -88,6 +92,8 @@ class C_Donatur extends Controller
             'jenis_kelamin'         => Request()->jenis_kelamin,
             'no_wa'                 => Request()->no_wa,
             'alamat'                => Request()->alamat,
+            'kecamatan'             => Request()->kecamatan,
+            'kabupaten'             => Request()->kabupaten,
             'status_anggota'        => 'Mandiri',
             'tanggal_donor_kembali' => date('Y-m-d'),
             // 'tanggal_donor_kembali' => date('Y-m-d', strtotime('+60 days', strtotime(date('Y-m-d')))),
@@ -96,6 +102,8 @@ class C_Donatur extends Controller
         $data_user = [
             'id_user'       => Session()->get('id_user'),
             'alamat_user'   => Request()->alamat,
+            'kecamatan'     => Request()->kecamatan,
+            'kabupaten'     => Request()->kabupaten,
             'nomor_telepon' => Request()->no_wa
         ];
 
@@ -122,6 +130,8 @@ class C_Donatur extends Controller
                 'jenis_kelamin'         => Request()->jenis_kelamin,
                 'no_wa'                 => Request()->no_wa,
                 'alamat'                => Request()->alamat,
+                'kecamatan'             => Request()->kecamatan,
+                'kabupaten'             => Request()->kabupaten,
                 'status_anggota'        => 'Mandiri',
                 'tanggal_donor_kembali' => date('Y-m-d'),
                 // 'tanggal_donor_kembali' => date('Y-m-d', strtotime('+60 days', strtotime(date('Y-m-d')))),

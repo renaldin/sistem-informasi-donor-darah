@@ -12,23 +12,21 @@
             $umur_menit = $diff->i;
             $umur_detik = $diff->s;
         
-            $data_umur = $umur_hari . ' hari, ' . $umur_jam . ' jam, '. $umur_menit . ' menit, '. $umur_detik . ' detik.';
+            $data_umur = $umur_hari . ' hari, ' . $umur_jam . ' jam, ' . $umur_menit . ' menit, ' . $umur_detik . ' detik.';
             return $data_umur;
         }
-
-        function tanggal_indonesia($tanggal) {
-            $bulan = array(
-                'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
-                'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
-            );
-            
+        
+        function tanggal_indonesia($tanggal)
+        {
+            $bulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+        
             $tanggal_array = explode('-', $tanggal);
             $tahun = $tanggal_array[0];
             $bulan_angka = intval($tanggal_array[1]);
             $tanggal_angka = intval($tanggal_array[2]);
-            
+        
             $tanggal_indonesia = $tanggal_angka . ' ' . $bulan[$bulan_angka - 1] . ' ' . $tahun;
-            
+        
             return $tanggal_indonesia;
         }
     @endphp
@@ -127,37 +125,6 @@
                                         {{ $jumlah_donor }}
                                     </td>
                                 </tr>
-                        </table>
-                    </div>
-                    <div class="col-lg-12 mt-2">
-                        <div class="table-responsive p-3">
-                            <table class="table align-items-center table-flush table-hover" id="dataTableHover">
-                                <thead class="thead-light">
-                                    <tr>
-                                        <th>No</th>
-                                        <th>No Kantung</th>
-                                        <th>Golongan Darah</th>
-                                        <th>Resus</th>
-                                        <th>Umur</th>
-                                        <th>Tanggal Kedaluwarsa</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php $no=1;?>
-                                    @foreach ($data_darah as $item)
-                                    @if ($item->id_event == $detail->id_event)
-                                      <tr>
-                                        <td>{{$no++}}</td>
-                                        <td>{{$item->no_kantong}}</td>
-                                        <td>{{$item->golongan_darah}}</td>
-                                        <td>{{$item->resus}}</td>
-                                        <td>{{ hitungUmur($item->tanggal_darah_masuk) }}</td>
-                                        <td>{{tanggal_indonesia($item->tanggal_kedaluwarsa)}}</td>
-                                      </tr>
-                                    @endif
-                                    @endforeach
-                                </tbody>
-
                             </table>
                         </div>
                         <div class="col-lg-12 mt-2">
@@ -168,7 +135,7 @@
                                             <th>No</th>
                                             <th>No Kantung</th>
                                             <th>Golongan Darah</th>
-                                            <th>Rhesus</th>
+                                            <th>Resus</th>
                                             <th>Umur</th>
                                             <th>Tanggal Kedaluwarsa</th>
                                         </tr>
@@ -188,17 +155,48 @@
                                             @endif
                                         @endforeach
                                     </tbody>
+
                                 </table>
                             </div>
-                        </div>
-                        <div class="col-lg-12 mt-3">
-                            <label for="upload_surat"><strong>Surat</strong></label>
-                            <iframe src="{{ asset('foto_surat/' . $detail->upload_surat) }}" frameborder="0" scrolling="auto"
-                                width="100%" height="500px"></iframe>
+                            <div class="col-lg-12 mt-2">
+                                <div class="table-responsive p-3">
+                                    <table class="table align-items-center table-flush table-hover" id="dataTableHover">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th>No</th>
+                                                <th>No Kantung</th>
+                                                <th>Golongan Darah</th>
+                                                <th>Rhesus</th>
+                                                <th>Umur</th>
+                                                <th>Tanggal Kedaluwarsa</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php $no = 1; ?>
+                                            @foreach ($data_darah as $item)
+                                                @if ($item->id_event == $detail->id_event)
+                                                    <tr>
+                                                        <td>{{ $no++ }}</td>
+                                                        <td>{{ $item->no_kantong }}</td>
+                                                        <td>{{ $item->golongan_darah }}</td>
+                                                        <td>{{ $item->resus }}</td>
+                                                        <td>{{ hitungUmur($item->tanggal_darah_masuk) }}</td>
+                                                        <td>{{ tanggal_indonesia($item->tanggal_kedaluwarsa) }}</td>
+                                                    </tr>
+                                                @endif
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 mt-3">
+                                <label for="upload_surat"><strong>Surat</strong></label>
+                                <iframe src="{{ asset('foto_surat/' . $detail->upload_surat) }}" frameborder="0"
+                                    scrolling="auto" width="100%" height="500px"></iframe>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-@endsection
+    @endsection

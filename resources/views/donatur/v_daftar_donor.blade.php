@@ -94,7 +94,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-12 col-lg-6">
+                            <div class="col-12 col-lg-3">
                                 <div class="form-group">
                                     <label for="jenis_kelamin">Jenis Kelamin</label>
                                     <input type="text" class="form-control @error('jenis_kelamin') is-invalid @enderror"
@@ -105,7 +105,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-12 col-lg-6">
+                            <div class="col-12 col-lg-3">
                                 <div class="form-group">
                                     <label for="no_wa">Nomor Whatsapp</label>
                                     <input type="text" onkeydown="return hanyaAngka(event)"
@@ -113,6 +113,28 @@
                                         name="no_wa" placeholder="Masukan Nomor Whatsapp"
                                         value="{{ $user->nomor_telepon }}" required>
                                     @error('no_wa')
+                                        <small class="form-text text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-3">
+                                <div class="form-group">
+                                    <label for="kecamatan">Kecamatan</label>
+                                    <input type="text" class="form-control @error('kecamatan') is-invalid @enderror"
+                                        id="kecamatan" name="kecamatan" placeholder="Masukan Kecamatan"
+                                        value="{{ $user->kecamatan }}" required>
+                                    @error('kecamatan')
+                                        <small class="form-text text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-3">
+                                <div class="form-group">
+                                    <label for="kabupaten">Kabupaten</label>
+                                    <input type="text" class="form-control @error('kabupaten') is-invalid @enderror"
+                                        id="kabupaten" name="kabupaten" placeholder="Masukan Kabupaten"
+                                        value="{{ $user->kabupaten }}" required>
+                                    @error('kabupaten')
                                         <small class="form-text text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>

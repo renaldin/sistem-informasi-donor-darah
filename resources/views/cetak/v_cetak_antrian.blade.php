@@ -268,7 +268,8 @@
                                     <label for="alamat">Alamat</label>
                                     <input type="text" class="form-control @error('alamat') is-invalid @enderror"
                                         id="alamat" name="alamat" placeholder="Masukan Alamat"
-                                        value="{{ $data_donor->alamat_user }}" readonly>
+                                        value="{{ $data_donor->alamat_user . ', Kec. ' . $data_donor->kecamatan . ', Kab. ' . $data_donor->kabupaten }}"
+                                        readonly>
                                     @error('alamat')
                                         <small class="form-text text-danger">{{ $message }}</small>
                                     @enderror
@@ -1240,6 +1241,40 @@
                             @endif
                         @endif
                         <hr>
+                        <br>
+                        <br>
+                        <br>
+                        <table>
+                            <tr>
+                                <td width="300px">
+                                </td>
+                                <td style="text-align: left;">
+                                    Subang, {{ tanggal_indonesia(date('Y-m-d')) }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="400px">
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <span style="margin-right: 150px">(</span><span>)</span> <br>
+                                    Dokter
+
+                                </td>
+                                <td style="text-align: left;">
+                                    Mengetahui,
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <span style="margin-right: 140px">(</span><span>)</span> <br>
+                                    Pendonor
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>
