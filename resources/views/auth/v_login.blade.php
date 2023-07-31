@@ -84,6 +84,7 @@
                                                 <input type="password" name="password"
                                                     class="form-control @error('password') is-invalid @enderror"
                                                     placeholder="Masukkan Password">
+                                                <small class="form-text text-danger">Password minimal 6 karakter</small>
                                                 @error('password')
                                                     <small class="form-text text-danger">{{ $message }}</small>
                                                 @enderror
@@ -94,7 +95,6 @@
                                             <div class="form-group text-right">
                                                 <a href="/lupa_password">Lupa Password</a>
                                             </div>
-                                            <hr>
                                         </form>
                                         <hr>
                                         <div class="text-center">

@@ -33,24 +33,26 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                <label for="kartu">Jenis Kartu <span class="text-danger">*</span></label>
-                                <select name="kartu" class="form-control @error('kartu') is-invalid @enderror" required onchange="handleChange(event)" id="kartu">
-                                    <option value="">-- Jenis Kartu --</option>
-                                    <option value="KTP">KTP</option>
-                                    <option value="SIM">SIM</option>
-                                </select>
-                                @error('kartu')
-                                    <small class="form-text text-danger">{{ $message }}</small>
-                                @enderror
+                                    <label for="kartu">Jenis Kartu <span class="text-danger">*</span></label>
+                                    <select name="kartu" class="form-control @error('kartu') is-invalid @enderror"
+                                        required onchange="handleChange(event)" id="kartu">
+                                        <option value="">-- Jenis Kartu --</option>
+                                        <option value="KTP">KTP</option>
+                                        <option value="SIM">SIM</option>
+                                    </select>
+                                    @error('kartu')
+                                        <small class="form-text text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-lg-6" id="div_nik" style="display: none;">
                                 <div class="form-group">
-                                <label for="nik">NIK/No. SIM <span class="text-danger">*</span></label>
-                                <input type="text" id="nik_sim" name="nik" onkeydown="return hanyaAngka(event)" class="form-control @error('nik') is-invalid @enderror" value="{{old('nik')}}">
-                                @error('nik')
-                                    <small class="form-text text-danger">{{ $message }}</small>
-                                @enderror
+                                    <label for="nik">NIK/No. SIM <span class="text-danger">*</span></label>
+                                    <input type="text" id="nik_sim" name="nik" onkeydown="return hanyaAngka(event)"
+                                        class="form-control @error('nik') is-invalid @enderror" value="{{ old('nik') }}">
+                                    @error('nik')
+                                        <small class="form-text text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                             </div>
                             {{-- <div class="col-lg-6">
@@ -68,8 +70,8 @@
                                 <div class="form-group">
                                     <label for="no_wa">No. Whatsapp <span class="text-danger">*</span></label>
                                     <input type="number" class="form-control @error('no_wa') is-invalid @enderror"
-                                        name="no_wa" onkeydown="return hanyaAngka(event)" id="no_wa" value="{{ old('no_wa') }}"
-                                        placeholder="Contoh: 089897675487">
+                                        name="no_wa" onkeydown="return hanyaAngka(event)" id="no_wa"
+                                        value="{{ old('no_wa') }}" placeholder="Contoh: 089897675487">
                                     @error('no_wa')
                                         <small class="form-text text-danger">{{ $message }}</small>
                                     @enderror
@@ -100,6 +102,28 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label for="kecamatan">Kecamatan <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control @error('kecamatan') is-invalid @enderror"
+                                        name="kecamatan" id="kecamatan" value="{{ old('kecamatan') }}"
+                                        placeholder="Masukkan Kecamatan">
+                                    @error('kecamatan')
+                                        <small class="form-text text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label for="kabupaten">Kabupaten <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control @error('kabupaten') is-invalid @enderror"
+                                        name="kabupaten" id="kabupaten" value="{{ old('kabupaten') }}"
+                                        placeholder="Masukkan Kabupaten">
+                                    @error('kabupaten')
+                                        <small class="form-text text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="hasil_kusioner">Hasil Kusioner <span class="text-danger">*</span></label>
@@ -117,9 +141,11 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label for="deskripsi_hasil_kusioner">Deskripsi Hasil Kusioner <span class="text-danger">*</span></label>
-                                    <textarea name="deskripsi_hasil_kusioner" class="form-control @error('deskripsi_hasil_kusioner') is-invalid @enderror"
-                                        cols="10" rows="3" placeholder="Masukkan Deskripsi Hasil Kusioner"></textarea>
+                                    <label for="deskripsi_hasil_kusioner">Deskripsi Hasil Kusioner <span
+                                            class="text-danger">*</span></label>
+                                    <textarea name="deskripsi_hasil_kusioner"
+                                        class="form-control @error('deskripsi_hasil_kusioner') is-invalid @enderror" cols="10" rows="3"
+                                        placeholder="Masukkan Deskripsi Hasil Kusioner"></textarea>
                                     @error('deskripsi_hasil_kusioner')
                                         <small class="form-text text-danger">{{ $message }}</small>
                                     @enderror
@@ -216,22 +242,26 @@
             }
             return true;
         }
-      </script>
-      
-      <script>
+    </script>
+
+    <script>
         function handleChange(event) {
             var selectedValue = event.target.value;
             var nik = document.getElementById("nik_sim");
             var div_nik = document.getElementById("div_nik");
-            if(selectedValue === 'KTP'){
+            if (selectedValue === 'KTP') {
                 nik.placeholder = "Masukkan NIK";
+                $('#nik_sim').attr('maxlength', '16');
+                $('#nik_sim').val('');
                 div_nik.style.display = "block";
             } else {
-              nik.placeholder = "Masukkan No. SIM";
-              div_nik.style.display = "block";
+                nik.placeholder = "Masukkan No. SIM";
+                $('#nik_sim').attr('maxlength', '12');
+                $('#nik_sim').val('');
+                div_nik.style.display = "block";
             }
-            
+
             // Tambahkan logika atau tindakan lain yang ingin Anda lakukan
-          }
-        </script>
+        }
+    </script>
 @endsection

@@ -44,7 +44,8 @@
                                     <td>{{ $no++ }}</td>
                                     <td>{{ $row->nama_anggota }}</td>
                                     <td>{{ $row->jenis_kelamin }}</td>
-                                    <td>{{ $row->alamat }}</td>
+                                    <td>{{ $row->alamat . ', Kec. ' . $row->kecamatan . ', Kab. ' . $row->kabupaten }}
+                                    </td>
                                     <td>{{ tanggal_indonesia($row->tanggal_donor) }}</td>
                                     <td>A0{{ $row->nomor_antrian }}</td>
                                     <td>
