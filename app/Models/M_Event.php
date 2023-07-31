@@ -20,7 +20,12 @@ class M_Event extends Model
 
     public function get_all_data($bulan)
     {
-        $bulan == null ? $bulan = date('m') : $bulan;
+        if ($bulan == null) {
+            return DB::table($this->table)
+                ->join('user', 'user.id_user', '=', 'event.id_user', 'left')
+                ->where('tanggal_event', '>=', date('Y-m-d'))
+                ->orderBy('tanggal_event', 'DESC')->get();
+        }
         return DB::table($this->table)
             ->join('user', 'user.id_user', '=', 'event.id_user', 'left')
             ->where('tanggal_event', '>=', date('Y-m-d'))

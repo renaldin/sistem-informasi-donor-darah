@@ -225,14 +225,25 @@ class C_Antrian extends Controller
             return redirect()->route('login');
         }
 
+        $data_donor = $this->M_Donor->get_donor_by_id($id);
+        if ($data_donor->id_donor == null) {
+            $data_petugas = null;
+            $data_kuesioner = null;
+            $data_donor = $this->M_Donor->get_donor_offline($id);
+        } else {
+            $data_petugas = $this->M_User->getPetugasByDonor($id);
+            $data_kuesioner = $this->M_User->getPetugasKuesionerByDonor($id);
+        }
+        // dd($data_donor);
+
         $data = [
             'title'         => 'Detail',
             'sub_title'     => 'Detail Kuesioner dan Kesehatan Donatur',
             'data_web'      => $this->M_Website->detail(1),
             'user'          => $this->M_User->detail(Session()->get('id_user')),
-            'data_petugas'  => $this->M_User->getPetugasByDonor($id),
-            'data_kuesioner'  => $this->M_User->getPetugasKuesionerByDonor($id),
-            'data_donor'    => $this->M_Donor->get_donor_by_id($id)
+            'data_petugas'  => $data_petugas,
+            'data_kuesioner'  => $data_kuesioner,
+            'data_donor'    => $data_donor
         ];
         return view('admin.antrian.v_detail_antrian', $data);
     }
