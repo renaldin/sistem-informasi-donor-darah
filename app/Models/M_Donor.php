@@ -36,6 +36,16 @@ class M_Donor extends Model
             ->where('donor.id_donor', $id)->first();
     }
 
+    public function get_donor_offline($id)
+    {
+        return DB::table($this->table)
+            ->select(['anggota.*', 'donor.*'])
+            ->join('anggota', 'anggota.id_anggota', '=', 'donor.id_anggota', 'left')
+            ->join('user_donatur', 'user_donatur.nik', '=', 'anggota.nik', 'left')
+            ->join('user', 'user.id_user', '=', 'user_donatur.id_user', 'left')
+            ->where('donor.id_donor', $id)->first();
+    }
+
     public function tambah($data)
     {
         DB::table($this->table)->insert($data);
