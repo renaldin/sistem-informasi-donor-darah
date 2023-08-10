@@ -867,6 +867,7 @@
                                                         <td>{{ $no++ }}</td>
                                                         <td>{{ $row->nama_anggota }}</td>
                                                         <td>{{ $row->alamat . ', Kec. ' . $row->kecamatan . ', Kab. ' . $row->kabupaten }}
+                                                            {{-- update error --}}
                                                         </td>
                                                         <td>
                                                             @if (hitungDurasiJadwalDonor($row->tanggal_donor_kembali) > 5)
