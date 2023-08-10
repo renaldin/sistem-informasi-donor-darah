@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 30, 2023 at 10:27 AM
+-- Generation Time: Aug 10, 2023 at 04:02 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -33,6 +33,8 @@ CREATE TABLE `anggota` (
   `nama_anggota` varchar(100) DEFAULT NULL,
   `jenis_kelamin` enum('Laki-laki','Perempuan') NOT NULL,
   `alamat` varchar(100) NOT NULL,
+  `kecamatan` varchar(30) DEFAULT NULL,
+  `kabupaten` varchar(30) DEFAULT NULL,
   `no_wa` varchar(30) DEFAULT NULL,
   `status_anggota` enum('Mandiri','Event') NOT NULL DEFAULT 'Mandiri',
   `tanggal_donor_kembali` date DEFAULT NULL
@@ -42,8 +44,9 @@ CREATE TABLE `anggota` (
 -- Dumping data for table `anggota`
 --
 
-INSERT INTO `anggota` (`id_anggota`, `nik`, `nama_anggota`, `jenis_kelamin`, `alamat`, `no_wa`, `status_anggota`, `tanggal_donor_kembali`) VALUES
-(1, '3333333333333333', 'Donatur 1', 'Laki-laki', 'Subang', '08986782321', 'Mandiri', '2023-09-28');
+INSERT INTO `anggota` (`id_anggota`, `nik`, `nama_anggota`, `jenis_kelamin`, `alamat`, `kecamatan`, `kabupaten`, `no_wa`, `status_anggota`, `tanggal_donor_kembali`) VALUES
+(1, '3333333333333333', 'Donatur 1', 'Laki-laki', 'Subang', 'Cibogo', 'Subang', '08986782321', 'Mandiri', '2023-09-28'),
+(12, '1234567890123456', 'Tes', 'Perempuan', 'Jl jalan ke mana aja', 'Cibogo', 'Subang', '0895220920038', 'Mandiri', '2023-09-29');
 
 -- --------------------------------------------------------
 
@@ -90,7 +93,7 @@ CREATE TABLE `darah` (
 --
 
 INSERT INTO `darah` (`id_darah`, `id_donor`, `no_kantong`, `golongan_darah`, `resus`, `jenis_darah`, `volume_darah`, `tanggal_kedaluwarsa`, `tanggal_darah_masuk`) VALUES
-(1, 5, 'K1', 'A', 'Positif', 'Darah Segar', 'A', '2023-09-03', '2023-07-30 11:15:33');
+(3, 11, 'K1', 'B', 'Positif', 'Darah Segar', 'B', '2023-09-04', '2023-07-31 14:27:13');
 
 -- --------------------------------------------------------
 
@@ -118,13 +121,6 @@ CREATE TABLE `darah_keluar` (
   `tanggal_keluar` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `darah_keluar`
---
-
-INSERT INTO `darah_keluar` (`id_darah_keluar`, `id_darah`, `id_permohonan_darah`, `tanggal_keluar`) VALUES
-(1, 1, 1, '2023-07-30 11:34:58');
-
 -- --------------------------------------------------------
 
 --
@@ -138,6 +134,13 @@ CREATE TABLE `darah_masuk` (
   `status_darah_masuk` enum('Belum Masuk','Sudah Masuk') NOT NULL DEFAULT 'Belum Masuk',
   `tanggal_masuk` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `darah_masuk`
+--
+
+INSERT INTO `darah_masuk` (`id_darah_masuk`, `id_darah`, `id_user`, `status_darah_masuk`, `tanggal_masuk`) VALUES
+(3, 3, 2, 'Belum Masuk', '2023-07-31 14:27:13');
 
 -- --------------------------------------------------------
 
@@ -171,7 +174,8 @@ CREATE TABLE `donor` (
 
 INSERT INTO `donor` (`id_donor`, `id_anggota`, `id_event`, `id_petugas_kuesioner`, `id_petugas_kesehatan`, `tanggal_donor`, `status_donor`, `hasil_kusioner`, `deskripsi_hasil_kusioner`, `hb`, `tekanan_darah`, `berat_badan`, `denyut_nadi`, `tinggi_badan`, `keadaan_umum`, `catatan_pendonor`, `nomor_antrian`) VALUES
 (1, 1, NULL, 34, 34, '2023-05-27 20:13:31', 'Ready', 'Lolos', NULL, '100', '100/80', '70', '100', '170', 'Sehat', NULL, 1),
-(3, 1, NULL, 34, NULL, '2023-07-27 20:37:14', 'Proses', 'Tidak Lolos', 'Anda sedang minum antibiotik, jadi tidak bisa', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2);
+(3, 1, NULL, 34, NULL, '2023-07-27 20:37:14', 'Proses', 'Tidak Lolos', 'Anda sedang minum antibiotik, jadi tidak bisa', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2),
+(11, 12, NULL, NULL, NULL, '2023-07-31 14:27:13', 'Selesai', 'Lolos', 'Lolos lolos aja', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -199,6 +203,13 @@ CREATE TABLE `event` (
   `alasan` varchar(255) DEFAULT NULL,
   `gambar` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `event`
+--
+
+INSERT INTO `event` (`id_event`, `id_user`, `nomor_pengajuan`, `nama_koordinator`, `nomor_koordinator`, `kd_instansi`, `nama_instansi`, `nama_kegiatan`, `alamat_lengkap`, `tanggal_event`, `jam`, `jumlah_orang`, `upload_surat`, `tanggal_pengajuan`, `status_pengajuan`, `status_event`, `alasan`, `gambar`) VALUES
+(1, 36, 'E1', '123', '0123', 'E-002', 'Event 2', 'Tes', 'Subang', '2023-08-02', '12:00', 50, '07312023151631 Event 2.pdf', '2023-07-31 00:00:00', 'Disetujui', 'Aktif', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -299,6 +310,8 @@ CREATE TABLE `user` (
   `id_user` int(11) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `alamat_user` varchar(100) DEFAULT NULL,
+  `kecamatan` varchar(30) DEFAULT NULL,
+  `kabupaten` varchar(30) DEFAULT NULL,
   `email` varchar(100) NOT NULL,
   `password` text NOT NULL,
   `nomor_telepon` varchar(30) DEFAULT NULL,
@@ -311,15 +324,15 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id_user`, `nama`, `alamat_user`, `email`, `password`, `nomor_telepon`, `role`, `status_verifikasi`, `foto`) VALUES
-(2, 'Admin Sistem Donor', 'Subang', 'admin@gmail.com', '$2y$10$smeipeg7V7MdF0BNmGaVduxOyL9ugB0d9s8kAYH0ABF./QqXZDzfW', '089787387878', 'Admin', 'Sudah', '07242023070004Admin Sistem Donor.png'),
-(31, 'Teresia Purba', 'Subang', 'renaldinoviandi@gmail.com', '$2y$10$EKARFSuwl7W/WdYW6fFgCuDKQ3tGerqXbHZG0ADp8ZMIc6IN0GNc6', '0895336928026', 'Donatur', 'Sudah', NULL),
-(32, 'Teresia Purba 1', 'Subang', 'renaldinoviandi1@gmail.com', '$2y$10$6flUBUdr3ws5I4Y0dXHHlOxMjKEOebbWBBKBz3RMjimrgszdscVe2', '089898989898', 'Donatur', 'Sudah', '07242023070142Teresia Purba 1.png'),
-(33, 'Rumah Sakit 1', 'Subang', 'renaldinoviandi9@gmail.com', '$2y$10$aUTkw9voq/g9cCWcn9Yfpu/YX1rAkJChvSTu8pNU9khdELJ2C6r1W', '089898989898', 'Event', 'Sudah', '07242023071520Rumah Sakit 1.png'),
-(34, 'Paskes 2', 'Subang', 'paskes2@gmail.com', '$2y$10$8XCs6CfwMRNYS76EXx6cceaUBzwyKAb5HzknRngCKOGaTMw4GFz5i', '0908333323', 'Petugas Kesehatan', 'Sudah', '07242023020541Paskes 2.png'),
-(35, 'Donatur 1', 'Subang', 'donatur@gmail.com', '$2y$10$/JyFnAKFjS7sAPCeyD2qC.kyAAoxlzpk/r0NPQVLLLbWswqqRrE/6', '08986782321', 'Donatur', 'Sudah', '07242023021117Donatur 1.png'),
-(36, 'Event 2', 'Subang', 'event2@gmail.com', '$2y$10$5CbW4EjQjF.AQAwc1MdzcOOhEcmAYYe49r2ZuorchBmMb6SgOAiZy', '089898989898', 'Event', 'Sudah', '07242023071407Event 2.png'),
-(38, 'Rumah Sakit 2', 'Subang', 'rumahsakit2@gmail.com', '$2y$10$oPxNOOZIcjVOLEoKEddfaeWGOeHsnDpowXehJAO8dyY4FhD308yuu', '089898787898', 'Rumah Sakit', 'Sudah', '07242023071956Rumah Sakit 2.png');
+INSERT INTO `user` (`id_user`, `nama`, `alamat_user`, `kecamatan`, `kabupaten`, `email`, `password`, `nomor_telepon`, `role`, `status_verifikasi`, `foto`) VALUES
+(2, 'Admin Sistem Donor', 'Subang', 'Cibogo', 'Subang', 'admin@gmail.com', '$2y$10$smeipeg7V7MdF0BNmGaVduxOyL9ugB0d9s8kAYH0ABF./QqXZDzfW', '089787387878', 'Admin', 'Sudah', '07242023070004Admin Sistem Donor.png'),
+(31, 'Teresia Purba', 'Subang', 'Cibogo', 'Subang', 'renaldinoviandi@gmail.com', '$2y$10$EKARFSuwl7W/WdYW6fFgCuDKQ3tGerqXbHZG0ADp8ZMIc6IN0GNc6', '0895336928026', 'Donatur', 'Sudah', NULL),
+(32, 'Teresia Purba 1', 'Subang', 'Cibogo', 'Subang', 'renaldinoviandi1@gmail.com', '$2y$10$6flUBUdr3ws5I4Y0dXHHlOxMjKEOebbWBBKBz3RMjimrgszdscVe2', '089898989898', 'Donatur', 'Sudah', '07242023070142Teresia Purba 1.png'),
+(33, 'Rumah Sakit 1', 'Subang', 'Cibogo', 'Subang', 'renaldinoviandi9@gmail.com', '$2y$10$aUTkw9voq/g9cCWcn9Yfpu/YX1rAkJChvSTu8pNU9khdELJ2C6r1W', '089898989898', 'Event', 'Sudah', '07242023071520Rumah Sakit 1.png'),
+(34, 'Paskes 2', 'Subang', 'Cibogo', 'Subang', 'paskes2@gmail.com', '$2y$10$8XCs6CfwMRNYS76EXx6cceaUBzwyKAb5HzknRngCKOGaTMw4GFz5i', '0908333323', 'Petugas Kesehatan', 'Sudah', '07242023020541Paskes 2.png'),
+(35, 'Donatur 1', 'Subang', 'Cibogo', 'Subang', 'donatur@gmail.com', '$2y$10$/JyFnAKFjS7sAPCeyD2qC.kyAAoxlzpk/r0NPQVLLLbWswqqRrE/6', '08986782321', 'Donatur', 'Sudah', '07242023021117Donatur 1.png'),
+(36, 'Event 2', 'Subang', 'Cibogo', 'Subang', 'event2@gmail.com', '$2y$10$5CbW4EjQjF.AQAwc1MdzcOOhEcmAYYe49r2ZuorchBmMb6SgOAiZy', '089898989898', 'Event', 'Sudah', '07242023071407Event 2.png'),
+(38, 'Rumah Sakit 2', 'Subang', 'Cibogo', 'Subang', 'rumahsakit2@gmail.com', '$2y$10$oPxNOOZIcjVOLEoKEddfaeWGOeHsnDpowXehJAO8dyY4FhD308yuu', '089898787898', 'Rumah Sakit', 'Sudah', '07242023071956Rumah Sakit 2.png');
 
 -- --------------------------------------------------------
 
@@ -344,8 +357,7 @@ CREATE TABLE `user_donatur` (
 INSERT INTO `user_donatur` (`id_user_donatur`, `id_user`, `kartu`, `nik`, `tanggal_lahir`, `jk`, `gol_darah`) VALUES
 (1, 31, 'KTP', '2222222222222222', '2001-01-23', 'Perempuan', 'A'),
 (2, 32, 'SIM', '222222222222', '2001-01-29', 'Perempuan', 'A'),
-(3, 35, 'KTP', '3333333333333333', '1999-12-27', 'Laki-laki', 'A'),
-(5, 40, 'KTP', '3213213213213213', '2001-01-01', 'Perempuan', 'AB');
+(3, 35, 'KTP', '3333333333333333', '1999-12-27', 'Laki-laki', 'A');
 
 -- --------------------------------------------------------
 
@@ -482,7 +494,7 @@ ALTER TABLE `user_rs`
 -- AUTO_INCREMENT for table `anggota`
 --
 ALTER TABLE `anggota`
-  MODIFY `id_anggota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_anggota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `biodata_web`
@@ -494,7 +506,7 @@ ALTER TABLE `biodata_web`
 -- AUTO_INCREMENT for table `darah`
 --
 ALTER TABLE `darah`
-  MODIFY `id_darah` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_darah` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `darah_buang`
@@ -512,25 +524,25 @@ ALTER TABLE `darah_keluar`
 -- AUTO_INCREMENT for table `darah_masuk`
 --
 ALTER TABLE `darah_masuk`
-  MODIFY `id_darah_masuk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_darah_masuk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `donor`
 --
 ALTER TABLE `donor`
-  MODIFY `id_donor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_donor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `event`
 --
 ALTER TABLE `event`
-  MODIFY `id_event` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_event` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `kuesioner_donor`
 --
 ALTER TABLE `kuesioner_donor`
-  MODIFY `id_kuesioner` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_kuesioner` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `permohonan_darah`
@@ -542,13 +554,13 @@ ALTER TABLE `permohonan_darah`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `user_donatur`
 --
 ALTER TABLE `user_donatur`
-  MODIFY `id_user_donatur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_user_donatur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `user_event`
